@@ -2,10 +2,13 @@ import { cacheGet, cacheSet } from '../cache/index.js';
 import { buildRapItemKey } from './itemKey.js';
 import {
   countItemsFiltered,
+  existsHistoryFor,
   historyFor,
   itemByName,
   listRowsFiltered,
   listRowsRaw,
+  similarItemsFor,
+  totalLatestExists,
   variantsForItem,
   type ExistsRange,
   type PtFilter,
@@ -13,6 +16,11 @@ import {
   type ShinyFilter,
   type SortKey,
 } from '../data/listings.js';
+import {
+  countExistsSnapshots,
+  countRapSnapshots,
+  type HistoryRawPoint,
+} from '../data/snapshotsRepo.js';
 import { countItems } from '../data/itemsRepo.js';
 
 export interface ListItemRow {
@@ -40,20 +48,106 @@ export interface ItemVariant {
 
 export interface ItemHistoryPoint {
   capturedAt: string;
-  value: number;
+  rap: number | null;
+  exists: number | null;
+  rapChg: number | null;
+  rapPct: number | null;
+}
+
+export interface ItemStats {
+  rapChange24h: number | null;
+  existsChange24h: number | null;
+  rapChangePct24h: number | null;
+  existsChangePct24h: number | null;
+  high24h: number | null;
+  low24h: number | null;
+  high1m: number | null;
+  low1m: number | null;
+  marketCap: number | null;
+  rapPerCopy: number | null;
+  tracked: number;
+  ath: number | null;
+  atl: number | null;
+  volatility30d: number;
+  updates24h: number;
+  rapPoints: number;
+  existsPoints: number;
 }
 
 export interface ItemDetail {
   item: {
     id: string;
     name: string;
+    slug: string | null;
     description: string | null;
     category: string | null;
     collectionName: string;
   };
   currentRap: number | null;
+  rapUpdatedAt: string | null;
+  exists: number | null;
+  totalExists: number | null;
+  similarItems: SimilarItem[];
   variants: ItemVariant[];
+  stats: ItemStats;
   history: ItemHistoryPoint[];
+}
+
+export interface SimilarItem {
+  name: string;
+  slug: string | null;
+  category: string | null;
+  rap: number | null;
+  exists: number | null;
+}
+
+const DAY_MS = 86_400_000;
+const MONTH_MS = 30 * DAY_MS;
+
+export function buildMergedHistory(
+  rapRows: HistoryRawPoint[],
+  existsRows: HistoryRawPoint[],
+): ItemHistoryPoint[] {
+  const byTs = new Map<number, { rap?: number; exists?: number }>();
+  for (const row of rapRows) {
+    const ts = Number(row.captured_at);
+    const entry = byTs.get(ts) ?? {};
+    entry.rap = row.value;
+    byTs.set(ts, entry);
+  }
+  for (const row of existsRows) {
+    const ts = Number(row.captured_at);
+    const entry = byTs.get(ts) ?? {};
+    entry.exists = row.value;
+    byTs.set(ts, entry);
+  }
+
+  let lastRap: number | null = null;
+  let lastExists: number | null = null;
+  const chrono = [...byTs.keys()].sort((a, b) => a - b).map((ts) => {
+    const entry = byTs.get(ts)!;
+    const rap = entry.rap !== undefined ? entry.rap : lastRap;
+    const exists = entry.exists !== undefined ? entry.exists : lastExists;
+    lastRap = rap;
+    lastExists = exists;
+    return { ts, rap, exists };
+  });
+
+  let prevRap: number | null = null;
+  const points = chrono.map(({ ts, rap, exists }) => {
+    let rapChg: number | null = null;
+    let rapPct: number | null = null;
+    if (rap !== null && prevRap !== null) {
+      rapChg = rap - prevRap;
+      if (prevRap !== 0) {
+        rapPct = Math.round((rapChg / prevRap) * 10000) / 100;
+      }
+    }
+    prevRap = rap;
+    return { capturedAt: new Date(ts * 1000).toISOString(), rap, exists, rapChg, rapPct };
+  });
+
+  return points.reverse();
 }
 
 function mapListRow(row: RawListRow): ListItemRow {
@@ -104,7 +198,7 @@ export async function listItems(params: {
   return result;
 }
 
-function parseItemKey(
+export function parseItemKey(
   itemKey: string,
 ): { name: string; pt: number; shiny: boolean } | null {
   const parts = itemKey.split(':');
@@ -121,23 +215,130 @@ function parseItemKey(
   return { name, pt, shiny };
 }
 
-async function loadHistory(itemId: string, pt: number, shiny: boolean): Promise<ItemHistoryPoint[]> {
-  const shinyInt = shiny ? 1 : 0;
-  const rows = await historyFor(itemId, pt, shinyInt);
-  return rows.map((r) => ({
-    capturedAt: new Date(Number(r.captured_at) * 1000).toISOString(),
-    value: r.value,
-  }));
+export interface ComputeStatsOptions {
+  currentRap: number | null;
+  exists: number | null;
+  rapPoints: number;
+  existsPoints: number;
+}
+
+function changeOverWindow(
+  rows: HistoryRawPoint[],
+  nowMs: number,
+): { change: number | null; baseline: number | null } {
+  if (rows.length === 0) return { change: null, baseline: null };
+  const cutoffMs = nowMs - DAY_MS;
+  let latest: number | null = null;
+  let baseline: number | null = null;
+  let latestTs = -Infinity;
+  let baselineTs = -Infinity;
+  for (const row of rows) {
+    const tsMs = Number(row.captured_at) * 1000;
+    if (tsMs > latestTs) {
+      latestTs = tsMs;
+      latest = row.value;
+    }
+    if (tsMs < cutoffMs && tsMs > baselineTs) {
+      baselineTs = tsMs;
+      baseline = row.value;
+    }
+  }
+  if (latest === null || baseline === null) return { change: null, baseline };
+  return { change: latest - baseline, baseline };
+}
+
+function pctChange(change: number | null, baseline: number | null): number | null {
+  if (change === null || baseline === null || baseline === 0) return null;
+  return Math.round((change / baseline) * 10000) / 100;
+}
+
+function extremesInWindow(
+  rows: HistoryRawPoint[],
+  nowMs: number,
+  windowMs: number,
+): { high: number | null; low: number | null; count: number } {
+  const cutoffMs = nowMs - windowMs;
+  let high: number | null = null;
+  let low: number | null = null;
+  let count = 0;
+  for (const row of rows) {
+    if (Number(row.captured_at) * 1000 >= cutoffMs) {
+      count += 1;
+      high = high === null || row.value > high ? row.value : high;
+      low = low === null || row.value < low ? row.value : low;
+    }
+  }
+  return { high, low, count };
+}
+
+export function computeStats(
+  rapRows: HistoryRawPoint[],
+  existsRows: HistoryRawPoint[],
+  nowMs: number,
+  opts: ComputeStatsOptions,
+): ItemStats {
+  const day24 = extremesInWindow(rapRows, nowMs, DAY_MS);
+  const month1 = extremesInWindow(rapRows, nowMs, MONTH_MS);
+
+  let ath: number | null = null;
+  let atl: number | null = null;
+  for (const row of rapRows) {
+    ath = ath === null || row.value > ath ? row.value : ath;
+    atl = atl === null || row.value < atl ? row.value : atl;
+  }
+
+  const { currentRap, exists } = opts;
+  const rapChange = changeOverWindow(rapRows, nowMs);
+  const existsChange = changeOverWindow(existsRows, nowMs);
+
+  return {
+    rapChange24h: rapChange.change,
+    existsChange24h: existsChange.change,
+    rapChangePct24h: pctChange(rapChange.change, rapChange.baseline),
+    existsChangePct24h: pctChange(existsChange.change, existsChange.baseline),
+    high24h: day24.high,
+    low24h: day24.low,
+    high1m: month1.high,
+    low1m: month1.low,
+    marketCap:
+      currentRap === null || exists === null ? null : currentRap * exists,
+    rapPerCopy:
+      currentRap === null || exists === null || exists <= 0
+        ? null
+        : currentRap / exists,
+    tracked: 0,
+    ath,
+    atl,
+    volatility30d: 0,
+    updates24h: day24.count,
+    rapPoints: opts.rapPoints,
+    existsPoints: opts.existsPoints,
+  };
 }
 
 export async function getItemDetail(itemKey: string): Promise<ItemDetail | null> {
-  const parsed = parseItemKey(decodeURIComponent(itemKey));
+  const decoded = decodeURIComponent(itemKey);
+  const parsed = parseItemKey(decoded);
   if (!parsed) return null;
+
+  const detailCacheKey = `v4:detail:${decoded}`;
+  const cached = await cacheGet<ItemDetail>(detailCacheKey);
+  if (cached) return cached;
 
   const item = await itemByName(parsed.name);
   if (!item) return null;
 
-  const variantRows = await variantsForItem(item.id);
+  const shinyInt = parsed.shiny ? 1 : 0;
+  const [variantRows, rapRows, existsRows, rapPoints, existsPoints, totalExists, similarRows] =
+    await Promise.all([
+      variantsForItem(item.id),
+      historyFor(item.id, parsed.pt, shinyInt),
+      existsHistoryFor(item.id, parsed.pt, shinyInt),
+      countRapSnapshots(item.id, parsed.pt, shinyInt),
+      countExistsSnapshots(item.id, parsed.pt, shinyInt),
+      totalLatestExists(item.id),
+      similarItemsFor(item.id, item.category, item.collectionName, item.name),
+    ]);
 
   const variants: ItemVariant[] = variantRows.map((row) => ({
     pt: row.pt,
@@ -149,31 +350,52 @@ export async function getItemDetail(itemKey: string): Promise<ItemDetail | null>
 
   const currentRap =
     variants.find((v) => v.pt === parsed.pt && v.shiny === parsed.shiny)?.rap ?? null;
+  const exists =
+    variants.find((v) => v.pt === parsed.pt && v.shiny === parsed.shiny)?.exists ?? null;
 
-  const historyKey = `v2:history:${itemKey}`;
-  let history = await cacheGet<ItemHistoryPoint[]>(historyKey);
-  if (!history) {
-    history = await loadHistory(item.id, parsed.pt, parsed.shiny);
-    await cacheSet(historyKey, history, 3600);
-  }
+  const nowMs = Date.now();
+  const stats = computeStats(rapRows, existsRows, nowMs, {
+    currentRap,
+    exists,
+    rapPoints,
+    existsPoints,
+  });
 
-  return {
+  const latestRapTs = rapRows[rapRows.length - 1]?.captured_at;
+  const detail: ItemDetail = {
     item: {
       id: item.id,
       name: item.name,
+      slug: item.slug ?? null,
       description: item.description,
       category: item.category,
       collectionName: item.collectionName,
     },
     currentRap,
+    rapUpdatedAt:
+      latestRapTs === undefined ? null : new Date(Number(latestRapTs) * 1000).toISOString(),
+    exists,
+    totalExists,
+    similarItems: similarRows.map((row) => ({
+      name: row.name,
+      slug: row.slug ?? null,
+      category: row.category,
+      rap: row.rap ?? null,
+      exists: row.exists ?? null,
+    })),
     variants,
-    history,
+    stats,
+    history: buildMergedHistory(rapRows, existsRows),
   };
+
+  await cacheSet(detailCacheKey, detail, 3600);
+  return detail;
 }
 
 export interface FilteredItem {
   itemKey: string;
   name: string;
+  slug: string | null;
   category: string | null;
   collectionName: string;
   rap: number | null;
@@ -284,8 +506,8 @@ function normalizeFilteredParams(params: FilteredItemsParams): {
     category,
     collection,
     existsRange,
-    showRapZero: parseFlag(params.show_rap_zero),
-    showExistsZero: parseFlag(params.show_exists_zero),
+    showRapZero: params.show_rap_zero === undefined ? true : parseFlag(params.show_rap_zero),
+    showExistsZero: params.show_exists_zero === undefined ? true : parseFlag(params.show_exists_zero),
     hidePets: parseFlag(params.hide_pets),
     page,
     pageSize,
@@ -297,7 +519,7 @@ export async function listItemsFiltered(
 ): Promise<FilteredItemsResult> {
   const normalized = normalizeFilteredParams(rawParams);
 
-  const cacheKey = `v2:items:${JSON.stringify(normalized)}`;
+  const cacheKey = `v3:items:${JSON.stringify(normalized)}`;
   const cached = await cacheGet<FilteredItemsResult>(cacheKey);
   if (cached) return cached;
 
@@ -310,6 +532,7 @@ export async function listItemsFiltered(
     items: rows.map((row) => ({
       itemKey: row.itemKey,
       name: row.name,
+      slug: row.slug ?? null,
       category: row.category,
       collectionName: row.collectionName,
       rap: row.rap,
@@ -329,11 +552,21 @@ export async function listItemsFiltered(
 export async function searchItems(
   q: string,
   limit: number,
-): Promise<{ items: { itemKey: string; name: string; category: string | null; rap: number | null }[] }> {
+): Promise<{
+  items: {
+    itemKey: string;
+    name: string;
+    slug: string | null;
+    pt: number;
+    shiny: boolean;
+    category: string | null;
+    rap: number | null;
+  }[];
+}> {
   const trimmed = q.trim();
   const boundedLimit = Math.min(Math.max(1, limit), 10);
-  const cacheKey = `v2:search:${trimmed}:${boundedLimit}`;
-  const cached = await cacheGet<{ items: { itemKey: string; name: string; category: string | null; rap: number | null }[] }>(cacheKey);
+  const cacheKey = `v3:search:${trimmed}:${boundedLimit}`;
+  const cached = await cacheGet<{ items: { itemKey: string; name: string; slug: string | null; pt: number; shiny: boolean; category: string | null; rap: number | null }[] }>(cacheKey);
   if (cached) return cached;
 
   const { items } = await listItemsFiltered({
@@ -348,6 +581,9 @@ export async function searchItems(
   const mapped = items.map((i) => ({
     itemKey: i.itemKey,
     name: i.name,
+    slug: i.slug,
+    pt: i.pt,
+    shiny: i.shiny,
     category: i.category,
     rap: i.rap,
   }));

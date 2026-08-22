@@ -31,7 +31,10 @@ apiRouter.get('/pets/:itemKey/history', async (req: Request, res: Response, next
     if (!detail) {
       return void res.status(404).json({ status: 'error', error: 'Item not found' });
     }
-    res.json({ history: detail.history });
+    const history = [...detail.history]
+      .reverse()
+      .map(({ capturedAt, rap, exists }) => ({ capturedAt, rap, exists }));
+    res.json({ history });
   } catch (err) {
     next(err);
   }

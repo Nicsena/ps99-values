@@ -20,8 +20,8 @@
     category: 'all',
     collection: 'all',
     exists: 'all',
-    show_rap_zero: '0',
-    show_exists_zero: '0',
+    show_rap_zero: '1',
+    show_exists_zero: '1',
     hide_pets: '0',
   };
   const VALID_SORTS = new Set([
@@ -101,15 +101,21 @@
       badges.push('<span class="badge">' + escapeHtml(item.category) + '</span>');
     }
     void variantKey;
+    const href = window.PS99 && PS99.itemPath
+      ? PS99.itemPath(item.name, item.pt || 0, !!item.shiny)
+      : '/pet/' + encodeURIComponent(item.itemKey);
     return (
-      '<a class="item-card-link" href="/pet/' + encodeURIComponent(item.itemKey) + '">' +
+      '<a class="item-card-link" href="' + href + '">' +
       '<article class="item-card">' +
-      '<img class="item-img" src="/img/placeholder.svg" loading="lazy" alt="' + escapeHtml(item.name) + '">' +
+      '<img class="item-thumb" src="/img/placeholder.svg" loading="lazy" alt="">' +
+      '<div class="item-info">' +
       '<h3 class="item-name">' + escapeHtml(item.name) + '</h3>' +
       '<div class="badge-row">' + badges.join('') + '</div>' +
       '<div class="item-stats">' +
       '<span>RAP <b>' + fmt(item.rap) + '</b></span>' +
+      '<span class="stat-sep">&middot;</span>' +
       '<span>Exists <b>' + fmt(item.exists) + '</b></span>' +
+      '</div>' +
       '</div>' +
       '</article></a>'
     );
@@ -133,6 +139,7 @@
       const items = Array.isArray(data.items) ? data.items : [];
       if (!append) grid.innerHTML = '';
       grid.insertAdjacentHTML('beforeend', items.map(cardHtml).join(''));
+      if (window.PS99 && typeof PS99.refreshIcons === 'function') PS99.refreshIcons();
       if (resultCount) resultCount.textContent = total.toLocaleString() + ' results';
       done = page * PAGE_SIZE >= total || items.length === 0;
       if (done && grid.children.length === 0) {
@@ -164,11 +171,13 @@
   }
 
   function hydrateControls(state) {
-    filterPanel.querySelectorAll('.pill[data-group]').forEach((pill) => {
-      const group = pill.getAttribute('data-group');
-      pill.classList.toggle('active', (state[group] || 'all') === pill.getAttribute('data-value'));
-    });
-    sortSelect.value = state.sort;
+    if (filterPanel) {
+      filterPanel.querySelectorAll('.pill[data-group]').forEach((pill) => {
+        const group = pill.getAttribute('data-group');
+        pill.classList.toggle('active', (state[group] || 'all') === pill.getAttribute('data-value'));
+      });
+    }
+    if (sortSelect) sortSelect.value = state.sort;
     [
       ['f-show-rap-zero', 'show_rap_zero'],
       ['f-show-exists-zero', 'show_exists_zero'],
@@ -179,13 +188,16 @@
     });
   }
 
-  toggleBtn.addEventListener('click', () => {
-    const hidden = filterPanel.hidden;
-    filterPanel.hidden = !hidden;
-    toggleBtn.setAttribute('aria-expanded', String(hidden));
-  });
+  if (toggleBtn && filterPanel) {
+    toggleBtn.addEventListener('click', () => {
+      const isHidden = filterPanel.hidden;
+      filterPanel.hidden = !isHidden;
+      toggleBtn.setAttribute('aria-expanded', String(!isHidden));
+    });
+  }
 
-  filterPanel.addEventListener('click', (e) => {
+  if (filterPanel) {
+    filterPanel.addEventListener('click', (e) => {
     const pill = e.target.closest('.pill[data-group]');
     if (!pill) return;
     const group = pill.getAttribute('data-group');
@@ -198,13 +210,16 @@
     writeState(state);
     resetAndLoad();
   });
+  }
 
+  if (sortSelect) {
   sortSelect.addEventListener('change', () => {
     const state = readState();
     state.sort = sortSelect.value;
     writeState(state);
     resetAndLoad();
   });
+  }
 
   [['f-show-rap-zero', 'show_rap_zero'], ['f-show-exists-zero', 'show_exists_zero'], ['f-hide-pets', 'hide_pets']].forEach(
     ([id, key]) => {

@@ -25,6 +25,8 @@ export default tseslint.config(
         clearTimeout: 'readonly',
         console: 'readonly',
         IntersectionObserver: 'readonly',
+        PS99: 'readonly',
+        lucide: 'readonly',
       },
     },
     rules: {

@@ -22,6 +22,7 @@ const statements = [
     id TEXT PRIMARY KEY,
     collection_name TEXT NOT NULL REFERENCES collections(name),
     name TEXT NOT NULL,
+    slug TEXT,
     description TEXT,
     category TEXT,
     config_data TEXT,
@@ -63,6 +64,15 @@ export function ensureSchema(): void {
     for (const statement of statements) {
       sqlite.exec(statement);
     }
+    ensureItemsSlugColumn();
+    sqlite.exec('CREATE INDEX IF NOT EXISTS items_slug_idx ON items (slug)');
   });
   run();
+}
+
+function ensureItemsSlugColumn(): void {
+  const columns = sqlite.prepare('PRAGMA table_info(items)').all() as { name: string }[];
+  if (!columns.some((column) => column.name === 'slug')) {
+    sqlite.exec('ALTER TABLE items ADD COLUMN slug TEXT');
+  }
 }

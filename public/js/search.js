@@ -52,6 +52,13 @@
     );
   }
 
+  function itemHref(item) {
+    if (window.PS99 && PS99.itemPath) {
+      return PS99.itemPath(item.name, item.pt || 0, !!item.shiny);
+    }
+    return '/pet/' + encodeURIComponent(item.itemKey || '');
+  }
+
   function render(items, q) {
     if (items.length === 0) {
       resultsBox.innerHTML = '<div class="search-empty">No matches</div>';
@@ -62,13 +69,13 @@
         .filter(Boolean)
         .join(' · ');
       return (
-        '<a class="search-result" href="/pet/' +
-        encodeURIComponent(item.itemKey) +
-        '"><span class="search-result-name">' +
+        '<a class="search-result" href="' + itemHref(item) +
+        '"><img class="search-thumb" src="/img/placeholder.svg" loading="lazy" alt="">' +
+        '<span class="search-result-body"><span class="search-result-name">' +
         highlight(item.name, q) +
         '</span><span class="search-result-meta">' +
         meta +
-        '</span></a>'
+        '</span></span></a>'
       );
     }).join('');
     resultsBox.innerHTML = html;

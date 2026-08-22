@@ -1,7 +1,7 @@
 import { sql } from 'drizzle-orm';
 import { db } from '../db/client.js';
 import { findItemByNameLower, type ItemRow } from './itemsRepo.js';
-import { loadHistory } from './snapshotsRepo.js';
+import { loadExistsHistory, loadHistory } from './snapshotsRepo.js';
 
 export const LATEST_CTE = sql`WITH latest AS (
   SELECT item_id, pt, shiny, item_key, value FROM rap_snapshots
@@ -61,6 +61,7 @@ export interface FilteredListRowsParams {
 
 export interface RawFilteredRow {
   name: string;
+  slug: string | null;
   category: string | null;
   collectionName: string;
   itemKey: string;
@@ -150,7 +151,7 @@ export async function listRowsFiltered(
   const offset = (params.page - 1) * params.pageSize;
 
   return (await db.all<RawFilteredRow>(sql`${LATEST_CTE}${LATEST_EXISTS_CTE}
-    SELECT i.name, i.category, i.collection_name AS collectionName,
+    SELECT i.name, i.slug AS slug, i.category, i.collection_name AS collectionName,
            COALESCE(l.item_key, i.name) AS itemKey,
            l.value AS rap, COALESCE(l.pt, 0) AS pt, COALESCE(l.shiny, 0) AS shiny,
            e.value AS existsCount
@@ -204,6 +205,34 @@ export async function listRowsRaw(params: ListRowsParams): Promise<RawListRow[]>
     LIMIT ${params.pageSize} OFFSET ${offset}`)) as RawListRow[];
 }
 
+export interface RawSimilarItemRow {
+  name: string;
+  slug: string | null;
+  category: string | null;
+  rap: number | null;
+  exists: number | null;
+}
+
+export async function similarItemsFor(
+  itemId: string,
+  category: string | null,
+  collectionName: string,
+  excludeName: string,
+): Promise<RawSimilarItemRow[]> {
+  const match = category
+    ? sql`i.category IS NOT NULL AND LOWER(i.category) = LOWER(${category})`
+    : sql`i.collection_name = ${collectionName}`;
+  return (await db.all<RawSimilarItemRow>(sql`${LATEST_CTE}${LATEST_EXISTS_CTE}
+    SELECT i.name, i.slug AS slug, i.category,
+           l.value AS rap, e.value AS "exists"
+    FROM items i
+    LEFT JOIN latest l ON l.item_id = i.id AND l.pt = 0 AND l.shiny = 0
+    LEFT JOIN latest_exists e ON e.item_id = i.id AND e.pt = 0 AND e.shiny = 0
+    WHERE i.id != ${itemId} AND LOWER(i.name) != LOWER(${excludeName}) AND ${match}
+    ORDER BY CASE WHEN l.value IS NULL THEN 1 ELSE 0 END, l.value DESC, LOWER(i.name) ASC
+    LIMIT 8`)) as RawSimilarItemRow[];
+}
+
 export async function itemByName(name: string): Promise<ItemRow | undefined> {
   return findItemByNameLower(name);
 }
@@ -222,4 +251,24 @@ export async function historyFor(
   limit = 200,
 ): Promise<{ captured_at: number; value: number }[]> {
   return loadHistory(itemId, pt, shinyInt, limit);
+}
+
+export async function existsHistoryFor(
+  itemId: string,
+  pt: number,
+  shinyInt: number,
+  limit = 200,
+): Promise<{ captured_at: number; value: number }[]> {
+  return loadExistsHistory(itemId, pt, shinyInt, limit);
+}
+
+export async function totalLatestExists(itemId: string): Promise<number | null> {
+  const rows = (await db.all<{ total: number | null }>(
+    sql`SELECT SUM(value) AS total FROM (
+          SELECT value FROM exists_snapshots
+          WHERE item_id = ${itemId}
+          GROUP BY item_id, pt, shiny HAVING captured_at = MAX(captured_at)
+        )`,
+  )) as { total: number | null }[];
+  return rows[0]?.total ?? null;
 }

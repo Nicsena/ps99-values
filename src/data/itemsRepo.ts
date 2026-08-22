@@ -2,11 +2,13 @@ import { randomUUID } from 'node:crypto';
 import { eq, sql } from 'drizzle-orm';
 import { db } from '../db/client.js';
 import { collections, items } from '../db/schema.js';
+import { slugify } from '../util/slug.js';
 
 export interface ItemRow {
   id: string;
   collectionName: string;
   name: string;
+  slug: string | null;
   description: string | null;
   category: string | null;
   configData: string | null;
@@ -41,13 +43,61 @@ export async function findItemByNameLower(name: string): Promise<ItemRow | undef
   return found[0];
 }
 
+export async function findItemBySlug(itemSlug: string): Promise<ItemRow | undefined> {
+  const normalized = slugify(itemSlug);
+  if (!normalized) return undefined;
+
+  const exact = await db.select().from(items).where(eq(items.slug, normalized)).limit(1);
+  if (exact[0]) return exact[0];
+
+  const prefix = normalized.slice(0, 4);
+  const candidates = (await db.all<{
+    id: string;
+    collection_name: string;
+    name: string;
+    slug: string | null;
+    description: string | null;
+    category: string | null;
+    config_data: string | null;
+  }>(
+    sql`SELECT * FROM items WHERE slug LIKE ${`${prefix}%`} OR LOWER(name) LIKE ${`%${prefix.replace(/-/g, '%')}%`} LIMIT 50`,
+  )) as {
+    id: string;
+    collection_name: string;
+    name: string;
+    slug: string | null;
+    description: string | null;
+    category: string | null;
+    config_data: string | null;
+  }[];
+  for (const row of candidates) {
+    if (
+      slugify(row.slug ?? row.name) === normalized ||
+      slugify(row.name) === normalized
+    ) {
+      return {
+        id: row.id,
+        collectionName: row.collection_name,
+        name: row.name,
+        slug: row.slug,
+        description: row.description,
+        category: row.category,
+        configData: row.config_data,
+      };
+    }
+  }
+  return undefined;
+}
+
 export async function upsertItem(params: UpsertItemParams): Promise<void> {
+  const itemSlug = slugify(params.name);
   await db
     .insert(items)
     .values({
       id: randomUUID(),
       collectionName: params.collectionName,
       name: params.name,
+      slug: itemSlug,
       description: params.description,
       category: params.category,
       configData: params.configDataJson,
@@ -55,6 +105,7 @@ export async function upsertItem(params: UpsertItemParams): Promise<void> {
     .onConflictDoUpdate({
       target: [items.collectionName, items.name],
       set: {
+        slug: itemSlug,
         description: params.description,
         category: params.category,
         configData: params.configDataJson,

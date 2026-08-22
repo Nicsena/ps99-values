@@ -79,6 +79,45 @@ export async function loadHistory(
   )) as HistoryRawPoint[];
 }
 
+export async function loadExistsHistory(
+  itemId: string,
+  pt: number,
+  shinyInt: number,
+  limit = 200,
+): Promise<HistoryRawPoint[]> {
+  return (await db.all<HistoryRawPoint>(
+    sql`SELECT captured_at, value FROM (
+          SELECT captured_at, value FROM exists_snapshots
+          WHERE item_id = ${itemId} AND pt = ${pt} AND shiny = ${shinyInt}
+          ORDER BY captured_at DESC LIMIT ${limit}
+        ) ORDER BY captured_at ASC`,
+  )) as HistoryRawPoint[];
+}
+
+export async function countRapSnapshots(
+  itemId: string,
+  pt: number,
+  shinyInt: number,
+): Promise<number> {
+  const rows = (await db.all<{ total: number }>(
+    sql`SELECT COUNT(*) AS total FROM rap_snapshots
+        WHERE item_id = ${itemId} AND pt = ${pt} AND shiny = ${shinyInt}`,
+  )) as { total: number }[];
+  return rows[0]?.total ?? 0;
+}
+
+export async function countExistsSnapshots(
+  itemId: string,
+  pt: number,
+  shinyInt: number,
+): Promise<number> {
+  const rows = (await db.all<{ total: number }>(
+    sql`SELECT COUNT(*) AS total FROM exists_snapshots
+        WHERE item_id = ${itemId} AND pt = ${pt} AND shiny = ${shinyInt}`,
+  )) as { total: number }[];
+  return rows[0]?.total ?? 0;
+}
+
 export async function pruneSnapshotsOlderThan(cutoffDate: Date): Promise<number> {
   const rapResult = await db.delete(rapSnapshots).where(lt(rapSnapshots.capturedAt, cutoffDate));
   const existsResult = await db

@@ -1,95 +1,745 @@
 <%- include('partials/header', { title: item.name }) %>
 
-<% if (locals.error) { %>
-  <div class="alert alert-error"><%= error %></div>
-<% } %>
+<%
+  function pad(n) { return String(n).padStart(2, '0'); }
+  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function fmtTableDate(iso) {
+    if (!iso) return '\u2014';
+    var d = new Date(iso);
+    if (isNaN(d.getTime())) return '\u2014';
+    var h = d.getHours(), ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12 || 12;
+    return MONTHS[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear() + ', ' + h + ':' + pad(d.getMinutes()) + ' ' + ampm;
+  }
+  function fmtCompactEJS(n) {
+    if (n === null || n === undefined || isNaN(Number(n))) return '\u2014';
+    var v = Number(n), abs = Math.abs(v), s = v < 0 ? '-' : '';
+    function t(x) { return x.replace(/\.0+$/, '').replace(/(\.\d*[1-9])0+$/, '$1'); }
+    if (abs >= 1e12) return s + t((abs / 1e12).toFixed(2)) + 'T';
+    if (abs >= 1e9) return s + t((abs / 1e9).toFixed(2)) + 'B';
+    if (abs >= 1e6) return s + t((abs / 1e6).toFixed(2)) + 'M';
+    if (abs >= 1e3) return s + t((abs / 1e3).toFixed(2)) + 'K';
+    return v.toLocaleString();
+  }
+  function fmtSignedCompactEJS(n) {
+    if (n === null || n === undefined || isNaN(Number(n))) return 'N/A';
+    var v = Number(n);
+    if (v === 0) return '+0';
+    return (v > 0 ? '+' : '-') + fmtCompactEJS(Math.abs(v));
+  }
+  function chgClass(n) {
+    var v = Number(n);
+    if (v > 0) return 'delta-up';
+    if (v < 0) return 'delta-down';
+    return '';
+  }
+  function normPtEJS(pt) {
+    if (typeof pt === 'string') return ({ regular: 0, golden: 1, rainbow: 2 }[pt.toLowerCase()] || 0);
+    return Number(pt) || 0;
+  }
 
-<section class="page-head">
-  <h1><%= item.name %></h1>
-  <div class="badge-row">
-    <span class="badge"><%= item.category %></span>
-    <% if (item.collectionName) { %><span class="badge collection"><%= item.collectionName %></span><% } %>
+  var st = stats || {};
+  var pct24 = (st.rapChangePct24h === null || st.rapChangePct24h === undefined || isNaN(Number(st.rapChangePct24h))) ? null : Number(st.rapChangePct24h);
+  var pctCls = pct24 === null ? '' : pct24 > 0 ? 'delta-up' : pct24 < 0 ? 'delta-down' : '';
+  var pctTxt = pct24 === null ? '' : (pct24 > 0 ? '+' : '') + (Math.round(Math.abs(pct24) * 10) / 10) + '%';
+
+  var marketCells = [
+    { label: '24h Rap Change', tip: 'Change in RAP over the last 24 hours.', value: fmtSignedCompactEJS(st.rapChange24h), cls: chgClass(st.rapChange24h) },
+    { label: '24h Exists Change', tip: 'Change in number of copies over the last 24 hours.', value: fmtSignedCompactEJS(st.existsChange24h), cls: chgClass(st.existsChange24h) },
+    { label: '24h High', value: fmtCompactEJS(st.high24h), delta: true },
+    { label: '24h Low', value: fmtCompactEJS(st.low24h), delta: true },
+    { label: '1M High', value: fmtCompactEJS(st.high1m), delta: true },
+    { label: '1M Low', value: fmtCompactEJS(st.low1m), delta: true },
+    { label: 'Market Cap', tip: 'RAP multiplied by total copies in existence.', value: fmtCompactEJS(st.marketCap) },
+    { label: 'Rap / Copy', tip: 'Average RAP per existing copy.', value: fmtCompactEJS(st.rapPerCopy), info: true },
+    { label: 'Tracked', tip: 'Number of related items tracked together.', value: (st.tracked === null || st.tracked === undefined) ? '0' : String(st.tracked), info: true },
+    { label: 'All-Time High', value: fmtCompactEJS(st.ath), delta: true },
+    { label: 'All-Time Low', value: fmtCompactEJS(st.atl), delta: true },
+    { label: '30D Rap Volatility', tip: 'Measure of how much the RAP has fluctuated in 30 days.', value: (st.volatility30d === null || st.volatility30d === undefined) ? 'N/A' : fmtCompactEJS(st.volatility30d), info: true },
+    { label: '24h Rap Updates', tip: 'Number of RAP updates captured in the last 24 hours.', value: (st.updates24h === null || st.updates24h === undefined) ? '\u2014' : fmtCompactEJS(st.updates24h), info: true },
+    { label: 'Rap Data Points', tip: 'Total historical RAP data points stored.', value: (st.rapPoints === null || st.rapPoints === undefined) ? '\u2014' : fmtCompactEJS(st.rapPoints) },
+    { label: 'Exists Data Points', tip: 'Total historical exists data points stored.', value: (st.existsPoints === null || st.existsPoints === undefined) ? '\u2014' : fmtCompactEJS(st.existsPoints) },
+  ];
+
+  var VAR_DEFS = [
+    { key: 'regular',       label: 'Regular',       pt: 0, shiny: false, color: '#14b8a6' },
+    { key: 'shiny',         label: 'Shiny',         pt: 0, shiny: true,  color: '#818cf8' },
+    { key: 'golden',        label: 'Golden',        pt: 1, shiny: false, color: '#f59e0b' },
+    { key: 'rainbow',       label: 'Rainbow',       pt: 2, shiny: false, color: '#f43f5e' },
+    { key: 'shiny-golden',  label: 'Shiny Golden',  pt: 1, shiny: true,  color: '#b45309' },
+    { key: 'shiny-rainbow', label: 'Shiny Rainbow', pt: 2, shiny: true,  color: '#be123c' },
+  ];
+  var variantRows = [];
+  if (totalExists > 0 && variants && variants.length) {
+    VAR_DEFS.forEach(function (def) {
+      var match = null;
+      variants.forEach(function (v) {
+        if (normPtEJS(v.pt) === def.pt && !!v.shiny === def.shiny && v.exists !== null && v.exists !== undefined && v.exists > 0) match = v;
+      });
+      if (match) variantRows.push({ def: def, exists: match.exists });
+    });
+  }
+  var donutR = 40, donutC = 2 * Math.PI * donutR, donutAcc = 0;
+%>
+
+<nav class="breadcrumbs">
+  <a href="/">Home</a> <span class="crumb-sep">&rsaquo;</span> <a href="/items">Items</a> <span class="crumb-sep">&rsaquo;</span> <span><%= item.name %></span>
+</nav>
+
+<div class="item-header">
+  <img class="item-header-thumb" src="/img/placeholder.svg" alt="<%= item.name %>">
+  <div class="item-header-info">
+    <h1 class="item-title"><%= item.name %></h1>
+    <div class="badge-row" id="variant-chips">
+      <% if (item.category) { %><span class="badge badge-cat"><%= item.category.toUpperCase() %></span><% } %>
+      <% if (item.collectionName) { %><span class="badge badge-collection"><%= item.collectionName %></span><% } %>
+    </div>
+    <% if (item.description) { %>
+      <p class="item-description"><%= item.description %></p>
+    <% } else { %>
+      <p class="item-description item-desc-empty"><em>No Description</em></p>
+    <% } %>
+    <div class="header-stats">
+      <div class="header-stat">
+        <span class="stat-label">RAP</span>
+        <span class="stat-value big-num"><%= fmtCompactEJS(currentRap) %></span>
+        <span class="stat-caption muted" data-rel="<%= rapUpdatedAt %>"></span>
+      </div>
+      <div class="header-stat">
+        <span class="stat-label">Exists</span>
+        <span class="stat-value big-num"><%= fmtCompactEJS(exists) %></span>
+        <span class="stat-caption muted" data-rel="<%= rapUpdatedAt %>"></span>
+      </div>
+      <div class="header-stat">
+        <span class="stat-label">Total Exists</span>
+        <span class="stat-value big-num"><%= fmtCompactEJS(totalExists) %></span>
+        <span class="stat-caption muted"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="card chart-card" id="rap-history-card" data-key="rap">
+  <div class="card-head">
+    <div class="card-head-left">
+      <i data-lucide="line-chart" class="section-icon"></i>
+      <h2 class="section-label">RAP History</h2>
+    </div>
+    <div class="card-toolbar">
+      <button type="button" class="pill-toggle" data-toggle="normalize" title="Scale both series to 0\u2013100%">
+        <i data-lucide="equal"></i><span>Normalize</span>
+      </button>
+      <button type="button" class="pill-toggle" data-toggle="zero" title="Start y axis at zero">
+        <i data-lucide="arrow-down-to-line"></i><span>Start at 0</span>
+      </button>
+      <button type="button" class="pill-toggle" data-toggle="overlay" title="Overlay the Exists series">
+        <i data-lucide="layers"></i><span>Overlay Exists</span>
+      </button>
+      <div class="icon-group chart-type-group" role="group" aria-label="Chart type">
+        <button type="button" class="icon-btn active" data-ctype="line" title="Line chart"><i data-lucide="chart-line"></i></button>
+        <button type="button" class="icon-btn" data-ctype="bar" title="Bar chart"><i data-lucide="bar-chart-2"></i></button>
+        <button type="button" class="icon-btn" data-ctype="area" title="Area chart"><i data-lucide="waves"></i></button>
+      </div>
+    </div>
+  </div>
+  <div class="chart-value-row">
+    <span class="big-num chart-big" id="rap-big"><%= fmtCompactEJS(currentRap) %></span>
+    <span class="muted chart-date" id="rap-date"></span>
+  </div>
+  <div class="chart-delta <%= chgClass(st.rapChange24h) %>" id="rap-delta"></div>
+  <div class="range-group" role="group" aria-label="Range">
+    <button type="button" class="pill-toggle range-btn" data-range="1D">1D</button>
+    <button type="button" class="pill-toggle range-btn active" data-range="7D">7D</button>
+    <button type="button" class="pill-toggle range-btn" data-range="30D">30D</button>
+    <button type="button" class="pill-toggle range-btn" data-range="90D">90D</button>
+    <button type="button" class="pill-toggle range-btn" data-range="ALL">ALL</button>
+  </div>
+  <div class="chart-body">
+    <div class="chart-canvas-wrap" style="height:300px;"><canvas id="rapChart"></canvas></div>
+    <p class="no-data-msg muted" hidden>Not enough data yet.</p>
+  </div>
+  <canvas id="rapStrip" class="mini-strip" height="56" aria-hidden="true"></canvas>
+</section>
+
+<section class="card chart-card" id="exists-history-card" data-key="exists">
+  <div class="card-head">
+    <div class="card-head-left">
+      <i data-lucide="activity" class="section-icon"></i>
+      <h2 class="section-label">Exists History</h2>
+    </div>
+    <div class="card-toolbar">
+      <button type="button" class="pill-toggle" data-toggle="hide-live" title="Drop the most recent point">
+        <i data-lucide="eye-off"></i><span>Hide Live Point</span>
+      </button>
+      <button type="button" class="pill-toggle" data-toggle="normalize" title="Scale series to 0\u2013100%">
+        <i data-lucide="equal"></i><span>Normalize</span>
+      </button>
+      <button type="button" class="pill-toggle" data-toggle="zero" title="Start y axis at zero">
+        <i data-lucide="arrow-down-to-line"></i><span>Start at 0</span>
+      </button>
+      <div class="icon-group chart-type-group" role="group" aria-label="Chart type">
+        <button type="button" class="icon-btn active" data-ctype="line" title="Line chart"><i data-lucide="chart-line"></i></button>
+        <button type="button" class="icon-btn" data-ctype="bar" title="Bar chart"><i data-lucide="bar-chart-2"></i></button>
+        <button type="button" class="icon-btn" data-ctype="area" title="Area chart"><i data-lucide="waves"></i></button>
+      </div>
+    </div>
+  </div>
+  <div class="chart-value-row">
+    <span class="big-num chart-big" id="exists-big"><%= fmtCompactEJS(exists) %></span>
+  </div>
+  <div class="chart-delta <%= chgClass(st.existsChange24h) %>" id="exists-delta"></div>
+  <div class="range-group" role="group" aria-label="Range">
+    <button type="button" class="pill-toggle range-btn" data-range="1D">1D</button>
+    <button type="button" class="pill-toggle range-btn active" data-range="7D">7D</button>
+    <button type="button" class="pill-toggle range-btn" data-range="30D">30D</button>
+    <button type="button" class="pill-toggle range-btn" data-range="90D">90D</button>
+    <button type="button" class="pill-toggle range-btn" data-range="ALL">ALL</button>
+  </div>
+  <div class="chart-body">
+    <div class="chart-canvas-wrap" style="height:300px;"><canvas id="existsChart"></canvas></div>
+    <p class="no-data-msg muted" hidden>Not enough data yet.</p>
+  </div>
+  <canvas id="existsStrip" class="mini-strip" height="56" aria-hidden="true"></canvas>
+</section>
+
+<section class="card">
+  <div class="card-head">
+    <div class="card-head-left">
+      <i data-lucide="bar-chart-3" class="section-icon"></i>
+      <h2 class="section-label">Market Statistics</h2>
+    </div>
+  </div>
+  <div class="market-grid">
+    <% marketCells.forEach(function (cell) { %>
+      <div class="market-cell">
+        <div class="market-label muted"><%= cell.label %>
+          <% if (cell.info) { %><i data-lucide="info" class="info-ico" title="<%= cell.tip %>"></i><% } %>
+        </div>
+        <div class="market-value">
+          <span class="<%= cell.cls || '' %>"><%= cell.value %></span>
+          <% if (cell.delta && pctTxt) { %><span class="cell-pct <%= pctCls %>"><%= pctTxt %></span><% } %>
+        </div>
+      </div>
+    <% }); %>
   </div>
 </section>
 
 <section class="card">
-  <h2>Current RAP</h2>
-  <p class="big-rap"><%= currentRap === null ? '—' : currentRap.toLocaleString() %></p>
-  <% if (item.description) { %><p class="muted"><%= item.description %></p><% } %>
-</section>
-
-<section class="card">
-  <h2>Variants</h2>
-  <% const variantNames = ['Normal', 'Golden', 'Rainbow']; %>
-  <% if (variants.length === 0) { %>
-    <p class="muted">No variants tracked</p>
-  <% } else { %>
-    <ul class="variant-list">
-      <% variants.forEach(function (v) {
-           const variant = variantNames[v.pt] || 'Normal';
-           const badgeClass = v.pt === 1 ? 'golden' : v.pt === 2 ? 'rainbow' : '';
-      %>
-        <li>
-          <a href="/pet/<%= encodeURIComponent(v.itemKey) %>">
-            <span class="badge <%= badgeClass %>"><%= variant %><%= v.shiny ? ' Shiny' : '' %></span>
-          </a>
-          <span class="rap"><%= v.rap === null ? '—' : v.rap.toLocaleString() %></span>
-        </li>
-      <% }); %>
-    </ul>
-  <% } %>
-</section>
-
-<section class="card">
-  <h2>RAP History</h2>
-  <% if (history.length === 0) { %>
+  <div class="card-head">
+    <div class="card-head-left">
+        <i data-lucide="table-2" class="section-icon"></i>
+        <h2 class="section-label">Price History <span class="muted history-count">(<%= (st.rapPoints === null || st.rapPoints === undefined) ? (history ? history.length : 0) : st.rapPoints %>)</span></h2>
+    </div>
+  </div>
+  <% if (!history || history.length === 0) { %>
     <p class="muted">No history yet</p>
   <% } else { %>
-    <canvas id="historyChart"></canvas>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
-    <script>
-      (function () {
-        var history = <%- JSON.stringify(history) %>;
-        var labels = history.map(function (h) {
-          return new Date(h.capturedAt).toLocaleDateString();
-        });
-        var values = history.map(function (h) { return h.value; });
-        var ctx = document.getElementById('historyChart').getContext('2d');
-        new Chart(ctx, {
-          type: 'line',
-          data: {
-            labels: labels,
-            datasets: [{
-              label: 'RAP',
-              data: values,
-              borderColor: '#8b5cf6',
-              backgroundColor: 'rgba(139, 92, 246, 0.15)',
-              pointBackgroundColor: '#22d3ee',
-              borderWidth: 2,
-              tension: 0.25,
-              fill: true
-            }]
-          },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: { labels: { color: '#e5e7eb' } }
-            },
-            scales: {
-              x: { ticks: { color: '#9ca3af' }, grid: { color: 'rgba(255,255,255,0.06)' } },
-              y: {
-                ticks: {
-                  color: '#9ca3af',
-                  callback: function (value) { return Number(value).toLocaleString(); }
-                },
-                grid: { color: 'rgba(255,255,255,0.06)' }
-              }
-            }
-          }
-        });
-      })();
-    </script>
+    <div class="table-wrap price-history-wrap">
+      <table class="table price-history-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th class="num">RAP</th>
+            <th class="num">Exists</th>
+            <th class="num">RAP Chg</th>
+            <th class="num">Rap %</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% history.forEach(function (h, idx) { %>
+            <tr>
+              <td class="muted"><%= fmtTableDate(h.capturedAt) %></td>
+              <td class="num rap"><%= fmtCompactEJS(h.rap) %></td>
+              <td class="num"><%= fmtCompactEJS(h.exists) %></td>
+              <% if (idx === 0) { %>
+                <td class="num">&minus;</td>
+                <td class="num">&minus;</td>
+              <% } else { %>
+                <td class="num <%= h.rapChg === null || h.rapChg === undefined ? 'muted' : chgClass(h.rapChg) %>"><%= h.rapChg === null || h.rapChg === undefined ? 'N/A' : fmtSignedCompactEJS(h.rapChg) %></td>
+                <td class="num <%= h.rapPct === null || h.rapPct === undefined ? 'muted' : chgClass(h.rapPct) %>"><%= h.rapPct === null || h.rapPct === undefined ? 'N/A' : ((Number(h.rapPct) > 0 ? '+' : '') + (Math.round(Number(h.rapPct) * 100) / 100) + '%') %></td>
+              <% } %>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
   <% } %>
 </section>
+
+<% if (totalExists > 0 && variantRows.length > 0) { %>
+  <section class="card" id="variant-exists-card">
+    <div class="card-head">
+      <div class="card-head-left">
+        <i data-lucide="pie-chart" class="section-icon"></i>
+        <h2 class="section-label">Exists by Variant</h2>
+      </div>
+    </div>
+    <div class="variant-exists-layout">
+      <div class="variant-bars">
+        <% var maxExists = Math.max.apply(null, variantRows.map(function (r) { return r.exists; })); %>
+        <% variantRows.forEach(function (row) {
+             var wPct = maxExists > 0 ? (row.exists / maxExists) * 100 : 0;
+             var share = totalExists > 0 ? (row.exists / totalExists) * 100 : 0;
+        %>
+          <div class="variant-bar-row">
+            <span class="variant-bar-label"><%= row.def.label %></span>
+            <span class="variant-bar-track">
+              <span class="variant-bar-fill" style="width:<%= Math.max(wPct, 1.5).toFixed(2) %>% ;background:<%= row.def.color %>;"></span>
+            </span>
+            <span class="variant-bar-meta">
+              <b><%= fmtCompactEJS(row.exists) %></b>
+              <span class="muted"><%= share.toFixed(1) %>%</span>
+            </span>
+          </div>
+        <% }); %>
+      </div>
+      <div class="variant-donut">
+        <svg viewBox="0 0 100 100" width="160" height="160" role="img" aria-label="Exists share by variant">
+          <circle cx="50" cy="50" r="<%= donutR %>" fill="none" stroke="#1c2030" stroke-width="14"></circle>
+          <% variantRows.forEach(function (row) {
+               var frac = totalExists > 0 ? row.exists / totalExists : 0;
+               var len = frac * donutC;
+               var offset = donutC / 4 - donutAcc;
+               donutAcc += len; %>
+          <circle cx="50" cy="50" r="<%= donutR %>" fill="none"
+                  stroke="<%= row.def.color %>" stroke-width="14"
+                  stroke-dasharray="<%= len.toFixed(3) %> <%= (donutC - len).toFixed(3) %>"
+                  stroke-dashoffset="<%= offset.toFixed(3) %>"></circle>
+          <% }); %>
+        </svg>
+        <ul class="donut-legend">
+          <% var acc2 = 0; variantRows.forEach(function (row) {
+               var share = totalExists > 0 ? (row.exists / totalExists) * 100 : 0; %>
+            <li>
+              <span class="legend-dot" style="background:<%= row.def.color %>;"></span>
+              <span class="legend-name"><%= row.def.label %></span>
+              <span class="legend-pct muted"><%= share.toFixed(1) %>%</span>
+            </li>
+          <% }); %>
+        </ul>
+      </div>
+    </div>
+  </section>
+<% } %>
+
+<% if (variants && variants.length > 0) { %>
+  <section class="card" id="variants-card">
+    <div class="card-head">
+      <div class="card-head-left">
+        <i data-lucide="shapes" class="section-icon"></i>
+        <h2 class="section-label">Variants</h2>
+      </div>
+    </div>
+    <div class="variant-tiles">
+      <% variants.forEach(function (v) {
+           var npt = normPtEJS(v.pt);
+           var names = ['Regular', 'Golden', 'Rainbow'];
+           var label = names[npt] || 'Regular';
+           if (v.shiny) label += ' Shiny';
+      %>
+        <button type="button" class="variant-tile"
+                data-name="<%= item.name %>"
+                data-pt="<%= typeof v.pt === 'string' ? v.pt.toLowerCase() : npt %>"
+                data-shiny="<%= v.shiny ? '1' : '0' %>">
+          <img src="/img/placeholder.svg" alt="" width="64" height="64" loading="lazy">
+          <span class="variant-tile-name"><%= label %></span>
+          <span class="variant-tile-rap muted"><%= fmtCompactEJS(v.rap) %></span>
+        </button>
+      <% }); %>
+    </div>
+  </section>
+<% } %>
+
+<% if (similarItems && similarItems.length > 0) { %>
+  <section class="card" id="similar-card">
+    <div class="card-head">
+      <div class="card-head-left">
+        <i data-lucide="sparkles" class="section-icon"></i>
+        <h2 class="section-label">Similar Items</h2>
+      </div>
+    </div>
+    <div class="similar-grid">
+      <% similarItems.forEach(function (si) { %>
+        <a class="similar-tile" href="#" data-sim-name="<%= si.name %>" data-pt="0" data-shiny="0">
+          <img src="/img/placeholder.svg" alt="" width="64" height="64" loading="lazy">
+          <span class="similar-info">
+            <span class="similar-name"><%= si.name %></span>
+            <% if (si.category) { %><span class="similar-cat muted"><%= si.category %></span><% } %>
+          </span>
+        </a>
+      <% }); %>
+    </div>
+  </section>
+<% } %>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script>
+  window.PAGE_DATA = {
+    item: <%- JSON.stringify({ name: item.name, slug: item.slug }) %>,
+    currentRap: <%- JSON.stringify(currentRap) %>,
+    exists: <%- JSON.stringify(exists) %>,
+    rapUpdatedAt: <%- JSON.stringify(rapUpdatedAt) %>,
+    stats: <%- JSON.stringify(stats || {}) %>,
+    history: <%- JSON.stringify(history || []) %>
+  };
+</script>
+<script>
+  function initItemPage() {
+    'use strict';
+    var D = window.PAGE_DATA;
+    var FMT = window.PS99 || {};
+
+    /* ---------- relative captions ---------- */
+    document.querySelectorAll('.stat-caption[data-rel]').forEach(function (el) {
+      var iso = el.getAttribute('data-rel');
+      if (!iso) { el.textContent = ''; return; }
+      var rel = FMT.relTime ? FMT.relTime(iso) : null;
+      el.textContent = rel ? 'Updated ' + rel : '';
+    });
+
+    /* ---------- variant chips from URL (linked via PS99.itemPath) ---------- */
+    (function () {
+      var m = location.pathname.match(/^\/items\/([a-z-]+)\//);
+      if (!m) return;
+      var vs = m[1];
+      var isShiny = vs.indexOf('shiny') !== -1;
+      var chips = [];
+      if (vs.indexOf('rainbow') !== -1) chips.push({ txt: 'RAINBOW', pt: 2 });
+      else if (vs.indexOf('golden') !== -1) chips.push({ txt: 'GOLDEN', pt: 1 });
+      if (isShiny) chips.push({ txt: 'SHINY', pt: 0 });
+      var box = document.getElementById('variant-chips');
+      if (!box || !FMT.itemPath) return;
+      chips.reverse().forEach(function (chip) {
+        var a = document.createElement('a');
+        a.className = 'badge badge-variant';
+        a.textContent = chip.txt;
+        a.href = FMT.itemPath(D.item.name, chip.pt, isShiny);
+        box.insertBefore(a, box.firstChild);
+      });
+    })();
+
+    /* ---------- variant tiles: active state + navigation ---------- */
+    (function () {
+      var m = location.pathname.match(/^\/items\/([a-z-]+)\//);
+      var cur = m ? m[1] : null;
+      document.querySelectorAll('.variant-tile').forEach(function (tile) {
+        if (FMT.variantSlug && FMT.variantSlug(tile.getAttribute('data-pt'), tile.getAttribute('data-shiny') === '1') === cur) {
+          tile.classList.add('active');
+        }
+        tile.addEventListener('click', function () {
+          if (!FMT.itemPath) return;
+          location.href = FMT.itemPath(
+            tile.getAttribute('data-name'),
+            tile.getAttribute('data-pt'),
+            tile.getAttribute('data-shiny') === '1'
+          );
+        });
+      });
+    })();
+
+    /* ---------- similar items links ---------- */
+    document.querySelectorAll('.similar-tile').forEach(function (a) {
+      if (!FMT.itemPath) return;
+      a.href = FMT.itemPath(a.getAttribute('data-sim-name'), a.getAttribute('data-pt'), a.getAttribute('data-shiny') === '1');
+    });
+
+    /* ---------- delta lines ---------- */
+    function setDelta(id, chg, pct) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      if (chg === null || chg === undefined || pct === null || pct === undefined) {
+        el.textContent = '';
+        el.classList.add('hidden');
+        return;
+      }
+      el.classList.remove('hidden');
+      var arrow = chg > 0 ? '\u25B2 ' : chg < 0 ? '\u25BC ' : '';
+      var chgTxt = FMT.fmtSignedCompact ? FMT.fmtSignedCompact(chg) : String(chg);
+      var pctTxt = FMT.fmtPct ? FMT.fmtPct(pct) : String(pct);
+      el.textContent = arrow + chgTxt + ' (' + pctTxt + ')';
+    }
+    setDelta('rap-delta', D.stats.rapChange24h, D.stats.rapChangePct24h);
+    setDelta('exists-delta', D.stats.existsChange24h, D.stats.existsChangePct24h);
+
+    var rapDateEl = document.getElementById('rap-date');
+    if (rapDateEl) {
+      rapDateEl.textContent = D.rapUpdatedAt && FMT.fmtDateTime ? FMT.fmtDateTime(D.rapUpdatedAt) : '';
+    }
+
+    /* ---------- charts ---------- */
+    if (typeof Chart === 'undefined' || !D.history.length) return;
+
+    Chart.defaults.font.family = getComputedStyle(document.body).fontFamily;
+    Chart.defaults.color = '#8b93a7';
+
+    var chrono = D.history.slice().reverse();
+    var SPANS = { '1D': 864e5, '7D': 6048e5, '30D': 2592e6, '90D': 7776e6 };
+
+    function pointsFor(range) {
+      if (range === 'ALL') return chrono.slice();
+      var cutoff = Date.now() - SPANS[range];
+      return chrono.filter(function (p) { return p.t >= cutoff; });
+    }
+
+    function compact(v) {
+      return FMT.fmtCompact ? FMT.fmtCompact(v) : (v === null ? '\u2014' : String(v));
+    }
+
+    function tickLabel(t) {
+      var d = new Date(t);
+      var M = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      var hh = String(d.getHours()).padStart(2, '0');
+      var mm = String(d.getMinutes()).padStart(2, '0');
+      return M[d.getMonth()] + ' ' + d.getDate() + ' ' + hh + ':' + mm;
+    }
+
+    function makeGradient(ctx, area, alphaTop) {
+      if (!area) return 'rgba(34,211,238,' + alphaTop + ')';
+      var g = ctx.createLinearGradient(0, area.top, 0, area.bottom);
+      g.addColorStop(0, 'rgba(34,211,238,' + alphaTop + ')');
+      g.addColorStop(1, 'rgba(34,211,238,0)');
+      return g;
+    }
+
+    function tooltipCfg() {
+      return {
+        backgroundColor: '#161920',
+        borderColor: '#2a2f3d',
+        borderWidth: 1,
+        titleColor: '#e5e7eb',
+        bodyColor: '#9ca3af',
+        padding: 10,
+        displayColors: false,
+        titleFont: { size: 11 },
+        bodyFont: { size: 12, weight: 600 }
+      };
+    }
+
+    function baseScales(normalized, beginZero) {
+      return {
+        x: {
+          grid: { display: false },
+          border: { display: false },
+          ticks: { maxTicksLimit: 8, maxRotation: 0, font: { size: 11 } }
+        },
+        y: {
+          position: 'right',
+          beginAtZero: beginZero,
+          grid: { color: 'rgba(255,255,255,0.05)' },
+          border: { display: false },
+          ticks: {
+            align: 'end',
+            crossAlign: 'far',
+            font: { size: 11 },
+            callback: function (value) { return normalized ? value.toFixed(0) + '%' : compact(value); }
+          }
+        }
+      };
+    }
+
+    function buildCard(cardEl) {
+      var key = cardEl.getAttribute('data-key'); // 'rap' | 'exists'
+      var canvas = cardEl.querySelector('canvas[id$="Chart"]');
+      var strip = cardEl.querySelector('.mini-strip');
+      var wrap = cardEl.querySelector('.chart-canvas-wrap');
+      var noData = cardEl.querySelector('.no-data-msg');
+      var state = { range: '7D', ctype: 'line', normalize: false, zero: false, extra: false };
+      var chart = null;
+
+      function datasetFor(keyName, pts, gradientAlpha, dashed) {
+        return {
+          label: keyName.toUpperCase(),
+          data: pts.map(function (p) { return p[keyName]; }),
+          borderColor: keyName === 'exists' ? '#818cf8' : '#22d3ee',
+          backgroundColor: function (c) { return makeGradient(c.chart.ctx, c.chart.chartArea, gradientAlpha); },
+          borderDash: dashed ? [5, 4] : undefined,
+          borderWidth: 2,
+          pointRadius: 0,
+          pointHitRadius: 12,
+          tension: 0.3,
+          fill: true,
+          spanGaps: true
+        };
+      }
+
+      function render() {
+        var pts = pointsFor(state.range);
+        if (key === 'exists' && state.extra && pts.length) pts = pts.slice(0, -1); // Hide Live Point
+
+        if (pts.length < 2) {
+          wrap.hidden = true;
+          noData.hidden = false;
+          if (strip) strip.style.display = 'none';
+          if (chart) { chart.destroy(); chart = null; }
+          return;
+        }
+        wrap.hidden = false;
+        noData.hidden = true;
+        if (strip) strip.style.display = '';
+
+        var labels = pts.map(function (p) { return p.t; });
+        var datasets;
+
+        if (state.ctype === 'bar') {
+          datasets = [{
+            label: key.toUpperCase(),
+            data: pts.map(function (p) { return p[key]; }),
+            backgroundColor: 'rgba(34,211,238,0.55)',
+            hoverBackgroundColor: 'rgba(34,211,238,0.75)',
+            borderRadius: 2,
+            categoryPercentage: 0.9,
+            barPercentage: 1
+          }];
+          if (key === 'rap' && state.extra) {
+            datasets.push({
+              label: 'EXISTS',
+              data: pts.map(function (p) { return p.exists; }),
+              backgroundColor: 'rgba(129,140,248,0.45)',
+              borderRadius: 2,
+              categoryPercentage: 0.9,
+              barPercentage: 1
+            });
+          }
+        } else {
+          datasets = [datasetFor(key, pts, state.ctype === 'area' ? 0.28 : 0.10)];
+          if (key === 'rap' && state.extra) datasets.push(datasetFor('exists', pts, 0.08, true));
+        }
+
+        if (state.normalize) {
+          datasets.forEach(function (ds) {
+            var base = null;
+            for (var i = 0; i < ds.data.length; i++) {
+              if (ds.data[i] !== null && ds.data[i] !== undefined) { base = Number(ds.data[i]); break; }
+            }
+            ds.data = ds.data.map(function (v) {
+              return v === null || v === undefined || !base ? null : (v / base) * 100;
+            });
+            if (state.ctype === 'bar') ds.backgroundColor = 'rgba(34,211,238,0.15)';
+          });
+        }
+
+        if (chart) chart.destroy();
+
+        var cfg = {
+          type: state.ctype === 'bar' ? 'bar' : 'line',
+          data: { labels: labels, datasets: datasets },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+              legend: { display: false },
+              tooltip: Object.assign(tooltipCfg(), {
+                callbacks: {
+                  title: function (items) { return items.length ? tickLabel(Number(items[0].label)) : ''; },
+                  label: function (item) {
+                    return item.dataset.label + ': ' + (state.normalize ? Number(item.parsed.y).toFixed(1) + '%' : compact(item.parsed.y));
+                  }
+                }
+              })
+            },
+            scales: baseScales(state.normalize, state.zero),
+            animation: { duration: 250 }
+          }
+        };
+
+        if (state.ctype === 'bar') {
+          cfg.options.scales.x.ticks.callback = function (v, i) { return tickLabel(labels[i]); };
+        }
+
+        chart = new Chart(canvas.getContext('2d'), cfg);
+      }
+
+      /* mini overview strip — full loaded series (hand-drawn, no resize loop) */
+      if (strip) {
+        function drawStrip() {
+          var w = strip.clientWidth;
+          var h = 56;
+          if (!w) return;
+          var dpr = window.devicePixelRatio || 1;
+          if (strip.width !== Math.round(w * dpr)) strip.width = Math.round(w * dpr);
+          if (strip.height !== Math.round(h * dpr)) strip.height = Math.round(h * dpr);
+          var ctx = strip.getContext('2d');
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          ctx.clearRect(0, 0, w, h);
+          var pts = [];
+          for (var i = 0; i < chrono.length; i++) {
+            var v = chrono[i][key];
+            if (v === null || v === undefined) continue;
+            pts.push({ x: chrono[i].t, y: v });
+          }
+          if (pts.length < 2) return;
+          var minX = pts[0].x, maxX = pts[pts.length - 1].x;
+          var minY = Infinity, maxY = -Infinity;
+          for (var j = 0; j < pts.length; j++) {
+            if (pts[j].y < minY) minY = pts[j].y;
+            if (pts[j].y > maxY) maxY = pts[j].y;
+          }
+          if (maxY === minY) { maxY = minY + 1; }
+          var pad = 4;
+          var px = function (x) { return ((x - minX) / (maxX - minX || 1)) * (w - 2) + 1; };
+          var py = function (y) { return h - pad - ((y - minY) / (maxY - minY)) * (h - pad * 2); };
+          ctx.beginPath();
+          ctx.moveTo(px(pts[0].x), py(pts[0].y));
+          for (var k = 1; k < pts.length; k++) ctx.lineTo(px(pts[k].x), py(pts[k].y));
+          ctx.strokeStyle = key === 'exists' ? 'rgba(129,140,248,0.5)' : 'rgba(34,211,238,0.5)';
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+          ctx.lineTo(px(pts[pts.length - 1].x), h);
+          ctx.lineTo(px(pts[0].x), h);
+          ctx.closePath();
+          ctx.fillStyle = 'rgba(34,211,238,0.06)';
+          ctx.fill();
+        }
+
+        drawStrip();
+        var stripRaf = null;
+        window.addEventListener('resize', function () {
+          if (stripRaf) cancelAnimationFrame(stripRaf);
+          stripRaf = requestAnimationFrame(drawStrip);
+        });
+      }
+
+      /* toolbar wiring */
+      cardEl.querySelectorAll('[data-toggle]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var t = btn.getAttribute('data-toggle');
+          if (t === 'normalize') state.normalize = !state.normalize;
+          else if (t === 'zero') state.zero = !state.zero;
+          else if (t === 'overlay' || t === 'hide-live') state.extra = !state.extra;
+          btn.classList.toggle('active');
+          render();
+        });
+      });
+      cardEl.querySelectorAll('.chart-type-group .icon-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          cardEl.querySelectorAll('.chart-type-group .icon-btn').forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          state.ctype = btn.getAttribute('data-ctype');
+          render();
+        });
+      });
+      cardEl.querySelectorAll('.range-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          cardEl.querySelectorAll('.range-btn').forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          state.range = btn.getAttribute('data-range');
+          render();
+        });
+      });
+
+      render();
+    }
+
+    chrono.forEach(function (h) { h.t = new Date(h.capturedAt).getTime(); });
+
+    document.querySelectorAll('.chart-card').forEach(buildCard);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initItemPage);
+  } else {
+    initItemPage();
+  }
+</script>
 
 <%- include('partials/footer') %>

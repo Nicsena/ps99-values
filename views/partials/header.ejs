@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= title %></title>
   <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/slugs.js" defer></script>
+  <script src="/js/format.js" defer></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <script src="/js/search.js" defer></script>
 </head>
 <body>
@@ -14,18 +17,75 @@
         <a href="/" class="site-name">PS99 Values</a>
         <a href="/items" class="nav-link">Items</a>
       </div>
-      <div class="navbar-search">
-        <input id="navbar-search" type="search" placeholder="Search pets…  ( / )" autocomplete="off" spellcheck="false">
-        <div id="search-results" class="search-results" hidden></div>
+      <div class="navbar-center">
+        <div class="navbar-search">
+          <i data-lucide="search" class="search-icon" aria-hidden="true"></i>
+          <input id="navbar-search" type="search" placeholder="Search pets…  ( / )" autocomplete="off" spellcheck="false">
+          <div id="search-results" class="search-results" hidden></div>
+        </div>
       </div>
-      <button id="refreshBtn" class="btn btn-accent" type="button">Refresh data</button>
+      <div class="navbar-right">
+        <button id="refreshBtn" class="btn btn-accent btn-icon" type="button">
+          <i data-lucide="rotate-cw" aria-hidden="true"></i><span>Refresh</span>
+        </button>
+      </div>
     </div>
   </nav>
   <main class="container">
   <script>
+    (function () {
+      'use strict';
+      window.PS99 = window.PS99 || {};
+
+      function hasIcon(name) {
+        try {
+          return !!(window.lucide && lucide.icons && lucide.icons[
+            name.split('-').map(function (p) { return p.charAt(0).toUpperCase() + p.slice(1); }).join('')
+          ]);
+        } catch (e) { return false; }
+      }
+
+      PS99.resolveIcon = function (name) { return bestName(name); };
+
+      var FALLBACKS = {
+        'line-chart': ['line-chart', 'chart-line', 'trending-up'],
+        'bar-chart-3': ['bar-chart-3', 'chart-column', 'bar-chart-2'],
+        'candlestick-chart': ['candlestick-chart', 'candlestick', 'bar-chart-2'],
+        'area-chart': ['area-chart', 'waves'],
+        'table-2': ['table-2', 'table'],
+        'pie-chart': ['pie-chart', 'chart-pie']
+      };
+
+      function bestName(name) {
+        var chain = [name].concat(FALLBACKS[name] || []);
+        for (var i = 0; i < chain.length; i++) {
+          if (hasIcon(chain[i])) return chain[i];
+        }
+        return chain[chain.length - 1];
+      }
+
+      function renderIcons() {
+        if (!window.lucide || typeof lucide.createIcons !== 'function') return;
+        document.querySelectorAll('i[data-lucide]').forEach(function (el) {
+          el.setAttribute('data-lucide', bestName(el.getAttribute('data-lucide')));
+        });
+        lucide.createIcons();
+      }
+
+      PS99.refreshIcons = function () { renderIcons(); };
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', renderIcons);
+      } else {
+        renderIcons();
+      }
+    })();
+  </script>
+  <script>
     document.getElementById('refreshBtn').addEventListener('click', async function () {
       this.disabled = true;
-      this.textContent = 'Refreshing...';
+      var label = this.querySelector('span');
+      if (label) label.textContent = 'Refreshing...'; else this.textContent = 'Refreshing...';
       try {
         await fetch('/api/refresh', { method: 'POST' });
       } finally {

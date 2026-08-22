@@ -1,4 +1,7 @@
 import { randomUUID } from 'node:crypto';
+import { eq, isNull } from 'drizzle-orm';
+import { db } from '../db/client.js';
+import { items } from '../db/schema.js';
 import {
   fetchCollection,
   fetchCollections,
@@ -16,6 +19,7 @@ import {
   upsertCollectionNames,
 } from '../data/collectionsRepo.js';
 import { getEnabledItemsWithCollection, upsertItem } from '../data/itemsRepo.js';
+import { slugify } from '../util/slug.js';
 import {
   getLatestExistsValues,
   getLatestRapValues,
@@ -48,8 +52,19 @@ export async function bootstrapIfNeeded(): Promise<void> {
     if ((await countCollections()) === 0) {
       await seedCollections();
     }
+    await backfillItemSlugs();
   } catch (err) {
     console.error('[sync] bootstrap failed:', err);
+  }
+}
+
+async function backfillItemSlugs(): Promise<void> {
+  const missing = await db
+    .select({ id: items.id, name: items.name })
+    .from(items)
+    .where(isNull(items.slug));
+  for (const row of missing) {
+    await db.update(items).set({ slug: slugify(row.name) }).where(eq(items.id, row.id));
   }
 }
 

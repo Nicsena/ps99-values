@@ -14,6 +14,7 @@ export const items = sqliteTable(
       .notNull()
       .references(() => collections.name),
     name: text('name').notNull(),
+    slug: text('slug'),
     description: text('description'),
     category: text('category'),
     configData: text('config_data'),
@@ -22,7 +23,10 @@ export const items = sqliteTable(
       .$defaultFn(() => new Date())
       .$onUpdateFn(() => new Date()),
   },
-  (t) => [uniqueIndex('items_collection_name_uq').on(t.collectionName, t.name)],
+  (t) => [
+    uniqueIndex('items_collection_name_uq').on(t.collectionName, t.name),
+    index('items_slug_idx').on(t.slug),
+  ],
 );
 
 export const rapSnapshots = sqliteTable(
