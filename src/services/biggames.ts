@@ -79,3 +79,7 @@ export async function fetchCollection(name: string): Promise<CollectionEntry[]> 
 export async function fetchRap(): Promise<RapEntry[]> {
   return request('/api/rap', (b) => extractData(rapEntrySchema, b));
 }
+
+export async function fetchExists(): Promise<RapEntry[]> {
+  return request('/api/exists', (b) => extractData(rapEntrySchema, b));
+}

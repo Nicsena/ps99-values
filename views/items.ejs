@@ -1,0 +1,83 @@
+<%- include('partials/header', { title: 'Items' }) %>
+
+<nav class="breadcrumbs">
+  <a href="/">Home</a> <span class="crumb-sep">&rsaquo;</span> <span>Items</span>
+</nav>
+
+<div class="toolbar">
+  <span id="result-count" class="muted"></span>
+  <span class="toolbar-spacer"></span>
+  <button id="toggle-filters" type="button" class="btn btn-ghost" aria-expanded="false" aria-controls="filter-panel">Filters &#9662;</button>
+</div>
+
+<div id="filter-panel" hidden>
+  <div class="filter-group" data-label="Shiny">
+    <button type="button" class="pill active" data-group="shiny" data-value="all">All</button>
+    <button type="button" class="pill" data-group="shiny" data-value="no">Not Shiny</button>
+    <button type="button" class="pill" data-group="shiny" data-value="yes">Shiny</button>
+  </div>
+
+  <div class="filter-group" data-label="Variant">
+    <button type="button" class="pill active" data-group="pt" data-value="all">All</button>
+    <button type="button" class="pill" data-group="pt" data-value="regular">Regular</button>
+    <button type="button" class="pill" data-group="pt" data-value="golden">Golden</button>
+    <button type="button" class="pill" data-group="pt" data-value="rainbow">Rainbow</button>
+  </div>
+
+  <div class="filter-group" data-label="Rarity">
+    <button type="button" class="pill active" data-group="category" data-value="all">All</button>
+    <button type="button" class="pill" data-group="category" data-value="huge">Huge</button>
+    <button type="button" class="pill" data-group="category" data-value="titanic">Titanic</button>
+    <button type="button" class="pill" data-group="category" data-value="gargantuan">Gargantuan</button>
+  </div>
+
+  <div class="filter-group" data-label="Collection">
+    <button type="button" class="pill active" data-group="collection" data-value="all">All</button>
+    <% collections.forEach(function (name) { %>
+      <button type="button" class="pill" data-group="collection" data-value="<%= name %>"><%= name %></button>
+    <% }); %>
+  </div>
+
+  <div class="filter-group" data-label="Exists">
+    <button type="button" class="pill active" data-group="exists" data-value="all">All</button>
+    <button type="button" class="pill" data-group="exists" data-value="lt100">&lt; 100</button>
+    <button type="button" class="pill" data-group="exists" data-value="lt1k">&lt; 1k</button>
+    <button type="button" class="pill" data-group="exists" data-value="lt5k">&lt; 5k</button>
+    <button type="button" class="pill" data-group="exists" data-value="gt100">&gt; 100</button>
+    <button type="button" class="pill" data-group="exists" data-value="gt1k">&gt; 1k</button>
+    <button type="button" class="pill" data-group="exists" data-value="gt10k">&gt; 10k</button>
+    <button type="button" class="pill" data-group="exists" data-value="gt100k">&gt; 100k</button>
+  </div>
+
+  <div class="checkbox-row">
+    <label><input id="f-show-rap-zero" type="checkbox" data-param="show_rap_zero"> Show RAP 0</label>
+    <label><input id="f-show-exists-zero" type="checkbox" data-param="show_exists_zero"> Show Exists 0</label>
+    <label><input id="f-hide-pets" type="checkbox" data-param="hide_pets"> Hide Pets</label>
+  </div>
+
+  <div class="sort-row">
+    <label for="sort-select">Sort</label>
+    <select id="sort-select">
+      <option value="rap_desc">Highest RAP</option>
+      <option value="rap_asc">Lowest RAP</option>
+      <option value="name_asc">A-Z</option>
+      <option value="name_desc">Z-A</option>
+      <option value="copies_desc">Highest Copies</option>
+      <option value="copies_asc">Lowest Copies</option>
+      <option value="newest">Newest</option>
+      <option value="oldest">Oldest</option>
+    </select>
+  </div>
+</div>
+
+<div id="items-grid" class="items-grid"></div>
+
+<div id="items-loading" class="items-loading" hidden>
+  <span class="spinner"></span>
+</div>
+
+<div id="scroll-sentinel"></div>
+
+<script src="/js/items.js" defer></script>
+
+<%- include('partials/footer') %>

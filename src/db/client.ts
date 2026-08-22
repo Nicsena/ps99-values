@@ -38,6 +38,16 @@ const statements = [
     captured_at INTEGER NOT NULL
   )`,
   `CREATE INDEX IF NOT EXISTS rap_snapshots_item_idx ON rap_snapshots (item_id, pt, shiny, captured_at)`,
+  `CREATE TABLE IF NOT EXISTS exists_snapshots (
+    id TEXT PRIMARY KEY,
+    item_id TEXT NOT NULL REFERENCES items(id),
+    item_key TEXT NOT NULL,
+    pt INTEGER NOT NULL DEFAULT 0,
+    shiny INTEGER NOT NULL DEFAULT 0,
+    value INTEGER NOT NULL,
+    captured_at INTEGER NOT NULL
+  )`,
+  `CREATE INDEX IF NOT EXISTS exists_snapshots_item_idx ON exists_snapshots (item_id, pt, shiny, captured_at)`,
   `CREATE TABLE IF NOT EXISTS app_settings (
     name TEXT PRIMARY KEY,
     value TEXT NOT NULL,

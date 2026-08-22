@@ -1,7 +1,6 @@
-import { schedule } from 'node-cron';
 import { config } from './config.js';
 import { initApp } from './app.js';
-import { syncAll, pruneSnapshots } from './services/sync.js';
+import { cronService, registerDefaultJobs } from './services/cron/index.js';
 
 async function main(): Promise<void> {
   const app = await initApp();
@@ -10,19 +9,8 @@ async function main(): Promise<void> {
     console.log(`ps99-values listening on http://localhost:${config.port}`);
   });
 
-  schedule(config.syncCron, () => {
-    syncAll()
-      .then((result) => {
-        console.log(
-          `[cron] sync done: collections=${result.collections} items=${result.itemsUpserted} snapshots=${result.snapshotsInserted}`,
-        );
-        return pruneSnapshots();
-      })
-      .then((pruned) => {
-        if (pruned > 0) console.log(`[cron] pruned ${pruned} snapshots`);
-      })
-      .catch(console.error);
-  });
+  registerDefaultJobs();
+  await cronService.startAll();
 
   function shutdown(signal: string): void {
     console.log(`Received ${signal}, shutting down...`);

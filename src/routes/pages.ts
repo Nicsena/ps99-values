@@ -1,33 +1,29 @@
 import { Router, type Request, type Response, type NextFunction } from 'express';
-import { listItems, getItemDetail } from '../services/rapService.js';
+import { getItemDetail } from '../services/rapService.js';
+import { getEnabledCollections } from '../data/collectionsRepo.js';
 
 export const pagesRouter = Router();
 
-function parsePage(value: unknown): number | undefined {
-  const n = Number(value);
-  return Number.isFinite(n) && n >= 1 ? Math.floor(n) : undefined;
-}
-
-pagesRouter.get('/', async (req: Request, res: Response, next: NextFunction) => {
+pagesRouter.get('/', (_req: Request, res: Response, next: NextFunction) => {
   try {
-    const search = typeof req.query.q === 'string' ? req.query.q : '';
-    const sort = req.query.sort === 'rap' ? 'rap' : 'name';
-    const order = req.query.order === 'desc' ? 'desc' : 'asc';
-    const page = parsePage(req.query.page) ?? 1;
-    const { rows, total } = await listItems({ search, sort, order, page });
-    res.render('index', {
-      items: rows,
-      search,
-      sort,
-      order,
-      page,
-      totalPages: Math.max(1, Math.ceil(total / 25)),
-      total,
-    });
+    res.render('home');
   } catch (err) {
     next(err);
   }
 });
+
+pagesRouter.get(
+  '/items',
+  async (_req: Request, res: Response, next: NextFunction) => {
+    try {
+      const rows = await getEnabledCollections();
+      const collections = rows.map((row) => row.name).sort((a, b) => a.localeCompare(b));
+      res.render('items', { collections });
+    } catch (err) {
+      next(err);
+    }
+  },
+);
 
 pagesRouter.get('/pet/:itemKey', async (req: Request, res: Response, next: NextFunction) => {
   try {

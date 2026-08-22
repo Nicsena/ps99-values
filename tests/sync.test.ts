@@ -10,12 +10,14 @@ const mocks = vi.hoisted(() => ({
   fetchCollections: vi.fn<() => Promise<string[]>>(),
   fetchCollection: vi.fn<(name: string) => Promise<Biggames.CollectionEntry[]>>(),
   fetchRap: vi.fn<() => Promise<Biggames.RapEntry[]>>(),
+  fetchExists: vi.fn<() => Promise<Biggames.RapEntry[]>>(),
 }));
 
 vi.mock('../src/services/biggames.js', () => ({
   fetchCollections: mocks.fetchCollections,
   fetchCollection: mocks.fetchCollection,
   fetchRap: mocks.fetchRap,
+  fetchExists: mocks.fetchExists,
 }));
 
 const dbPath = join(tmpdir(), `ps99-sync-test-${Date.now()}-${process.pid}.db`);
@@ -72,12 +74,17 @@ describe('syncAll', () => {
       { category: 'Pet', value: 100, configData: { id: 'Unicorn' } },
       { category: 'Pet', value: 200, configData: { id: 'Dragon', pt: 1 } },
     ]);
+    mocks.fetchExists.mockResolvedValue([
+      { category: 'Pet', value: 5, configData: { id: 'Unicorn' } },
+      { category: 'Pet', value: 3, configData: { id: 'Dragon', pt: 1 } },
+    ]);
 
     const result = await sync.syncAll();
 
     expect(result.collections).toBe(3);
     expect(result.itemsUpserted).toBe(2);
     expect(result.snapshotsInserted).toBe(2);
+    expect(result.existsInserted).toBe(2);
 
     const cols = await client.db.select().from(schema.collections);
     const byName = new Map(cols.map((c) => [c.name, c]));
@@ -94,6 +101,12 @@ describe('syncAll', () => {
     const snapByKey = new Map(snapshots.map((s) => [s.itemKey, s]));
     expect(snapByKey.get('Unicorn')?.value).toBe(100);
     expect(snapByKey.get('Dragon:golden')?.value).toBe(200);
+
+    const existsSnaps = await client.db.select().from(schema.existsSnapshots);
+    expect(existsSnaps).toHaveLength(2);
+    const existsByKey = new Map(existsSnaps.map((s) => [s.itemKey, s]));
+    expect(existsByKey.get('Unicorn')?.value).toBe(5);
+    expect(existsByKey.get('Dragon:golden')?.value).toBe(3);
   });
 
   it('inserts a snapshot only for changed values on re-sync', async () => {
@@ -101,10 +114,15 @@ describe('syncAll', () => {
       { category: 'Pet', value: 150, configData: { id: 'Unicorn' } },
       { category: 'Pet', value: 200, configData: { id: 'Dragon', pt: 1 } },
     ]);
+    mocks.fetchExists.mockResolvedValue([
+      { category: 'Pet', value: 5, configData: { id: 'Unicorn' } },
+      { category: 'Pet', value: 3, configData: { id: 'Dragon', pt: 1 } },
+    ]);
 
     const result = await sync.syncAll();
 
     expect(result.snapshotsInserted).toBe(1);
+    expect(result.existsInserted).toBe(0);
 
     const unicorn = await client.db
       .select()
@@ -120,6 +138,29 @@ describe('syncAll', () => {
     const dragonSnaps = snapshots.filter((s) => s.itemId === dragon[0].id);
     expect(dragonSnaps).toHaveLength(1);
     expect(dragonSnaps[0].value).toBe(200);
+
+    const existsSnaps = await client.db.select().from(schema.existsSnapshots);
+    expect(existsSnaps).toHaveLength(2);
+  });
+
+  it('inserts exists snapshots when values change between runs', async () => {
+    mocks.fetchRap.mockResolvedValue([
+      { category: 'Pet', value: 150, configData: { id: 'Unicorn' } },
+      { category: 'Pet', value: 200, configData: { id: 'Dragon', pt: 1 } },
+    ]);
+    mocks.fetchExists.mockResolvedValue([
+      { category: 'Pet', value: 7, configData: { id: 'Unicorn' } },
+      { category: 'Pet', value: 4, configData: { id: 'Dragon', pt: 1 } },
+    ]);
+
+    const result = await sync.syncAll();
+
+    expect(result.existsInserted).toBe(2);
+
+    const existsSnaps = await client.db.select().from(schema.existsSnapshots);
+    expect(existsSnaps).toHaveLength(4);
+    const unicornExists = existsSnaps.filter((s) => s.itemKey === 'Unicorn');
+    expect(unicornExists.map((s) => s.value).sort((a, b) => a - b)).toEqual([5, 7]);
   });
 
   it('prunes snapshots older than the retention window', async () => {

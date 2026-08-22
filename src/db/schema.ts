@@ -41,9 +41,27 @@ export const rapSnapshots = sqliteTable(
   (t) => [index('rap_snapshots_item_idx').on(t.itemId, t.pt, t.shiny, t.capturedAt)],
 );
 
+export const existsSnapshots = sqliteTable(
+  'exists_snapshots',
+  {
+    id: text('id').primaryKey(),
+    itemId: text('item_id')
+      .notNull()
+      .references(() => items.id),
+    itemKey: text('item_key').notNull(),
+    pt: integer('pt').notNull().default(0),
+    shiny: integer('shiny', { mode: 'boolean' }).notNull().default(false),
+    value: integer('value').notNull(),
+    capturedAt: integer('captured_at', { mode: 'timestamp' }).notNull(),
+  },
+  (t) => [index('exists_snapshots_item_idx').on(t.itemId, t.pt, t.shiny, t.capturedAt)],
+);
+
 export type Collection = typeof collections.$inferSelect;
 export type NewCollection = typeof collections.$inferInsert;
 export type Item = typeof items.$inferSelect;
 export type NewItem = typeof items.$inferInsert;
 export type RapSnapshot = typeof rapSnapshots.$inferSelect;
 export type NewRapSnapshot = typeof rapSnapshots.$inferInsert;
+export type ExistsSnapshot = typeof existsSnapshots.$inferSelect;
+export type NewExistsSnapshot = typeof existsSnapshots.$inferInsert;
