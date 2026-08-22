@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-inner container">
+      <a href="/" class="site-name">PS99 Values</a>
+      <button id="refreshBtn" class="btn btn-accent" type="button">Refresh data</button>
+    </div>
+  </nav>
+  <main class="container">
+  <script>
+    document.getElementById('refreshBtn').addEventListener('click', async function () {
+      this.disabled = true;
+      this.textContent = 'Refreshing...';
+      try {
+        await fetch('/api/refresh', { method: 'POST' });
+      } finally {
+        window.location.reload();
+      }
+    });
+  </script>

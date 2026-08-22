@@ -1,0 +1,95 @@
+<%- include('partials/header', { title: item.name }) %>
+
+<% if (locals.error) { %>
+  <div class="alert alert-error"><%= error %></div>
+<% } %>
+
+<section class="page-head">
+  <h1><%= item.name %></h1>
+  <div class="badge-row">
+    <span class="badge"><%= item.category %></span>
+    <% if (item.collectionName) { %><span class="badge collection"><%= item.collectionName %></span><% } %>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Current RAP</h2>
+  <p class="big-rap"><%= currentRap === null ? '—' : currentRap.toLocaleString() %></p>
+  <% if (item.description) { %><p class="muted"><%= item.description %></p><% } %>
+</section>
+
+<section class="card">
+  <h2>Variants</h2>
+  <% const variantNames = ['Normal', 'Golden', 'Rainbow']; %>
+  <% if (variants.length === 0) { %>
+    <p class="muted">No variants tracked</p>
+  <% } else { %>
+    <ul class="variant-list">
+      <% variants.forEach(function (v) {
+           const variant = variantNames[v.pt] || 'Normal';
+           const badgeClass = v.pt === 1 ? 'golden' : v.pt === 2 ? 'rainbow' : '';
+      %>
+        <li>
+          <a href="/pet/<%= encodeURIComponent(v.itemKey) %>">
+            <span class="badge <%= badgeClass %>"><%= variant %><%= v.shiny ? ' Shiny' : '' %></span>
+          </a>
+          <span class="rap"><%= v.rap === null ? '—' : v.rap.toLocaleString() %></span>
+        </li>
+      <% }); %>
+    </ul>
+  <% } %>
+</section>
+
+<section class="card">
+  <h2>RAP History</h2>
+  <% if (history.length === 0) { %>
+    <p class="muted">No history yet</p>
+  <% } else { %>
+    <canvas id="historyChart"></canvas>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+    <script>
+      (function () {
+        var history = <%- JSON.stringify(history) %>;
+        var labels = history.map(function (h) {
+          return new Date(h.capturedAt).toLocaleDateString();
+        });
+        var values = history.map(function (h) { return h.value; });
+        var ctx = document.getElementById('historyChart').getContext('2d');
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'RAP',
+              data: values,
+              borderColor: '#8b5cf6',
+              backgroundColor: 'rgba(139, 92, 246, 0.15)',
+              pointBackgroundColor: '#22d3ee',
+              borderWidth: 2,
+              tension: 0.25,
+              fill: true
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: { labels: { color: '#e5e7eb' } }
+            },
+            scales: {
+              x: { ticks: { color: '#9ca3af' }, grid: { color: 'rgba(255,255,255,0.06)' } },
+              y: {
+                ticks: {
+                  color: '#9ca3af',
+                  callback: function (value) { return Number(value).toLocaleString(); }
+                },
+                grid: { color: 'rgba(255,255,255,0.06)' }
+              }
+            }
+          }
+        });
+      })();
+    </script>
+  <% } %>
+</section>
+
+<%- include('partials/footer') %>
