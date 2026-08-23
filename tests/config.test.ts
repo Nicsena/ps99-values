@@ -6,7 +6,7 @@ describe('configSchema', () => {
     const parsed = configSchema.parse({});
     expect(parsed.PORT).toBe(3000);
     expect(parsed.DB_PATH).toBe('./data/ps99.db');
-    expect(parsed.SYNC_CRON).toBe('0 */4 * * *');
+    expect(parsed.SYNC_CRON).toBe('0 */1 * * *');
     expect(parsed.REDIS_URL).toBeUndefined();
   });
 

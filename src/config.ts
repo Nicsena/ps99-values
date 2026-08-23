@@ -5,7 +5,7 @@ export const configSchema = z.object({
   PORT: z.coerce.number().int().positive().default(3000),
   DB_PATH: z.string().min(1).default('./data/ps99.db'),
   REDIS_URL: z.string().min(1).optional(),
-  SYNC_CRON: z.string().min(1).default('0 */4 * * *'),
+  SYNC_CRON: z.string().min(1).default('0 */1 * * *'),
 });
 
 const parsed = configSchema.safeParse(process.env);
