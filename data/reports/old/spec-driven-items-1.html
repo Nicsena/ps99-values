@@ -28,10 +28,10 @@ td.col{font-weight:600;white-space:nowrap}td.total{text-align:right}
 </head>
 <body>
 <h1>Spec-Driven Item Sync &mdash; Resolved Items</h1>
-<p class="meta">Generated 2026-08-23T01:07:34.626Z from <code>data/game/collection-*.json</code> (approach: spec-driven)</p>
+<p class="meta">Generated 2026-08-23T00:02:27.170Z from <code>data/game/collection-*.json</code> (approach: spec-driven)</p>
 <div class="kpis">
-<div class="kpi"><b>3887</b><span>items resolved</span></div>
-<div class="kpi"><b>14</b><span>enabled collections</span></div>
+<div class="kpi"><b>3909</b><span>items resolved</span></div>
+<div class="kpi"><b>17</b><span>enabled collections</span></div>
 <div class="kpi"><b style="color:#dc2626">23</b><span>fell back to configName</span></div>
 </div>
 <h2>Per-collection resolution</h2>
@@ -47,12 +47,15 @@ td.col{font-weight:600;white-space:nowrap}td.total{text-align:right}
 <tr><td class="col">Charms</td><td class="total">13</td><td class="total">13</td><td><div class="bar"><div class="fill" style="width:0%"></div></div><span class="pct">0%</span></td></tr>
 <tr><td class="col">XPPotions</td><td class="total">12</td><td class="total">2</td><td><div class="bar"><div class="fill" style="width:83%"></div></div><span class="pct">83%</span></td></tr>
 <tr><td class="col">Ultimates</td><td class="total">11</td><td class="total"><span class="none">0</span></td><td><div class="bar"><div class="fill" style="width:100%"></div></div><span class="pct">100%</span></td></tr>
+<tr><td class="col">Shovels</td><td class="total">11</td><td class="total"><span class="none">0</span></td><td><div class="bar"><div class="fill" style="width:100%"></div></div><span class="pct">100%</span></td></tr>
+<tr><td class="col">ZoneFlags</td><td class="total">10</td><td class="total"><span class="none">0</span></td><td><div class="bar"><div class="fill" style="width:100%"></div></div><span class="pct">100%</span></td></tr>
 <tr><td class="col">Potions</td><td class="total">8</td><td class="total">8</td><td><div class="bar"><div class="fill" style="width:0%"></div></div><span class="pct">0%</span></td></tr>
 <tr><td class="col">Fruits</td><td class="total">7</td><td class="total"><span class="none">0</span></td><td><div class="bar"><div class="fill" style="width:100%"></div></div><span class="pct">100%</span></td></tr>
 <tr><td class="col">Seeds</td><td class="total">4</td><td class="total"><span class="none">0</span></td><td><div class="bar"><div class="fill" style="width:100%"></div></div><span class="pct">100%</span></td></tr>
 <tr><td class="col">Boxes</td><td class="total">1</td><td class="total"><span class="none">0</span></td><td><div class="bar"><div class="fill" style="width:100%"></div></div><span class="pct">100%</span></td></tr>
+<tr><td class="col">Sprinklers</td><td class="total">1</td><td class="total"><span class="none">0</span></td><td><div class="bar"><div class="fill" style="width:100%"></div></div><span class="pct">100%</span></td></tr>
 </tbody></table>
-<h2>All items (3887)</h2>
+<h2>All items (3909)</h2>
 <p class="small">Rows highlighted orange used the configName fallback.</p>
 <table><thead><tr><th>Collection</th><th>configName</th><th>Resolved name</th><th>Name source</th><th>Description</th><th>Thumbnail</th></tr></thead>
 <tbody>
@@ -4152,6 +4155,28 @@ Found in the Hacker Pack!</td><td class="mono">rbxassetid://17761141100</td></tr
 <tr><td>CardItems</td><td class="mono">Kung Fu Monkey Card</td><td><b>Kung Fu Monkey Card</b></td><td><span class="src ok">DisplayName</span></td><td class="desc">Combine 3 to create a Kung Fu Monkey!</td><td class="mono">rbxassetid://89873182062916</td></tr>
 <tr><td>CardItems</td><td class="mono">Huge Super Spider Card</td><td><b>Huge Super Spider Card</b></td><td><span class="src ok">DisplayName</span></td><td class="desc">Combine 3 to create a HUGE Super Spider!</td><td class="mono">rbxassetid://72718369848565</td></tr>
 <tr><td>CardItems</td><td class="mono">Gamer Shiba Card</td><td><b>Gamer Shiba Card</b></td><td><span class="src ok">DisplayName</span></td><td class="desc">Combine 3 to create a Gamer Shiba!</td><td class="mono">rbxassetid://91955982490108</td></tr>
+<tr><td>Shovels</td><td class="mono">Shovel | Flimsy Shovel</td><td><b>Wooden Shovel</b></td><td><span class="src ok">DisplayName</span></td><td class="desc">Really flimsy. Doesn't dig very fast.</td><td class="mono">rbxassetid://16039332097</td></tr>
+<tr><td>Shovels</td><td class="mono">Shovel | Sharp Shovel</td><td><b>Stone Shovel</b></td><td><span class="src ok">DisplayName</span></td><td class="desc">me dig</td><td class="mono">rbxassetid://16039332182</td></tr>
+<tr><td>Shovels</td><td class="mono">Shovel | Bluesteel Shovel</td><td><b>Advanced Shovel</b></td><td><span class="src ok">DisplayName</span></td><td class="desc">Cuts through solid rock easily!</td><td class="mono">rbxassetid://16039333077</td></tr>
+<tr><td>Shovels</td><td class="mono">Shovel | Golden Shovel</td><td><b>Golden Shovel</b></td><td><span class="src ok">DisplayName</span></td><td class="desc">Shiny! Digs insanely fast!</td><td class="mono">rbxassetid://16039332602</td></tr>
+<tr><td>Shovels</td><td class="mono">Shovel | Normal Shovel</td><td><b>Sturdy Shovel</b></td><td><span class="src ok">DisplayName</span></td><td class="desc">It's a shovel. It digs!</td><td class="mono">rbxassetid://16039331991</td></tr>
+<tr><td>Shovels</td><td class="mono">Shovel | Pro Shovel</td><td><b>Iron Shovel</b></td><td><span class="src ok">DisplayName</span></td><td class="desc">For professionals only! Digs super fast!</td><td class="mono">rbxassetid://16039332500</td></tr>
+<tr><td>Shovels</td><td class="mono">Shovel | Platinum Shovel</td><td><b>Platinum Shovel</b></td><td><span class="src ok">DisplayName</span></td><td class="desc">Platinum means quality.</td><td class="mono">rbxassetid://16039332375</td></tr>
+<tr><td>Shovels</td><td class="mono">Shovel | Diamond Shovel</td><td><b>Diamond Shovel</b></td><td><span class="src ok">DisplayName</span></td><td class="desc">Do you like my Diamond Shovel?</td><td class="mono">rbxassetid://16039332788</td></tr>
+<tr><td>Shovels</td><td class="mono">Shovel | Sapphire Shovel</td><td><b>Sapphire Shovel</b></td><td><span class="src ok">DisplayName</span></td><td class="desc">Sapphire is the best, but that's just my opinion.</td><td class="mono">rbxassetid://16039332265</td></tr>
+<tr><td>Shovels</td><td class="mono">Shovel | Emerald Shovel</td><td><b>Emerald Shovel</b></td><td><span class="src ok">DisplayName</span></td><td class="desc">Sharpened really carefully. Digs really fast!</td><td class="mono">rbxassetid://16039332703</td></tr>
+<tr><td>Shovels</td><td class="mono">Shovel | Amethyst Shovel</td><td><b>Amethyst Shovel</b></td><td><span class="src ok">DisplayName</span></td><td class="desc">As sharp as crystal!</td><td class="mono">rbxassetid://16039332930</td></tr>
+<tr><td>Sprinklers</td><td class="mono">Sprinkler | Breakable Sprinkler</td><td><b>Sprinkler</b></td><td><span class="src ok">Name</span></td><td class="desc">Place in an area to increase breakable respawn rate by 50%! Lasts 5 minutes!</td><td class="mono">rbxassetid://16467241128</td></tr>
+<tr><td>ZoneFlags</td><td class="mono">ZoneFlag | Magnet Flag</td><td><b>Magnet Flag</b></td><td><span class="src ok">Name</span></td><td class="desc">A portable magnet that can be placed in any area! Lasts 5 minutes!</td><td class="mono">rbxassetid://15000810137</td></tr>
+<tr><td>ZoneFlags</td><td class="mono">ZoneFlag | Hasty Flag</td><td><b>Hasty Flag</b></td><td><span class="src ok">Name</span></td><td class="desc">Place in an area to super-charge pets! Lasts 5 minutes!</td><td class="mono">rbxassetid://15000810356</td></tr>
+<tr><td>ZoneFlags</td><td class="mono">ZoneFlag | Diamonds Flag</td><td><b>Diamonds Flag</b></td><td><span class="src ok">Name</span></td><td class="desc">Place in an area to increase diamond breakables by 2x! Lasts 5 minutes!</td><td class="mono">rbxassetid://15000810493</td></tr>
+<tr><td>ZoneFlags</td><td class="mono">ZoneFlag | Coins Flag</td><td><b>Coins Flag</b></td><td><span class="src ok">Name</span></td><td class="desc">Place in an area to increase coins you earn by 50%! Lasts 5 minutes!</td><td class="mono">rbxassetid://15000809958</td></tr>
+<tr><td>ZoneFlags</td><td class="mono">ZoneFlag | Exotic Treasure Flag</td><td><b>Exotic Treasure Flag</b></td><td><span class="src ok">Name</span></td><td class="desc">Place in an area to SUBSTANTIALLY increase drops! Lasts 5 minutes!</td><td class="mono">rbxassetid://15011948755</td></tr>
+<tr><td>ZoneFlags</td><td class="mono">ZoneFlag | Rainbow Flag</td><td><b>Rainbow Flag</b></td><td><span class="src ok">Name</span></td><td class="desc">When placed in an area, temporarily makes ALL pets Rainbow! Lasts 5 minutes!</td><td class="mono">rbxassetid://15853949239</td></tr>
+<tr><td>ZoneFlags</td><td class="mono">ZoneFlag | Shiny Flag</td><td><b>Shiny Flag</b></td><td><span class="src ok">Name</span></td><td class="desc">When placed in an area, temporarily makes ALL pets Shiny! Lasts 5 minutes!</td><td class="mono">rbxassetid://15853949167</td></tr>
+<tr><td>ZoneFlags</td><td class="mono">ZoneFlag | Strength Flag</td><td><b>Strength Flag</b></td><td><span class="src ok">Name</span></td><td class="desc">Place in an area to increase your pet strength by 50%! Lasts 5 minutes!</td><td class="mono">rbxassetid://15853955101</td></tr>
+<tr><td>ZoneFlags</td><td class="mono">ZoneFlag | Golden Flag</td><td><b>Golden Flag</b></td><td><span class="src ok">Name</span></td><td class="desc">When placed in an area, temporarily makes ALL pets Golden! Lasts 5 minutes!</td><td class="mono">rbxassetid://15853955173</td></tr>
+<tr><td>ZoneFlags</td><td class="mono">ZoneFlag | Fortune Flag</td><td><b>Fortune Flag</b></td><td><span class="src ok">Name</span></td><td class="desc">Place in an area to increase coins by 50% and diamonds by 2.5x! Lasts 5 minutes!</td><td class="mono">rbxassetid://15000810242</td></tr>
 </tbody></table>
 </body>
 </html>

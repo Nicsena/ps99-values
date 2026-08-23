@@ -56,9 +56,21 @@
         "CardItems": {
             "total": 59,
             "fallbackToConfigName": 0
+        },
+        "Shovels": {
+            "total": 11,
+            "fallbackToConfigName": 0
+        },
+        "Sprinklers": {
+            "total": 1,
+            "fallbackToConfigName": 0
+        },
+        "ZoneFlags": {
+            "total": 10,
+            "fallbackToConfigName": 0
         }
     },
-    "itemCount": 3887,
+    "itemCount": 3909,
     "sample": [
         {
             "collectionName": "Pets",
@@ -31317,6 +31329,182 @@
             "nameSource": "DisplayName",
             "description": "Combine 3 to create a Gamer Shiba!",
             "thumbnail": "rbxassetid://91955982490108"
+        },
+        {
+            "collectionName": "Shovels",
+            "configName": "Shovel | Flimsy Shovel",
+            "name": "Wooden Shovel",
+            "nameSource": "DisplayName",
+            "description": "Really flimsy. Doesn't dig very fast.",
+            "thumbnail": "rbxassetid://16039332097"
+        },
+        {
+            "collectionName": "Shovels",
+            "configName": "Shovel | Sharp Shovel",
+            "name": "Stone Shovel",
+            "nameSource": "DisplayName",
+            "description": "me dig",
+            "thumbnail": "rbxassetid://16039332182"
+        },
+        {
+            "collectionName": "Shovels",
+            "configName": "Shovel | Bluesteel Shovel",
+            "name": "Advanced Shovel",
+            "nameSource": "DisplayName",
+            "description": "Cuts through solid rock easily!",
+            "thumbnail": "rbxassetid://16039333077"
+        },
+        {
+            "collectionName": "Shovels",
+            "configName": "Shovel | Golden Shovel",
+            "name": "Golden Shovel",
+            "nameSource": "DisplayName",
+            "description": "Shiny! Digs insanely fast!",
+            "thumbnail": "rbxassetid://16039332602"
+        },
+        {
+            "collectionName": "Shovels",
+            "configName": "Shovel | Normal Shovel",
+            "name": "Sturdy Shovel",
+            "nameSource": "DisplayName",
+            "description": "It's a shovel. It digs!",
+            "thumbnail": "rbxassetid://16039331991"
+        },
+        {
+            "collectionName": "Shovels",
+            "configName": "Shovel | Pro Shovel",
+            "name": "Iron Shovel",
+            "nameSource": "DisplayName",
+            "description": "For professionals only! Digs super fast!",
+            "thumbnail": "rbxassetid://16039332500"
+        },
+        {
+            "collectionName": "Shovels",
+            "configName": "Shovel | Platinum Shovel",
+            "name": "Platinum Shovel",
+            "nameSource": "DisplayName",
+            "description": "Platinum means quality.",
+            "thumbnail": "rbxassetid://16039332375"
+        },
+        {
+            "collectionName": "Shovels",
+            "configName": "Shovel | Diamond Shovel",
+            "name": "Diamond Shovel",
+            "nameSource": "DisplayName",
+            "description": "Do you like my Diamond Shovel?",
+            "thumbnail": "rbxassetid://16039332788"
+        },
+        {
+            "collectionName": "Shovels",
+            "configName": "Shovel | Sapphire Shovel",
+            "name": "Sapphire Shovel",
+            "nameSource": "DisplayName",
+            "description": "Sapphire is the best, but that's just my opinion.",
+            "thumbnail": "rbxassetid://16039332265"
+        },
+        {
+            "collectionName": "Shovels",
+            "configName": "Shovel | Emerald Shovel",
+            "name": "Emerald Shovel",
+            "nameSource": "DisplayName",
+            "description": "Sharpened really carefully. Digs really fast!",
+            "thumbnail": "rbxassetid://16039332703"
+        },
+        {
+            "collectionName": "Shovels",
+            "configName": "Shovel | Amethyst Shovel",
+            "name": "Amethyst Shovel",
+            "nameSource": "DisplayName",
+            "description": "As sharp as crystal!",
+            "thumbnail": "rbxassetid://16039332930"
+        },
+        {
+            "collectionName": "Sprinklers",
+            "configName": "Sprinkler | Breakable Sprinkler",
+            "name": "Sprinkler",
+            "nameSource": "Name",
+            "description": "Place in an area to increase breakable respawn rate by 50%! Lasts 5 minutes!",
+            "thumbnail": "rbxassetid://16467241128"
+        },
+        {
+            "collectionName": "ZoneFlags",
+            "configName": "ZoneFlag | Magnet Flag",
+            "name": "Magnet Flag",
+            "nameSource": "Name",
+            "description": "A portable magnet that can be placed in any area! Lasts 5 minutes!",
+            "thumbnail": "rbxassetid://15000810137"
+        },
+        {
+            "collectionName": "ZoneFlags",
+            "configName": "ZoneFlag | Hasty Flag",
+            "name": "Hasty Flag",
+            "nameSource": "Name",
+            "description": "Place in an area to super-charge pets! Lasts 5 minutes!",
+            "thumbnail": "rbxassetid://15000810356"
+        },
+        {
+            "collectionName": "ZoneFlags",
+            "configName": "ZoneFlag | Diamonds Flag",
+            "name": "Diamonds Flag",
+            "nameSource": "Name",
+            "description": "Place in an area to increase diamond breakables by 2x! Lasts 5 minutes!",
+            "thumbnail": "rbxassetid://15000810493"
+        },
+        {
+            "collectionName": "ZoneFlags",
+            "configName": "ZoneFlag | Coins Flag",
+            "name": "Coins Flag",
+            "nameSource": "Name",
+            "description": "Place in an area to increase coins you earn by 50%! Lasts 5 minutes!",
+            "thumbnail": "rbxassetid://15000809958"
+        },
+        {
+            "collectionName": "ZoneFlags",
+            "configName": "ZoneFlag | Exotic Treasure Flag",
+            "name": "Exotic Treasure Flag",
+            "nameSource": "Name",
+            "description": "Place in an area to SUBSTANTIALLY increase drops! Lasts 5 minutes!",
+            "thumbnail": "rbxassetid://15011948755"
+        },
+        {
+            "collectionName": "ZoneFlags",
+            "configName": "ZoneFlag | Rainbow Flag",
+            "name": "Rainbow Flag",
+            "nameSource": "Name",
+            "description": "When placed in an area, temporarily makes ALL pets Rainbow! Lasts 5 minutes!",
+            "thumbnail": "rbxassetid://15853949239"
+        },
+        {
+            "collectionName": "ZoneFlags",
+            "configName": "ZoneFlag | Shiny Flag",
+            "name": "Shiny Flag",
+            "nameSource": "Name",
+            "description": "When placed in an area, temporarily makes ALL pets Shiny! Lasts 5 minutes!",
+            "thumbnail": "rbxassetid://15853949167"
+        },
+        {
+            "collectionName": "ZoneFlags",
+            "configName": "ZoneFlag | Strength Flag",
+            "name": "Strength Flag",
+            "nameSource": "Name",
+            "description": "Place in an area to increase your pet strength by 50%! Lasts 5 minutes!",
+            "thumbnail": "rbxassetid://15853955101"
+        },
+        {
+            "collectionName": "ZoneFlags",
+            "configName": "ZoneFlag | Golden Flag",
+            "name": "Golden Flag",
+            "nameSource": "Name",
+            "description": "When placed in an area, temporarily makes ALL pets Golden! Lasts 5 minutes!",
+            "thumbnail": "rbxassetid://15853955173"
+        },
+        {
+            "collectionName": "ZoneFlags",
+            "configName": "ZoneFlag | Fortune Flag",
+            "name": "Fortune Flag",
+            "nameSource": "Name",
+            "description": "Place in an area to increase coins by 50% and diamonds by 2.5x! Lasts 5 minutes!",
+            "thumbnail": "rbxassetid://15000810242"
         }
     ]
 }

@@ -130,7 +130,7 @@ const result = {
   collisions,
 };
 
-writeFileSync(join(testDir, 'name-match-report.json'), JSON.stringify(result, null, 4));
+writeFileSync(join(testDir, 'spec-driven-items-rap-exists.json'), JSON.stringify(result, null, 4));
 
 function esc(s: unknown): string {
   return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -236,6 +236,6 @@ ${collisionRows}
 
 writeFileSync(reportPath, html);
 
-console.log('[05] json ->', join(testDir, 'name-match-report.json'));
+console.log('[05] json ->', join(testDir, 'spec-driven-items-rap-exists.json'));
 console.log('[05] html ->', reportPath);
 console.log('[05] rap matched:', t.itemsWithRap, '/', t.items, '| exists matched:', t.itemsWithExists, '| collisions:', t.crossCollectionNameCollisions);

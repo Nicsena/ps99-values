@@ -23,15 +23,15 @@ td.col{font-weight:600;white-space:nowrap}td.total{text-align:right}
 </head>
 <body>
 <h1>Spec-Driven Item Names vs RAP &amp; Exists Entries</h1>
-<p class="meta">Generated 2026-08-23T01:07:47.559Z from <code>data/test/spec-driven-items.json</code>, <code>rap.json</code>, <code>exists.json</code></p>
+<p class="meta">Generated 2026-08-22T23:47:52.174Z from <code>data/test/spec-driven-items.json</code>, <code>rap.json</code>, <code>exists.json</code></p>
 
 <div class="kpis">
-<div class="kpi"><b>3,887</b><span>spec-resolved items</span></div>
-<div class="kpi"><b>3,260</b><span>matched in rap</span></div>
-<div class="kpi"><b>3,389</b><span>matched in exists</span></div>
+<div class="kpi"><b>3,909</b><span>spec-resolved items</span></div>
+<div class="kpi"><b>3,271</b><span>matched in rap</span></div>
+<div class="kpi"><b>3,404</b><span>matched in exists</span></div>
 <div class="kpi"><b style="color:#dc2626">516</b><span>rap ids unmatched</span></div>
 <div class="kpi"><b style="color:#dc2626">678</b><span>exists ids unmatched</span></div>
-<div class="kpi"><b style="color:#d97706">7</b><span>cross-collection name collisions</span></div>
+<div class="kpi"><b style="color:#d97706">28</b><span>cross-collection name collisions</span></div>
 </div>
 
 <h2>Per-collection match coverage</h2>
@@ -50,8 +50,11 @@ td.col{font-weight:600;white-space:nowrap}td.total{text-align:right}
 <tr><td class="col">Pets</td><td class="total">3037</td><td class="total">2954</td><td class="total">2984</td><td><div class="bar"><div class="fill" style="width:97%"></div></div><span class="pct">97%</span></td></tr>
 <tr><td class="col">Potions</td><td class="total">8</td><td class="total">8</td><td class="total">8</td><td><div class="bar"><div class="fill" style="width:100%"></div></div><span class="pct">100%</span></td></tr>
 <tr><td class="col">Seeds</td><td class="total">4</td><td class="total">0</td><td class="total">0</td><td><div class="bar"><div class="fill" style="width:0%"></div></div><span class="pct">0%</span></td></tr>
+<tr><td class="col">Shovels</td><td class="total">11</td><td class="total">2</td><td class="total">6</td><td><div class="bar"><div class="fill" style="width:18%"></div></div><span class="pct">18%</span></td></tr>
+<tr><td class="col">Sprinklers</td><td class="total">1</td><td class="total">0</td><td class="total">0</td><td><div class="bar"><div class="fill" style="width:0%"></div></div><span class="pct">0%</span></td></tr>
 <tr><td class="col">Ultimates</td><td class="total">11</td><td class="total">10</td><td class="total">11</td><td><div class="bar"><div class="fill" style="width:91%"></div></div><span class="pct">91%</span></td></tr>
 <tr><td class="col">XPPotions</td><td class="total">12</td><td class="total">0</td><td class="total">1</td><td><div class="bar"><div class="fill" style="width:0%"></div></div><span class="pct">0%</span></td></tr>
+<tr><td class="col">ZoneFlags</td><td class="total">10</td><td class="total">9</td><td class="total">9</td><td><div class="bar"><div class="fill" style="width:90%"></div></div><span class="pct">90%</span></td></tr>
 </tbody>
 </table>
 
@@ -120,7 +123,7 @@ td.col{font-weight:600;white-space:nowrap}td.total{text-align:right}
 </tbody>
 </table>
 
-<h2>Cross-collection name collisions (7)</h2>
+<h2>Cross-collection name collisions (28)</h2>
 <table>
 <thead><tr><th>Name</th><th>Collections</th></tr></thead>
 <tbody>
@@ -130,6 +133,27 @@ td.col{font-weight:600;white-space:nowrap}td.total{text-align:right}
 <tr><td>Coins</td><td>Charms, Potions</td></tr>
 <tr><td>Diamonds</td><td>Charms, Potions</td></tr>
 <tr><td>TNT</td><td>Charms, MiscItems</td></tr>
+<tr><td>Exotic Treasure Flag</td><td>MiscItems, ZoneFlags</td></tr>
+<tr><td>Magnet Flag</td><td>MiscItems, ZoneFlags</td></tr>
+<tr><td>Fortune Flag</td><td>MiscItems, ZoneFlags</td></tr>
+<tr><td>Diamonds Flag</td><td>MiscItems, ZoneFlags</td></tr>
+<tr><td>Strength Flag</td><td>MiscItems, ZoneFlags</td></tr>
+<tr><td>Hasty Flag</td><td>MiscItems, ZoneFlags</td></tr>
+<tr><td>Coins Flag</td><td>MiscItems, ZoneFlags</td></tr>
+<tr><td>Shiny Flag</td><td>MiscItems, ZoneFlags</td></tr>
+<tr><td>Rainbow Flag</td><td>MiscItems, ZoneFlags</td></tr>
+<tr><td>Stone Shovel</td><td>MiscItems, Shovels</td></tr>
+<tr><td>Advanced Shovel</td><td>MiscItems, Shovels</td></tr>
+<tr><td>Diamond Shovel</td><td>MiscItems, Shovels</td></tr>
+<tr><td>Emerald Shovel</td><td>MiscItems, Shovels</td></tr>
+<tr><td>Wooden Shovel</td><td>MiscItems, Shovels</td></tr>
+<tr><td>Golden Shovel</td><td>MiscItems, Shovels</td></tr>
+<tr><td>Sturdy Shovel</td><td>MiscItems, Shovels</td></tr>
+<tr><td>Platinum Shovel</td><td>MiscItems, Shovels</td></tr>
+<tr><td>Iron Shovel</td><td>MiscItems, Shovels</td></tr>
+<tr><td>Sapphire Shovel</td><td>MiscItems, Shovels</td></tr>
+<tr><td>Amethyst Shovel</td><td>MiscItems, Shovels</td></tr>
+<tr><td>Sprinkler</td><td>MiscItems, Sprinklers</td></tr>
 <tr><td>UFO</td><td>Hoverboards, Ultimates</td></tr>
 </tbody>
 </table>
