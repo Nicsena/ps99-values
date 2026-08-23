@@ -10,7 +10,7 @@ import {
   type RapEntry,
 } from './biggames.js';
 import { buildRapItemKey, parseVariantFromRap } from './itemKey.js';
-import { resolveItemNaming } from './collectionSpecs.js';
+import { parseGoldenImageId, parseImageId, parseShinyImageId, resolveItemNaming } from './collectionSpecs.js';
 import { buildDetailSlug } from '../util/slug.js';
 import { getSetting, setSetting } from './settings.js';
 import {
@@ -39,12 +39,31 @@ export interface SyncResult {
 
 let syncing: Promise<SyncResult> | null = null;
 
+const DEFAULT_ENABLED_COLLECTIONS = [
+  'Pets',
+  'Boosts',
+  'Booths',
+  'Boxes',
+  'Charms',
+  'MiscItems',
+  'Potions',
+  'Seeds',
+  'Ultimates',
+  'XPPotions',
+  'Lootboxes',
+  'Hoverboards',
+  'Fruits',
+  'CardItems',
+] as const;
+
 async function seedCollections(): Promise<number> {
   const names = await fetchCollections();
   const wasEmpty = (await countCollections()) === 0;
   await upsertCollectionNames(names);
   if (wasEmpty) {
-    await enableCollection('Pets');
+    for (const name of DEFAULT_ENABLED_COLLECTIONS) {
+      await enableCollection(name);
+    }
   }
   return names.length;
 }
@@ -96,6 +115,8 @@ async function runSync(): Promise<SyncResult> {
   const enabledCollections = await getEnabledCollections();
 
   let itemsUpserted = 0;
+  const goldenImageIds = new Map<string, number | null>();
+  const shinyImageIds = new Map<string, number | null>();
 
   for (const { name } of enabledCollections) {
     let entries;
@@ -116,11 +137,15 @@ async function runSync(): Promise<SyncResult> {
         console.warn(`[sync] ${name}: no name key matched for "${entry.configName}", used configName`);
       }
       const cd = entry.configData;
+      const imageId = parseImageId(cd);
+      goldenImageIds.set(`${name}:${displayName}`, parseGoldenImageId(cd));
+      shinyImageIds.set(`${name}:${displayName}`, parseShinyImageId(cd));
       await upsertItem({
         collectionName: name,
         name: displayName,
         displayName,
         description,
+        imageId,
         hidden: cd.hidden === true,
         huge: cd.huge === true,
         titanic: cd.titanic === true,
@@ -153,6 +178,10 @@ async function runSync(): Promise<SyncResult> {
     const variantLabel = [shiny ? 'Shiny' : '', pt === 1 ? 'Golden' : pt === 2 ? 'Rainbow' : '']
       .filter(Boolean)
       .join(' ');
+    const goldenId =
+      pt === 1 ? (goldenImageIds.get(`${base.collectionName}:${base.name}`) ?? null) : null;
+    const shinyId =
+      !pt && shiny ? (shinyImageIds.get(`${base.collectionName}:${base.name}`) ?? null) : null;
     const id = await upsertItem({
       collectionName: base.collectionName,
       name: base.name,
@@ -160,6 +189,7 @@ async function runSync(): Promise<SyncResult> {
         ? `${variantLabel} ${base.displayName ?? base.name}`
         : (base.displayName ?? null),
       description: base.description,
+      imageId: goldenId ?? shinyId ?? base.imageId,
       variant: pt,
       shiny,
       hidden: base.hidden,
@@ -281,3 +311,4 @@ export async function pruneSnapshots(): Promise<number> {
     return 0;
   }
 }
+

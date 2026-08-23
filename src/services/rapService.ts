@@ -404,11 +404,14 @@ export async function getItemDetail(itemKey: string): Promise<ItemDetail | null>
 export interface FilteredItem {
   itemKey: string;
   name: string;
+  displayName: string | null;
   slug: string | null;
+  imageId: number | null;
   category: string | null;
   collectionName: string;
   rap: number | null;
   exists: number | null;
+  existsPerHour: number | null;
   pt: number;
   shiny: boolean;
 }
@@ -541,11 +544,14 @@ export async function listItemsFiltered(
     items: rows.map((row) => ({
       itemKey: row.itemKey,
       name: row.name,
+      displayName: row.displayName ?? null,
       slug: row.slug ?? null,
+      imageId: row.imageId ?? null,
       category: row.category,
       collectionName: row.collectionName,
       rap: row.rap,
       exists: row.existsCount,
+      existsPerHour: row.existsPerHour ?? null,
       pt: row.pt,
       shiny: Number(row.shiny) !== 0,
     })),
@@ -565,6 +571,7 @@ export async function searchItems(
   items: {
     itemKey: string;
     name: string;
+    displayName: string | null;
     slug: string | null;
     pt: number;
     shiny: boolean;
@@ -575,7 +582,7 @@ export async function searchItems(
   const trimmed = q.trim();
   const boundedLimit = Math.min(Math.max(1, limit), 10);
   const cacheKey = `v3:search:${trimmed}:${boundedLimit}`;
-  const cached = await cacheGet<{ items: { itemKey: string; name: string; slug: string | null; pt: number; shiny: boolean; category: string | null; rap: number | null }[] }>(cacheKey);
+  const cached = await cacheGet<{ items: { itemKey: string; name: string; displayName: string | null; slug: string | null; pt: number; shiny: boolean; category: string | null; rap: number | null }[] }>(cacheKey);
   if (cached) return cached;
 
   const { items } = await listItemsFiltered({
@@ -590,6 +597,7 @@ export async function searchItems(
   const mapped = items.map((i) => ({
     itemKey: i.itemKey,
     name: i.name,
+    displayName: i.displayName,
     slug: i.slug,
     pt: i.pt,
     shiny: i.shiny,

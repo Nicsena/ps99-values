@@ -8,7 +8,7 @@ export const DEFAULT_SETTINGS = {
   'snapshot.retentionDays': 90,
   'cron.enabled': true,
   'cron.jobs.sync.enabled': true,
-  'cron.jobs.sync.schedule': '0 */4 * * *',
+  'cron.jobs.sync.schedule': '*/30 * * * *',
   'cron.jobs.prune.enabled': true,
   'cron.jobs.prune.schedule': '30 3 * * *',
 } as const;

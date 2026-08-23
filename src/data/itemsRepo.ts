@@ -14,6 +14,7 @@ export interface ItemRow {
   hidden: boolean;
   shiny: boolean;
   variant: number;
+  imageId: number | null;
   huge: boolean;
   titanic: boolean;
   gargantuan: boolean;
@@ -26,6 +27,7 @@ export interface UpsertItemParams {
   description?: string | null;
   variant?: number;
   shiny?: boolean;
+  imageId?: number | null;
   hidden?: boolean;
   huge?: boolean;
   titanic?: boolean;
@@ -76,6 +78,17 @@ export async function findItemVariant(
   return found[0];
 }
 
+export async function findImageIdByName(name: string): Promise<number | null> {
+  const found = await db
+    .select({ imageId: items.imageId })
+    .from(items)
+    .where(
+      sql`(LOWER(${items.displayName}) = ${name.toLowerCase()} OR LOWER(${items.name}) = ${name.toLowerCase()}) AND ${items.imageId} IS NOT NULL`,
+    )
+    .limit(1);
+  return found[0]?.imageId ?? null;
+}
+
 export async function findItemBySlug(itemSlug: string): Promise<ItemRow | undefined> {
   const normalized = slugify(itemSlug).toLowerCase();
   if (!normalized) return undefined;
@@ -123,6 +136,7 @@ export async function upsertItem(params: UpsertItemParams): Promise<string> {
       hidden: params.hidden ?? false,
       shiny,
       variant,
+      imageId: params.imageId ?? null,
       huge: params.huge ?? false,
       titanic: params.titanic ?? false,
       gargantuan: params.gargantuan ?? false,
@@ -137,6 +151,7 @@ export async function upsertItem(params: UpsertItemParams): Promise<string> {
         huge: params.huge ?? false,
         titanic: params.titanic ?? false,
         gargantuan: params.gargantuan ?? false,
+        imageId: params.imageId ?? null,
       },
     })
     .returning({ id: items.id });
@@ -150,6 +165,7 @@ export async function getBaseItemsWithCollection(): Promise<
     name: string;
     displayName: string | null;
     description: string | null;
+    imageId: number | null;
     hidden: boolean;
     huge: boolean;
     titanic: boolean;
@@ -163,6 +179,7 @@ export async function getBaseItemsWithCollection(): Promise<
       name: items.name,
       displayName: items.displayName,
       description: items.description,
+      imageId: items.imageId,
       hidden: items.hidden,
       huge: items.huge,
       titanic: items.titanic,
@@ -172,5 +189,6 @@ export async function getBaseItemsWithCollection(): Promise<
     .innerJoin(collections, eq(collections.name, items.collectionName))
     .where(and(eq(collections.enabled, true), eq(items.variant, 0), eq(items.shiny, false)));
 }
+
 
 

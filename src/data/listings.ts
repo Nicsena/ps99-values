@@ -13,8 +13,18 @@ const LATEST_EXISTS_CTE = sql`, latest_exists AS (
   GROUP BY item_id, pt, shiny HAVING captured_at = MAX(captured_at)
 )`;
 
+const HOUR_EXISTS_CTE = sql`, hour_exists AS (
+  SELECT item_id, pt, shiny, value, captured_at FROM (
+    SELECT item_id, pt, shiny, value, captured_at,
+      ROW_NUMBER() OVER (PARTITION BY item_id, pt, shiny ORDER BY captured_at DESC) rn
+    FROM exists_snapshots
+    WHERE captured_at <= unixepoch() - 3600
+  ) WHERE rn = 1
+)`;
+
 export interface RawListRow {
   name: string;
+  displayName: string;
   category: string | null;
   collectionName: string;
   itemKey: string;
@@ -61,14 +71,17 @@ export interface FilteredListRowsParams {
 
 export interface RawFilteredRow {
   name: string;
+  displayName: string | null ;
   slug: string | null;
   category: string | null;
   collectionName: string;
   itemKey: string;
+  imageId: number | null;
   rap: number | null;
   pt: number;
   shiny: number;
   existsCount: number | null;
+  existsPerHour: number | null;
 }
 
 function buildFilteredWhere(params: FilteredListRowsParams): ReturnType<typeof sql> {
@@ -163,19 +176,48 @@ export async function listRowsFiltered(
   const orderBy = buildFilteredOrderBy(params.sort);
   const offset = (params.page - 1) * params.pageSize;
 
-  const rows = (await db.all<Omit<RawFilteredRow, 'category'> & { huge: number; titanic: number; gargantuan: number }>(sql`${LATEST_CTE}${LATEST_EXISTS_CTE}
-    SELECT i.name, i.slug AS slug, i.huge, i.titanic, i.gargantuan,
+  const rows = (await db.all<Omit<RawFilteredRow, 'category' | 'existsPerHour'> & {
+    huge: number;
+    titanic: number;
+    gargantuan: number;
+    imageId: number | null;
+    existsHourValue: number | null;
+    existsHourAt: number | null;
+  }>(sql`${LATEST_CTE}${LATEST_EXISTS_CTE}${HOUR_EXISTS_CTE}
+    SELECT i.name, i."displayName" AS displayName, i.slug AS slug, i.imageId AS imageId,
+           i.huge, i.titanic, i.gargantuan,
            i.collection AS collectionName,
            COALESCE(l.item_key, i.name) AS itemKey,
            l.value AS rap, COALESCE(l.pt, 0) AS pt, COALESCE(l.shiny, 0) AS shiny,
-           e.value AS existsCount
+           e.value AS existsCount,
+           h.value AS existsHourValue, h.captured_at AS existsHourAt
     FROM items i
     LEFT JOIN latest l ON l.item_id = i.id
     LEFT JOIN latest_exists e ON e.item_id = i.id
-      AND e.pt = COALESCE(l.pt, 0) AND e.shiny = COALESCE(l.shiny, 0)${where}${orderBy}
-    LIMIT ${params.pageSize} OFFSET ${offset}`)) as unknown as RawFilteredRow[];
-  for (const row of rows as unknown as (RawFilteredRow & { huge: number; titanic: number; gargantuan: number })[]) {
+      AND e.pt = COALESCE(l.pt, 0) AND e.shiny = COALESCE(l.shiny, 0)
+    LEFT JOIN hour_exists h ON h.item_id = i.id
+      AND h.pt = COALESCE(l.pt, 0) AND h.shiny = COALESCE(l.shiny, 0)${where}${orderBy}
+    LIMIT ${params.pageSize} OFFSET ${offset}`)) as unknown as (RawFilteredRow & {
+    huge: number;
+    titanic: number;
+    gargantuan: number;
+    existsHourValue: number | null;
+    existsHourAt: number | null;
+  })[];
+  const nowSec = Math.floor(Date.now() / 1000);
+  for (const row of rows) {
     row.category = deriveCategory(row.huge, row.titanic, row.gargantuan);
+    if (
+      row.existsCount !== null &&
+      row.existsHourValue !== null &&
+      row.existsHourAt !== null &&
+      nowSec - row.existsHourAt >= 600
+    ) {
+      const hours = (nowSec - row.existsHourAt) / 3600;
+      row.existsPerHour = Math.round((row.existsCount - row.existsHourValue) / hours);
+    } else {
+      row.existsPerHour = null;
+    }
   }
   return rows;
 }
@@ -215,7 +257,7 @@ export async function listRowsRaw(params: ListRowsParams): Promise<RawListRow[]>
   const offset = (params.page - 1) * params.pageSize;
 
   const rows = (await db.all<Omit<RawListRow, 'category'> & { huge: number; titanic: number; gargantuan: number }>(sql`${LATEST_CTE}
-    SELECT i.name, i.huge, i.titanic, i.gargantuan, i.collection AS collectionName,
+    SELECT i.name, i."displayName" AS displayName, i.huge, i.titanic, i.gargantuan, i.collection AS collectionName,
            COALESCE(l.item_key, i.name) AS itemKey,
            l.value AS rap, COALESCE(l.pt, 0) AS pt, COALESCE(l.shiny, 0) AS shiny
     FROM items i

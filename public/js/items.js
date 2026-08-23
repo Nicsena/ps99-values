@@ -85,19 +85,24 @@
   }
 
   function cardHtml(item) {
+    const displayName = item.displayName || item.name;
     const href = window.PS99 && PS99.itemPath
       ? PS99.itemPath(item.name, item.pt || 0, !!item.shiny)
       : '/items/' + (item.slug || PS99.slugify(item.name));
+    const perHour =
+      typeof item.existsPerHour === 'number' && item.existsPerHour !== 0
+        ? (item.existsPerHour > 0 ? '+' : '') + fmt(item.existsPerHour) + '/hr'
+        : '';
     return (
       '<a class="item-card-link" href="' + href + '">' +
       '<article class="item-card">' +
-      '<img class="item-thumb" src="/img/placeholder.svg" loading="lazy" alt="">' +
+      '<img class="item-thumb" src="/thumbnails/' + encodeURIComponent(displayName) + '" loading="lazy" alt="">' +
       '<div class="item-info">' +
-      '<h3 class="item-name">' + escapeHtml(item.name) + '</h3>' +
+      '<h3 class="item-name">' + escapeHtml(displayName) + '</h3>' +
       '<div class="item-stats">' +
       '<span>RAP <b>' + fmt(item.rap) + '</b></span>' +
       '<span class="stat-sep">&middot;</span>' +
-      '<span>Exists <b>' + fmt(item.exists) + '</b></span>' +
+      '<span>Exists <b>' + fmt(item.exists) + '</b>' + (perHour ? ' <small class="exists-rate">(' + perHour + ')</small>' : '') + '</span>' +
       '</div>' +
       '</div>' +
       '</article></a>'

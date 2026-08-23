@@ -87,7 +87,7 @@
 </nav>
 
 <div class="item-header">
-  <img class="item-header-thumb" src="/img/placeholder.svg" alt="<%= item.displayName || item.name %>">
+  <img class="item-header-thumb" src="/thumbnails/<%= encodeURIComponent(item.displayName || item.name) %>" alt="<%= item.displayName || item.name %>">
   <div class="item-header-info">
     <h1 class="item-title"><%= item.displayName || item.name %></h1>
     <div class="badge-row" id="variant-chips">
@@ -122,7 +122,6 @@
 <section class="card chart-card" id="rap-history-card" data-key="rap">
   <div class="card-head">
     <div class="card-head-left">
-      <i data-lucide="line-chart" class="section-icon"></i>
       <h2 class="section-label">RAP History</h2>
     </div>
     <div class="card-toolbar">
@@ -144,9 +143,9 @@
   </div>
   <div class="chart-value-row">
     <span class="big-num chart-big" id="rap-big"><%= fmtCompactEJS(currentRap) %></span>
+    <span class="chart-delta <%= chgClass(st.rapChange24h) %>" id="rap-delta"></span>
     <span class="muted chart-date" id="rap-date"></span>
   </div>
-  <div class="chart-delta <%= chgClass(st.rapChange24h) %>" id="rap-delta"></div>
   <div class="range-group" role="group" aria-label="Range">
     <button type="button" class="pill-toggle range-btn" data-range="1D">1D</button>
     <button type="button" class="pill-toggle range-btn active" data-range="7D">7D</button>
@@ -164,7 +163,6 @@
 <section class="card chart-card" id="exists-history-card" data-key="exists">
   <div class="card-head">
     <div class="card-head-left">
-      <i data-lucide="activity" class="section-icon"></i>
       <h2 class="section-label">Exists History</h2>
     </div>
     <div class="card-toolbar">
@@ -186,8 +184,8 @@
   </div>
   <div class="chart-value-row">
     <span class="big-num chart-big" id="exists-big"><%= fmtCompactEJS(exists) %></span>
+    <span class="chart-delta <%= chgClass(st.existsChange24h) %>" id="exists-delta"></span>
   </div>
-  <div class="chart-delta <%= chgClass(st.existsChange24h) %>" id="exists-delta"></div>
   <div class="range-group" role="group" aria-label="Range">
     <button type="button" class="pill-toggle range-btn" data-range="1D">1D</button>
     <button type="button" class="pill-toggle range-btn active" data-range="7D">7D</button>

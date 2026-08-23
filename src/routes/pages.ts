@@ -1,11 +1,51 @@
 import { Router, type Request, type Response, type NextFunction } from 'express';
+import { existsSync, mkdirSync } from 'node:fs';
+import { rename, writeFile } from 'node:fs/promises';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { getItemDetail } from '../services/rapService.js';
 import { buildRapItemKey } from '../services/itemKey.js';
 import { getEnabledCollections } from '../data/collectionsRepo.js';
-import { findItemBySlug } from '../data/itemsRepo.js';
+import { findImageIdByName, findItemBySlug } from '../data/itemsRepo.js';
 import { splitDetailSlug, type DetailSlugCandidate } from '../util/slug.js';
 
 export const pagesRouter = Router();
+
+const rootDir = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
+const thumbnailsDir = join(rootDir, 'public', 'thumbnails');
+mkdirSync(thumbnailsDir, { recursive: true });
+
+pagesRouter.get('/thumbnails/:name', async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    let name: string = Array.isArray(req.params.name) ? req.params.name[0] : req.params.name;
+    try {
+      name = decodeURIComponent(name);
+    } catch {
+      /* keep raw */
+    }
+    const imageId = name.trim() ? await findImageIdByName(name) : null;
+    if (!imageId) return void res.redirect(302, '/img/placeholder.svg');
+
+    const fileName = `${imageId}.png`;
+    const filePath = join(thumbnailsDir, fileName);
+    if (!existsSync(filePath)) {
+      const upstream = await fetch(`https://ps99.biggamesapi.io/image/${imageId}`, {
+        signal: AbortSignal.timeout(15000),
+      });
+      if (!upstream.ok) return void res.redirect(302, '/img/placeholder.svg');
+      const buffer = Buffer.from(await upstream.arrayBuffer());
+      const tmpPath = `${filePath}.tmp`;
+      await writeFile(tmpPath, buffer);
+      await rename(tmpPath, filePath).catch(async () => {
+        // Windows: rename can fail if the target was created concurrently
+        if (!existsSync(filePath)) throw new Error('thumbnail rename failed');
+      });
+    }
+    res.redirect(302, `/thumbnails/${fileName}`);
+  } catch (err) {
+    next(err);
+  }
+});
 
 function notFound(res: Response, message: string): void {
   res.status(404).render('error', {

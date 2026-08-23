@@ -29,6 +29,7 @@ const statements = [
     shiny INTEGER NOT NULL DEFAULT 0,
     variant INTEGER NOT NULL DEFAULT 0,
     tier INTEGER,
+    imageId INTEGER,
     huge INTEGER NOT NULL DEFAULT 0,
     titanic INTEGER NOT NULL DEFAULT 0,
     gargantuan INTEGER NOT NULL DEFAULT 0,
@@ -97,6 +98,7 @@ function migrateItemsTable(): void {
     columns.includes('display_name') ||
     columns.includes('modified_at') ||
     !columns.includes('tier') ||
+    !columns.includes('imageId') ||
     !columns.includes('description');
   if (!needsMigration) return;
 
@@ -114,13 +116,14 @@ function migrateItemsTable(): void {
     shiny INTEGER NOT NULL DEFAULT 0,
     variant INTEGER NOT NULL DEFAULT 0,
     tier INTEGER,
+    imageId INTEGER,
     huge INTEGER NOT NULL DEFAULT 0,
     titanic INTEGER NOT NULL DEFAULT 0,
     gargantuan INTEGER NOT NULL DEFAULT 0,
     "createdAt" INTEGER NOT NULL DEFAULT (unixepoch())
   )`);
   sqlite.exec(`INSERT INTO items_new (
-    id, collection, name, "displayName", description, slug, hidden, shiny, variant, tier,
+    id, collection, name, "displayName", description, slug, hidden, shiny, variant, tier, imageId,
     huge, titanic, gargantuan, "createdAt"
   )
   SELECT
@@ -134,6 +137,7 @@ function migrateItemsTable(): void {
     ${pick('shiny', '0')},
     ${pick('variant', '0')},
     ${pick('tier', 'NULL')},
+    ${pick('imageId', 'NULL')},
     ${pick('huge', '0')},
     ${pick('titanic', '0')},
     ${pick('gargantuan', '0')},
@@ -142,3 +146,4 @@ function migrateItemsTable(): void {
   sqlite.exec('DROP TABLE items');
   sqlite.exec('ALTER TABLE items_new RENAME TO items');
 }
+

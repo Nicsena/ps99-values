@@ -15,11 +15,13 @@ export const items = sqliteTable(
       .references(() => collections.name),
     name: text('name').notNull(),
     displayName: text('displayName'),
+    description: text('description'),
     slug: text('slug'),
     hidden: integer('hidden', { mode: 'boolean' }).notNull().default(false),
     shiny: integer('shiny', { mode: 'boolean' }).notNull().default(false),
     variant: integer('variant').notNull().default(0),
     tier: integer('tier'),
+    imageId: integer('imageId'),
     huge: integer('huge', { mode: 'boolean' }).notNull().default(false),
     titanic: integer('titanic', { mode: 'boolean' }).notNull().default(false),
     gargantuan: integer('gargantuan', { mode: 'boolean' }).notNull().default(false),
@@ -73,3 +75,4 @@ export type RapSnapshot = typeof rapSnapshots.$inferSelect;
 export type NewRapSnapshot = typeof rapSnapshots.$inferInsert;
 export type ExistsSnapshot = typeof existsSnapshots.$inferSelect;
 export type NewExistsSnapshot = typeof existsSnapshots.$inferInsert;
+
