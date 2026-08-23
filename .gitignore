@@ -118,5 +118,8 @@ data/*.db-shm
 data/*.db-wal
 data/*.db*
 
+local/
+.local/
+
 # Images
 public/thumbnails*

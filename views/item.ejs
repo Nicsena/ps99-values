@@ -1,8 +1,13 @@
 <%- include('partials/header', { title: item.displayName || item.name }) %>
 
+
 <%
-  function pad(n) { return String(n).padStart(2, '0'); }
+  function pad(n) { 
+    return String(n).padStart(2, '0'); 
+  }
+
   var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  
   function fmtTableDate(iso) {
     if (!iso) return '\u2014';
     var d = new Date(iso);
@@ -69,7 +74,9 @@
     { key: 'shiny-golden',  label: 'Shiny Golden',  pt: 1, shiny: true,  color: '#b45309' },
     { key: 'shiny-rainbow', label: 'Shiny Rainbow', pt: 2, shiny: true,  color: '#be123c' },
   ];
+
   var variantRows = [];
+
   if (totalExists > 0 && variants && variants.length) {
     VAR_DEFS.forEach(function (def) {
       var match = null;
@@ -79,8 +86,12 @@
       if (match) variantRows.push({ def: def, exists: match.exists });
     });
   }
+
   var donutR = 40, donutC = 2 * Math.PI * donutR, donutAcc = 0;
+
 %>
+
+
 
 <nav class="breadcrumbs">
   <a href="/">Home</a> <span class="crumb-sep">&rsaquo;</span> <a href="/items">Items</a> <span class="crumb-sep">&rsaquo;</span> <span><%= item.displayName || item.name %></span>
