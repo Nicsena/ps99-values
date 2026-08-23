@@ -78,6 +78,7 @@ export interface ItemDetail {
   item: {
     id: string;
     name: string;
+    displayName: string | null;
     slug: string | null;
     description: string | null;
     category: string | null;
@@ -373,6 +374,7 @@ export async function getItemDetail(itemKey: string): Promise<ItemDetail | null>
     item: {
       id: item.id,
       name: item.name,
+      displayName: item.displayName,
       slug: item.slug ?? null,
       description: item.description ?? null,
       category: deriveCategory(item.huge, item.titanic, item.gargantuan),
