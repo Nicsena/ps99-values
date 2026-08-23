@@ -37,9 +37,10 @@ function parseVariant(cd: ConfigData): { pt: number; shiny: boolean; label: stri
   return { pt, shiny, label };
 }
 
-const dataDir = './data/game';
-const outDir = './data/test';
+const dataDir = './.local/game';
+const outDir = './.local/test/data';
 mkdirSync(outDir, { recursive: true });
+mkdirSync('./.local/reports', { recursive: true });
 
 import ENABLED_COLLECTIONS from "./enabled_collections.js"
 const enabledCollections = new Set(ENABLED_COLLECTIONS);
@@ -47,7 +48,7 @@ const enabledCollections = new Set(ENABLED_COLLECTIONS);
 const knownNames = new Set<string>();
 for (const col of enabledCollections) {
   const entries: { configData?: ConfigData }[] =
-    JSON.parse(readFileSync(join(dataDir, `collection-${col}.json`), 'utf8')).data ?? [];
+    JSON.parse(readFileSync(join(dataDir, `collection-${col}.json`), 'utf8')) ?? [];
   for (const e of entries) {
     const name = e.configData?.name;
     if (typeof name === 'string') knownNames.add(name);
@@ -59,7 +60,7 @@ const rows: VariantRow[] = [];
 let unmatched = 0;
 
 for (const kind of ['rap', 'exists'] as const) {
-  const entries: RapEntry[] = JSON.parse(readFileSync(join(dataDir, `${kind}.json`), 'utf8')).data ?? [];
+  const entries: RapEntry[] = JSON.parse(readFileSync(join(dataDir, `${kind}.json`), 'utf8')) ?? [];
   for (const entry of entries) {
     const id = entry.configData?.id;
     if (typeof id !== 'string') continue;
@@ -124,7 +125,7 @@ const labelSamplesHtml = rows
   .join('\n');
 
 writeFileSync(
-  './data/reports/variant-keys.html',
+  './.local/reports/variant-keys.html',
   `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -150,7 +151,7 @@ td.total{text-align:right}
 </head>
 <body>
 <h1>Variant Key Derivation (rap + exists)</h1>
-<p class="meta">Generated ${new Date().toISOString()} from <code>data/game/rap.json</code> and <code>data/game/exists.json</code></p>
+<p class="meta">Generated ${new Date().toISOString()} from <code>.local/game/rap.json</code> and <code>.local/game/exists.json</code></p>
 <div class="kpis">
 <div class="kpi"><b>${rows.length.toLocaleString()}</b><span>matched variant rows</span></div>
 <div class="kpi"><b style="color:#dc2626">${unmatched.toLocaleString()}</b><span>unmatched entries (disabled collections)</span></div>
@@ -167,4 +168,4 @@ ${labelSamplesHtml}
 </body>
 </html>`,
 );
-console.log('[03] html -> ./data/reports/variant-keys.html');
+console.log('[03] html -> ./.local/reports/variant-keys.html');

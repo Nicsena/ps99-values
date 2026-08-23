@@ -43,9 +43,10 @@ function detectNameKey(entries: CollectionEntry[]): { chosenKey: string | null; 
   return { chosenKey: bestKey, coverage };
 }
 
-const dataDir = './data/game';
-const outDir = './data/test';
+const dataDir = './.local/game';
+const outDir = './.local/test/data';
 mkdirSync(outDir, { recursive: true });
+mkdirSync('./.local/reports', { recursive: true });
 
 import ENABLED_COLLECTIONS from "./enabled_collections.js"
 const enabledCollections = new Set(ENABLED_COLLECTIONS);
@@ -55,7 +56,7 @@ const results: DetectionResult[] = [];
 for (const file of readdirSync(dataDir).filter((f) => f.startsWith('collection-'))) {
   const collection = file.replace('collection-', '').replace('.json', '');
   if (!enabledCollections.has(collection)) continue;
-  const entries: CollectionEntry[] = JSON.parse(readFileSync(join(dataDir, file), 'utf8')).data ?? [];
+  const entries: CollectionEntry[] = JSON.parse(readFileSync(join(dataDir, file), 'utf8')) ?? [];
   const { chosenKey, coverage } = detectNameKey(entries);
   results.push({ collection, totalItems: entries.length, chosenKey, coverage });
 }
@@ -103,7 +104,7 @@ const detectRowsHtml = results
   .join('\n');
 
 writeFileSync(
-  './data/reports/auto-detected-namekeys.html',
+  './.local/reports/auto-detected-namekeys.html',
   `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -131,7 +132,7 @@ td.col{font-weight:600;white-space:nowrap}td.total{text-align:right}
 </head>
 <body>
 <h1>Auto-Detected Name Keys by Collection</h1>
-<p class="meta">Generated ${new Date().toISOString()} from <code>data/test/auto-detected-namekeys.json</code> &middot; priority: ${NAME_KEY_PRIORITY.map(esc).join(' &rarr; ')} &middot; threshold ${Math.round(COVERAGE_THRESHOLD * 100)}%</p>
+<p class="meta">Generated ${new Date().toISOString()} from <code>.local/test/data/auto-detected-namekeys.json</code> &middot; priority: ${NAME_KEY_PRIORITY.map(esc).join(' &rarr; ')} &middot; threshold ${Math.round(COVERAGE_THRESHOLD * 100)}%</p>
 <div class="kpis">
 <div class="kpi"><b>${results.length}</b><span>collections analyzed</span></div>
 <div class="kpi"><b>${results.filter((r) => r.chosenKey).length}</b><span>resolved a name key</span></div>
@@ -145,4 +146,4 @@ ${detectRowsHtml}
 </body>
 </html>`,
 );
-console.log('[02] html -> ./data/reports/auto-detected-namekeys.html');
+console.log('[02] html -> ./.local/reports/auto-detected-namekeys.html');

@@ -24,17 +24,18 @@ interface CollectionStat {
   coveragePct: number;
 }
 
-const dataDir = './data/game';
-const testDir = './data/test';
-const reportPath = './data/reports/spec-driven-items-rap-exists.html';
+const dataDir = './.local/game';
+const testDir = './.local/test/data';
+mkdirSync('./.local/reports', { recursive: true });
+const reportPath = './.local/reports/spec-driven-items-rap-exists.html';
 mkdirSync(testDir, { recursive: true });
 
 const specItems: { items: SpecItem[] } = JSON.parse(
-  readFileSync('./data/test/spec-driven-items.json', 'utf8'),
+  readFileSync('./.local/test/data/spec-driven-items.json', 'utf8'),
 );
 
-const rapEntries: MarketEntry[] = JSON.parse(readFileSync(join(dataDir, 'rap.json'), 'utf8')).data ?? [];
-const existsEntries: MarketEntry[] = JSON.parse(readFileSync(join(dataDir, 'exists.json'), 'utf8')).data ?? [];
+const rapEntries: MarketEntry[] = JSON.parse(readFileSync(join(dataDir, 'rap.json'), 'utf8')) ?? [];
+const existsEntries: MarketEntry[] = JSON.parse(readFileSync(join(dataDir, 'exists.json'), 'utf8')) ?? [];
 
 const itemsByCollection = new Map<string, SpecItem[]>();
 for (const item of specItems.items) {
@@ -188,7 +189,7 @@ td.col{font-weight:600;white-space:nowrap}td.total{text-align:right}
 </head>
 <body>
 <h1>Spec-Driven Item Names vs RAP &amp; Exists Entries</h1>
-<p class="meta">Generated ${new Date().toISOString()} from <code>data/test/spec-driven-items.json</code>, <code>rap.json</code>, <code>exists.json</code></p>
+<p class="meta">Generated ${new Date().toISOString()} from <code>.local/test/data/spec-driven-items.json</code>, <code>rap.json</code>, <code>exists.json</code></p>
 
 <div class="kpis">
 <div class="kpi"><b>${t.items.toLocaleString()}</b><span>spec-resolved items</span></div>

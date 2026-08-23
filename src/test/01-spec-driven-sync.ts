@@ -56,9 +56,10 @@ function resolveSpec(collectionName: string): CollectionSpec {
   return { ...SPECS[collectionName], ...(SPECS[collectionName] ? {} : DEFAULT_SPEC) };
 }
 
-const dataDir = './data/game';
-const outDir = './data/test';
+const dataDir = './.local/game';
+const outDir = './.local/test/data';
 mkdirSync(outDir, { recursive: true });
+mkdirSync('./.local/reports', { recursive: true });
 
 import ENABLED_COLLECTIONS from "./enabled_collections.js"
 
@@ -68,7 +69,7 @@ const stats: Record<string, { total: number; fallbackToConfigName: number }> = {
 for (const col of ENABLED_COLLECTIONS) {
   const entries: CollectionEntry[] = JSON.parse(
     readFileSync(join(dataDir, `collection-${col}.json`), 'utf8'),
-  ).data;
+  );
 
   const spec = resolveSpec(col);
   let fallbackToConfigName = 0;
@@ -135,7 +136,7 @@ const itemRowsHtml = items
   .join('\n');
 
 writeFileSync(
-  './data/reports/spec-driven-items.html',
+  './.local/reports/spec-driven-items.html',
   `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -166,7 +167,7 @@ td.col{font-weight:600;white-space:nowrap}td.total{text-align:right}
 </head>
 <body>
 <h1>Spec-Driven Item Sync &mdash; Resolved Items</h1>
-<p class="meta">Generated ${new Date().toISOString()} from <code>data/game/collection-*.json</code> (approach: ${esc('spec-driven')})</p>
+<p class="meta">Generated ${new Date().toISOString()} from <code>.local/game/collection-*.json</code> (approach: ${esc('spec-driven')})</p>
 <div class="kpis">
 <div class="kpi"><b>${items.length}</b><span>items resolved</span></div>
 <div class="kpi"><b>${Object.keys(stats).length}</b><span>enabled collections</span></div>
@@ -186,4 +187,4 @@ ${itemRowsHtml}
 </body>
 </html>`,
 );
-console.log('[01] html -> ./data/reports/spec-driven-items.html');
+console.log('[01] html -> ./.local/reports/spec-driven-items.html');

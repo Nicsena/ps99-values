@@ -62,9 +62,10 @@ function project(collectionName: string, entry: CollectionEntry): ItemView {
   };
 }
 
-const dataDir = './data/game';
-const outDir = './data/test';
+const dataDir = './.local/game';
+const outDir = './.local/test/data';
 mkdirSync(outDir, { recursive: true });
+mkdirSync('./.local/reports', { recursive: true });
 
 const sampleCollections = ['Pets', 'MiscItems', 'Booths', 'Charms'];
 const views: ItemView[] = [];
@@ -72,7 +73,7 @@ const keyHistogram: Record<string, number> = {};
 
 for (const col of sampleCollections) {
   const entries: CollectionEntry[] =
-    JSON.parse(readFileSync(join(dataDir, `collection-${col}.json`), 'utf8')).data ?? [];
+    JSON.parse(readFileSync(join(dataDir, `collection-${col}.json`), 'utf8')) ?? [];
   for (const entry of entries.slice(0, 50)) {
     views.push(project(col, entry));
     for (const k of Object.keys(entry.configData ?? {})) {
@@ -127,7 +128,7 @@ const viewRowsHtml = views
   .join('\n');
 
 writeFileSync(
-  './data/reports/read-time-projection.html',
+  './.local/reports/read-time-projection.html',
   `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -168,4 +169,4 @@ ${viewRowsHtml}
 </body>
 </html>`,
 );
-console.log('[04] html -> ./data/reports/read-time-projection.html');
+console.log('[04] html -> ./.local/reports/read-time-projection.html');
