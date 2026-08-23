@@ -1,3 +1,6 @@
+// Disabled Collections - Reason: Cross-collection collisions. /api/rap and /api/exists shows the misc collection of these disabled collection items.
+// Sprinklers, ZoneFlags, Shovels
+
 export default [
     "Pets",
     "Boosts",
@@ -12,8 +15,5 @@ export default [
     "Lootboxes",
     "Hoverboards",
     "Fruits",
-    "CardItems",
-    "Shovels",
-    "Sprinklers",
-    "ZoneFlags"
+    "CardItems"
 ]
