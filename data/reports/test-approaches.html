@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sync Approach Test Reports</title>
+<style>
+body{font-family:'Segoe UI',system-ui,sans-serif;margin:2rem;background:#f6f7f9;color:#222}
+h1{margin-bottom:.2rem}h2{margin-top:2.2rem;border-bottom:2px solid #111827;padding-bottom:.3rem}
+.meta{color:#666;margin-bottom:1.5rem}
+.kpis{display:flex;gap:1rem;margin:1rem 0;flex-wrap:wrap}
+.kpi{background:#fff;border-radius:8px;padding:1rem 1.5rem;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.kpi b{display:block;font-size:1.6rem}.kpi span{color:#666;font-size:.8rem}
+table{border-collapse:collapse;width:100%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.08);margin-bottom:1rem}
+th,td{padding:.45rem .7rem;border-bottom:1px solid #e5e7eb;text-align:left;font-size:.83rem}
+th{background:#111827;color:#fff}
+tr:hover td{background:#f0f4ff}tr.warnrow td{background:#fff7ed}
+td.col{font-weight:600;white-space:nowrap}td.total{text-align:right}
+.mono{font-family:Consolas,monospace;font-size:.78rem}
+.none{color:#bbb}
+.src{padding:1px 8px;border-radius:10px;font-size:.75rem;font-family:Consolas,monospace}
+.src.ok{background:#d1fae5}.src.warn{background:#fee2e2}
+.key{display:inline-block;padding:1px 7px;margin:1px 2px;border-radius:10px;background:#e5e7eb;font-family:Consolas,monospace;font-size:.75rem}
+.key.full{background:#d1fae5}.key.half{background:#fef3c7}.key.low{background:#fee2e2}.key.zero{opacity:.45}
+.small{font-size:.8rem;color:#666}
+</style>
+</head>
+<body>
+<h1>Sync Approach Tests &mdash; Results</h1>
+<p class="meta">Generated 2026-08-22T23:38:33.927Z from refreshed JSON in <code>data/test/</code></p>
+
+<h2>02 &middot; Auto-Detected Name Keys (enabled collections)</h2>
+<div class="kpis">
+  <div class="kpi"><b>17</b><span>collections analyzed</span></div>
+  <div class="kpi"><b>15</b><span>resolved a name key</span></div>
+  <div class="kpi"><b style="color:#dc2626">2</b><span>need configName fallback</span></div>
+</div>
+<p class="small">Priority order tried: name &rarr; DisplayName &rarr; Name &rarr; Title &rarr; AssociatedItemID, threshold 50%. Orange rows have no key above threshold.</p>
+<table>
+<thead><tr><th>Collection</th><th>Items</th><th>Chosen key</th><th>Coverage per candidate</th></tr></thead>
+<tbody>
+<tr><td class="col">Boosts</td><td class="total">42</td><td><span class="src ok">DisplayName</span></td><td><span class="key zero">name 0%</span> <span class="key full">DisplayName 100%</span> <span class="key zero">Name 0%</span> <span class="key zero">Title 0%</span> <span class="key zero">AssociatedItemID 0%</span></td></tr>
+<tr><td class="col">Booths</td><td class="total">138</td><td><span class="src ok">DisplayName</span></td><td><span class="key zero">name 0%</span> <span class="key full">DisplayName 100%</span> <span class="key zero">Name 0%</span> <span class="key zero">Title 0%</span> <span class="key zero">AssociatedItemID 0%</span></td></tr>
+<tr><td class="col">Boxes</td><td class="total">1</td><td><span class="src ok">DisplayName</span></td><td><span class="key zero">name 0%</span> <span class="key full">DisplayName 100%</span> <span class="key zero">Name 0%</span> <span class="key zero">Title 0%</span> <span class="key zero">AssociatedItemID 0%</span></td></tr>
+<tr><td class="col">CardItems</td><td class="total">59</td><td><span class="src ok">DisplayName</span></td><td><span class="key zero">name 0%</span> <span class="key full">DisplayName 100%</span> <span class="key zero">Name 0%</span> <span class="key zero">Title 0%</span> <span class="key zero">AssociatedItemID 0%</span></td></tr>
+<tr class="warnrow"><td class="col">Charms</td><td class="total">13</td><td><span class="src warn">configName fallback</span></td><td><span class="key zero">name 0%</span> <span class="key zero">DisplayName 0%</span> <span class="key zero">Name 0%</span> <span class="key zero">Title 0%</span> <span class="key zero">AssociatedItemID 0%</span></td></tr>
+<tr><td class="col">Fruits</td><td class="total">7</td><td><span class="src ok">DisplayName</span></td><td><span class="key zero">name 0%</span> <span class="key full">DisplayName 100%</span> <span class="key zero">Name 0%</span> <span class="key zero">Title 0%</span> <span class="key zero">AssociatedItemID 0%</span></td></tr>
+<tr><td class="col">Hoverboards</td><td class="total">129</td><td><span class="src ok">DisplayName</span></td><td><span class="key zero">name 0%</span> <span class="key full">DisplayName 100%</span> <span class="key zero">Name 0%</span> <span class="key zero">Title 0%</span> <span class="key zero">AssociatedItemID 0%</span></td></tr>
+<tr><td class="col">Lootboxes</td><td class="total">104</td><td><span class="src ok">DisplayName</span></td><td><span class="key zero">name 0%</span> <span class="key full">DisplayName 100%</span> <span class="key zero">Name 0%</span> <span class="key zero">Title 0%</span> <span class="key zero">AssociatedItemID 0%</span></td></tr>
+<tr><td class="col">MiscItems</td><td class="total">322</td><td><span class="src ok">DisplayName</span></td><td><span class="key zero">name 0%</span> <span class="key full">DisplayName 100%</span> <span class="key zero">Name 0%</span> <span class="key zero">Title 0%</span> <span class="key zero">AssociatedItemID 0%</span></td></tr>
+<tr><td class="col">Pets</td><td class="total">3037</td><td><span class="src ok">name</span></td><td><span class="key full">name 100%</span> <span class="key zero">DisplayName 0%</span> <span class="key zero">Name 0%</span> <span class="key zero">Title 0%</span> <span class="key zero">AssociatedItemID 0%</span></td></tr>
+<tr class="warnrow"><td class="col">Potions</td><td class="total">8</td><td><span class="src warn">configName fallback</span></td><td><span class="key zero">name 0%</span> <span class="key zero">DisplayName 0%</span> <span class="key zero">Name 0%</span> <span class="key zero">Title 0%</span> <span class="key zero">AssociatedItemID 0%</span></td></tr>
+<tr><td class="col">Seeds</td><td class="total">4</td><td><span class="src ok">DisplayName</span></td><td><span class="key zero">name 0%</span> <span class="key full">DisplayName 100%</span> <span class="key zero">Name 0%</span> <span class="key zero">Title 0%</span> <span class="key zero">AssociatedItemID 0%</span></td></tr>
+<tr><td class="col">Shovels</td><td class="total">11</td><td><span class="src ok">DisplayName</span></td><td><span class="key zero">name 0%</span> <span class="key full">DisplayName 100%</span> <span class="key zero">Name 0%</span> <span class="key zero">Title 0%</span> <span class="key full">AssociatedItemID 100%</span></td></tr>
+<tr><td class="col">Sprinklers</td><td class="total">1</td><td><span class="src ok">Name</span></td><td><span class="key zero">name 0%</span> <span class="key zero">DisplayName 0%</span> <span class="key full">Name 100%</span> <span class="key zero">Title 0%</span> <span class="key zero">AssociatedItemID 0%</span></td></tr>
+<tr><td class="col">Ultimates</td><td class="total">11</td><td><span class="src ok">DisplayName</span></td><td><span class="key zero">name 0%</span> <span class="key full">DisplayName 100%</span> <span class="key zero">Name 0%</span> <span class="key zero">Title 0%</span> <span class="key zero">AssociatedItemID 0%</span></td></tr>
+<tr><td class="col">XPPotions</td><td class="total">12</td><td><span class="src ok">DisplayName</span></td><td><span class="key zero">name 0%</span> <span class="key half">DisplayName 83%</span> <span class="key zero">Name 0%</span> <span class="key zero">Title 0%</span> <span class="key zero">AssociatedItemID 0%</span></td></tr>
+<tr><td class="col">ZoneFlags</td><td class="total">10</td><td><span class="src ok">Name</span></td><td><span class="key zero">name 0%</span> <span class="key zero">DisplayName 0%</span> <span class="key full">Name 100%</span> <span class="key zero">Title 0%</span> <span class="key zero">AssociatedItemID 0%</span></td></tr>
+</tbody>
+</table>
+
+<h2>03 &middot; Variant Key Derivation (rap + exists)</h2>
+<div class="kpis">
+  <div class="kpi"><b>29,522</b><span>matched variant rows</span></div>
+  <div class="kpi"><b style="color:#dc2626">2,296</b><span>unmatched entries (disabled collections)</span></div>
+  <div class="kpi"><b>43</b><span>distinct variant keys</span></div>
+</div>
+<p class="small">Top 15 most common variant keys:</p>
+<table>
+<thead><tr><th>Variant key</th><th>Rows</th></tr></thead>
+<tbody>
+<tr><td class="mono">base</td><td class="total">6760</td></tr>
+<tr><td class="mono">pt=2</td><td class="total">5550</td></tr>
+<tr><td class="mono">sh=true</td><td class="total">4976</td></tr>
+<tr><td class="mono">pt=1</td><td class="total">4508</td></tr>
+<tr><td class="mono">pt=2;sh=true</td><td class="total">3959</td></tr>
+<tr><td class="mono">pt=1;sh=true</td><td class="total">3375</td></tr>
+<tr><td class="mono">cv=5</td><td class="total">20</td></tr>
+<tr><td class="mono">cv=3</td><td class="total">20</td></tr>
+<tr><td class="mono">cv=1</td><td class="total">20</td></tr>
+<tr><td class="mono">cv=4</td><td class="total">20</td></tr>
+<tr><td class="mono">cv=6</td><td class="total">20</td></tr>
+<tr><td class="mono">cv=2</td><td class="total">19</td></tr>
+<tr><td class="mono">tn=1</td><td class="total">18</td></tr>
+<tr><td class="mono">cv=2;pt=2</td><td class="total">17</td></tr>
+<tr><td class="mono">cv=1;pt=2</td><td class="total">17</td></tr>
+</tbody>
+</table>
+<p class="small">Sample labeled variants (cv / vr / tn dimensions):</p>
+<table>
+<thead><tr><th>Kind</th><th>Item</th><th>Variant key</th><th>Label</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td>rap</td><td>TNT</td><td class="mono">tn=1</td><td>Tier 1</td><td class="total">1,245</td></tr>
+<tr><td>rap</td><td>Fireworks</td><td class="mono">tn=1</td><td>Tier 1</td><td class="total">94,970</td></tr>
+<tr><td>rap</td><td>Huge Chroma Unicorn</td><td class="mono">cv=5</td><td>Chroma #5</td><td class="total">39,323,745</td></tr>
+<tr><td>rap</td><td>Huge Chroma Doodle Axolotl</td><td class="mono">cv=3</td><td>Chroma #3</td><td class="total">60,728,814</td></tr>
+<tr><td>rap</td><td>Huge Chroma Butterfly</td><td class="mono">cv=1</td><td>Chroma #1</td><td class="total">88,394,544</td></tr>
+<tr><td>rap</td><td>Huge Chroma Phoenix</td><td class="mono">cv=4</td><td>Chroma #4</td><td class="total">56,755,733</td></tr>
+<tr><td>rap</td><td>Huge Chroma Phoenix</td><td class="mono">cv=2;pt=2</td><td>Chroma #2</td><td class="total">490,611,519</td></tr>
+<tr><td>rap</td><td>Huge Chroma Swan</td><td class="mono">cv=6</td><td>Chroma #6</td><td class="total">174,047,221</td></tr>
+<tr><td>rap</td><td>Huge Chroma Snail</td><td class="mono">cv=3</td><td>Chroma #3</td><td class="total">81,948,999</td></tr>
+<tr><td>rap</td><td>Huge Chroma Snail</td><td class="mono">cv=5;pt=2</td><td>Chroma #5</td><td class="total">2,333,569,245</td></tr>
+<tr><td>rap</td><td>Huge Chroma Tiger</td><td class="mono">cv=2</td><td>Chroma #2</td><td class="total">112,657,534</td></tr>
+<tr><td>rap</td><td>Huge Chroma Phoenix</td><td class="mono">cv=3</td><td>Chroma #3</td><td class="total">58,058,294</td></tr>
+</tbody>
+</table>
+
+<h2>04 &middot; Read-Time Projection (schema-less)</h2>
+<div class="kpis">
+  <div class="kpi"><b>163</b><span>projected views (Pets, MiscItems, Booths, Charms)</span></div>
+  <div class="kpi"><b>30</b><span>distinct raw configData keys seen</span></div>
+</div>
+<p class="small">Promoted columns: displayName, rarity, obtainable, tradable, huge. Top raw keys remaining behind (candidates for extraConfig):</p>
+<table>
+<thead><tr><th>Raw key</th><th>Occurrences</th></tr></thead>
+<tbody>
+<tr><td class="mono">Icon</td><td class="total">113</td></tr>
+<tr><td class="mono">Rarity</td><td class="total">100</td></tr>
+<tr><td class="mono">DisplayName</td><td class="total">100</td></tr>
+<tr><td class="mono">Desc</td><td class="total">100</td></tr>
+<tr><td class="mono">goldenThumbnail</td><td class="total">50</td></tr>
+<tr><td class="mono">indexObtainable</td><td class="total">50</td></tr>
+<tr><td class="mono">huge</td><td class="total">50</td></tr>
+<tr><td class="mono">name</td><td class="total">50</td></tr>
+<tr><td class="mono">indexDesc</td><td class="total">50</td></tr>
+<tr><td class="mono">thumbnail</td><td class="total">50</td></tr>
+<tr><td class="mono">rarity</td><td class="total">50</td></tr>
+<tr><td class="mono">InventoryTags</td><td class="total">50</td></tr>
+<tr><td class="mono">Model</td><td class="total">50</td></tr>
+<tr><td class="mono">Tradable</td><td class="total">33</td></tr>
+<tr><td class="mono">fly</td><td class="total">15</td></tr>
+<tr><td class="mono">BaseTier</td><td class="total">13</td></tr>
+<tr><td class="mono">Tiers</td><td class="total">13</td></tr>
+<tr><td class="mono">MaxTier</td><td class="total">13</td></tr>
+<tr><td class="mono">animations</td><td class="total">6</td></tr>
+<tr><td class="mono">ProductId</td><td class="total">6</td></tr>
+</tbody>
+</table>
+<p class="small">Sample projected views:</p>
+<table>
+<thead><tr><th>Collection</th><th>Display name</th><th>Rarity</th><th>Tradable</th><th>Huge</th><th>Extra keys</th></tr></thead>
+<tbody>
+<tr><td>Pets</td><td><b>Huge Cosmic Axolotl</b></td><td>Exclusive</td><td><span class="none">-</span></td><td>yes</td><td class="total">0</td></tr>
+<tr><td>Pets</td><td><b>Huge Sleipnir</b></td><td>Exclusive</td><td><span class="none">-</span></td><td>yes</td><td class="total">0</td></tr>
+<tr><td>Pets</td><td><b>Huge Floppa</b></td><td>Exclusive</td><td><span class="none">-</span></td><td>yes</td><td class="total">0</td></tr>
+<tr><td>Pets</td><td><b>Huge Chest Mimic</b></td><td>Exclusive</td><td><span class="none">-</span></td><td>yes</td><td class="total">0</td></tr>
+<tr><td>Pets</td><td><b>Huge Hell Rock</b></td><td>Exclusive</td><td><span class="none">-</span></td><td>yes</td><td class="total">0</td></tr>
+<tr><td>Pets</td><td><b>Huge Enchanted Deer</b></td><td>Exclusive</td><td><span class="none">-</span></td><td>yes</td><td class="total">0</td></tr>
+<tr><td>Pets</td><td><b>Huge Cyborg Capybara</b></td><td>Exclusive</td><td><span class="none">-</span></td><td>yes</td><td class="total">1</td></tr>
+<tr><td>Pets</td><td><b>Huge Pirate Parrot</b></td><td>Exclusive</td><td><span class="none">-</span></td><td>yes</td><td class="total">1</td></tr>
+<tr><td>Pets</td><td><b>Huge Skeleton</b></td><td>Exclusive</td><td><span class="none">-</span></td><td>yes</td><td class="total">0</td></tr>
+<tr><td>Pets</td><td><b>Huge Cheerful Yeti</b></td><td>Exclusive</td><td><span class="none">-</span></td><td>yes</td><td class="total">0</td></tr>
+</tbody>
+</table>
+</body>
+</html>

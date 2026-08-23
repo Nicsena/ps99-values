@@ -1,0 +1,257 @@
+{
+    "status": "ok",
+    "data": [
+        {
+            "configName": "1 | Basic",
+            "category": "Rarity",
+            "configData": {
+                "RarityNumber": 1,
+                "Lootbag": null,
+                "Color": "#9491A7",
+                "DisplayName": "Basic",
+                "Message": null,
+                "ItemSlot": null,
+                "Gradient": null,
+                "Announce": false
+            },
+            "dateModified": "2025-07-05T23:29:23.069Z",
+            "dateCreated": null,
+            "collection": "Rarity",
+            "hashShort": "986a75c5de3f7982"
+        },
+        {
+            "configName": "2 | Rare",
+            "category": "Rarity",
+            "configData": {
+                "RarityNumber": 2,
+                "Lootbag": null,
+                "Color": "#71FF3E",
+                "DisplayName": "Rare",
+                "Message": null,
+                "ItemSlot": null,
+                "Gradient": null,
+                "Announce": false
+            },
+            "dateModified": "2025-07-05T23:29:23.075Z",
+            "dateCreated": null,
+            "collection": "Rarity",
+            "hashShort": "c517f2d1664245cb"
+        },
+        {
+            "configName": "3 | Epic",
+            "category": "Rarity",
+            "configData": {
+                "RarityNumber": 3,
+                "Lootbag": null,
+                "Color": "#29E2FF",
+                "DisplayName": "Epic",
+                "Message": null,
+                "ItemSlot": null,
+                "Gradient": null,
+                "Announce": false
+            },
+            "dateModified": "2025-07-05T23:29:23.057Z",
+            "dateCreated": null,
+            "collection": "Rarity",
+            "hashShort": "93067d4ca868fbc4"
+        },
+        {
+            "configName": "4 | Legendary",
+            "category": "Rarity",
+            "configData": {
+                "RarityNumber": 4,
+                "Lootbag": null,
+                "Color": "#FF8522",
+                "DisplayName": "Legendary",
+                "Message": null,
+                "ItemSlot": null,
+                "Gradient": null,
+                "Announce": false
+            },
+            "dateModified": "2025-07-05T23:29:23.077Z",
+            "dateCreated": null,
+            "collection": "Rarity",
+            "hashShort": "95f5c1e9994d2b74"
+        },
+        {
+            "configName": "5 | Mythical",
+            "category": "Rarity",
+            "configData": {
+                "RarityNumber": 5,
+                "Lootbag": null,
+                "Color": "#FF2B64",
+                "DisplayName": "Mythical",
+                "Message": null,
+                "ItemSlot": null,
+                "Gradient": null,
+                "Announce": false
+            },
+            "dateModified": "2025-07-05T23:29:23.054Z",
+            "dateCreated": null,
+            "collection": "Rarity",
+            "hashShort": "8bab8ff799f653a0"
+        },
+        {
+            "configName": "Exclusive",
+            "category": "Rarity",
+            "configData": {
+                "RarityNumber": 999,
+                "Lootbag": null,
+                "Color": "#AD4FFF",
+                "DisplayName": "Exclusive",
+                "Message": null,
+                "ItemSlot": null,
+                "Gradient": null,
+                "Announce": true
+            },
+            "dateModified": null,
+            "dateCreated": null,
+            "collection": "Rarity",
+            "hashShort": null
+        },
+        {
+            "configName": "6 | Exotic",
+            "category": "Rarity",
+            "configData": {
+                "RarityNumber": 6,
+                "Lootbag": null,
+                "Color": "#FF1DFB",
+                "DisplayName": "Exotic",
+                "Message": null,
+                "ItemSlot": null,
+                "Gradient": null,
+                "Announce": true
+            },
+            "dateModified": "2025-07-05T23:29:23.068Z",
+            "dateCreated": null,
+            "collection": "Rarity",
+            "hashShort": "a321238c0b93b651"
+        },
+        {
+            "configName": "7 | Divine",
+            "category": "Rarity",
+            "configData": {
+                "RarityNumber": 7,
+                "Lootbag": null,
+                "Color": "#FFEC58",
+                "DisplayName": "Divine",
+                "Message": null,
+                "ItemSlot": null,
+                "Gradient": null,
+                "Announce": true
+            },
+            "dateModified": "2025-07-05T23:29:23.080Z",
+            "dateCreated": null,
+            "collection": "Rarity",
+            "hashShort": "f79be9f7f0664f14"
+        },
+        {
+            "configName": "8 | Superior",
+            "category": "Rarity",
+            "configData": {
+                "RarityNumber": 8,
+                "Lootbag": null,
+                "Color": "#C3FFFF",
+                "DisplayName": "Superior",
+                "Message": null,
+                "ItemSlot": null,
+                "Gradient": null,
+                "Announce": true
+            },
+            "dateModified": "2025-07-05T23:29:23.064Z",
+            "dateCreated": null,
+            "collection": "Rarity",
+            "hashShort": "552983d868681ce7"
+        },
+        {
+            "configName": "9 | Celestial",
+            "category": "Rarity",
+            "configData": {
+                "RarityNumber": 9,
+                "Lootbag": null,
+                "Color": "#BBC4FF",
+                "DisplayName": "Celestial",
+                "Message": null,
+                "ItemSlot": null,
+                "Gradient": null,
+                "Announce": true
+            },
+            "dateModified": "2025-07-05T23:29:23.069Z",
+            "dateCreated": null,
+            "collection": "Rarity",
+            "hashShort": "30205eadafc30d1a"
+        },
+        {
+            "configName": "Secret",
+            "category": "Rarity",
+            "configData": {
+                "RarityNumber": 998,
+                "Lootbag": null,
+                "Color": "#AD4FFF",
+                "DisplayName": "Secret",
+                "Message": null,
+                "ItemSlot": null,
+                "Gradient": null,
+                "Announce": true
+            },
+            "dateModified": null,
+            "dateCreated": null,
+            "collection": "Rarity",
+            "hashShort": null
+        },
+        {
+            "configName": "999 | Exclusive",
+            "category": "Rarity",
+            "configData": {
+                "RarityNumber": 999,
+                "Lootbag": null,
+                "Color": "#D24AFF",
+                "DisplayName": "Exclusive",
+                "Message": null,
+                "ItemSlot": null,
+                "Gradient": null,
+                "Announce": true
+            },
+            "dateCreated": "2025-07-05T23:23:22.028Z",
+            "dateModified": "2025-07-12T16:08:37.009Z",
+            "collection": "Rarity",
+            "hashShort": "d455dc87be660999"
+        },
+        {
+            "configName": "998 | Secret",
+            "category": "Rarity",
+            "configData": {
+                "RarityNumber": 998,
+                "Lootbag": null,
+                "Color": "#AD4FFF",
+                "DisplayName": "Secret",
+                "Message": null,
+                "ItemSlot": null,
+                "Gradient": null,
+                "Announce": true
+            },
+            "dateCreated": "2025-07-05T23:23:22.028Z",
+            "dateModified": "2025-07-05T23:23:22.028Z",
+            "collection": "Rarity",
+            "hashShort": "5ee7297d03917f63"
+        },
+        {
+            "configName": "1000 | Secret Exclusive",
+            "category": "Rarity",
+            "configData": {
+                "RarityNumber": 1000,
+                "Lootbag": null,
+                "Color": "#AD4FFF",
+                "DisplayName": "Secret",
+                "Message": null,
+                "ItemSlot": null,
+                "Gradient": null,
+                "Announce": true
+            },
+            "dateCreated": "2025-07-12T16:08:36.954Z",
+            "dateModified": "2025-07-12T16:08:36.954Z",
+            "collection": "Rarity",
+            "hashShort": "6d67008e867268b8"
+        }
+    ]
+}

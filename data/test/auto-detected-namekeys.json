@@ -1,0 +1,217 @@
+{
+    "approach": "auto-detection",
+    "priorityOrder": [
+        "name",
+        "DisplayName",
+        "Name",
+        "Title",
+        "AssociatedItemID"
+    ],
+    "threshold": 0.5,
+    "results": [
+        {
+            "collection": "Boosts",
+            "totalItems": 42,
+            "chosenKey": "DisplayName",
+            "coverage": {
+                "name": 0,
+                "DisplayName": 1,
+                "Name": 0,
+                "Title": 0,
+                "AssociatedItemID": 0
+            }
+        },
+        {
+            "collection": "Booths",
+            "totalItems": 138,
+            "chosenKey": "DisplayName",
+            "coverage": {
+                "name": 0,
+                "DisplayName": 1,
+                "Name": 0,
+                "Title": 0,
+                "AssociatedItemID": 0
+            }
+        },
+        {
+            "collection": "Boxes",
+            "totalItems": 1,
+            "chosenKey": "DisplayName",
+            "coverage": {
+                "name": 0,
+                "DisplayName": 1,
+                "Name": 0,
+                "Title": 0,
+                "AssociatedItemID": 0
+            }
+        },
+        {
+            "collection": "CardItems",
+            "totalItems": 59,
+            "chosenKey": "DisplayName",
+            "coverage": {
+                "name": 0,
+                "DisplayName": 1,
+                "Name": 0,
+                "Title": 0,
+                "AssociatedItemID": 0
+            }
+        },
+        {
+            "collection": "Charms",
+            "totalItems": 13,
+            "chosenKey": null,
+            "coverage": {
+                "name": 0,
+                "DisplayName": 0,
+                "Name": 0,
+                "Title": 0,
+                "AssociatedItemID": 0
+            }
+        },
+        {
+            "collection": "Fruits",
+            "totalItems": 7,
+            "chosenKey": "DisplayName",
+            "coverage": {
+                "name": 0,
+                "DisplayName": 1,
+                "Name": 0,
+                "Title": 0,
+                "AssociatedItemID": 0
+            }
+        },
+        {
+            "collection": "Hoverboards",
+            "totalItems": 129,
+            "chosenKey": "DisplayName",
+            "coverage": {
+                "name": 0,
+                "DisplayName": 1,
+                "Name": 0,
+                "Title": 0,
+                "AssociatedItemID": 0
+            }
+        },
+        {
+            "collection": "Lootboxes",
+            "totalItems": 104,
+            "chosenKey": "DisplayName",
+            "coverage": {
+                "name": 0,
+                "DisplayName": 1,
+                "Name": 0,
+                "Title": 0,
+                "AssociatedItemID": 0
+            }
+        },
+        {
+            "collection": "MiscItems",
+            "totalItems": 322,
+            "chosenKey": "DisplayName",
+            "coverage": {
+                "name": 0,
+                "DisplayName": 1,
+                "Name": 0,
+                "Title": 0,
+                "AssociatedItemID": 0
+            }
+        },
+        {
+            "collection": "Pets",
+            "totalItems": 3037,
+            "chosenKey": "name",
+            "coverage": {
+                "name": 1,
+                "DisplayName": 0,
+                "Name": 0,
+                "Title": 0,
+                "AssociatedItemID": 0
+            }
+        },
+        {
+            "collection": "Potions",
+            "totalItems": 8,
+            "chosenKey": null,
+            "coverage": {
+                "name": 0,
+                "DisplayName": 0,
+                "Name": 0,
+                "Title": 0,
+                "AssociatedItemID": 0
+            }
+        },
+        {
+            "collection": "Seeds",
+            "totalItems": 4,
+            "chosenKey": "DisplayName",
+            "coverage": {
+                "name": 0,
+                "DisplayName": 1,
+                "Name": 0,
+                "Title": 0,
+                "AssociatedItemID": 0
+            }
+        },
+        {
+            "collection": "Shovels",
+            "totalItems": 11,
+            "chosenKey": "DisplayName",
+            "coverage": {
+                "name": 0,
+                "DisplayName": 1,
+                "Name": 0,
+                "Title": 0,
+                "AssociatedItemID": 1
+            }
+        },
+        {
+            "collection": "Sprinklers",
+            "totalItems": 1,
+            "chosenKey": "Name",
+            "coverage": {
+                "name": 0,
+                "DisplayName": 0,
+                "Name": 1,
+                "Title": 0,
+                "AssociatedItemID": 0
+            }
+        },
+        {
+            "collection": "Ultimates",
+            "totalItems": 11,
+            "chosenKey": "DisplayName",
+            "coverage": {
+                "name": 0,
+                "DisplayName": 1,
+                "Name": 0,
+                "Title": 0,
+                "AssociatedItemID": 0
+            }
+        },
+        {
+            "collection": "XPPotions",
+            "totalItems": 12,
+            "chosenKey": "DisplayName",
+            "coverage": {
+                "name": 0,
+                "DisplayName": 0.8333333333333334,
+                "Name": 0,
+                "Title": 0,
+                "AssociatedItemID": 0
+            }
+        },
+        {
+            "collection": "ZoneFlags",
+            "totalItems": 10,
+            "chosenKey": "Name",
+            "coverage": {
+                "name": 0,
+                "DisplayName": 0,
+                "Name": 1,
+                "Title": 0,
+                "AssociatedItemID": 0
+            }
+        }
+    ]
+}

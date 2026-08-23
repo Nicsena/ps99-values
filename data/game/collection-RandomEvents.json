@@ -1,0 +1,162 @@
+{
+    "status": "ok",
+    "data": [
+        {
+            "configName": "RandomEvent | CoinJar",
+            "category": "RandomEvents",
+            "configData": {
+                "AllowInZones": true,
+                "Color": "#FFDC13",
+                "Duration": 600,
+                "Icon": "rbxassetid://15000811448",
+                "BreakingRequirement": 5,
+                "PlaytimeRequirement": 5,
+                "Name": "Coin Jar",
+                "AllowInInstances": false,
+                "Chance": 42.5,
+                "AreaWhitelist": {
+                    "Main_Magma": true,
+                    "Main": true,
+                    "Main_Ice": true
+                },
+                "AllowMultiple": true
+            },
+            "dateModified": "2025-07-05T23:29:23.053Z",
+            "dateCreated": null,
+            "collection": "RandomEvents",
+            "hashShort": "4d930d91a8380d05"
+        },
+        {
+            "configName": "RandomEvent | Comet",
+            "category": "RandomEvents",
+            "configData": {
+                "AllowInZones": true,
+                "Color": "#2CFFFF",
+                "Duration": 600,
+                "Icon": "rbxassetid://15000811043",
+                "BreakingRequirement": 5,
+                "PlaytimeRequirement": 5,
+                "Name": "Comet",
+                "AllowInInstances": false,
+                "Chance": 42.5,
+                "AreaWhitelist": {
+                    "Main_Magma": true,
+                    "Main": true,
+                    "Main_Ice": true
+                },
+                "AllowMultiple": true
+            },
+            "dateModified": "2025-07-05T23:29:23.065Z",
+            "dateCreated": null,
+            "collection": "RandomEvents",
+            "hashShort": "8531ecc0ad64e68e"
+        },
+        {
+            "configName": "RandomEvent | Pinata",
+            "category": "RandomEvents",
+            "configData": {
+                "MinimumZone": 70,
+                "AllowInZones": true,
+                "Color": "#FFDC13",
+                "Duration": 600,
+                "AllowInInstances": false,
+                "AllowMultiple": true,
+                "Name": "Piñata",
+                "PlaytimeRequirement": 5,
+                "Chance": 5,
+                "AreaWhitelist": {
+                    "Main_Magma": true,
+                    "Main": true,
+                    "Main_Ice": true
+                },
+                "Icon": "rbxassetid://15938616489",
+                "BreakingRequirement": 5
+            },
+            "dateModified": "2025-07-05T23:29:23.066Z",
+            "dateCreated": null,
+            "collection": "RandomEvents",
+            "hashShort": "eaeeceed83489bd1"
+        },
+        {
+            "configName": "RandomEvent | LuckyBlock",
+            "category": "RandomEvents",
+            "configData": {
+                "MinimumZone": 55,
+                "AllowInZones": true,
+                "Color": "#2CFFFF",
+                "Duration": 120,
+                "AllowInInstances": false,
+                "AllowMultiple": true,
+                "Name": "Lucky Block",
+                "PlaytimeRequirement": 5,
+                "Chance": 10,
+                "AreaWhitelist": {
+                    "Main_Magma": true,
+                    "Main": true,
+                    "Main_Ice": true
+                },
+                "Icon": "rbxassetid://15938616838",
+                "BreakingRequirement": 5
+            },
+            "dateModified": "2025-07-05T23:29:23.063Z",
+            "dateCreated": null,
+            "collection": "RandomEvents",
+            "hashShort": "0f2f449ae4bc6a4e"
+        },
+        {
+            "configName": "RandomEvent | ItemJar",
+            "category": "RandomEvents",
+            "configData": {
+                "AllowInZones": true,
+                "Color": "#FFDC13",
+                "Duration": 600,
+                "Icon": "rbxassetid://16717382310",
+                "BreakingRequirement": 5,
+                "PlaytimeRequirement": 5,
+                "Name": "Item Jar",
+                "AllowInInstances": false,
+                "Chance": 10,
+                "AreaWhitelist": {
+                    "Main_Magma": true,
+                    "Main": true,
+                    "Main_Ice": true
+                },
+                "AllowMultiple": true
+            },
+            "dateModified": "2025-07-05T23:29:23.059Z",
+            "dateCreated": null,
+            "collection": "RandomEvents",
+            "hashShort": "3f4851fc565b14ec"
+        },
+        {
+            "configName": "RandomEvent | GiantExclusiveEgg",
+            "category": "RandomEvents",
+            "configData": {
+                "MinimumZone": {
+                    "m": null,
+                    "t": "numeric",
+                    "v": "inf"
+                },
+                "AllowInZones": true,
+                "Color": "#FFDC13",
+                "Duration": 600,
+                "AllowInInstances": false,
+                "AllowMultiple": false,
+                "Name": "Giant Exclusive Egg",
+                "PlaytimeRequirement": 5,
+                "Chance": 0,
+                "AreaWhitelist": {
+                    "Main_Magma": true,
+                    "Main": true,
+                    "Main_Ice": true
+                },
+                "Icon": "rbxassetid://17014122346",
+                "BreakingRequirement": 5
+            },
+            "dateModified": "2026-04-18T15:56:20.314Z",
+            "dateCreated": null,
+            "collection": "RandomEvents",
+            "hashShort": "c38a1ea2af529ff2"
+        }
+    ]
+}

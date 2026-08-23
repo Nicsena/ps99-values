@@ -1,0 +1,4372 @@
+{
+    "status": "ok",
+    "data": [
+        {
+            "configName": "RoyalBattle2026",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "BestContributor": 1,
+                        "Item": {
+                            "_data": {
+                                "id": "Gargantuan Stealth Dragon"
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 100
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Royal Cloud Cat",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Royal Cloud Cat",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 10
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Royal Cloud Cat"
+                            }
+                        },
+                        "Best": 11,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Royal Cloud Corgi"
+                            }
+                        },
+                        "Best": 51,
+                        "Worst": 250
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Royal"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 30
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Royal"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift 2"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    }
+                ],
+                "FinishTime": 1788019200,
+                "Title": "RoyalBattle2026",
+                "StartTime": 1787331540,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2026-08-22T16:43:24.430Z",
+            "dateModified": "2026-08-22T16:43:24.430Z",
+            "collection": "GuildBattles",
+            "hashShort": "fcf2be18c3be768e"
+        },
+        {
+            "configName": "NinjaBattle2026",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "BestContributor": 1,
+                        "Item": {
+                            "_data": {
+                                "id": "Gargantuan Stealth Dragon"
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 100
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Ninja Capybara",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Ninja Capybara",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 10
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Ninja Capybara"
+                            }
+                        },
+                        "Best": 11,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Ninja Cat"
+                            }
+                        },
+                        "Best": 51,
+                        "Worst": 250
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Ninja"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 30
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Ninja"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift 2"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    }
+                ],
+                "FinishTime": 1786723200,
+                "Title": "NinjaBattle2026",
+                "StartTime": 1785603600,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2026-08-08T16:00:45.688Z",
+            "dateModified": "2026-08-15T16:23:21.938Z",
+            "collection": "GuildBattles",
+            "hashShort": "beccfeac3968f481"
+        },
+        {
+            "configName": "GummyBattle2026",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "BestContributor": 1,
+                        "Item": {
+                            "_data": {
+                                "id": "Gargantuan Storm Wolf"
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 100
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Gummy Bear",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Gummy Bear",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 10
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Gummy Bear"
+                            }
+                        },
+                        "Best": 11,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Gummy Fox"
+                            }
+                        },
+                        "Best": 51,
+                        "Worst": 250
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Gummy"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 30
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Gummy"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift 2"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    }
+                ],
+                "FinishTime": 1785513600,
+                "Title": "GummyBattle2026",
+                "StartTime": 1784390400,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2026-07-25T16:19:45.670Z",
+            "dateModified": "2026-07-25T16:19:45.670Z",
+            "collection": "GuildBattles",
+            "hashShort": "ea1ddb118ee9e8a2"
+        },
+        {
+            "configName": "LunarBattle2026",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "BestContributor": 1,
+                        "Item": {
+                            "_data": {
+                                "id": "Gargantuan Storm Wolf"
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 100
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Lunar Deer",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Lunar Deer",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 10
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Lunar Deer"
+                            }
+                        },
+                        "Best": 11,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Lunar Fox"
+                            }
+                        },
+                        "Best": 51,
+                        "Worst": 250
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Lunar"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 30
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Lunar"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift 2"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    }
+                ],
+                "FinishTime": 1784304000,
+                "Title": "LunarBattle2026",
+                "StartTime": 1783180800,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2026-07-11T18:33:52.029Z",
+            "dateModified": "2026-07-11T18:33:52.029Z",
+            "collection": "GuildBattles",
+            "hashShort": "cd946a0a6ec28d3a"
+        },
+        {
+            "configName": "SoccerBattle2026",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "BestContributor": 1,
+                        "Item": {
+                            "_data": {
+                                "id": "Gargantuan Storm Wolf"
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 100
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Cloud Dog",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Cloud Dog",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 10
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Cloud Dog"
+                            }
+                        },
+                        "Best": 11,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Umbrella Bear"
+                            }
+                        },
+                        "Best": 51,
+                        "Worst": 250
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Thunderstorm"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 30
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Thunderstorm"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift 2"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    }
+                ],
+                "FinishTime": 1783090800,
+                "Title": "SoccerBattle2026",
+                "StartTime": 1781971200,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2026-06-27T16:07:13.338Z",
+            "dateModified": "2026-07-11T18:33:52.040Z",
+            "collection": "GuildBattles",
+            "hashShort": "446b05f0fa8ecdfb"
+        },
+        {
+            "configName": "Backrooms2026",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift 2"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "BestContributor": 1,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Daydream Fox",
+                                "pt": 2
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 3
+                    },
+                    {
+                        "BestContributor": 4,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Daydream Fox",
+                                "pt": 1
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 10
+                    },
+                    {
+                        "BestContributor": 11,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Daydream Fox"
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 100
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Daydream Fox",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Daydream Fox",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 10
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Daydream Fox"
+                            }
+                        },
+                        "Best": 11,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Daydream"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Daydream"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 30
+                    }
+                ],
+                "FinishTime": 1781884800,
+                "Title": "Backrooms2026",
+                "StartTime": 1780768800,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2026-06-13T23:13:44.955Z",
+            "dateModified": "2026-06-13T23:13:44.955Z",
+            "collection": "GuildBattles",
+            "hashShort": "2655e64b7aee3db9"
+        },
+        {
+            "configName": "AngelBattle2026",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift 2"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "BestContributor": 1,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Angel Cow",
+                                "pt": 2
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 3
+                    },
+                    {
+                        "BestContributor": 4,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Angel Cow",
+                                "pt": 1
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 10
+                    },
+                    {
+                        "BestContributor": 11,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Angel Cow"
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 100
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Angel Cow",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Angel Cow",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 10
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Angel Cow"
+                            }
+                        },
+                        "Best": 11,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Angel"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Angel"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 30
+                    }
+                ],
+                "FinishTime": 1778860800,
+                "Title": "AngelBattle2026",
+                "StartTime": 1778342400,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2026-05-09T17:52:22.089Z",
+            "dateModified": "2026-05-09T17:52:22.089Z",
+            "collection": "GuildBattles",
+            "hashShort": "3ee33e2e69c0d81b"
+        },
+        {
+            "configName": "RngBattleU79",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Arcane Halo Cat",
+                                "sh": true,
+                                "pt": 2
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 1
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Arcane Halo Cat",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 5
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Arcane Halo Cat",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 6,
+                        "Worst": 15
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Arcane Halo Cat"
+                            }
+                        },
+                        "Best": 16,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Oracle Tiger",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 51,
+                        "Worst": 150
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Oracle Tiger",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 151,
+                        "Worst": 500
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Oracle Tiger"
+                            }
+                        },
+                        "Best": 501,
+                        "Worst": 5000
+                    }
+                ],
+                "FinishTime": 1780156800,
+                "Title": "RNG League U79",
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                },
+                "StartTime": 1778342400,
+                "IsLeague": true
+            },
+            "dateCreated": "2026-05-16T16:40:56.277Z",
+            "dateModified": "2026-06-13T23:13:44.955Z",
+            "collection": "GuildBattles",
+            "hashShort": "c1228891161e73ff"
+        },
+        {
+            "configName": "TimeTrialsBattle",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Gargantuan Wicked Kirin"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 15
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Veil Horse"
+                            }
+                        },
+                        "Best": 16,
+                        "Worst": 765
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Knight Golem"
+                            }
+                        },
+                        "Best": 766,
+                        "Worst": 10765
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Time Trial Gift 2",
+                                "_am": 50
+                            }
+                        },
+                        "Best": 10766,
+                        "Worst": 25765
+                    }
+                ],
+                "FinishTime": 1777914000,
+                "Title": "Time Trials League",
+                "StartTime": 1777741200,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2026-05-02T17:32:37.100Z",
+            "dateModified": "2026-05-02T19:12:16.732Z",
+            "collection": "GuildBattles",
+            "hashShort": "83af2a7e9510f089"
+        },
+        {
+            "configName": "StarryBattle",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift 2"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "BestContributor": 1,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Starry Owl",
+                                "pt": 2
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 3
+                    },
+                    {
+                        "BestContributor": 4,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Starry Owl",
+                                "pt": 1
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 10
+                    },
+                    {
+                        "BestContributor": 11,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Starry Owl"
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 100
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Starry Owl",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Starry Owl",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 10
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Starry Owl"
+                            }
+                        },
+                        "Best": 11,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Starry"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Starry"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 30
+                    }
+                ],
+                "FinishTime": 1777734000,
+                "Title": "StarryBattle",
+                "StartTime": 1777132800,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2026-04-25T17:31:31.968Z",
+            "dateModified": "2026-04-25T17:31:31.968Z",
+            "collection": "GuildBattles",
+            "hashShort": "47a6264542951501"
+        },
+        {
+            "configName": "Spring2026",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift 2"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "BestContributor": 1,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Abstract Dominus",
+                                "pt": 2
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 3
+                    },
+                    {
+                        "BestContributor": 4,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Abstract Dominus",
+                                "pt": 1
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 10
+                    },
+                    {
+                        "BestContributor": 11,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Abstract Dominus"
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 100
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Abstract Agony",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Abstract Agony",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 10
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Abstract Agony"
+                            }
+                        },
+                        "Best": 11,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Abstract"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Abstract"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 30
+                    }
+                ],
+                "FinishTime": 1777042800,
+                "Title": "Spring2026",
+                "StartTime": 1776528000,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2026-04-18T15:56:29.059Z",
+            "dateModified": "2026-05-02T17:32:37.081Z",
+            "collection": "GuildBattles",
+            "hashShort": "43af6c1e89838f94"
+        },
+        {
+            "configName": "LuckyChestBattle",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift 2"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "BestContributor": 1,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Clover Owl",
+                                "pt": 2
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 3
+                    },
+                    {
+                        "BestContributor": 4,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Clover Owl",
+                                "pt": 1
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 10
+                    },
+                    {
+                        "BestContributor": 11,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Clover Owl"
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 100
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Clover Owl",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Clover Owl",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 10
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Clover Owl"
+                            }
+                        },
+                        "Best": 11,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clover"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clover"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 30
+                    }
+                ],
+                "FinishTime": 1774710000,
+                "Title": "Lucky Chest Battle",
+                "StartTime": 1773504000,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2026-03-14T15:52:29.916Z",
+            "dateModified": "2026-04-18T15:56:29.045Z",
+            "collection": "GuildBattles",
+            "hashShort": "a1722d374bd94c70"
+        },
+        {
+            "configName": "Christmas2025",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift 2"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "BestContributor": 1,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Silver Stag",
+                                "pt": 2
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 3
+                    },
+                    {
+                        "BestContributor": 4,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Silver Stag",
+                                "pt": 1
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 10
+                    },
+                    {
+                        "BestContributor": 11,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Silver Stag"
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 100
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Silver"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Silver"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 10
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Silver Bison",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Silver Bison",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 10
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Silver Bison"
+                            }
+                        },
+                        "Best": 11,
+                        "Worst": 50
+                    }
+                ],
+                "FinishTime": 1766768400,
+                "Title": "Gingerbread Battle 2025",
+                "StartTime": 1766250000,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2025-12-20T17:55:27.573Z",
+            "dateModified": "2025-12-20T17:55:27.573Z",
+            "collection": "GuildBattles",
+            "hashShort": "bd8a8d3668667300"
+        },
+        {
+            "configName": "Turkey2025",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift 2"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "BestContributor": 1,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Spectral Deer",
+                                "pt": 2
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 3
+                    },
+                    {
+                        "BestContributor": 4,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Spectral Deer",
+                                "pt": 1
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 10
+                    },
+                    {
+                        "BestContributor": 11,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Spectral Deer"
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 100
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Forged Robot",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Forged Robot",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 8
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Forged Robot"
+                            }
+                        },
+                        "Best": 9,
+                        "Worst": 20
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Forged Cyclops"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    }
+                ],
+                "FinishTime": 1764954000,
+                "Title": "Thanksgiving 2025 Battle",
+                "StartTime": 1764435600,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2025-12-07T23:02:15.833Z",
+            "dateModified": "2025-12-07T23:02:15.833Z",
+            "collection": "GuildBattles",
+            "hashShort": "49b8a57d34afb36b"
+        },
+        {
+            "configName": "TrickOrTreat",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift 2"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "BestContributor": 1,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Spectral Deer",
+                                "pt": 2
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 3
+                    },
+                    {
+                        "BestContributor": 4,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Spectral Deer",
+                                "pt": 1
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 10
+                    },
+                    {
+                        "BestContributor": 11,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Spectral Deer"
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 100
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Mummy Cow",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Mummy Cow",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 8
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Mummy Cow"
+                            }
+                        },
+                        "Best": 9,
+                        "Worst": 20
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Patchwork"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 30
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Reaper"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    }
+                ],
+                "FinishTime": 1761321600,
+                "Title": "Trick or Treat Battle",
+                "StartTime": 1760803200,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2025-10-19T02:11:36.671Z",
+            "dateModified": "2025-10-19T02:11:36.671Z",
+            "collection": "GuildBattles",
+            "hashShort": "c39f388e38d564a8"
+        },
+        {
+            "configName": "BlockPartyBattle",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift 2"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "BestContributor": 1,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Sun Angelus",
+                                "pt": 2
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 3
+                    },
+                    {
+                        "BestContributor": 4,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Sun Angelus",
+                                "pt": 1
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 10
+                    },
+                    {
+                        "BestContributor": 11,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Sun Angelus"
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 100
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Sun Griffin",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Sun Griffin",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 8
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Sun Griffin"
+                            }
+                        },
+                        "Best": 9,
+                        "Worst": 20
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Sun Angelus"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 30
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Sun Angelus"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    }
+                ],
+                "FinishTime": 1752854400,
+                "Title": "Block Party Battle",
+                "StartTime": 1752336000,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2025-07-12T16:08:43.628Z",
+            "dateModified": "2025-07-12T16:08:43.628Z",
+            "collection": "GuildBattles",
+            "hashShort": "d7f5fda5cc7420a0"
+        },
+        {
+            "configName": "StrengthBattle",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift 2"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "BestContributor": 1,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Sun Angelus",
+                                "pt": 2
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 3
+                    },
+                    {
+                        "BestContributor": 4,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Sun Angelus",
+                                "pt": 1
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 10
+                    },
+                    {
+                        "BestContributor": 11,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Sun Angelus"
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 100
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Scuba Dog",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Scuba Dog",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 8
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Scuba Dog"
+                            }
+                        },
+                        "Best": 9,
+                        "Worst": 20
+                    }
+                ],
+                "FinishTime": 1751644800,
+                "Title": "Strength Battle",
+                "StartTime": 1751126400,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2025-07-05T23:23:43.021Z",
+            "dateModified": "2025-07-05T23:23:43.021Z",
+            "collection": "GuildBattles",
+            "hashShort": "da755b9c7414a4a8"
+        },
+        {
+            "configName": "TowerBattle",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift 2"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "BestContributor": 1,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Mosaic Cat",
+                                "pt": 2
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 3
+                    },
+                    {
+                        "BestContributor": 4,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Mosaic Cat",
+                                "pt": 1
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 10
+                    },
+                    {
+                        "BestContributor": 11,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Mosaic Cat"
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 100
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Nightmare Cyclops",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Nightmare Cyclops",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 8
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Nightmare Cyclops"
+                            }
+                        },
+                        "Best": 9,
+                        "Worst": 20
+                    }
+                ],
+                "FinishTime": 1750435200,
+                "Title": "Tower Defense Battle",
+                "StartTime": 1749916800,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2025-07-05T23:23:43.021Z",
+            "dateModified": "2025-07-05T23:23:43.021Z",
+            "collection": "GuildBattles",
+            "hashShort": "f3c9dbaab993ee3d"
+        },
+        {
+            "configName": "BasketballBattle",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift 2"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "BestContributor": 1,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Mosaic Cat",
+                                "pt": 2
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 3
+                    },
+                    {
+                        "BestContributor": 4,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Mosaic Cat",
+                                "pt": 1
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 10
+                    },
+                    {
+                        "BestContributor": 11,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Mosaic Cat"
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 100
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Junkyard Hound",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Junkyard Hound",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 8
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Junkyard Hound"
+                            }
+                        },
+                        "Best": 9,
+                        "Worst": 20
+                    }
+                ],
+                "FinishTime": 1749225600,
+                "Title": "Basketball Battle",
+                "StartTime": 1748707200,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2025-07-05T23:23:43.021Z",
+            "dateModified": "2025-07-05T23:23:43.021Z",
+            "collection": "GuildBattles",
+            "hashShort": "1bb3b65b33b159d3"
+        },
+        {
+            "configName": "BalloonCorgiBattle",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift 2"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "BestContributor": 1,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Mosaic Cat",
+                                "pt": 2
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 3
+                    },
+                    {
+                        "BestContributor": 4,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Mosaic Cat",
+                                "pt": 1
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 10
+                    },
+                    {
+                        "BestContributor": 11,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Mosaic Cat"
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 100
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Balloon Corgi",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Balloon Corgi",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 8
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Balloon Corgi"
+                            }
+                        },
+                        "Best": 9,
+                        "Worst": 20
+                    }
+                ],
+                "FinishTime": 1748016000,
+                "Title": "Balloon Corgi Battle",
+                "StartTime": 1747497600,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2025-07-05T23:23:43.021Z",
+            "dateModified": "2025-07-05T23:23:43.021Z",
+            "collection": "GuildBattles",
+            "hashShort": "624cfe86b418e803"
+        },
+        {
+            "configName": "PoisonTurtleBattle",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift 2"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "BestContributor": 1,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Mosaic Cat",
+                                "pt": 2
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 3
+                    },
+                    {
+                        "BestContributor": 4,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Mosaic Cat",
+                                "pt": 1
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 10
+                    },
+                    {
+                        "BestContributor": 11,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Mosaic Cat"
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 100
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Poison Turtle",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Poison Turtle",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 8
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Poison Turtle"
+                            }
+                        },
+                        "Best": 9,
+                        "Worst": 20
+                    }
+                ],
+                "FinishTime": 1746806400,
+                "Title": "Poison Turtle Battle",
+                "StartTime": 1746288000,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2025-07-05T23:23:43.021Z",
+            "dateModified": "2025-07-05T23:23:43.021Z",
+            "collection": "GuildBattles",
+            "hashShort": "c3c65f23c3e13510"
+        },
+        {
+            "configName": "PixelChickBattle",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift 2"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "BestContributor": 1,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Mosaic Cat",
+                                "pt": 2
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 3
+                    },
+                    {
+                        "BestContributor": 4,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Mosaic Cat",
+                                "pt": 1
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 10
+                    },
+                    {
+                        "BestContributor": 11,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Mosaic Cat"
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 100
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Pixel Chick",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Pixel Chick",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 8
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Pixel Chick"
+                            }
+                        },
+                        "Best": 9,
+                        "Worst": 20
+                    }
+                ],
+                "FinishTime": 1745596800,
+                "Title": "Pixel Chick Battle",
+                "StartTime": 1745078400,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2025-07-05T23:23:43.021Z",
+            "dateModified": "2025-07-05T23:23:43.021Z",
+            "collection": "GuildBattles",
+            "hashShort": "d0d8f8983329940e"
+        },
+        {
+            "configName": "AthenaBattle",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift 2"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "BestContributor": 1,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Mosaic Cat",
+                                "pt": 2
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 3
+                    },
+                    {
+                        "BestContributor": 4,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Mosaic Cat",
+                                "pt": 1
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 10
+                    },
+                    {
+                        "BestContributor": 11,
+                        "Item": {
+                            "_data": {
+                                "id": "Titanic Mosaic Cat"
+                            }
+                        },
+                        "Worst": 1,
+                        "Best": 1,
+                        "WorstContributor": 100
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Athena Owl",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Athena Owl",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 8
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Athena Owl"
+                            }
+                        },
+                        "Best": 9,
+                        "Worst": 20
+                    }
+                ],
+                "FinishTime": 1743782400,
+                "Title": "Athena Battle",
+                "StartTime": 1743264000,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2025-07-05T23:23:43.021Z",
+            "dateModified": "2025-07-05T23:23:43.021Z",
+            "collection": "GuildBattles",
+            "hashShort": "43a2051dc3c74cb4"
+        },
+        {
+            "configName": "TieDyeBattle",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Tie Dye"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Tie Dye"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 10
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Tiedye Dog",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 1
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Tiedye Dog",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Tiedye Dog"
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 10
+                    }
+                ],
+                "FinishTime": 1742572800,
+                "Title": "Tie Dye Battle",
+                "StartTime": 1742054400,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2025-07-05T23:23:43.021Z",
+            "dateModified": "2025-07-05T23:23:43.021Z",
+            "collection": "GuildBattles",
+            "hashShort": "ff371430deb46548"
+        },
+        {
+            "configName": "LuckyBattle",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Sphinx"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Sphinx"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 10
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Sphinx",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 1
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Sphinx",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Sphinx"
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 10
+                    }
+                ],
+                "FinishTime": 1741971600,
+                "Title": "Lucky Battle",
+                "StartTime": 1741453200,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2025-07-05T23:23:43.021Z",
+            "dateModified": "2025-07-05T23:23:43.021Z",
+            "collection": "GuildBattles",
+            "hashShort": "e607d21ad22288e3"
+        },
+        {
+            "configName": "CardBattle",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Evil"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Evil"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 10
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Evil Deer",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 1
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Evil Deer",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Evil Deer"
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 10
+                    }
+                ],
+                "FinishTime": 1740762000,
+                "Title": "Evil Battle",
+                "StartTime": 1740243600,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2025-07-05T23:23:43.021Z",
+            "dateModified": "2025-07-05T23:23:43.021Z",
+            "collection": "GuildBattles",
+            "hashShort": "30cf4a1de588b996"
+        },
+        {
+            "configName": "ValBattle",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Holographic"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Holographic"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 10
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Holographic Monkey",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 1
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Holographic Monkey",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Holographic Monkey"
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 10
+                    }
+                ],
+                "FinishTime": 1739552400,
+                "Title": "Holographic Battle",
+                "StartTime": 1739034000,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2025-07-05T23:23:43.021Z",
+            "dateModified": "2025-07-05T23:23:43.021Z",
+            "collection": "GuildBattles",
+            "hashShort": "6a10df8ae1a89834"
+        },
+        {
+            "configName": "CannonBattle",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Mushroom"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Mushroom"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 10
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Mushroom King",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 1
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Mushroom King",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Mushroom King"
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 10
+                    }
+                ],
+                "FinishTime": 1738342800,
+                "Title": "Cannon Battle",
+                "StartTime": 1737824400,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2025-07-05T23:23:43.021Z",
+            "dateModified": "2025-07-05T23:23:43.021Z",
+            "collection": "GuildBattles",
+            "hashShort": "a1a49141892059de"
+        },
+        {
+            "configName": "SquidBattle",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Wyvern of Hades"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Wyvern of Hades"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 10
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Wyvern of Hades",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 1
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Wyvern of Hades",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Wyvern of Hades"
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 10
+                    }
+                ],
+                "FinishTime": 1737738000,
+                "Title": "Pet Games Battle",
+                "StartTime": 1736614800,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2025-07-05T23:23:43.021Z",
+            "dateModified": "2025-07-05T23:23:43.021Z",
+            "collection": "GuildBattles",
+            "hashShort": "1295b64a68ef2cff"
+        },
+        {
+            "configName": "NewYear2024",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Blurred"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Blurred"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 10
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Blurred Agony",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 1
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Blurred Agony",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Blurred Agony"
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 10
+                    }
+                ],
+                "FinishTime": 1735923600,
+                "Title": "New Years Battle",
+                "StartTime": 1735405200,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2025-07-05T23:23:43.021Z",
+            "dateModified": "2025-07-05T23:23:43.021Z",
+            "collection": "GuildBattles",
+            "hashShort": "fff01c1b8053c8b8"
+        },
+        {
+            "configName": "YearEnd2024",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Diamond"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Diamond"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 10
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Diamond Dragon",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 1
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Diamond Dragon",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Diamond Dragon"
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 10
+                    }
+                ],
+                "FinishTime": 1735318800,
+                "Title": "Christmas Present Battle",
+                "StartTime": 1734800400,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2025-07-05T23:23:43.021Z",
+            "dateModified": "2025-07-05T23:23:43.021Z",
+            "collection": "GuildBattles",
+            "hashShort": "f44e25586a462dd9"
+        },
+        {
+            "configName": "Christmas2024",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Gingerbread"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Gingerbread"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 10
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Gingerbread Dragon",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 1
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Gingerbread Dragon",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Gingerbread Dragon"
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 10
+                    }
+                ],
+                "FinishTime": 1734714000,
+                "Title": "Gingerbread Battle",
+                "StartTime": 1734195630,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2025-07-05T23:23:43.021Z",
+            "dateModified": "2025-07-05T23:23:43.021Z",
+            "collection": "GuildBattles",
+            "hashShort": "82fb6701fc2e60f0"
+        },
+        {
+            "configName": "SantaBattle",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Bee"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Bee"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 10
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Doodle Bee",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 1
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Doodle Bee",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Doodle Bee"
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 10
+                    }
+                ],
+                "FinishTime": 1734109200,
+                "Title": "Bee Battle",
+                "StartTime": 1733590800,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2025-07-05T23:23:43.021Z",
+            "dateModified": "2025-07-05T23:23:43.021Z",
+            "collection": "GuildBattles",
+            "hashShort": "8da8ff988383f2c7"
+        },
+        {
+            "configName": "LineBattle",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Blimp Dragon"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Blimp Dragon"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 10
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Blimp Dragon",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 1
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Blimp Dragon",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Blimp Dragon"
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 10
+                    }
+                ],
+                "FinishTime": 1732291200,
+                "Title": "Line Battle",
+                "StartTime": 1731168000,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2025-07-05T23:23:43.021Z",
+            "dateModified": "2025-07-05T23:23:43.021Z",
+            "collection": "GuildBattles",
+            "hashShort": "4b55fba1e60ef394"
+        },
+        {
+            "configName": "HalloweenBattle",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Ghost Cat"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Ghost"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 10
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Ghost Cat",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 1
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Ghost Cat",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Ghost Cat"
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 10
+                    }
+                ],
+                "FinishTime": 1730476800,
+                "Title": "Ghost Battle",
+                "StartTime": 1729353600,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2025-07-05T23:23:43.021Z",
+            "dateModified": "2025-07-05T23:23:43.021Z",
+            "collection": "GuildBattles",
+            "hashShort": "25abcc6e7baa049b"
+        },
+        {
+            "configName": "CatchingBattle",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Reversed"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Reversed"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 10
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Reversed Cat",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 1
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Reversed Cat",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Reversed Cat"
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 10
+                    }
+                ],
+                "FinishTime": 1728057600,
+                "Title": "Catching Battle",
+                "StartTime": 1726934400,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2025-07-05T23:23:43.021Z",
+            "dateModified": "2025-07-05T23:23:43.021Z",
+            "collection": "GuildBattles",
+            "hashShort": "b6db7dc15a9c2e39"
+        },
+        {
+            "configName": "CrabBattle",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Rave Crab"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Rave Crab"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 10
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Rave Crab",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 1
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Rave Crab",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Rave Crab"
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 10
+                    }
+                ],
+                "FinishTime": 1726243200,
+                "Title": "Crab Battle",
+                "StartTime": 1725120000,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2025-07-05T23:23:43.021Z",
+            "dateModified": "2025-07-05T23:23:43.021Z",
+            "collection": "GuildBattles",
+            "hashShort": "74bf065243d512f7"
+        },
+        {
+            "configName": "RngBattle",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Ice Cream"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Ice Cream"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 10
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Ice Cream Cone",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 1
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Ice Cream Cone",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Ice Cream Cone"
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 10
+                    }
+                ],
+                "FinishTime": 1724428800,
+                "Title": "RNG Battle",
+                "StartTime": 1723305600,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2025-07-05T23:23:43.021Z",
+            "dateModified": "2025-07-05T23:23:43.021Z",
+            "collection": "GuildBattles",
+            "hashShort": "821b3fed7faec478"
+        },
+        {
+            "configName": "MillionaireRunBattle",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clown"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clown"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 10
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Clown Cat",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 1
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Clown Cat",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Clown Cat"
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 10
+                    }
+                ],
+                "FinishTime": 1722614400,
+                "Title": "Millionaire Run Battle",
+                "StartTime": 1721491200,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2025-07-05T23:23:43.021Z",
+            "dateModified": "2025-07-05T23:23:43.021Z",
+            "collection": "GuildBattles",
+            "hashShort": "e3079c3f40ac3b06"
+        },
+        {
+            "configName": "GoodEvilBattle",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Safety"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Safety"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 10
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Safety Cat",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 1
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Safety Cat",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Safety Cat"
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 10
+                    }
+                ],
+                "FinishTime": 1720195200,
+                "Title": "Good vs. Evil Battle",
+                "StartTime": 1719072000,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2025-07-05T23:23:43.021Z",
+            "dateModified": "2025-07-05T23:23:43.021Z",
+            "collection": "GuildBattles",
+            "hashShort": "1457406ef9ceec0f"
+        },
+        {
+            "configName": "HackerBattle",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Wicked"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Wicked"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 10
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Wicked Empyrean Dragon",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 1
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Wicked Empyrean Dragon",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Wicked Empyrean Dragon"
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 10
+                    }
+                ],
+                "FinishTime": 1718985600,
+                "Title": "Wicked Battle",
+                "StartTime": 1717862400,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateCreated": "2025-07-05T23:23:43.021Z",
+            "dateModified": "2025-07-05T23:23:43.021Z",
+            "collection": "GuildBattles",
+            "hashShort": "0c76467a7ff6bae0"
+        },
+        {
+            "configName": "PrisonBattle",
+            "category": "GuildBattles",
+            "configData": {
+                "PlacementRewards": [
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Clan Gift"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 500
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Fragmented"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 50
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Fragmented"
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 10
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Fragmented Dominus",
+                                "pt": 2
+                            }
+                        },
+                        "Best": 1,
+                        "Worst": 1
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Fragmented Dominus",
+                                "pt": 1
+                            }
+                        },
+                        "Best": 2,
+                        "Worst": 3
+                    },
+                    {
+                        "Item": {
+                            "_data": {
+                                "id": "Huge Fragmented Dominus"
+                            }
+                        },
+                        "Best": 4,
+                        "Worst": 10
+                    }
+                ],
+                "FinishTime": 1717171200,
+                "Title": "Prison Battle",
+                "StartTime": 1716048000,
+                "Rewards": {
+                    "Good": [],
+                    "Bronze": [],
+                    "Silver": [],
+                    "Gold": []
+                }
+            },
+            "dateModified": "2025-07-05T23:29:23.557Z",
+            "dateCreated": null,
+            "collection": "GuildBattles",
+            "hashShort": "6fbf663f05701638"
+        },
+        {
+            "configName": "GlitchBattle",
+            "category": "GuildBattles",
+            "configData": {
+                "FinishTime": 1715443200,
+                "Title": "Bubble Battle",
+                "StartTime": 1714233600,
+                "Rewards": {
+                    "Good": [
+                        {
+                            "_data": {
+                                "id": "Clan Gift"
+                            }
+                        }
+                    ],
+                    "Bronze": [
+                        {
+                            "_data": {
+                                "id": "Bubble"
+                            }
+                        }
+                    ],
+                    "Silver": [
+                        {
+                            "_data": {
+                                "id": "Bubble"
+                            }
+                        }
+                    ],
+                    "Gold": [
+                        {
+                            "_data": {
+                                "id": "Huge Bubble Dog"
+                            }
+                        }
+                    ]
+                }
+            },
+            "dateModified": "2025-07-05T23:29:23.554Z",
+            "dateCreated": null,
+            "collection": "GuildBattles",
+            "hashShort": "2a2ba2c3b84f77f2"
+        },
+        {
+            "configName": "GoalBattleTwo",
+            "category": "GuildBattles",
+            "configData": {
+                "FinishTime": 1713628800,
+                "Title": "Goal Battle: Two",
+                "StartTime": 1712419200,
+                "Rewards": {
+                    "Good": [
+                        {
+                            "_data": {
+                                "id": "Clan Gift"
+                            }
+                        }
+                    ],
+                    "Bronze": [
+                        {
+                            "_data": {
+                                "id": "Pixel"
+                            }
+                        }
+                    ],
+                    "Silver": [
+                        {
+                            "_data": {
+                                "id": "Pixel Dragon"
+                            }
+                        }
+                    ],
+                    "Gold": [
+                        {
+                            "_data": {
+                                "id": "Huge Pixel Shark"
+                            }
+                        }
+                    ]
+                },
+                "HasGoals": true
+            },
+            "dateModified": "2025-07-05T23:29:23.573Z",
+            "dateCreated": null,
+            "collection": "GuildBattles",
+            "hashShort": "381a32e73a08b2c6"
+        },
+        {
+            "configName": "GoalBattleOne",
+            "category": "GuildBattles",
+            "configData": {
+                "FinishTime": 1711818000,
+                "Title": "Goal Battle: One",
+                "StartTime": 1710608400,
+                "Rewards": {
+                    "Bronze": [
+                        {
+                            "_data": {
+                                "id": "Alien"
+                            }
+                        }
+                    ],
+                    "Silver": [
+                        {
+                            "_data": {
+                                "id": "Bleebo The Alien"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 23"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 23"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 23"
+                            }
+                        }
+                    ],
+                    "Gold": [
+                        {
+                            "_data": {
+                                "id": "Huge Alien Arachnid"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 23"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 23"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 23"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 23"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 23"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 23"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 23"
+                            }
+                        }
+                    ]
+                },
+                "HasGoals": true
+            },
+            "dateModified": "2025-07-05T23:29:23.556Z",
+            "dateCreated": null,
+            "collection": "GuildBattles",
+            "hashShort": "a1970bc113b1f25b"
+        },
+        {
+            "configName": "RaidBattle",
+            "category": "GuildBattles",
+            "configData": {
+                "FinishTime": 1710522000,
+                "Title": "Raid Battle",
+                "StartTime": 1708794000,
+                "Rewards": {
+                    "Bronze": [
+                        {
+                            "_data": {
+                                "id": "Galaxy"
+                            }
+                        }
+                    ],
+                    "Silver": [
+                        {
+                            "_data": {
+                                "id": "Cosmic"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 22"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 22"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 22"
+                            }
+                        }
+                    ],
+                    "Gold": [
+                        {
+                            "_data": {
+                                "id": "Huge Mystical Fox"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 22"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 22"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 22"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 22"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 22"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 22"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 22"
+                            }
+                        }
+                    ]
+                }
+            },
+            "dateModified": "2025-07-05T23:29:23.573Z",
+            "dateCreated": null,
+            "collection": "GuildBattles",
+            "hashShort": "a96272e0b1e330f0"
+        },
+        {
+            "configName": "AchBattle",
+            "category": "GuildBattles",
+            "configData": {
+                "FinishTime": 1708707600,
+                "Title": "Achievements Battle",
+                "StartTime": 1707584400,
+                "Rewards": {
+                    "Bronze": [
+                        {
+                            "_data": {
+                                "id": "Empyrean"
+                            }
+                        }
+                    ],
+                    "Silver": [
+                        {
+                            "_data": {
+                                "id": "Ducky"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 21"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 21"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 21"
+                            }
+                        }
+                    ],
+                    "Gold": [
+                        {
+                            "_data": {
+                                "id": "Huge Empyrean Axolotl"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 21"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 21"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 21"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 21"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 21"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 21"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 21"
+                            }
+                        }
+                    ]
+                }
+            },
+            "dateModified": "2025-07-05T23:29:23.555Z",
+            "dateCreated": null,
+            "collection": "GuildBattles",
+            "hashShort": "a8dcee91f4098280"
+        },
+        {
+            "configName": "IndexBattle",
+            "category": "GuildBattles",
+            "configData": {
+                "FinishTime": 1707498000,
+                "Title": "Pet Collection Battle",
+                "StartTime": 1705770000,
+                "Rewards": {
+                    "Bronze": [
+                        {
+                            "_data": {
+                                "id": "M10"
+                            }
+                        }
+                    ],
+                    "Silver": [
+                        {
+                            "_data": {
+                                "id": "Pegasus"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 20"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 20"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 20"
+                            }
+                        }
+                    ],
+                    "Gold": [
+                        {
+                            "_data": {
+                                "id": "Huge Sensei Penguin"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 20"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 20"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 20"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 20"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 20"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 20"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 20"
+                            }
+                        }
+                    ]
+                }
+            },
+            "dateModified": "2025-07-05T23:29:23.558Z",
+            "dateCreated": null,
+            "collection": "GuildBattles",
+            "hashShort": "e6158c2bb88733fe"
+        },
+        {
+            "configName": "DecemberActiveHugePets",
+            "category": "GuildBattles",
+            "configData": {
+                "FinishTime": 1705683600,
+                "Title": "New Year's Clan Battle",
+                "StartTime": 1703955600,
+                "Rewards": {
+                    "Bronze": [
+                        {
+                            "_data": {
+                                "id": "Cupcake"
+                            }
+                        }
+                    ],
+                    "Silver": [
+                        {
+                            "_data": {
+                                "id": "Blobfish"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 18"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 18"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 18"
+                            }
+                        }
+                    ],
+                    "Gold": [
+                        {
+                            "_data": {
+                                "id": "Huge Owl"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 18"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 18"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 18"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 18"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 18"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 18"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 18"
+                            }
+                        }
+                    ]
+                }
+            },
+            "dateModified": "2025-07-05T23:29:23.559Z",
+            "dateCreated": null,
+            "collection": "GuildBattles",
+            "hashShort": "01bb67b6eeeb984e"
+        },
+        {
+            "configName": "Christmas2023",
+            "category": "GuildBattles",
+            "configData": {
+                "FinishTime": 1703869200,
+                "Title": "Festive Clan Battle",
+                "StartTime": 1702746000,
+                "Rewards": {
+                    "Bronze": [
+                        {
+                            "_data": {
+                                "id": "Present"
+                            }
+                        }
+                    ],
+                    "Silver": [
+                        {
+                            "_data": {
+                                "id": "Red Present"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 18"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 18"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 18"
+                            }
+                        }
+                    ],
+                    "Gold": [
+                        {
+                            "_data": {
+                                "id": "Huge Present Cat"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 18"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 18"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 18"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 18"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 18"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 18"
+                            }
+                        },
+                        {
+                            "_data": {
+                                "id": "Exclusive Egg 18"
+                            }
+                        }
+                    ]
+                }
+            },
+            "dateModified": "2025-07-05T23:29:23.553Z",
+            "dateCreated": null,
+            "collection": "GuildBattles",
+            "hashShort": "95676172080de4a8"
+        }
+    ]
+}

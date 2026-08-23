@@ -1,0 +1,575 @@
+{
+    "status": "ok",
+    "data": [
+        {
+            "configName": "RegularMerchant",
+            "category": "Merchants",
+            "configData": {
+                "PriceMult": 1,
+                "GetOffers": null,
+                "DisplayName": "Items Merchant",
+                "StockRangeByRespectLevel": [
+                    [
+                        1,
+                        1
+                    ],
+                    [
+                        1,
+                        1
+                    ],
+                    [
+                        1,
+                        1
+                    ],
+                    [
+                        1,
+                        3
+                    ],
+                    [
+                        1,
+                        3
+                    ]
+                ],
+                "MachineName": "RegularMerchant",
+                "SlotRespectLevels": [
+                    1,
+                    1,
+                    2,
+                    2,
+                    3,
+                    5
+                ],
+                "RefreshRate": 1800
+            },
+            "dateModified": "2026-07-04T16:06:40.839Z",
+            "dateCreated": null,
+            "collection": "Merchants",
+            "hashShort": "f82aa67dcf833b6d"
+        },
+        {
+            "configName": "AdvancedMerchant",
+            "category": "Merchants",
+            "configData": {
+                "PriceMult": 1,
+                "GetOffers": null,
+                "DisplayName": "Advanced Merchant",
+                "StockRangeByRespectLevel": [
+                    [
+                        1,
+                        1
+                    ],
+                    [
+                        1,
+                        1
+                    ],
+                    [
+                        1,
+                        1
+                    ],
+                    [
+                        1,
+                        3
+                    ],
+                    [
+                        1,
+                        3
+                    ]
+                ],
+                "MachineName": "AdvancedMerchant",
+                "SlotRespectLevels": [
+                    1,
+                    1,
+                    2,
+                    2,
+                    3,
+                    5
+                ],
+                "RefreshRate": 3600
+            },
+            "dateModified": "2026-07-04T16:06:40.839Z",
+            "dateCreated": null,
+            "collection": "Merchants",
+            "hashShort": "2cb7e7037c6c9fa0"
+        },
+        {
+            "configName": "GardenMerchant",
+            "category": "Merchants",
+            "configData": {
+                "PriceMult": 1,
+                "HideNotification": true,
+                "DisplayName": "Garden Merchant",
+                "StockRangeByRespectLevel": [
+                    [
+                        1,
+                        2
+                    ],
+                    [
+                        2,
+                        2
+                    ],
+                    [
+                        2,
+                        3
+                    ],
+                    [
+                        3,
+                        5
+                    ],
+                    [
+                        3,
+                        6
+                    ]
+                ],
+                "MachineName": "GardenMerchant",
+                "SlotRespectLevels": [
+                    1,
+                    1,
+                    2,
+                    2,
+                    3,
+                    5
+                ],
+                "GetOffers": null,
+                "RefreshRate": 300
+            },
+            "dateModified": "2026-07-04T16:06:40.840Z",
+            "dateCreated": null,
+            "collection": "Merchants",
+            "hashShort": "0cfa38b276eaa60b"
+        },
+        {
+            "configName": "SnowMerchant",
+            "category": "Merchants",
+            "configData": {
+                "PriceMult": 1,
+                "GetOffers": null,
+                "DisplayName": "Snow Merchant",
+                "StockRangeByRespectLevel": [
+                    [
+                        1,
+                        1
+                    ],
+                    [
+                        1,
+                        1
+                    ],
+                    [
+                        1,
+                        1
+                    ],
+                    [
+                        1,
+                        3
+                    ],
+                    [
+                        1,
+                        3
+                    ]
+                ],
+                "MachineName": "SnowMerchant",
+                "SlotRespectLevels": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                ],
+                "RefreshRate": 1800
+            },
+            "dateModified": "2026-07-04T16:06:41.922Z",
+            "dateCreated": null,
+            "collection": "Merchants",
+            "hashShort": "b53b96c3f5251334"
+        },
+        {
+            "configName": "FireworkMerchant",
+            "category": "Merchants",
+            "configData": {
+                "PriceMult": 1,
+                "GetOffers": null,
+                "DisplayName": "Firework Merchant",
+                "StockRangeByRespectLevel": [
+                    [
+                        1,
+                        1
+                    ],
+                    [
+                        1,
+                        1
+                    ],
+                    [
+                        1,
+                        1
+                    ],
+                    [
+                        1,
+                        3
+                    ],
+                    [
+                        1,
+                        3
+                    ]
+                ],
+                "MachineName": "FireworkMerchant",
+                "SlotRespectLevels": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                ],
+                "RefreshRate": 1800
+            },
+            "dateModified": "2025-07-05T23:36:13.721Z",
+            "dateCreated": null,
+            "collection": "Merchants",
+            "hashShort": "1c4fadc854f874b5"
+        },
+        {
+            "configName": "IndexMerchant",
+            "category": "Merchants",
+            "configData": {
+                "PriceMult": 1,
+                "DisableApproachOpen": true,
+                "DisplayName": "Index Merchant",
+                "StockRangeByRespectLevel": [
+                    [
+                        1,
+                        1
+                    ],
+                    [
+                        2,
+                        2
+                    ],
+                    [
+                        3,
+                        3
+                    ],
+                    [
+                        4,
+                        4
+                    ],
+                    [
+                        5,
+                        5
+                    ]
+                ],
+                "MachineName": "PetIndexMachine",
+                "SlotRespectLevels": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                ],
+                "GetOffers": null,
+                "HideRespect": true,
+                "RefreshRate": 3600
+            },
+            "dateModified": "2025-07-05T23:36:13.717Z",
+            "dateCreated": null,
+            "collection": "Merchants",
+            "hashShort": "720b7513d63f2d1d"
+        },
+        {
+            "configName": "AdventurerStore",
+            "category": "Merchants",
+            "configData": {
+                "PriceMult": 1,
+                "IsStatic": true,
+                "HideNotification": true,
+                "DisplayName": "Adventurer Store",
+                "HideRespect": true,
+                "GetOffers": null,
+                "RefreshRate": 21600,
+                "MachineName": "AdventurerStore"
+            },
+            "dateModified": "2025-07-05T23:36:13.721Z",
+            "dateCreated": null,
+            "collection": "Merchants",
+            "hashShort": "77f9e8463c238ab7"
+        },
+        {
+            "configName": "RaffleMerchant",
+            "category": "Merchants",
+            "configData": {
+                "MachineName": "RaffleMerchant",
+                "PriceMult": 1,
+                "GetOffers": null,
+                "RefreshRate": 3600,
+                "DisplayName": "Raffle Merchant"
+            },
+            "dateCreated": "2025-07-05T23:23:42.717Z",
+            "dateModified": "2025-07-05T23:23:42.717Z",
+            "collection": "Merchants",
+            "hashShort": "8c1fc893c45f9a27"
+        },
+        {
+            "configName": "LuckyDiceMerchant",
+            "category": "Merchants",
+            "configData": {
+                "PriceMult": 1,
+                "GetOffers": null,
+                "DisplayName": "Lucky Dice Merchant",
+                "StockRangeByRespectLevel": [
+                    [
+                        1,
+                        1
+                    ],
+                    [
+                        1,
+                        1
+                    ],
+                    [
+                        1,
+                        1
+                    ],
+                    [
+                        1,
+                        2
+                    ],
+                    [
+                        1,
+                        3
+                    ]
+                ],
+                "MachineName": "LuckyDiceMerchant",
+                "SlotRespectLevels": [
+                    1,
+                    1,
+                    2,
+                    2,
+                    3,
+                    5
+                ],
+                "RefreshRate": 300
+            },
+            "dateCreated": "2025-07-05T23:23:42.717Z",
+            "dateModified": "2025-07-05T23:23:42.717Z",
+            "collection": "Merchants",
+            "hashShort": "aed407e4a24fad03"
+        },
+        {
+            "configName": "PetCubeStore",
+            "category": "Merchants",
+            "configData": {
+                "PriceMult": 1,
+                "IsStatic": false,
+                "HideNotification": true,
+                "DisplayName": "Pet Cube Store",
+                "HideRespect": true,
+                "GetOffers": null,
+                "RefreshRate": 1500,
+                "MachineName": "PetCubeStore"
+            },
+            "dateCreated": "2025-07-05T23:23:42.717Z",
+            "dateModified": "2025-07-05T23:23:42.717Z",
+            "collection": "Merchants",
+            "hashShort": "7a3615b57346ef87"
+        },
+        {
+            "configName": "PackMerchant",
+            "category": "Merchants",
+            "configData": {
+                "PriceMult": 1,
+                "GetOffers": null,
+                "DisplayName": "Pack Merchant",
+                "StockRangeByRespectLevel": [
+                    [
+                        1,
+                        1
+                    ],
+                    [
+                        1,
+                        1
+                    ],
+                    [
+                        1,
+                        1
+                    ],
+                    [
+                        1,
+                        2
+                    ],
+                    [
+                        1,
+                        3
+                    ]
+                ],
+                "MachineName": "PackMerchant",
+                "SlotRespectLevels": [
+                    1,
+                    1,
+                    2,
+                    2,
+                    3,
+                    5
+                ],
+                "HasAccess": null,
+                "RefreshRate": 600
+            },
+            "dateCreated": "2025-07-05T23:23:42.717Z",
+            "dateModified": "2025-07-05T23:23:42.717Z",
+            "collection": "Merchants",
+            "hashShort": "6599ac93c6eeff2f"
+        },
+        {
+            "configName": "MiningMerchant",
+            "category": "Merchants",
+            "configData": {
+                "PriceMult": 1,
+                "GetOffers": null,
+                "DisplayName": "Mining Merchant",
+                "StockRangeByRespectLevel": [
+                    [
+                        1,
+                        1
+                    ],
+                    [
+                        1,
+                        1
+                    ],
+                    [
+                        1,
+                        1
+                    ],
+                    [
+                        1,
+                        2
+                    ],
+                    [
+                        1,
+                        3
+                    ]
+                ],
+                "MachineName": "MiningMerchant",
+                "SlotRespectLevels": [
+                    1,
+                    1,
+                    2,
+                    2,
+                    3,
+                    5
+                ],
+                "HasAccess": null,
+                "RefreshRate": 600
+            },
+            "dateCreated": "2025-07-05T23:23:42.717Z",
+            "dateModified": "2025-07-05T23:23:42.717Z",
+            "collection": "Merchants",
+            "hashShort": "09e86a231203e636"
+        },
+        {
+            "configName": "UnitMerchant",
+            "category": "Merchants",
+            "configData": {
+                "PriceMult": 1,
+                "IsStatic": true,
+                "HideNotification": true,
+                "DisplayName": "Unit Merchant",
+                "HideRespect": true,
+                "GetOffers": null,
+                "RefreshRate": 60,
+                "MachineName": "UnitMerchant"
+            },
+            "dateCreated": "2025-07-05T23:23:42.717Z",
+            "dateModified": "2025-07-05T23:23:42.717Z",
+            "collection": "Merchants",
+            "hashShort": "1b40a682d16b10a1"
+        },
+        {
+            "configName": "LuckyDiceMerchantV2",
+            "category": "Merchants",
+            "configData": {
+                "PriceMult": 1,
+                "GetOffers": null,
+                "DisplayName": "Lucky Dice Merchant",
+                "StockRangeByRespectLevel": [
+                    [
+                        1,
+                        1
+                    ],
+                    [
+                        1,
+                        1
+                    ],
+                    [
+                        1,
+                        1
+                    ],
+                    [
+                        1,
+                        1
+                    ],
+                    [
+                        1,
+                        3
+                    ]
+                ],
+                "MachineName": "LuckyDiceMerchantV2",
+                "SlotRespectLevels": [
+                    1,
+                    1,
+                    2,
+                    2,
+                    3,
+                    4
+                ],
+                "RefreshRate": 300
+            },
+            "dateCreated": "2026-05-09T17:52:38.471Z",
+            "dateModified": "2026-08-15T16:23:09.304Z",
+            "collection": "Merchants",
+            "hashShort": "b6f3682400284ce6"
+        },
+        {
+            "configName": "FarmingMerchant",
+            "category": "Merchants",
+            "configData": {
+                "PriceMult": 1,
+                "HideNotification": true,
+                "DisplayName": "Farming Merchant",
+                "StockRangeByRespectLevel": [
+                    [
+                        2,
+                        4
+                    ],
+                    [
+                        2,
+                        3
+                    ],
+                    [
+                        1,
+                        3
+                    ],
+                    [
+                        1,
+                        2
+                    ],
+                    [
+                        1,
+                        2
+                    ]
+                ],
+                "MachineName": "FarmingMerchantMachine",
+                "SlotRespectLevels": [
+                    1,
+                    1,
+                    2,
+                    2,
+                    3,
+                    5
+                ],
+                "GetOffers": null,
+                "RefreshRate": 300
+            },
+            "dateCreated": "2026-07-25T16:19:47.456Z",
+            "dateModified": "2026-08-01T16:02:36.139Z",
+            "collection": "Merchants",
+            "hashShort": "8e3a916c0d80d38b"
+        }
+    ]
+}

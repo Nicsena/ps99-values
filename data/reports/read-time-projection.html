@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Read-Time Projection</title>
+<style>
+body{font-family:'Segoe UI',system-ui,sans-serif;margin:2rem;background:#f6f7f9;color:#222}
+h1{margin-bottom:.2rem}h2{margin-top:2rem}
+.meta{color:#666;margin-bottom:1.5rem}
+.kpis{display:flex;gap:1rem;margin:1rem 0;flex-wrap:wrap}
+.kpi{background:#fff;border-radius:8px;padding:1rem 1.5rem;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.kpi b{display:block;font-size:1.6rem}.kpi span{color:#666;font-size:.8rem}
+table{border-collapse:collapse;width:100%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.08);margin-bottom:1rem}
+th,td{padding:.45rem .7rem;border-bottom:1px solid #e5e7eb;text-align:left;font-size:.83rem}
+th{background:#111827;color:#fff}
+tr:hover td{background:#f0f4ff}
+td.total{text-align:right}
+.mono{font-family:Consolas,monospace;font-size:.78rem}
+.none{color:#bbb}
+.small{font-size:.8rem;color:#666}
+</style>
+</head>
+<body>
+<h1>Read-Time Projection (schema-less configData)</h1>
+<p class="meta">Generated 2026-08-23T00:02:49.425Z &middot; collections sampled: Pets, MiscItems, Booths, Charms</p>
+<div class="kpis">
+<div class="kpi"><b>163</b><span>projected item views</span></div>
+<div class="kpi"><b>30</b><span>distinct raw configData keys seen</span></div>
+</div>
+<p class="small">Promoted columns: displayName, rarity, obtainable, tradable, huge. Top raw keys remaining behind (candidates for <code>extraConfig</code>):</p>
+<table><thead><tr><th>Raw key</th><th>Occurrences</th></tr></thead><tbody>
+<tr><td class="mono">Icon</td><td class="total">113</td></tr>
+<tr><td class="mono">Rarity</td><td class="total">100</td></tr>
+<tr><td class="mono">DisplayName</td><td class="total">100</td></tr>
+<tr><td class="mono">Desc</td><td class="total">100</td></tr>
+<tr><td class="mono">goldenThumbnail</td><td class="total">50</td></tr>
+<tr><td class="mono">indexObtainable</td><td class="total">50</td></tr>
+<tr><td class="mono">huge</td><td class="total">50</td></tr>
+<tr><td class="mono">name</td><td class="total">50</td></tr>
+<tr><td class="mono">indexDesc</td><td class="total">50</td></tr>
+<tr><td class="mono">thumbnail</td><td class="total">50</td></tr>
+<tr><td class="mono">rarity</td><td class="total">50</td></tr>
+<tr><td class="mono">InventoryTags</td><td class="total">50</td></tr>
+<tr><td class="mono">Model</td><td class="total">50</td></tr>
+<tr><td class="mono">Tradable</td><td class="total">33</td></tr>
+<tr><td class="mono">fly</td><td class="total">15</td></tr>
+<tr><td class="mono">BaseTier</td><td class="total">13</td></tr>
+<tr><td class="mono">Tiers</td><td class="total">13</td></tr>
+<tr><td class="mono">MaxTier</td><td class="total">13</td></tr>
+<tr><td class="mono">animations</td><td class="total">6</td></tr>
+<tr><td class="mono">ProductId</td><td class="total">6</td></tr>
+</tbody></table>
+<h2 style="margin-top:1.5rem">Sample projected views</h2>
+<table><thead><tr><th>Collection</th><th>Display name</th><th>Rarity</th><th>Tradable</th><th>Huge</th><th>Extra keys</th></tr></thead><tbody>
+<tr><td>Pets</td><td><b>Huge Cosmic Axolotl</b></td><td>Exclusive</td><td><span class="none">-</span></td><td>yes</td><td class="total">0</td></tr>
+<tr><td>Pets</td><td><b>Huge Sleipnir</b></td><td>Exclusive</td><td><span class="none">-</span></td><td>yes</td><td class="total">0</td></tr>
+<tr><td>Pets</td><td><b>Huge Floppa</b></td><td>Exclusive</td><td><span class="none">-</span></td><td>yes</td><td class="total">0</td></tr>
+<tr><td>Pets</td><td><b>Huge Chest Mimic</b></td><td>Exclusive</td><td><span class="none">-</span></td><td>yes</td><td class="total">0</td></tr>
+<tr><td>Pets</td><td><b>Huge Hell Rock</b></td><td>Exclusive</td><td><span class="none">-</span></td><td>yes</td><td class="total">0</td></tr>
+<tr><td>Pets</td><td><b>Huge Enchanted Deer</b></td><td>Exclusive</td><td><span class="none">-</span></td><td>yes</td><td class="total">0</td></tr>
+<tr><td>Pets</td><td><b>Huge Cyborg Capybara</b></td><td>Exclusive</td><td><span class="none">-</span></td><td>yes</td><td class="total">1</td></tr>
+<tr><td>Pets</td><td><b>Huge Pirate Parrot</b></td><td>Exclusive</td><td><span class="none">-</span></td><td>yes</td><td class="total">1</td></tr>
+<tr><td>Pets</td><td><b>Huge Skeleton</b></td><td>Exclusive</td><td><span class="none">-</span></td><td>yes</td><td class="total">0</td></tr>
+<tr><td>Pets</td><td><b>Huge Cheerful Yeti</b></td><td>Exclusive</td><td><span class="none">-</span></td><td>yes</td><td class="total">0</td></tr>
+<tr><td>Pets</td><td><b>Huge Sapphire Phoenix</b></td><td>Exclusive</td><td><span class="none">-</span></td><td>yes</td><td class="total">1</td></tr>
+<tr><td>Pets</td><td><b>Huge Sun Angelus</b></td><td>Exclusive</td><td><span class="none">-</span></td><td>yes</td><td class="total">2</td></tr>
+<tr><td>Pets</td><td><b>Huge Sandcastle Cat</b></td><td>Exclusive</td><td><span class="none">-</span></td><td>yes</td><td class="total">0</td></tr>
+<tr><td>Pets</td><td><b>Huge Ducky</b></td><td>Exclusive</td><td><span class="none">-</span></td><td>yes</td><td class="total">0</td></tr>
+<tr><td>Pets</td><td><b>Huge Monkey</b></td><td>Exclusive</td><td><span class="none">-</span></td><td>yes</td><td class="total">0</td></tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,33 @@
+{
+    "status": "ok",
+    "data": [
+        {
+            "configName": "Sprinkler | Breakable Sprinkler",
+            "category": "Sprinklers",
+            "configData": {
+                "Rarity": {
+                    "RarityNumber": 5,
+                    "Lootbag": null,
+                    "_id": "Mythical",
+                    "Color": null,
+                    "DisplayName": "Mythical",
+                    "Message": null,
+                    "ItemSlot": null,
+                    "Gradient": null,
+                    "Announce": false,
+                    "_script": null
+                },
+                "Color": "#E7F214",
+                "Duration": 300,
+                "Desc": "Place in an area to increase breakable respawn rate by 50%! Lasts 5 minutes!",
+                "Name": "Sprinkler",
+                "Model": null,
+                "Icon": "rbxassetid://16467241128"
+            },
+            "dateModified": "2025-07-05T23:28:48.749Z",
+            "dateCreated": null,
+            "collection": "Sprinklers",
+            "hashShort": "e8bf716c93329637"
+        }
+    ]
+}

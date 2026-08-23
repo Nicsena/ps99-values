@@ -1,0 +1,343 @@
+{
+    "status": "ok",
+    "data": [
+        {
+            "configName": "FishingRod | Wooden Fishing Rod",
+            "category": "FishingRods",
+            "configData": {
+                "FishingChance": 0.75,
+                "FishingOdds": [
+                    [
+                        "Basic",
+                        95
+                    ],
+                    [
+                        "Legendary",
+                        5
+                    ]
+                ],
+                "FishingCurrencyMultiplier": 1.2,
+                "DisplayName": "Wooden Fishing Rod",
+                "LineColor": null,
+                "AssociatedItemID": "Wooden Fishing Rod",
+                "Model": null,
+                "MinFishingTime": 2,
+                "FishingGameSpeedMultiplier": 1,
+                "Icon": "rbxassetid://16028878115",
+                "BarSize": 0.5
+            },
+            "dateModified": "2025-07-05T23:29:23.234Z",
+            "dateCreated": null,
+            "collection": "FishingRods",
+            "hashShort": "d99efe6e485cbfe8"
+        },
+        {
+            "configName": "FishingRod | Sturdy Fishing Rod",
+            "category": "FishingRods",
+            "configData": {
+                "FishingChance": 0.75,
+                "FishingOdds": [
+                    [
+                        "Basic",
+                        93
+                    ],
+                    [
+                        "Legendary",
+                        7
+                    ]
+                ],
+                "FishingCurrencyMultiplier": 7.5,
+                "Model": null,
+                "DisplayName": "Sturdy Fishing Rod",
+                "LineColor": null,
+                "AssociatedItemID": "Sturdy Fishing Rod",
+                "MerchantSalePrice": 100,
+                "MinFishingTime": 1.9,
+                "FishingGameSpeedMultiplier": 0.975,
+                "Icon": "rbxassetid://16028878219",
+                "BarSize": 0.4
+            },
+            "dateModified": "2025-07-05T23:29:23.227Z",
+            "dateCreated": null,
+            "collection": "FishingRods",
+            "hashShort": "f4d73eddac1c5fd3"
+        },
+        {
+            "configName": "FishingRod | Advanced Fishing Rod",
+            "category": "FishingRods",
+            "configData": {
+                "FishingChance": 0.75,
+                "FishingOdds": [
+                    [
+                        "Basic",
+                        90
+                    ],
+                    [
+                        "Legendary",
+                        10
+                    ]
+                ],
+                "FishingCurrencyMultiplier": 15,
+                "Model": null,
+                "DisplayName": "Advanced Fishing Rod",
+                "LineColor": null,
+                "AssociatedItemID": "Advanced Fishing Rod",
+                "MerchantSalePrice": 2500,
+                "MinFishingTime": 1.85,
+                "FishingGameSpeedMultiplier": 0.925,
+                "Icon": "rbxassetid://16028879358",
+                "BarSize": 0.4
+            },
+            "dateModified": "2025-07-05T23:29:23.237Z",
+            "dateCreated": null,
+            "collection": "FishingRods",
+            "hashShort": "ef0933069f467d18"
+        },
+        {
+            "configName": "FishingRod | Pro Fishing Rod",
+            "category": "FishingRods",
+            "configData": {
+                "FishingChance": 0.75,
+                "FishingOdds": [
+                    [
+                        "Basic",
+                        70
+                    ],
+                    [
+                        "Legendary",
+                        30
+                    ]
+                ],
+                "FishingCurrencyMultiplier": 50,
+                "Model": null,
+                "DisplayName": "Iron Fishing Rod",
+                "LineColor": null,
+                "AssociatedItemID": "Pro Fishing Rod",
+                "MerchantSalePrice": 100000,
+                "MinFishingTime": 1.6,
+                "FishingGameSpeedMultiplier": 0.75,
+                "Icon": "rbxassetid://16028878776",
+                "BarSize": 0.4
+            },
+            "dateModified": "2025-07-05T23:29:23.234Z",
+            "dateCreated": null,
+            "collection": "FishingRods",
+            "hashShort": "00b715a29a5b4283"
+        },
+        {
+            "configName": "FishingRod | Super Fishing Rod",
+            "category": "FishingRods",
+            "configData": {
+                "FishingChance": 0.75,
+                "FishingOdds": [
+                    [
+                        "Basic",
+                        85
+                    ],
+                    [
+                        "Legendary",
+                        15
+                    ]
+                ],
+                "FishingCurrencyMultiplier": 25,
+                "Model": null,
+                "DisplayName": "Stone Fishing Rod",
+                "LineColor": null,
+                "AssociatedItemID": "Super Fishing Rod",
+                "MerchantSalePrice": 25000,
+                "MinFishingTime": 1.75,
+                "FishingGameSpeedMultiplier": 0.85,
+                "Icon": "rbxassetid://16028878295",
+                "BarSize": 0.4
+            },
+            "dateModified": "2025-07-05T23:29:23.231Z",
+            "dateCreated": null,
+            "collection": "FishingRods",
+            "hashShort": "f285b69e5a66ee83"
+        },
+        {
+            "configName": "FishingRod | Golden Fishing Rod",
+            "category": "FishingRods",
+            "configData": {
+                "FishingChance": 0.75,
+                "FishingOdds": [
+                    [
+                        "Basic",
+                        70
+                    ],
+                    [
+                        "Legendary",
+                        30
+                    ]
+                ],
+                "FishingCurrencyMultiplier": 50,
+                "DisplayName": "Golden Fishing Rod",
+                "LineColor": null,
+                "AssociatedItemID": "Golden Fishing Rod",
+                "Model": null,
+                "MinFishingTime": 1.6,
+                "FishingGameSpeedMultiplier": 0.75,
+                "Icon": "rbxassetid://16028878947",
+                "BarSize": 0.4
+            },
+            "dateModified": "2025-07-05T23:29:23.230Z",
+            "dateCreated": null,
+            "collection": "FishingRods",
+            "hashShort": "3fa854dad557da56"
+        },
+        {
+            "configName": "FishingRod | Platinum Fishing Rod",
+            "category": "FishingRods",
+            "configData": {
+                "FishingChance": 0.75,
+                "FishingOdds": [
+                    [
+                        "Advanced Basic",
+                        93
+                    ],
+                    [
+                        "Advanced Legendary",
+                        7
+                    ]
+                ],
+                "FishingCurrencyMultiplier": 150,
+                "Model": null,
+                "DisplayName": "Platinum Fishing Rod",
+                "LineColor": null,
+                "AssociatedItemID": "Platinum Fishing Rod",
+                "MerchantSalePrice": 40000,
+                "MinFishingTime": 2,
+                "FishingGameSpeedMultiplier": 0.975,
+                "Icon": "rbxassetid://16028878591",
+                "BarSize": 0.4
+            },
+            "dateModified": "2025-07-05T23:29:23.242Z",
+            "dateCreated": null,
+            "collection": "FishingRods",
+            "hashShort": "754ddd5ed957f0fb"
+        },
+        {
+            "configName": "FishingRod | Diamond Fishing Rod",
+            "category": "FishingRods",
+            "configData": {
+                "FishingChance": 0.75,
+                "FishingOdds": [
+                    [
+                        "Advanced Basic",
+                        70
+                    ],
+                    [
+                        "Advanced Legendary",
+                        30
+                    ]
+                ],
+                "FishingCurrencyMultiplier": 1400,
+                "DisplayName": "Diamond Fishing Rod",
+                "LineColor": null,
+                "AssociatedItemID": "Diamond Fishing Rod",
+                "Model": null,
+                "MinFishingTime": 1.6,
+                "FishingGameSpeedMultiplier": 0.75,
+                "Icon": "rbxassetid://16028879185",
+                "BarSize": 0.4
+            },
+            "dateModified": "2025-07-05T23:29:23.245Z",
+            "dateCreated": null,
+            "collection": "FishingRods",
+            "hashShort": "b8020f85ce04d46c"
+        },
+        {
+            "configName": "FishingRod | Emerald Fishing Rod",
+            "category": "FishingRods",
+            "configData": {
+                "FishingChance": 0.75,
+                "FishingOdds": [
+                    [
+                        "Advanced Basic",
+                        90
+                    ],
+                    [
+                        "Advanced Legendary",
+                        10
+                    ]
+                ],
+                "FishingCurrencyMultiplier": 350,
+                "Model": null,
+                "DisplayName": "Emerald Fishing Rod",
+                "LineColor": null,
+                "AssociatedItemID": "Emerald Fishing Rod",
+                "MerchantSalePrice": 150000,
+                "MinFishingTime": 1.9,
+                "FishingGameSpeedMultiplier": 0.925,
+                "Icon": "rbxassetid://16028879073",
+                "BarSize": 0.4
+            },
+            "dateModified": "2025-07-05T23:29:23.244Z",
+            "dateCreated": null,
+            "collection": "FishingRods",
+            "hashShort": "e9ffc804f26082f8"
+        },
+        {
+            "configName": "FishingRod | Sapphire Fishing Rod",
+            "category": "FishingRods",
+            "configData": {
+                "FishingChance": 0.75,
+                "FishingOdds": [
+                    [
+                        "Advanced Basic",
+                        85
+                    ],
+                    [
+                        "Advanced Legendary",
+                        15
+                    ]
+                ],
+                "FishingCurrencyMultiplier": 700,
+                "Model": null,
+                "DisplayName": "Sapphire Fishing Rod",
+                "LineColor": null,
+                "AssociatedItemID": "Sapphire Fishing Rod",
+                "MerchantSalePrice": 425000,
+                "MinFishingTime": 1.75,
+                "FishingGameSpeedMultiplier": 0.85,
+                "Icon": "rbxassetid://16028878380",
+                "BarSize": 0.4
+            },
+            "dateModified": "2025-07-05T23:29:23.226Z",
+            "dateCreated": null,
+            "collection": "FishingRods",
+            "hashShort": "889a882353085ee1"
+        },
+        {
+            "configName": "FishingRod | Amethyst Fishing Rod",
+            "category": "FishingRods",
+            "configData": {
+                "FishingChance": 0.75,
+                "FishingOdds": [
+                    [
+                        "Advanced Basic",
+                        70
+                    ],
+                    [
+                        "Advanced Legendary",
+                        30
+                    ]
+                ],
+                "FishingCurrencyMultiplier": 1400,
+                "Model": null,
+                "DisplayName": "Amethyst Fishing Rod",
+                "LineColor": null,
+                "AssociatedItemID": "Amethyst Fishing Rod",
+                "MerchantSalePrice": 2250000,
+                "MinFishingTime": 1.6,
+                "FishingGameSpeedMultiplier": 0.75,
+                "Icon": "rbxassetid://16028879272",
+                "BarSize": 0.4
+            },
+            "dateModified": "2025-07-05T23:29:23.239Z",
+            "dateCreated": null,
+            "collection": "FishingRods",
+            "hashShort": "5940d226f6627eb2"
+        }
+    ]
+}

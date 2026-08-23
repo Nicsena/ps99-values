@@ -1,0 +1,6340 @@
+{
+    "approach": "name matching: spec-driven items vs rap + exists",
+    "totals": {
+        "items": 3909,
+        "itemsWithRap": 3271,
+        "itemsWithExists": 3404,
+        "rapEntriesTotal": 14192,
+        "existsEntriesTotal": 17626,
+        "unmatchedRapIds": 516,
+        "unmatchedExistsIds": 678,
+        "crossCollectionNameCollisions": 28
+    },
+    "perCollection": [
+        {
+            "collection": "Boosts",
+            "items": 42,
+            "itemsWithRap": 2,
+            "itemsWithExists": 2,
+            "rapVariantRows": 4,
+            "existsVariantRows": 4,
+            "coveragePct": 5
+        },
+        {
+            "collection": "Booths",
+            "items": 138,
+            "itemsWithRap": 0,
+            "itemsWithExists": 0,
+            "rapVariantRows": 0,
+            "existsVariantRows": 0,
+            "coveragePct": 0
+        },
+        {
+            "collection": "Boxes",
+            "items": 1,
+            "itemsWithRap": 0,
+            "itemsWithExists": 0,
+            "rapVariantRows": 0,
+            "existsVariantRows": 0,
+            "coveragePct": 0
+        },
+        {
+            "collection": "CardItems",
+            "items": 59,
+            "itemsWithRap": 59,
+            "itemsWithExists": 59,
+            "rapVariantRows": 287,
+            "existsVariantRows": 310,
+            "coveragePct": 100
+        },
+        {
+            "collection": "Charms",
+            "items": 13,
+            "itemsWithRap": 13,
+            "itemsWithExists": 13,
+            "rapVariantRows": 67,
+            "existsVariantRows": 69,
+            "coveragePct": 100
+        },
+        {
+            "collection": "Fruits",
+            "items": 7,
+            "itemsWithRap": 6,
+            "itemsWithExists": 6,
+            "rapVariantRows": 21,
+            "existsVariantRows": 26,
+            "coveragePct": 86
+        },
+        {
+            "collection": "Hoverboards",
+            "items": 129,
+            "itemsWithRap": 8,
+            "itemsWithExists": 10,
+            "rapVariantRows": 15,
+            "existsVariantRows": 17,
+            "coveragePct": 6
+        },
+        {
+            "collection": "Lootboxes",
+            "items": 104,
+            "itemsWithRap": 72,
+            "itemsWithExists": 72,
+            "rapVariantRows": 72,
+            "existsVariantRows": 72,
+            "coveragePct": 69
+        },
+        {
+            "collection": "MiscItems",
+            "items": 322,
+            "itemsWithRap": 128,
+            "itemsWithExists": 223,
+            "rapVariantRows": 139,
+            "existsVariantRows": 238,
+            "coveragePct": 40
+        },
+        {
+            "collection": "Pets",
+            "items": 3037,
+            "itemsWithRap": 2954,
+            "itemsWithExists": 2984,
+            "rapVariantRows": 12697,
+            "existsVariantRows": 15651,
+            "coveragePct": 97
+        },
+        {
+            "collection": "Potions",
+            "items": 8,
+            "itemsWithRap": 8,
+            "itemsWithExists": 8,
+            "rapVariantRows": 97,
+            "existsVariantRows": 99,
+            "coveragePct": 100
+        },
+        {
+            "collection": "Seeds",
+            "items": 4,
+            "itemsWithRap": 0,
+            "itemsWithExists": 0,
+            "rapVariantRows": 0,
+            "existsVariantRows": 0,
+            "coveragePct": 0
+        },
+        {
+            "collection": "Shovels",
+            "items": 11,
+            "itemsWithRap": 2,
+            "itemsWithExists": 6,
+            "rapVariantRows": 2,
+            "existsVariantRows": 6,
+            "coveragePct": 18
+        },
+        {
+            "collection": "Sprinklers",
+            "items": 1,
+            "itemsWithRap": 0,
+            "itemsWithExists": 0,
+            "rapVariantRows": 0,
+            "existsVariantRows": 0,
+            "coveragePct": 0
+        },
+        {
+            "collection": "Ultimates",
+            "items": 11,
+            "itemsWithRap": 10,
+            "itemsWithExists": 11,
+            "rapVariantRows": 15,
+            "existsVariantRows": 16,
+            "coveragePct": 91
+        },
+        {
+            "collection": "XPPotions",
+            "items": 12,
+            "itemsWithRap": 0,
+            "itemsWithExists": 1,
+            "rapVariantRows": 0,
+            "existsVariantRows": 3,
+            "coveragePct": 0
+        },
+        {
+            "collection": "ZoneFlags",
+            "items": 10,
+            "itemsWithRap": 9,
+            "itemsWithExists": 9,
+            "rapVariantRows": 9,
+            "existsVariantRows": 9,
+            "coveragePct": 90
+        }
+    ],
+    "unmatchedRap": [
+        {
+            "id": "Lucky Eggs",
+            "category": "Enchant",
+            "count": 10
+        },
+        {
+            "id": "Strong Pets",
+            "category": "Enchant",
+            "count": 10
+        },
+        {
+            "id": "Tap Power",
+            "category": "Enchant",
+            "count": 10
+        },
+        {
+            "id": "Arctic Fox",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Artichoke Armadillo",
+            "category": "Tower",
+            "count": 6
+        },
+        {
+            "id": "Beet Beaver",
+            "category": "Tower",
+            "count": 6
+        },
+        {
+            "id": "Corn Minotaur",
+            "category": "Tower",
+            "count": 6
+        },
+        {
+            "id": "Frost Dragon",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Huge Firefighter Dalmation",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Huge Pinata Dog",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Huge Pinata Monkey",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Huge Rainbow Slime",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Huge Valentines Bear",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Leek Lizard",
+            "category": "Tower",
+            "count": 6
+        },
+        {
+            "id": "Pinata Cat",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Pinata Dog",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Pinata Monkey",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Valentines Axolotl",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Valentines Bear",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Valentines Bee",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Valentines Owl",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Valentines Sloth",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Wistera Wyvern",
+            "category": "Tower",
+            "count": 6
+        },
+        {
+            "id": "Astral Axolotl",
+            "category": "Pet",
+            "count": 5
+        },
+        {
+            "id": "Garlic Chick",
+            "category": "Tower",
+            "count": 5
+        },
+        {
+            "id": "Huge Valentines Unicorn",
+            "category": "Pet",
+            "count": 5
+        },
+        {
+            "id": "Tomato Turtle",
+            "category": "Tower",
+            "count": 5
+        },
+        {
+            "id": "Basic",
+            "category": "CropSeed",
+            "count": 4
+        },
+        {
+            "id": "Divine",
+            "category": "CropSeed",
+            "count": 4
+        },
+        {
+            "id": "Exotic",
+            "category": "CropSeed",
+            "count": 4
+        },
+        {
+            "id": "Huge Dominus Lucki",
+            "category": "Pet",
+            "count": 4
+        },
+        {
+            "id": "Huge Valentines Axolotl",
+            "category": "Pet",
+            "count": 4
+        },
+        {
+            "id": "Huge Valentines Dominus",
+            "category": "Pet",
+            "count": 4
+        },
+        {
+            "id": "Mr Krabs",
+            "category": "Pet",
+            "count": 4
+        },
+        {
+            "id": "Mythic",
+            "category": "CropSeed",
+            "count": 4
+        },
+        {
+            "id": "Potted Puppy",
+            "category": "Tower",
+            "count": 4
+        },
+        {
+            "id": "Rare",
+            "category": "CropSeed",
+            "count": 4
+        },
+        {
+            "id": "Shadow Panther",
+            "category": "Pet",
+            "count": 4
+        },
+        {
+            "id": "Tech Cowboy Cat",
+            "category": "Pet",
+            "count": 4
+        },
+        {
+            "id": "Tech Cowboy Dog",
+            "category": "Pet",
+            "count": 4
+        },
+        {
+            "id": "Valentines Angelus",
+            "category": "Pet",
+            "count": 4
+        },
+        {
+            "id": "Valentines Cat",
+            "category": "Pet",
+            "count": 4
+        },
+        {
+            "id": "Valentines Dominus",
+            "category": "Pet",
+            "count": 4
+        },
+        {
+            "id": "Valentines Unicorn",
+            "category": "Pet",
+            "count": 4
+        },
+        {
+            "id": "Bloom Wyrm",
+            "category": "Tower",
+            "count": 3
+        },
+        {
+            "id": "Broccoli Dino",
+            "category": "Tower",
+            "count": 3
+        },
+        {
+            "id": "Carrot Crocodile",
+            "category": "Tower",
+            "count": 3
+        },
+        {
+            "id": "Diamond",
+            "category": "Seed",
+            "count": 3
+        },
+        {
+            "id": "Factory Coins Booster",
+            "category": "Consumable",
+            "count": 3
+        },
+        {
+            "id": "Factory Damage Booster",
+            "category": "Consumable",
+            "count": 3
+        },
+        {
+            "id": "Factory Speed Booster",
+            "category": "Consumable",
+            "count": 3
+        },
+        {
+            "id": "Fertilizer",
+            "category": "Consumable",
+            "count": 3
+        },
+        {
+            "id": "Fiesta Maze Damage Booster",
+            "category": "Consumable",
+            "count": 3
+        },
+        {
+            "id": "Fiesta Maze XP Booster",
+            "category": "Consumable",
+            "count": 3
+        },
+        {
+            "id": "Garden Coin Bloom",
+            "category": "Consumable",
+            "count": 3
+        },
+        {
+            "id": "Garden Credit Bloom",
+            "category": "Consumable",
+            "count": 3
+        },
+        {
+            "id": "Growth Cocktail",
+            "category": "Consumable",
+            "count": 3
+        },
+        {
+            "id": "Hotdog",
+            "category": "Hoverboard",
+            "count": 3
+        },
+        {
+            "id": "Huge Mr Krabs",
+            "category": "Pet",
+            "count": 3
+        },
+        {
+            "id": "Huge Pinata Cat",
+            "category": "Pet",
+            "count": 3
+        },
+        {
+            "id": "Huge Valentines Angelus",
+            "category": "Pet",
+            "count": 3
+        },
+        {
+            "id": "Huge Valentines Cat",
+            "category": "Pet",
+            "count": 3
+        },
+        {
+            "id": "Magnet",
+            "category": "Enchant",
+            "count": 3
+        },
+        {
+            "id": "Pizza",
+            "category": "Booth",
+            "count": 3
+        },
+        {
+            "id": "Rain",
+            "category": "Consumable",
+            "count": 3
+        },
+        {
+            "id": "Rainbow",
+            "category": "Fruit",
+            "count": 3
+        },
+        {
+            "id": "Rose Wolf",
+            "category": "Tower",
+            "count": 3
+        },
+        {
+            "id": "Shadow Dragon",
+            "category": "Pet",
+            "count": 3
+        },
+        {
+            "id": "Sunlight",
+            "category": "Consumable",
+            "count": 3
+        },
+        {
+            "id": "Throne",
+            "category": "Booth",
+            "count": 3
+        },
+        {
+            "id": "Titanic Valentines Axolotl",
+            "category": "Pet",
+            "count": 3
+        },
+        {
+            "id": "Turnip Hamster",
+            "category": "Tower",
+            "count": 3
+        },
+        {
+            "id": "Abstract",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Angel",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Art",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Astra",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Aura",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Autumn",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Balloon",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Barbell",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Basketball",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Blossom",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Blurred",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Booster",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Bubble",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Candy Cane",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Chest Luck Boost",
+            "category": "Consumable",
+            "count": 2
+        },
+        {
+            "id": "Clown",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Corrupt",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Cowboy Dog",
+            "category": "Pet",
+            "count": 2
+        },
+        {
+            "id": "Crayon",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Daydream",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Easter Chest Points Booster",
+            "category": "Consumable",
+            "count": 2
+        },
+        {
+            "id": "Easter Chest Tokens Booster",
+            "category": "Consumable",
+            "count": 2
+        },
+        {
+            "id": "Electric Guitar",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Elemental",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Elf",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Evil",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Forcefield",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Fragmented",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Garden Golem",
+            "category": "Tower",
+            "count": 2
+        },
+        {
+            "id": "Gingerbread",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Glitched",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Good vs Evil",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Gummy",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Hacker",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Hellfire",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Hologram",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Holographic",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Ice Cream",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Jelly",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Kitsune",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Lucky Egg Booster",
+            "category": "Consumable",
+            "count": 2
+        },
+        {
+            "id": "Lucky Raid Damage Booster",
+            "category": "Consumable",
+            "count": 2
+        },
+        {
+            "id": "Lucky Raid Damage Booster V2",
+            "category": "Consumable",
+            "count": 2
+        },
+        {
+            "id": "Lucky Raid XP Booster",
+            "category": "Consumable",
+            "count": 2
+        },
+        {
+            "id": "Lucky Raid XP Booster V2",
+            "category": "Consumable",
+            "count": 2
+        },
+        {
+            "id": "Lunar",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Marble",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Millionaire",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Mining Coins Booster",
+            "category": "Consumable",
+            "count": 2
+        },
+        {
+            "id": "Mining Damage Booster",
+            "category": "Consumable",
+            "count": 2
+        },
+        {
+            "id": "Mining Speed Booster",
+            "category": "Consumable",
+            "count": 2
+        },
+        {
+            "id": "Mosaic",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Mushroom",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Night Terror",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Ninja",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Obsidian",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Patchwork",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Pencil",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Pet Games",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Pinata",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Police",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Popcat",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Pot of Gold",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Rave",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Reversed",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Rich",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Safety",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Samurai",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Sandcastle",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Silver",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Soccer",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Starry",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Strawberry",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Sunflower",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Tap Damage Booster",
+            "category": "Consumable",
+            "count": 2
+        },
+        {
+            "id": "Thunderstorm",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Tie Dye",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Ultimate",
+            "category": "XPPotion",
+            "count": 2
+        },
+        {
+            "id": "Unicorn",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Valentines",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Void",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Wicked",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "2024 New Years Gift",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "2025 New Years Gift",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "2026 New Years Gift",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Abyssal",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Abyssal Turtle",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Active Huge Egg",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Active Huge Overload",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Adventurer Lootbox",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Alien",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Amethyst Pickaxe",
+            "category": "Tool",
+            "count": 1
+        },
+        {
+            "id": "Angelic",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Arcade",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Arcade Angelus",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Arcade Egg 1",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Arcade Egg 2",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Arcade Egg 3",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Arcade Egg 4",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Arcade Egg 5",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Arcade Meebo in a Spaceship",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Backrooms Luck Booster",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Backrooms Speed Booster",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Backrooms Teleport Booster",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Basketball Egg",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Basketball Hoop",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Basketball Orb Frenzy",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Black Hole Cannon",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Blast",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Blurred Owl",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Boss Chest Mimic",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Boss Lucky Block",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Breakable Mayhem",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Breakable Sprinkler",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Buff Gym Egg",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Cannon Corruption",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Cannon Critical Booster",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Cannon Damage Booster",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Cannon Luck Booster",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Cannon Speed Booster",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Cardboard",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Cauldron",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Chest",
+            "category": "CropSeed",
+            "count": 1
+        },
+        {
+            "id": "Chest Breaker",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Christmas",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Chroma Balloon Corgi",
+            "category": "Pet",
+            "count": 1
+        },
+        {
+            "id": "Clan Gift 2",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Cleats",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Comet Dragon",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Comet Pickaxe",
+            "category": "Tool",
+            "count": 1
+        },
+        {
+            "id": "Confetti Cannon",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Coral",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Corruption",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Cosmic",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "Cosmic Basketball",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "Cosmic Basketball Egg",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Cracked Marble Clover",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Crystal Giraffe",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Crystal Key Lower Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Crystal Key Upper Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Cyborg Kitsune",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Dark Unit Egg",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Daycare",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Demolition Panda",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Demonic",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Detective Bunny",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Diamond Chest Mimic",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Diamond Gift Hunter",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Diamond Orb",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Diamond Pickaxe",
+            "category": "Tool",
+            "count": 1
+        },
+        {
+            "id": "Disco Ball Agony",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "DJ Shark",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Doodle",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "Double Coins",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Easter",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Easter Bunny",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "Easter Diamond Egg Booster",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Easter Heroic Chest",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Egg",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Electric Eel",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Empyrean",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Enchant",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Enchant Bundle",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Error",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Event Egg 1",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Event Kraken Fishing Rod",
+            "category": "Tool",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 1",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 10",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 11",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 12",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 13",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 14",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 15",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 16",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 17",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 18",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 19",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 2",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 20",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 21",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 22",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 23",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 24",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 25",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 26",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 27",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 28",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 29",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 3",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 30",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 31",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 32",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 33",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 34",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 35",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 36",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 37",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 38",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 39",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 4",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 40",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 41",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 42",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 43",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 44",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 45",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 46",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 47",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 48",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 49",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 5",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 50",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 51",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 52",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 53",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 54",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 55",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 56",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 57",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 58",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 59",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 6",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 60",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 61",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 62",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 63",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 64",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 65",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 66",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 67",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 7",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 8",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 9",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exotic Pet",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Explosive",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Fantasy Key Lower Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Fantasy Key Upper Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Fiesta",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "Fiesta Boss Key Lower Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Fiesta Boss Key Upper Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Fire Dragon",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "Fishing",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Flag Bundle",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Flamethrower Spider",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Forged Armadillo",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Fortune",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Frostbyte Griffin",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Fruit",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Fruit Bundle",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Fruity",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Galaxy",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Garden Diamond Egg Booster",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Gift",
+            "category": "Seed",
+            "count": 1
+        },
+        {
+            "id": "Glowy",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Gold",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Golden Cleats",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Good vs Evil Gift",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Gym Egg",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Gym Gloves",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Gym Shake",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Hacker Key Hunter",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Halloween Lucky Egg",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Halloween Trick or Treat Luck",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Happy Pets",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Haunted",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Helicopter Corgi",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "High Tech",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "Huge Hunter",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Huge Machine Egg 1",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Huge Machine Egg 2",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Huge Machine Egg 3",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Huge Machine Egg 4",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Huge Machine Egg 5",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Huge Machine Egg 6",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Hype Egg 2",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Hype Egg 3",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Insta Plant Capsule",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Jetpack Cat",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Kawaii",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Knight Chicken",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Large Christmas Present",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Large Enchant Bundle",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Large Potion Bundle",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Large Taps",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Lemonade",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Leprechaun Key V2",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Lightning Cannon",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Lightning Orb",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Lockpick A",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Lockpick B",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Lockpick C",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Lucky Block Breaker",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Lucky Noob Egg",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Lucky Raid Boss Key Lower Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Lucky Raid Boss Key Lower Half V2",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Lucky Raid Boss Key Upper Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Lucky Raid Boss Key Upper Half V2",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Lucky Raid Boss Key V2",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Lucky Tile",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "M-10",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "M10",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Magic Orb",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Magma Unit Egg",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Massive Comet",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Mastery",
+            "category": "XPPotion",
+            "count": 1
+        },
+        {
+            "id": "Mechanical Griffin",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Medium Christmas Present",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Mega Bloom Egg",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Mega Boost Chest",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Mega Chest Breaker",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Mega Thorn Egg",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Merchant",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Midas Touch",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Midnight",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Mini Chest Fortune",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Mini Lucky Block",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Mini Pinata",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Mining Bejeweled TNT Crate",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Mining Bomb",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Mining Nuclear TNT Crate",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Mining TNT",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Mining TNT Crate",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Molten Pickaxe",
+            "category": "Tool",
+            "count": 1
+        },
+        {
+            "id": "Money",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "MVP Key Lower Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "MVP Key Upper Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Nature Dragon",
+            "category": "Pet",
+            "count": 1
+        },
+        {
+            "id": "Neon Twilight",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Nightfall",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Nightmare Cat",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Nightmare Cyclops",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Nightmare Orb",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Ninja Dalmatian",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Nuclear",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Nuclear Cannon",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Nuclear Dominus",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Obsidian Pickaxe",
+            "category": "Tool",
+            "count": 1
+        },
+        {
+            "id": "Old Wizard Cat",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Ooze Dragon",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Oversized",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "Party Time",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Paw Print",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "Pet Token Boost",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Pinata Basher",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Pirate",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Pixel",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Polished Marble Clover",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Potion",
+            "category": "Seed",
+            "count": 1
+        },
+        {
+            "id": "Potion Bundle",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Potion Penguin",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Present",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Pristine Marble Clover",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Rainbow Eggs",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Red Present",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "Rich Corgi",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Rival Soccer Egg",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Ronin Piggy",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Rudolph",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "Ruler",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "Safari Monkey",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "School",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Secret Key Lower Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Secret Key Upper Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Series 1 Basic Gift",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Series 1 Epic Gift",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Series 1 Legendary Gift",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Series 1 Mythical Gift",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Series 1 Rare Gift",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Series 2 Basic Gift",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Series 2 Epic Gift",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Series 2 Legendary Gift",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Series 2 Mythical Gift",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Series 2 Rare Gift",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Series 3 Basic Gift",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Series 3 Epic Gift",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Series 3 Legendary Gift",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Series 3 Mythical Gift",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Series 3 Rare Gift",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Shadow Pegasus",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Shiny Hunter",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Shiny Supercharge",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Sleigh",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "Small",
+            "category": "Box",
+            "count": 1
+        },
+        {
+            "id": "Small Christmas Present",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Soccer Net",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Soccer Orb Frenzy",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Solar Pickaxe",
+            "category": "Tool",
+            "count": 1
+        },
+        {
+            "id": "Spring Diamond Egg Booster",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Spring Egg Token Booster",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Spring Hatch Speed Booster",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Spring Pink Rose Token",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Spring Raffle Ticket Booster",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Spring Red Tulip Token",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Spring Upgrade Token Booster",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Spring Yellow Sunflower Token",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Springy Shoes",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Starfall",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Steampunk",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "Summer",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Super Basketball Hoop",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Super Gym Gloves",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Super Gym Shake",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Super Hero Pack",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Super Lightning",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Super Magnet",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Super Shiny Hunter",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Super Soccer Net",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Super Springy Shoes",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Superior Chest Mimic",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Superior Wisdom",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Swift Taps",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Tap Teamwork",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Tech Key Lower Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Tech Key Upper Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Tech Samurai Axolotl",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Time Trial Gift 2",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Titanic",
+            "category": "XPPotion",
+            "count": 1
+        },
+        {
+            "id": "Titanic Christmas Present",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Titanic Fantasy Present",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Titanic Pinata Cat",
+            "category": "Pet",
+            "count": 1
+        },
+        {
+            "id": "Titanic Pink Balloon",
+            "category": "Pet",
+            "count": 1
+        },
+        {
+            "id": "Titanic Valentines Cat",
+            "category": "Pet",
+            "count": 1
+        },
+        {
+            "id": "TNT Capybara",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Torpedo Cat",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Tower Defense Gift 2",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Tower Defense Gift 3",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Tower Luck Booster",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Tower Stacking Booster",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Toy Bundle",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Treasure Hideout Key Lower Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Treasure Hideout Key Upper Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Trophy Soccer Egg",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Ultra Huge",
+            "category": "XPPotion",
+            "count": 1
+        },
+        {
+            "id": "Ultra Lucky Tile",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Ultra Pet Token Boost",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Umbrella Elephant",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Valentines Present",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Vampire",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Void Key Lower Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Void Key Upper Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Water Gun",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Web",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "X-Large Christmas Present",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Zeus Bear",
+            "category": "Tower",
+            "count": 1
+        }
+    ],
+    "unmatchedExists": [
+        {
+            "id": "Astral Axolotl",
+            "category": "Pet",
+            "count": 12
+        },
+        {
+            "id": "Lucky Eggs",
+            "category": "Enchant",
+            "count": 10
+        },
+        {
+            "id": "Strong Pets",
+            "category": "Enchant",
+            "count": 10
+        },
+        {
+            "id": "Tap Power",
+            "category": "Enchant",
+            "count": 10
+        },
+        {
+            "id": "Pixel Agony",
+            "category": "EggFarm",
+            "count": 7
+        },
+        {
+            "id": "Pixel Angelus",
+            "category": "EggFarm",
+            "count": 7
+        },
+        {
+            "id": "Pixel Bee",
+            "category": "EggFarm",
+            "count": 7
+        },
+        {
+            "id": "Pixel Bunny",
+            "category": "EggFarm",
+            "count": 7
+        },
+        {
+            "id": "Pixel Cat",
+            "category": "EggFarm",
+            "count": 7
+        },
+        {
+            "id": "Pixel Chick",
+            "category": "EggFarm",
+            "count": 7
+        },
+        {
+            "id": "Pixel Corgi",
+            "category": "EggFarm",
+            "count": 7
+        },
+        {
+            "id": "Pixel Demon",
+            "category": "EggFarm",
+            "count": 7
+        },
+        {
+            "id": "Pixel Dominus Astra",
+            "category": "EggFarm",
+            "count": 7
+        },
+        {
+            "id": "Pixel Goblin",
+            "category": "EggFarm",
+            "count": 7
+        },
+        {
+            "id": "Pixel Griffin",
+            "category": "EggFarm",
+            "count": 7
+        },
+        {
+            "id": "Pixel M-2 PROTOTYPE",
+            "category": "EggFarm",
+            "count": 7
+        },
+        {
+            "id": "Pixel Monkey",
+            "category": "EggFarm",
+            "count": 7
+        },
+        {
+            "id": "Pixel Piggy",
+            "category": "EggFarm",
+            "count": 7
+        },
+        {
+            "id": "Pixel Tiger",
+            "category": "EggFarm",
+            "count": 7
+        },
+        {
+            "id": "Pixel Wolf",
+            "category": "EggFarm",
+            "count": 7
+        },
+        {
+            "id": "Pixel Yeti",
+            "category": "EggFarm",
+            "count": 7
+        },
+        {
+            "id": "Abyssal Jellyfish",
+            "category": "Catch",
+            "count": 6
+        },
+        {
+            "id": "Arctic Fox",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Artichoke Armadillo",
+            "category": "Tower",
+            "count": 6
+        },
+        {
+            "id": "Atlantean Jellyfish",
+            "category": "Catch",
+            "count": 6
+        },
+        {
+            "id": "Beet Beaver",
+            "category": "Tower",
+            "count": 6
+        },
+        {
+            "id": "Bloom Wyrm",
+            "category": "Tower",
+            "count": 6
+        },
+        {
+            "id": "Blurred Axolotl",
+            "category": "Catch",
+            "count": 6
+        },
+        {
+            "id": "Broccoli Dino",
+            "category": "Tower",
+            "count": 6
+        },
+        {
+            "id": "Carrot Crocodile",
+            "category": "Tower",
+            "count": 6
+        },
+        {
+            "id": "Corn Minotaur",
+            "category": "Tower",
+            "count": 6
+        },
+        {
+            "id": "Cowboy Dog",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Frost Dragon",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Garden Golem",
+            "category": "Tower",
+            "count": 6
+        },
+        {
+            "id": "Garlic Chick",
+            "category": "Tower",
+            "count": 6
+        },
+        {
+            "id": "Huge Firefighter Dalmation",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Huge Pinata Dog",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Huge Pinata Monkey",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Huge Rainbow Slime",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Huge Valentines Bear",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Huge Valentines Unicorn",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Leek Lizard",
+            "category": "Tower",
+            "count": 6
+        },
+        {
+            "id": "Pinata Cat",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Pinata Dog",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Pinata Monkey",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Potted Puppy",
+            "category": "Tower",
+            "count": 6
+        },
+        {
+            "id": "Rose Wolf",
+            "category": "Tower",
+            "count": 6
+        },
+        {
+            "id": "Shadow Dragon",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Shadow Panther",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Storm Axolotl",
+            "category": "Catch",
+            "count": 6
+        },
+        {
+            "id": "Tech Cowboy Cat",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Tech Cowboy Dog",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Tomato Turtle",
+            "category": "Tower",
+            "count": 6
+        },
+        {
+            "id": "Turnip Hamster",
+            "category": "Tower",
+            "count": 6
+        },
+        {
+            "id": "Valentines Axolotl",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Valentines Bear",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Valentines Bee",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Valentines Owl",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Valentines Sloth",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Valentines Unicorn",
+            "category": "Pet",
+            "count": 6
+        },
+        {
+            "id": "Wistera Wyvern",
+            "category": "Tower",
+            "count": 6
+        },
+        {
+            "id": "Huge Dominus Lucki",
+            "category": "Pet",
+            "count": 5
+        },
+        {
+            "id": "Huge Pinata Cat",
+            "category": "Pet",
+            "count": 5
+        },
+        {
+            "id": "Basic",
+            "category": "CropSeed",
+            "count": 4
+        },
+        {
+            "id": "Diamond",
+            "category": "Seed",
+            "count": 4
+        },
+        {
+            "id": "Divine",
+            "category": "CropSeed",
+            "count": 4
+        },
+        {
+            "id": "Exotic",
+            "category": "CropSeed",
+            "count": 4
+        },
+        {
+            "id": "Huge Mr Krabs",
+            "category": "Pet",
+            "count": 4
+        },
+        {
+            "id": "Huge Valentines Axolotl",
+            "category": "Pet",
+            "count": 4
+        },
+        {
+            "id": "Huge Valentines Cat",
+            "category": "Pet",
+            "count": 4
+        },
+        {
+            "id": "Huge Valentines Dominus",
+            "category": "Pet",
+            "count": 4
+        },
+        {
+            "id": "Mr Krabs",
+            "category": "Pet",
+            "count": 4
+        },
+        {
+            "id": "Mythic",
+            "category": "CropSeed",
+            "count": 4
+        },
+        {
+            "id": "Rainbow",
+            "category": "Fruit",
+            "count": 4
+        },
+        {
+            "id": "Rare",
+            "category": "CropSeed",
+            "count": 4
+        },
+        {
+            "id": "Titanic Valentines Axolotl",
+            "category": "Pet",
+            "count": 4
+        },
+        {
+            "id": "Titanic Valentines Cat",
+            "category": "Pet",
+            "count": 4
+        },
+        {
+            "id": "Valentines Angelus",
+            "category": "Pet",
+            "count": 4
+        },
+        {
+            "id": "Valentines Cat",
+            "category": "Pet",
+            "count": 4
+        },
+        {
+            "id": "Valentines Dominus",
+            "category": "Pet",
+            "count": 4
+        },
+        {
+            "id": "Factory Coins Booster",
+            "category": "Consumable",
+            "count": 3
+        },
+        {
+            "id": "Factory Damage Booster",
+            "category": "Consumable",
+            "count": 3
+        },
+        {
+            "id": "Factory Speed Booster",
+            "category": "Consumable",
+            "count": 3
+        },
+        {
+            "id": "Fertilizer",
+            "category": "Consumable",
+            "count": 3
+        },
+        {
+            "id": "Fiesta Maze Damage Booster",
+            "category": "Consumable",
+            "count": 3
+        },
+        {
+            "id": "Fiesta Maze XP Booster",
+            "category": "Consumable",
+            "count": 3
+        },
+        {
+            "id": "Garden Coin Bloom",
+            "category": "Consumable",
+            "count": 3
+        },
+        {
+            "id": "Garden Credit Bloom",
+            "category": "Consumable",
+            "count": 3
+        },
+        {
+            "id": "Growth Cocktail",
+            "category": "Consumable",
+            "count": 3
+        },
+        {
+            "id": "Hotdog",
+            "category": "Hoverboard",
+            "count": 3
+        },
+        {
+            "id": "Huge Valentines Angelus",
+            "category": "Pet",
+            "count": 3
+        },
+        {
+            "id": "Instant Fiesta Maze XP Booster",
+            "category": "Consumable",
+            "count": 3
+        },
+        {
+            "id": "Magnet",
+            "category": "Enchant",
+            "count": 3
+        },
+        {
+            "id": "Pizza",
+            "category": "Hoverboard",
+            "count": 3
+        },
+        {
+            "id": "Rain",
+            "category": "Consumable",
+            "count": 3
+        },
+        {
+            "id": "Sunlight",
+            "category": "Consumable",
+            "count": 3
+        },
+        {
+            "id": "Throne",
+            "category": "Booth",
+            "count": 3
+        },
+        {
+            "id": "Titanic Pink Balloon",
+            "category": "Pet",
+            "count": 3
+        },
+        {
+            "id": "Abstract",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Alien",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Angel",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Art",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Astra",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Aura",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Autumn",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Balloon",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Barbell",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Basketball",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Blossom",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Blurred",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Booster",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Bubble",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Candy Cane",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Chest Luck Boost",
+            "category": "Consumable",
+            "count": 2
+        },
+        {
+            "id": "Clown",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Corrupt",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Crayon",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Daydream",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Easter Chest Points Booster",
+            "category": "Consumable",
+            "count": 2
+        },
+        {
+            "id": "Easter Chest Tokens Booster",
+            "category": "Consumable",
+            "count": 2
+        },
+        {
+            "id": "Electric Guitar",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Elemental",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Elf",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Evil",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Fishing",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Forcefield",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Fragmented",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Gift",
+            "category": "Seed",
+            "count": 2
+        },
+        {
+            "id": "Gingerbread",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Glitched",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Good vs Evil",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Gummy",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Hacker",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Hellfire",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Hologram",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Holographic",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Ice Cream",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Instant Lucky Raid XP Booster",
+            "category": "Consumable",
+            "count": 2
+        },
+        {
+            "id": "Instant Lucky Raid XP Booster V2",
+            "category": "Consumable",
+            "count": 2
+        },
+        {
+            "id": "Jelly",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Kitsune",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Large Christmas Present",
+            "category": "Lootbox",
+            "count": 2
+        },
+        {
+            "id": "Lucky Egg Booster",
+            "category": "Consumable",
+            "count": 2
+        },
+        {
+            "id": "Lucky Raid Damage Booster",
+            "category": "Consumable",
+            "count": 2
+        },
+        {
+            "id": "Lucky Raid Damage Booster V2",
+            "category": "Consumable",
+            "count": 2
+        },
+        {
+            "id": "Lucky Raid XP Booster",
+            "category": "Consumable",
+            "count": 2
+        },
+        {
+            "id": "Lucky Raid XP Booster V2",
+            "category": "Consumable",
+            "count": 2
+        },
+        {
+            "id": "Lunar",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Marble",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Medium Christmas Present",
+            "category": "Lootbox",
+            "count": 2
+        },
+        {
+            "id": "Millionaire",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Mining Coins Booster",
+            "category": "Consumable",
+            "count": 2
+        },
+        {
+            "id": "Mining Damage Booster",
+            "category": "Consumable",
+            "count": 2
+        },
+        {
+            "id": "Mining Speed Booster",
+            "category": "Consumable",
+            "count": 2
+        },
+        {
+            "id": "Mosaic",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Mushroom",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Night Terror",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Ninja",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Obsidian",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Patchwork",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Pencil",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Pet Games",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Pinata",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Police",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Popcat",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Pot of Gold",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Potion",
+            "category": "Seed",
+            "count": 2
+        },
+        {
+            "id": "Rave",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Reversed",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Rich",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Safety",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Samurai",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Sandcastle",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Silver",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Small Christmas Present",
+            "category": "Lootbox",
+            "count": 2
+        },
+        {
+            "id": "Soccer",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Starry",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Strawberry",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Sunflower",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Tap Damage Booster",
+            "category": "Consumable",
+            "count": 2
+        },
+        {
+            "id": "Thunderstorm",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Tie Dye",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Titanic Christmas Present",
+            "category": "Lootbox",
+            "count": 2
+        },
+        {
+            "id": "Tower 10 Stack",
+            "category": "Consumable",
+            "count": 2
+        },
+        {
+            "id": "Ultimate",
+            "category": "XPPotion",
+            "count": 2
+        },
+        {
+            "id": "Unicorn",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Valentines",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "Void",
+            "category": "Hoverboard",
+            "count": 2
+        },
+        {
+            "id": "Wicked",
+            "category": "Booth",
+            "count": 2
+        },
+        {
+            "id": "X-Large Christmas Present",
+            "category": "Lootbox",
+            "count": 2
+        },
+        {
+            "id": "(TD) Blurred Owl",
+            "category": "Pet",
+            "count": 1
+        },
+        {
+            "id": "(TD) Crystal Giraffe",
+            "category": "Pet",
+            "count": 1
+        },
+        {
+            "id": "2024 New Years Gift",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "2025 New Years Gift",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "2026 New Years Gift",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Abyssal",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Abyssal Turtle",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Active Huge Egg",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Active Huge Overload",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Adventurer Lootbox",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Amethyst Pickaxe",
+            "category": "Pickaxe",
+            "count": 1
+        },
+        {
+            "id": "Angelic",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Anubis",
+            "category": "Pet",
+            "count": 1
+        },
+        {
+            "id": "Arcade",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Arcade Angelus",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Arcade Egg 1",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Arcade Egg 2",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Arcade Egg 3",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Arcade Egg 4",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Arcade Egg 5",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Arcade Meebo in a Spaceship",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Backrooms Crayon Key",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Backrooms Luck Booster",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Backrooms Speed Booster",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Backrooms Teleport Booster",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Basketball Egg",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Basketball Hoop",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Basketball Orb Frenzy",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "BasketballCoins",
+            "category": "Currency",
+            "count": 1
+        },
+        {
+            "id": "Bat Egg",
+            "category": "EggHalloween",
+            "count": 1
+        },
+        {
+            "id": "BIG Maskot",
+            "category": "Pet",
+            "count": 1
+        },
+        {
+            "id": "Black Hole Cannon",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Bladee",
+            "category": "Pet",
+            "count": 1
+        },
+        {
+            "id": "Blast",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Bling",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "BlockPartyCoins",
+            "category": "Currency",
+            "count": 1
+        },
+        {
+            "id": "Bluesteel Shovel",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Blurred Owl",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Boat 1",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Boat 2",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Boat 3",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Boat 4",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Boat 5",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Boat 6",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Boost Exchange Cape",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Boss Chest Mimic",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Boss Lucky Block",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Breakable Mayhem",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Breakable Sprinkler",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Breakables Cape",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "BreakoutBucks",
+            "category": "Currency",
+            "count": 1
+        },
+        {
+            "id": "BreakoutCoins",
+            "category": "Currency",
+            "count": 1
+        },
+        {
+            "id": "Bronze Pickaxe",
+            "category": "Pickaxe",
+            "count": 1
+        },
+        {
+            "id": "Bucket O' Chum",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Buff Gym Egg",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Cannon Corruption",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Cannon Critical Booster",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Cannon Damage Booster",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Cannon Luck Booster",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Cannon Speed Booster",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Cardboard",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Cauldron",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Cauldron Egg",
+            "category": "EggHalloween",
+            "count": 1
+        },
+        {
+            "id": "Chest",
+            "category": "CropSeed",
+            "count": 1
+        },
+        {
+            "id": "Chest Breaker",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Christmas",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Chroma Balloon Axolotl",
+            "category": "Pet",
+            "count": 1
+        },
+        {
+            "id": "Chroma Balloon Corgi",
+            "category": "Pet",
+            "count": 1
+        },
+        {
+            "id": "Chroma Balloon Dragon",
+            "category": "Pet",
+            "count": 1
+        },
+        {
+            "id": "Clan Gift 2",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Cleats",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Clover V2",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Clown Egg",
+            "category": "EggHalloween",
+            "count": 1
+        },
+        {
+            "id": "Coffin Egg",
+            "category": "EggHalloween",
+            "count": 1
+        },
+        {
+            "id": "Comet Dragon",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Comet Pickaxe",
+            "category": "Pickaxe",
+            "count": 1
+        },
+        {
+            "id": "Confetti Cannon",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Coral",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Corruption",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Cosmic",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "Cosmic Basketball",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "Cosmic Basketball Egg",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Cracked Marble Clover",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Crystal Giraffe",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Crystal Key Lower Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Crystal Key Upper Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Cyborg Kitsune",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Dark Unit Egg",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Daycare",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "DaydreamCoins",
+            "category": "Currency",
+            "count": 1
+        },
+        {
+            "id": "Deep Backrooms Crayon Key",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Default",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Demolition Panda",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Demonic",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Detective Bunny",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Diamond Chest Mimic",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Diamond Gift Hunter",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Diamond Orb",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Diamond Pickaxe",
+            "category": "Pickaxe",
+            "count": 1
+        },
+        {
+            "id": "Digging Cape",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Digsite",
+            "category": "Currency",
+            "count": 1
+        },
+        {
+            "id": "Disco Ball Agony",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "DJ Shark",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Doodle",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "Double Coins",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Easter",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Easter Bunny",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "Easter Diamond Egg Booster",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Easter Heroic Chest",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "EasterCoins",
+            "category": "Currency",
+            "count": 1
+        },
+        {
+            "id": "Economy Cape",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Egg",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Eggs Cape",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Electric Eel",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Emerald Pickaxe",
+            "category": "Pickaxe",
+            "count": 1
+        },
+        {
+            "id": "Empyrean",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Enchant",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Enchant Bundle",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Enchants Cape",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Error",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Essence Fuel",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Event Basic Fishing Rod",
+            "category": "Tool",
+            "count": 1
+        },
+        {
+            "id": "Event Deep Sea Fishing Rod",
+            "category": "Tool",
+            "count": 1
+        },
+        {
+            "id": "Event Egg 1",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Event Emerald Fishing Rod",
+            "category": "Tool",
+            "count": 1
+        },
+        {
+            "id": "Event Frozen Fishing Rod",
+            "category": "Tool",
+            "count": 1
+        },
+        {
+            "id": "Event Golden Fishing Rod",
+            "category": "Tool",
+            "count": 1
+        },
+        {
+            "id": "Event Iron Fishing Rod",
+            "category": "Tool",
+            "count": 1
+        },
+        {
+            "id": "Event Kraken Fishing Rod",
+            "category": "Tool",
+            "count": 1
+        },
+        {
+            "id": "Event Platinum Fishing Rod",
+            "category": "Tool",
+            "count": 1
+        },
+        {
+            "id": "Event Sapphire Fishing Rod",
+            "category": "Tool",
+            "count": 1
+        },
+        {
+            "id": "Event Stone Fishing Rod",
+            "category": "Tool",
+            "count": 1
+        },
+        {
+            "id": "Event Sturdy Fishing Rod",
+            "category": "Tool",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 1",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 10",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 11",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 12",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 13",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 14",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 15",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 16",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 17",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 18",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 19",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 2",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 20",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 21",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 22",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 23",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 24",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 25",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 26",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 27",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 28",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 29",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 3",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 30",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 31",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 32",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 33",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 34",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 35",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 36",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 37",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 38",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 39",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 4",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 40",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 41",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 42",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 43",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 44",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 45",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 46",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 47",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 48",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 49",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 5",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 50",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 51",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 52",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 53",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 54",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 55",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 56",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 57",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 58",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 59",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 6",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 60",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 61",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 62",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 63",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 64",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 65",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 66",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 67",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 7",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 8",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exclusive Egg 9",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Exotic Pet",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Explosive",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "FactoryCoins",
+            "category": "Currency",
+            "count": 1
+        },
+        {
+            "id": "Fantasy Key Lower Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Fantasy Key Upper Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "FantasyCoins",
+            "category": "Currency",
+            "count": 1
+        },
+        {
+            "id": "Farming Sprinkler 1",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Farming Sprinkler 2",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Farming Sprinkler 3",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "FarmingCoins",
+            "category": "Currency",
+            "count": 1
+        },
+        {
+            "id": "Fiesta",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "Fiesta Boss Key Lower Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Fiesta Boss Key Upper Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "FiestaCoins",
+            "category": "Currency",
+            "count": 1
+        },
+        {
+            "id": "FiestaOrbs",
+            "category": "Currency",
+            "count": 1
+        },
+        {
+            "id": "Fire",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Fire Dice V2",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Fire Dragon",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "Fishing Cape",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Fishing Luck Scroll",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Fishing Speed Scroll",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Fishing XP Scroll",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "FishingEvent",
+            "category": "Currency",
+            "count": 1
+        },
+        {
+            "id": "Flag Bundle",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Flame",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "Flamethrower Spider",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Flimsy Shovel",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Forged Armadillo",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Fortune",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Frostbyte Griffin",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Fruit",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Fruit Bundle",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Fruit Cape",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Fruity",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Fuse Cape",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Galaxy",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Garden Diamond Egg Booster",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Gargantuan Lovemelon",
+            "category": "Pet",
+            "count": 1
+        },
+        {
+            "id": "Ghost Egg",
+            "category": "EggHalloween",
+            "count": 1
+        },
+        {
+            "id": "Gifts Cape",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "GingerbreadCoins",
+            "category": "Currency",
+            "count": 1
+        },
+        {
+            "id": "GingerbreadCoins2",
+            "category": "Currency",
+            "count": 1
+        },
+        {
+            "id": "Glowy",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Gold",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Gold Pickaxe",
+            "category": "Pickaxe",
+            "count": 1
+        },
+        {
+            "id": "Golden Cleats",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Good vs Evil Gift",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Grave Egg",
+            "category": "EggHalloween",
+            "count": 1
+        },
+        {
+            "id": "Gym Egg",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Gym Gloves",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Gym Shake",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "GymCoins",
+            "category": "Currency",
+            "count": 1
+        },
+        {
+            "id": "Hacker Key Hunter",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Halloween Lucky Egg",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Halloween Trick or Treat Luck",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "HalloweenCoins",
+            "category": "Currency",
+            "count": 1
+        },
+        {
+            "id": "Happy Pets",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Haunted",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Helicopter Corgi",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "High Tech",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "Huge Chroma Balloon Axolotl",
+            "category": "Pet",
+            "count": 1
+        },
+        {
+            "id": "Huge Hunter",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Huge Lovemelon",
+            "category": "Pet",
+            "count": 1
+        },
+        {
+            "id": "Huge Machine Egg 1",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Huge Machine Egg 2",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Huge Machine Egg 3",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Huge Machine Egg 4",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Huge Machine Egg 5",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Huge Machine Egg 6",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Hype Egg 2",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Hype Egg 3",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Insta Plant Capsule",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Iron Pickaxe",
+            "category": "Pickaxe",
+            "count": 1
+        },
+        {
+            "id": "Jetpack Cat",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Kawaii",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Keys Cape",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Knight Chicken",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Large Enchant Bundle",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Large Fantasy Present",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Large Potion Bundle",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Large Taps",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Lemonade",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Leprechaun Key V2",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Lightning Cannon",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Lightning Orb",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Locked Hype Egg",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Locked Hype Egg 3",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Lockpick A",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Lockpick B",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Lockpick C",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Lucky Block Breaker",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Lucky Dice II V2",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Lucky Dice III V2",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Lucky Dice V2",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Lucky Noob Egg",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Lucky Raid Boss Key Lower Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Lucky Raid Boss Key Lower Half V2",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Lucky Raid Boss Key Upper Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Lucky Raid Boss Key Upper Half V2",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Lucky Raid Boss Key V2",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Lucky Raid Orb V2",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Lucky Tile",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "LuckyCoins",
+            "category": "Currency",
+            "count": 1
+        },
+        {
+            "id": "M-10",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "M10",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Magic Orb",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Magma Unit Egg",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "MarbleCoins",
+            "category": "Currency",
+            "count": 1
+        },
+        {
+            "id": "Maskot",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Massive Comet",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Mastery",
+            "category": "XPPotion",
+            "count": 1
+        },
+        {
+            "id": "Mechanical Griffin",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Medium Fantasy Present",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Mega Bloom Egg",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Mega Boost Chest",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Mega Chest Breaker",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Mega Lucky Dice II V2",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Mega Lucky Dice V2",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Mega Thorn Egg",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Merchant",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Midas Touch",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Midnight",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Mini Chest Fortune",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Mini Lucky Block",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Mini Pinata",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Mining Bejeweled TNT Crate",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Mining Bomb",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Mining Nuclear TNT Crate",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Mining TNT",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Mining TNT Crate",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "MiningCoins",
+            "category": "Currency",
+            "count": 1
+        },
+        {
+            "id": "Molten Pickaxe",
+            "category": "Pickaxe",
+            "count": 1
+        },
+        {
+            "id": "Money",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "MVP Key Lower Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "MVP Key Upper Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Nature Dragon",
+            "category": "Pet",
+            "count": 1
+        },
+        {
+            "id": "Neon Twilight",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Nightfall",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Nightmare Cat",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Nightmare Cyclops",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Nightmare Orb",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Ninja Dalmatian",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Normal Shovel",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Nuclear",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Nuclear Cannon",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Nuclear Dominus",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Obsidian Pickaxe",
+            "category": "Pickaxe",
+            "count": 1
+        },
+        {
+            "id": "Old Wizard Cat",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Ooze Dragon",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Original",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "Oversized",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "Party Time",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Paw Print",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "Pet Token Boost",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Pets Cape",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Pinata Basher",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Pirate",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Pixel",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Pls Donate",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Polished Marble Clover",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Potion Bundle",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Potion Penguin",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Potions Cape",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Present",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Pristine Marble Clover",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Pro Fishing Rod",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Pro Shovel",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Pumpkin Egg",
+            "category": "EggHalloween",
+            "count": 1
+        },
+        {
+            "id": "Rainbow Eggs",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Reaper Egg",
+            "category": "EggHalloween",
+            "count": 1
+        },
+        {
+            "id": "Red Present",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "Rich Corgi",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Rival Soccer Egg",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "RngCoins2",
+            "category": "Currency",
+            "count": 1
+        },
+        {
+            "id": "Ronin Piggy",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Ruby Pickaxe",
+            "category": "Pickaxe",
+            "count": 1
+        },
+        {
+            "id": "Rudolph",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "Ruler",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "Safari Monkey",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Sapphire Pickaxe",
+            "category": "Pickaxe",
+            "count": 1
+        },
+        {
+            "id": "School",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Secret Key Lower Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Secret Key Upper Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Series 1 Basic Gift",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Series 1 Epic Gift",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Series 1 Legendary Gift",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Series 1 Mythical Gift",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Series 1 Rare Gift",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Series 2 Basic Gift",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Series 2 Epic Gift",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Series 2 Legendary Gift",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Series 2 Mythical Gift",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Series 2 Rare Gift",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Series 3 Basic Gift",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Series 3 Epic Gift",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Series 3 Legendary Gift",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Series 3 Mythical Gift",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Series 3 Rare Gift",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Shadow Pegasus",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Sharp Shovel",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Shiny Hunter",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Shiny Supercharge",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Sleigh",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "Slingshot",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Small",
+            "category": "Box",
+            "count": 1
+        },
+        {
+            "id": "Small Fantasy Present",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Soccer Net",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Soccer Orb Frenzy",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "SoccerCoins",
+            "category": "Currency",
+            "count": 1
+        },
+        {
+            "id": "SoccerOrbs",
+            "category": "Currency",
+            "count": 1
+        },
+        {
+            "id": "Solar Pickaxe",
+            "category": "Pickaxe",
+            "count": 1
+        },
+        {
+            "id": "Spider Egg",
+            "category": "EggHalloween",
+            "count": 1
+        },
+        {
+            "id": "Spring Diamond Egg Booster",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Spring Egg Token Booster",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Spring Hatch Speed Booster",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Spring Pink Rose Token",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Spring Raffle Ticket Booster",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Spring Red Tulip Token",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Spring Upgrade Token Booster",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Spring Yellow Sunflower Token",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "SpringCoins",
+            "category": "Currency",
+            "count": 1
+        },
+        {
+            "id": "Springy Shoes",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Starfall",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Steampunk",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "Stone Pickaxe",
+            "category": "Pickaxe",
+            "count": 1
+        },
+        {
+            "id": "Summer",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Sunflowers",
+            "category": "Currency",
+            "count": 1
+        },
+        {
+            "id": "Super Basketball Hoop",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Super Fishing Rod",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Super Gym Gloves",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Super Gym Shake",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Super Hero Pack",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Super Lightning",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Super Magnet",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Super Shiny Hunter",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Super Soccer Net",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Super Springy Shoes",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Superior Chest Mimic",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Superior Chests Cape",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Superior Wisdom",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Swift Taps",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "Tap Rebirth Token",
+            "category": "Currency",
+            "count": 1
+        },
+        {
+            "id": "Tap Teamwork",
+            "category": "Enchant",
+            "count": 1
+        },
+        {
+            "id": "TapTokens",
+            "category": "Currency",
+            "count": 1
+        },
+        {
+            "id": "Tech Key Lower Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Tech Key Upper Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Tech Samurai Axolotl",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "TechCoins",
+            "category": "Currency",
+            "count": 1
+        },
+        {
+            "id": "Time Trial Gift 2",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Titanic",
+            "category": "XPPotion",
+            "count": 1
+        },
+        {
+            "id": "Titanic Chroma Balloon Monkey",
+            "category": "Pet",
+            "count": 1
+        },
+        {
+            "id": "Titanic Fantasy Present",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Titanic Hot Dooooog",
+            "category": "Pet",
+            "count": 1
+        },
+        {
+            "id": "Titanic Pinata Cat",
+            "category": "Pet",
+            "count": 1
+        },
+        {
+            "id": "Titanic Toilet Cat",
+            "category": "Pet",
+            "count": 1
+        },
+        {
+            "id": "TNT Capybara",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Torpedo Cat",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Tower Defense Gift 2",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Tower Defense Gift 3",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "Tower Defense I",
+            "category": "XPPotion",
+            "count": 1
+        },
+        {
+            "id": "Tower Defense II",
+            "category": "XPPotion",
+            "count": 1
+        },
+        {
+            "id": "Tower Defense III",
+            "category": "XPPotion",
+            "count": 1
+        },
+        {
+            "id": "Tower Luck Booster",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "Tower Stacking Booster",
+            "category": "Consumable",
+            "count": 1
+        },
+        {
+            "id": "TowerDefenseRubies",
+            "category": "Currency",
+            "count": 1
+        },
+        {
+            "id": "Toy Bundle",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Treasure Hideout Key Lower Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Treasure Hideout Key Upper Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Trophy Soccer Egg",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Ultra Huge",
+            "category": "XPPotion",
+            "count": 1
+        },
+        {
+            "id": "Ultra Lucky Tile",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Ultra Mastery",
+            "category": "XPPotion",
+            "count": 1
+        },
+        {
+            "id": "Ultra Pet Token Boost",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Umbrella Elephant",
+            "category": "Tower",
+            "count": 1
+        },
+        {
+            "id": "Valentines Heart",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Valentines Present",
+            "category": "Egg",
+            "count": 1
+        },
+        {
+            "id": "Vampire",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "VIP",
+            "category": "Booth",
+            "count": 1
+        },
+        {
+            "id": "Void Key Lower Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Void Key Upper Half",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "VoidCoins",
+            "category": "Currency",
+            "count": 1
+        },
+        {
+            "id": "Water Gun",
+            "category": "Misc",
+            "count": 1
+        },
+        {
+            "id": "Web",
+            "category": "Hoverboard",
+            "count": 1
+        },
+        {
+            "id": "Woodcutting",
+            "category": "Currency",
+            "count": 1
+        },
+        {
+            "id": "Wooden Pickaxe",
+            "category": "Pickaxe",
+            "count": 1
+        },
+        {
+            "id": "X-Large Fantasy Present",
+            "category": "Lootbox",
+            "count": 1
+        },
+        {
+            "id": "YeetOrbs",
+            "category": "Currency",
+            "count": 1
+        },
+        {
+            "id": "Zeus Bear",
+            "category": "Tower",
+            "count": 1
+        }
+    ],
+    "collisions": [
+        {
+            "name": "Candycane",
+            "collections": [
+                "Fruits",
+                "Pets"
+            ]
+        },
+        {
+            "name": "Banana",
+            "collections": [
+                "Fruits",
+                "Pets"
+            ]
+        },
+        {
+            "name": "Rainbow Swirl",
+            "collections": [
+                "MiscItems",
+                "Pets"
+            ]
+        },
+        {
+            "name": "Coins",
+            "collections": [
+                "Charms",
+                "Potions"
+            ]
+        },
+        {
+            "name": "Diamonds",
+            "collections": [
+                "Charms",
+                "Potions"
+            ]
+        },
+        {
+            "name": "TNT",
+            "collections": [
+                "Charms",
+                "MiscItems"
+            ]
+        },
+        {
+            "name": "Exotic Treasure Flag",
+            "collections": [
+                "MiscItems",
+                "ZoneFlags"
+            ]
+        },
+        {
+            "name": "Magnet Flag",
+            "collections": [
+                "MiscItems",
+                "ZoneFlags"
+            ]
+        },
+        {
+            "name": "Fortune Flag",
+            "collections": [
+                "MiscItems",
+                "ZoneFlags"
+            ]
+        },
+        {
+            "name": "Diamonds Flag",
+            "collections": [
+                "MiscItems",
+                "ZoneFlags"
+            ]
+        },
+        {
+            "name": "Strength Flag",
+            "collections": [
+                "MiscItems",
+                "ZoneFlags"
+            ]
+        },
+        {
+            "name": "Hasty Flag",
+            "collections": [
+                "MiscItems",
+                "ZoneFlags"
+            ]
+        },
+        {
+            "name": "Coins Flag",
+            "collections": [
+                "MiscItems",
+                "ZoneFlags"
+            ]
+        },
+        {
+            "name": "Shiny Flag",
+            "collections": [
+                "MiscItems",
+                "ZoneFlags"
+            ]
+        },
+        {
+            "name": "Rainbow Flag",
+            "collections": [
+                "MiscItems",
+                "ZoneFlags"
+            ]
+        },
+        {
+            "name": "Stone Shovel",
+            "collections": [
+                "MiscItems",
+                "Shovels"
+            ]
+        },
+        {
+            "name": "Advanced Shovel",
+            "collections": [
+                "MiscItems",
+                "Shovels"
+            ]
+        },
+        {
+            "name": "Diamond Shovel",
+            "collections": [
+                "MiscItems",
+                "Shovels"
+            ]
+        },
+        {
+            "name": "Emerald Shovel",
+            "collections": [
+                "MiscItems",
+                "Shovels"
+            ]
+        },
+        {
+            "name": "Wooden Shovel",
+            "collections": [
+                "MiscItems",
+                "Shovels"
+            ]
+        },
+        {
+            "name": "Golden Shovel",
+            "collections": [
+                "MiscItems",
+                "Shovels"
+            ]
+        },
+        {
+            "name": "Sturdy Shovel",
+            "collections": [
+                "MiscItems",
+                "Shovels"
+            ]
+        },
+        {
+            "name": "Platinum Shovel",
+            "collections": [
+                "MiscItems",
+                "Shovels"
+            ]
+        },
+        {
+            "name": "Iron Shovel",
+            "collections": [
+                "MiscItems",
+                "Shovels"
+            ]
+        },
+        {
+            "name": "Sapphire Shovel",
+            "collections": [
+                "MiscItems",
+                "Shovels"
+            ]
+        },
+        {
+            "name": "Amethyst Shovel",
+            "collections": [
+                "MiscItems",
+                "Shovels"
+            ]
+        },
+        {
+            "name": "Sprinkler",
+            "collections": [
+                "MiscItems",
+                "Sprinklers"
+            ]
+        },
+        {
+            "name": "UFO",
+            "collections": [
+                "Hoverboards",
+                "Ultimates"
+            ]
+        }
+    ]
+}

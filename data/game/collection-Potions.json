@@ -1,0 +1,1255 @@
+{
+    "status": "ok",
+    "data": [
+        {
+            "configName": "Potion | Damage",
+            "category": "Potions",
+            "configData": {
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 1,
+                            "Lootbag": null,
+                            "_id": "Basic",
+                            "Color": null,
+                            "DisplayName": "Basic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 15,
+                        "Desc": "Temporarily increases damage of your pets by 15%!",
+                        "Time": 600,
+                        "Icon": "rbxassetid://15020966601",
+                        "DisplayName": "Damage Potion I"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 2,
+                            "Lootbag": null,
+                            "_id": "Rare",
+                            "Color": null,
+                            "DisplayName": "Rare",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 30,
+                        "Desc": "Temporarily increases damage of your pets by 30%!",
+                        "Time": 1200,
+                        "Icon": "rbxassetid://15020968068",
+                        "DisplayName": "Damage Potion II"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 3,
+                            "Lootbag": null,
+                            "_id": "Epic",
+                            "Color": null,
+                            "DisplayName": "Epic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 45,
+                        "Desc": "Temporarily increases damage of your pets by 45%!",
+                        "Time": 1800,
+                        "Icon": "rbxassetid://15020969725",
+                        "DisplayName": "Damage Potion III"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 4,
+                            "Lootbag": null,
+                            "_id": "Legendary",
+                            "Color": null,
+                            "DisplayName": "Legendary",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 60,
+                        "Desc": "Temporarily increases damage of your pets by 60%!",
+                        "Time": 2400,
+                        "Icon": "rbxassetid://15020970884",
+                        "DisplayName": "Damage Potion IV"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 5,
+                            "Lootbag": null,
+                            "_id": "Mythical",
+                            "Color": null,
+                            "DisplayName": "Mythical",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 75,
+                        "Desc": "Temporarily increases damage of your pets by 75%!",
+                        "Time": 3000,
+                        "Icon": "rbxassetid://15020972861",
+                        "DisplayName": "Damage Potion V"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 6,
+                            "Lootbag": null,
+                            "_id": "Exotic",
+                            "Color": null,
+                            "DisplayName": "Exotic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 90,
+                        "Desc": "Temporarily increases damage of your pets by 90%!",
+                        "Time": 3600,
+                        "Icon": "rbxassetid://15020974605",
+                        "DisplayName": "Damage Potion VI"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 7,
+                            "Lootbag": null,
+                            "_id": "Divine",
+                            "Color": null,
+                            "DisplayName": "Divine",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 105,
+                        "Desc": "Temporarily increases damage of your pets by 105%!",
+                        "Time": 4200,
+                        "Icon": "rbxassetid://15706020479",
+                        "DisplayName": "Damage Potion VII"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 8,
+                            "Lootbag": null,
+                            "_id": "Superior",
+                            "Color": null,
+                            "DisplayName": "Superior",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 120,
+                        "Desc": "Temporarily increases damage of your pets by 120%!",
+                        "Time": 4800,
+                        "Icon": "rbxassetid://15801635170",
+                        "DisplayName": "Damage Potion VIII"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 9,
+                            "Lootbag": null,
+                            "_id": "Celestial",
+                            "Color": null,
+                            "DisplayName": "Celestial",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 135,
+                        "Desc": "Temporarily increases damage of your pets by 135%!",
+                        "Time": 5400,
+                        "Icon": "rbxassetid://16292198048",
+                        "DisplayName": "Damage Potion IX"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 9,
+                            "Lootbag": null,
+                            "_id": "Celestial",
+                            "Color": null,
+                            "DisplayName": "Celestial",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 150,
+                        "Desc": "Temporarily increases damage of your pets by 150%!",
+                        "Time": 6000,
+                        "Icon": "rbxassetid://17012809069",
+                        "DisplayName": "Damage Potion X"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 9,
+                            "Lootbag": null,
+                            "_id": "Celestial",
+                            "Color": null,
+                            "DisplayName": "Celestial",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 165,
+                        "Desc": "Temporarily increases damage of your pets by 165%!",
+                        "Time": 6600,
+                        "Icon": "rbxassetid://126967496459366",
+                        "DisplayName": "Damage Potion XI"
+                    }
+                ],
+                "PrimaryColor": "#FF473A",
+                "MaxTier": 11,
+                "SecondaryColor": "#FF2929",
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:29:23.072Z",
+            "dateCreated": null,
+            "collection": "Potions",
+            "hashShort": "61d89125432a1329"
+        },
+        {
+            "configName": "Potion | Coins",
+            "category": "Potions",
+            "configData": {
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 1,
+                            "Lootbag": null,
+                            "_id": "Basic",
+                            "Color": null,
+                            "DisplayName": "Basic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 20,
+                        "Desc": "Temporarily increases Coins you earn by 20%!",
+                        "Time": 600,
+                        "Icon": "rbxassetid://15020966368",
+                        "DisplayName": "Coins Potion I"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 2,
+                            "Lootbag": null,
+                            "_id": "Rare",
+                            "Color": null,
+                            "DisplayName": "Rare",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 40,
+                        "Desc": "Temporarily increases Coins you earn by 40%!",
+                        "Time": 1200,
+                        "Icon": "rbxassetid://15020969165",
+                        "DisplayName": "Coins Potion II"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 3,
+                            "Lootbag": null,
+                            "_id": "Epic",
+                            "Color": null,
+                            "DisplayName": "Epic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 60,
+                        "Desc": "Temporarily increases Coins you earn by 60%!",
+                        "Time": 1800,
+                        "Icon": "rbxassetid://15020970760",
+                        "DisplayName": "Coins Potion III"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 4,
+                            "Lootbag": null,
+                            "_id": "Legendary",
+                            "Color": null,
+                            "DisplayName": "Legendary",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 80,
+                        "Desc": "Temporarily increases Coins you earn by 80%!",
+                        "Time": 2400,
+                        "Icon": "rbxassetid://15020972226",
+                        "DisplayName": "Coins Potion IV"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 5,
+                            "Lootbag": null,
+                            "_id": "Mythical",
+                            "Color": null,
+                            "DisplayName": "Mythical",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 100,
+                        "Desc": "Temporarily increases Coins you earn by 100%!",
+                        "Time": 3000,
+                        "Icon": "rbxassetid://15020974203",
+                        "DisplayName": "Coins Potion V"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 6,
+                            "Lootbag": null,
+                            "_id": "Exotic",
+                            "Color": null,
+                            "DisplayName": "Exotic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 120,
+                        "Desc": "Temporarily increases Coins you earn by 120%!",
+                        "Time": 3600,
+                        "Icon": "rbxassetid://15020975743",
+                        "DisplayName": "Coins Potion VI"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 7,
+                            "Lootbag": null,
+                            "_id": "Divine",
+                            "Color": null,
+                            "DisplayName": "Divine",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 140,
+                        "Desc": "Temporarily increases Coins you earn by 140%!",
+                        "Time": 4200,
+                        "Icon": "rbxassetid://15706015819",
+                        "DisplayName": "Coins Potion VII"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 8,
+                            "Lootbag": null,
+                            "_id": "Superior",
+                            "Color": null,
+                            "DisplayName": "Superior",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 160,
+                        "Desc": "Temporarily increases Coins you earn by 160%!",
+                        "Time": 4800,
+                        "Icon": "rbxassetid://15801634837",
+                        "DisplayName": "Coins Potion VIII"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 9,
+                            "Lootbag": null,
+                            "_id": "Celestial",
+                            "Color": null,
+                            "DisplayName": "Celestial",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 180,
+                        "Desc": "Temporarily increases Coins you earn by 180%!",
+                        "Time": 5400,
+                        "Icon": "rbxassetid://16292196849",
+                        "DisplayName": "Coins Potion IX"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 9,
+                            "Lootbag": null,
+                            "_id": "Celestial",
+                            "Color": null,
+                            "DisplayName": "Celestial",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 200,
+                        "Desc": "Temporarily increases Coins you earn by 200%!",
+                        "Time": 6000,
+                        "Icon": "rbxassetid://17039608371",
+                        "DisplayName": "Coins Potion X"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 9,
+                            "Lootbag": null,
+                            "_id": "Celestial",
+                            "Color": null,
+                            "DisplayName": "Celestial",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 220,
+                        "Desc": "Temporarily increases Coins you earn by 220%!",
+                        "Time": 6600,
+                        "Icon": "rbxassetid://124764535484261",
+                        "DisplayName": "Coins Potion XI"
+                    }
+                ],
+                "PrimaryColor": "#FFD439",
+                "MaxTier": 11,
+                "SecondaryColor": "#FFFF2A",
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:29:23.078Z",
+            "dateCreated": null,
+            "collection": "Potions",
+            "hashShort": "0be00e6bde398e4a"
+        },
+        {
+            "configName": "Potion | Diamonds",
+            "category": "Potions",
+            "configData": {
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 1,
+                            "Lootbag": null,
+                            "_id": "Basic",
+                            "Color": null,
+                            "DisplayName": "Basic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 10,
+                        "Desc": "Temporarily increases Diamonds you earn by 10%!",
+                        "Time": 600,
+                        "Icon": "rbxassetid://15549792977",
+                        "DisplayName": "Diamonds Potion I"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 2,
+                            "Lootbag": null,
+                            "_id": "Rare",
+                            "Color": null,
+                            "DisplayName": "Rare",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 25,
+                        "Desc": "Temporarily increases Diamonds you earn by 25%!",
+                        "Time": 1200,
+                        "Icon": "rbxassetid://15549792909",
+                        "DisplayName": "Diamonds Potion II"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 3,
+                            "Lootbag": null,
+                            "_id": "Epic",
+                            "Color": null,
+                            "DisplayName": "Epic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 40,
+                        "Desc": "Temporarily increases Diamonds you earn by 40%!",
+                        "Time": 1800,
+                        "Icon": "rbxassetid://15020970352",
+                        "DisplayName": "Diamonds Potion III"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 4,
+                            "Lootbag": null,
+                            "_id": "Legendary",
+                            "Color": null,
+                            "DisplayName": "Legendary",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 50,
+                        "Desc": "Temporarily increases Diamonds you earn by 50%!",
+                        "Time": 2400,
+                        "Icon": "rbxassetid://15020971674",
+                        "DisplayName": "Diamonds Potion IV"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 5,
+                            "Lootbag": null,
+                            "_id": "Mythical",
+                            "Color": null,
+                            "DisplayName": "Mythical",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 60,
+                        "Desc": "Temporarily increases Diamonds you earn by 60%!",
+                        "Time": 3000,
+                        "Icon": "rbxassetid://15706023136",
+                        "DisplayName": "Diamonds Potion V"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 6,
+                            "Lootbag": null,
+                            "_id": "Exotic",
+                            "Color": null,
+                            "DisplayName": "Exotic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 70,
+                        "Desc": "Temporarily increases Diamonds you earn by 70%!",
+                        "Time": 3600,
+                        "Icon": "rbxassetid://15801649326",
+                        "DisplayName": "Diamonds Potion VI"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 7,
+                            "Lootbag": null,
+                            "_id": "Divine",
+                            "Color": null,
+                            "DisplayName": "Divine",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 80,
+                        "Desc": "Temporarily increases Diamonds you earn by 80%!",
+                        "Time": 4200,
+                        "Icon": "rbxassetid://16443030291",
+                        "DisplayName": "Diamonds Potion VII"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 8,
+                            "Lootbag": null,
+                            "_id": "Superior",
+                            "Color": null,
+                            "DisplayName": "Superior",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 90,
+                        "Desc": "Temporarily increases Diamonds you earn by 90%!",
+                        "Time": 4800,
+                        "Icon": "rbxassetid://17015603578",
+                        "DisplayName": "Diamonds Potion VIII"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 9,
+                            "Lootbag": null,
+                            "_id": "Celestial",
+                            "Color": null,
+                            "DisplayName": "Celestial",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 100,
+                        "Desc": "Temporarily increases Diamonds you earn by 100%!",
+                        "Time": 5400,
+                        "Icon": "rbxassetid://140129810869965",
+                        "DisplayName": "Diamonds Potion IX"
+                    }
+                ],
+                "PrimaryColor": "#3CDBFF",
+                "MaxTier": 9,
+                "SecondaryColor": "#2FD9FF",
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:29:23.070Z",
+            "dateCreated": null,
+            "collection": "Potions",
+            "hashShort": "5d6514f0f8176498"
+        },
+        {
+            "configName": "Potion | Lucky",
+            "category": "Potions",
+            "configData": {
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 1,
+                            "Lootbag": null,
+                            "_id": "Basic",
+                            "Color": null,
+                            "DisplayName": "Basic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 25,
+                        "Desc": "Temporarily increases your egg luck by 25%!",
+                        "Time": 600,
+                        "Icon": "rbxassetid://15020967109",
+                        "DisplayName": "Lucky Eggs Potion I"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 2,
+                            "Lootbag": null,
+                            "_id": "Rare",
+                            "Color": null,
+                            "DisplayName": "Rare",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 50,
+                        "Desc": "Temporarily increases your egg luck by 50%!",
+                        "Time": 1200,
+                        "Icon": "rbxassetid://15020968380",
+                        "DisplayName": "Lucky Eggs Potion II"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 3,
+                            "Lootbag": null,
+                            "_id": "Epic",
+                            "Color": null,
+                            "DisplayName": "Epic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 75,
+                        "Desc": "Temporarily increases your egg luck by 75%!",
+                        "Time": 1800,
+                        "Icon": "rbxassetid://15020970040",
+                        "DisplayName": "Lucky Eggs Potion III"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 4,
+                            "Lootbag": null,
+                            "_id": "Legendary",
+                            "Color": null,
+                            "DisplayName": "Legendary",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 100,
+                        "Desc": "Temporarily increases your egg luck by 100%!",
+                        "Time": 2400,
+                        "Icon": "rbxassetid://15020971283",
+                        "DisplayName": "Lucky Eggs Potion IV"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 5,
+                            "Lootbag": null,
+                            "_id": "Mythical",
+                            "Color": null,
+                            "DisplayName": "Mythical",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 125,
+                        "Desc": "Temporarily increases your egg luck by 125%!",
+                        "Time": 3000,
+                        "Icon": "rbxassetid://15020973259",
+                        "DisplayName": "Lucky Eggs Potion V"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 6,
+                            "Lootbag": null,
+                            "_id": "Exotic",
+                            "Color": null,
+                            "DisplayName": "Exotic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 150,
+                        "Desc": "Temporarily increases your egg luck by 150%!",
+                        "Time": 3600,
+                        "Icon": "rbxassetid://15020975038",
+                        "DisplayName": "Lucky Eggs Potion VI"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 7,
+                            "Lootbag": null,
+                            "_id": "Divine",
+                            "Color": null,
+                            "DisplayName": "Divine",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 175,
+                        "Desc": "Temporarily increases your egg luck by 175%!",
+                        "Time": 4200,
+                        "Icon": "rbxassetid://15706025686",
+                        "DisplayName": "Lucky Eggs Potion VII"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 8,
+                            "Lootbag": null,
+                            "_id": "Superior",
+                            "Color": null,
+                            "DisplayName": "Superior",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 200,
+                        "Desc": "Temporarily increases your egg luck by 200%!",
+                        "Time": 4800,
+                        "Icon": "rbxassetid://15801635964",
+                        "DisplayName": "Lucky Eggs Potion VIII"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 9,
+                            "Lootbag": null,
+                            "_id": "Celestial",
+                            "Color": null,
+                            "DisplayName": "Celestial",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 225,
+                        "Desc": "Temporarily increases your egg luck by 225%!",
+                        "Time": 5400,
+                        "Icon": "rbxassetid://16292197771",
+                        "DisplayName": "Lucky Eggs Potion IX"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 9,
+                            "Lootbag": null,
+                            "_id": "Celestial",
+                            "Color": null,
+                            "DisplayName": "Celestial",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 250,
+                        "Desc": "Temporarily increases your egg luck by 250%!",
+                        "Time": 6000,
+                        "Icon": "rbxassetid://17012808777",
+                        "DisplayName": "Lucky Eggs Potion X"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 9,
+                            "Lootbag": null,
+                            "_id": "Celestial",
+                            "Color": null,
+                            "DisplayName": "Celestial",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 275,
+                        "Desc": "Temporarily increases your egg luck by 275%!",
+                        "Time": 6600,
+                        "Icon": "rbxassetid://118954624181479",
+                        "DisplayName": "Lucky Eggs Potion XI"
+                    }
+                ],
+                "PrimaryColor": "#3CFF5C",
+                "MaxTier": 11,
+                "SecondaryColor": "#7CFF2B",
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:29:23.074Z",
+            "dateCreated": null,
+            "collection": "Potions",
+            "hashShort": "b21a8bab02f73876"
+        },
+        {
+            "configName": "Potion | Treasure Hunter",
+            "category": "Potions",
+            "configData": {
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 1,
+                            "Lootbag": null,
+                            "_id": "Basic",
+                            "Color": null,
+                            "DisplayName": "Basic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 10,
+                        "Desc": "Temporarily increases your chances of getting random item drops by 10%!",
+                        "Time": 600,
+                        "Icon": "rbxassetid://15020966853",
+                        "DisplayName": "Treasure Hunter Potion I"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 2,
+                            "Lootbag": null,
+                            "_id": "Rare",
+                            "Color": null,
+                            "DisplayName": "Rare",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 20,
+                        "Desc": "Temporarily increases your chances of getting random item drops by 20%!",
+                        "Time": 1200,
+                        "Icon": "rbxassetid://15020968249",
+                        "DisplayName": "Treasure Hunter Potion II"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 3,
+                            "Lootbag": null,
+                            "_id": "Epic",
+                            "Color": null,
+                            "DisplayName": "Epic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 30,
+                        "Desc": "Temporarily increases your chances of getting random item drops by 30%!",
+                        "Time": 1800,
+                        "Icon": "rbxassetid://15020969840",
+                        "DisplayName": "Treasure Hunter Potion III"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 4,
+                            "Lootbag": null,
+                            "_id": "Legendary",
+                            "Color": null,
+                            "DisplayName": "Legendary",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 40,
+                        "Desc": "Temporarily increases your chances of getting random item drops by 40%!",
+                        "Time": 2400,
+                        "Icon": "rbxassetid://15020971115",
+                        "DisplayName": "Treasure Hunter Potion IV"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 5,
+                            "Lootbag": null,
+                            "_id": "Mythical",
+                            "Color": null,
+                            "DisplayName": "Mythical",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 45,
+                        "Desc": "Temporarily increases your chances of getting random item drops by 45%!",
+                        "Time": 3000,
+                        "Icon": "rbxassetid://15020973089",
+                        "DisplayName": "Treasure Hunter Potion V"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 6,
+                            "Lootbag": null,
+                            "_id": "Exotic",
+                            "Color": null,
+                            "DisplayName": "Exotic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 50,
+                        "Desc": "Temporarily increases your chances of getting random item drops by 50%!",
+                        "Time": 3600,
+                        "Icon": "rbxassetid://15020974780",
+                        "DisplayName": "Treasure Hunter Potion VI"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 7,
+                            "Lootbag": null,
+                            "_id": "Divine",
+                            "Color": null,
+                            "DisplayName": "Divine",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 55,
+                        "Desc": "Temporarily increases your chances of getting random item drops by 55%!",
+                        "Time": 4200,
+                        "Icon": "rbxassetid://15706029032",
+                        "DisplayName": "Treasure Hunter Potion VII"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 8,
+                            "Lootbag": null,
+                            "_id": "Superior",
+                            "Color": null,
+                            "DisplayName": "Superior",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 60,
+                        "Desc": "Temporarily increases your chances of getting random item drops by 60%!",
+                        "Time": 4800,
+                        "Icon": "rbxassetid://15801635325",
+                        "DisplayName": "Treasure Hunter Potion VIII"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 9,
+                            "Lootbag": null,
+                            "_id": "Celestial",
+                            "Color": null,
+                            "DisplayName": "Celestial",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 70,
+                        "Desc": "Temporarily increases your chances of getting random item drops by 70%!",
+                        "Time": 5400,
+                        "Icon": "rbxassetid://16292197920",
+                        "DisplayName": "Treasure Hunter Potion IX"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 9,
+                            "Lootbag": null,
+                            "_id": "Celestial",
+                            "Color": null,
+                            "DisplayName": "Celestial",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 75,
+                        "Desc": "Temporarily increases your chances of getting random item drops by 75%!",
+                        "Time": 6000,
+                        "Icon": "rbxassetid://17012808910",
+                        "DisplayName": "Treasure Hunter Potion X"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 9,
+                            "Lootbag": null,
+                            "_id": "Celestial",
+                            "Color": null,
+                            "DisplayName": "Celestial",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 80,
+                        "Desc": "Temporarily increases your chances of getting random item drops by 80%!",
+                        "Time": 6600,
+                        "Icon": "rbxassetid://126996396522981",
+                        "DisplayName": "Treasure Hunter Potion XI"
+                    }
+                ],
+                "PrimaryColor": "#FF743D",
+                "MaxTier": 11,
+                "SecondaryColor": "#FF7029",
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:29:23.081Z",
+            "dateCreated": null,
+            "collection": "Potions",
+            "hashShort": "eabd91abc3a10b17"
+        },
+        {
+            "configName": "Potion | Walkspeed",
+            "category": "Potions",
+            "configData": {
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 1,
+                            "Lootbag": null,
+                            "_id": "Basic",
+                            "Color": null,
+                            "DisplayName": "Basic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 25,
+                        "Desc": "Temporarily increases player and pet speed by 25%!",
+                        "Time": 900,
+                        "Icon": "rbxassetid://15020966003",
+                        "DisplayName": "Speed Potion I"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 2,
+                            "Lootbag": null,
+                            "_id": "Rare",
+                            "Color": null,
+                            "DisplayName": "Rare",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 40,
+                        "Desc": "Temporarily increases player and pet speed by 40%!",
+                        "Time": 1800,
+                        "Icon": "rbxassetid://15020967803",
+                        "DisplayName": "Speed Potion II"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 3,
+                            "Lootbag": null,
+                            "_id": "Epic",
+                            "Color": null,
+                            "DisplayName": "Epic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 55,
+                        "Desc": "Temporarily increases player and pet speed by 55%!",
+                        "Time": 2700,
+                        "Icon": "rbxassetid://15020969274",
+                        "DisplayName": "Speed Potion III"
+                    }
+                ],
+                "PrimaryColor": "#FFFFFF",
+                "MaxTier": 3,
+                "SecondaryColor": "#E5E5E5",
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:29:23.079Z",
+            "dateCreated": null,
+            "collection": "Potions",
+            "hashShort": "f06ca7ae557fa584"
+        },
+        {
+            "configName": "Potion | The Cocktail",
+            "category": "Potions",
+            "configData": {
+                "BaseTier": 1,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 8,
+                            "Lootbag": null,
+                            "_id": "Superior",
+                            "Color": null,
+                            "DisplayName": "Superior",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 1,
+                        "Desc": "Temporarily increases:\n- Coins by 200%\n- Diamonds by 50%\n- Damage by 100%\n- Egg luck by 300%\n- Item drops by 100%\n- Walkspeed by 50%!",
+                        "Time": 1800,
+                        "Icon": "rbxassetid://15245389767",
+                        "DisplayName": "The Cocktail"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 9,
+                            "Lootbag": null,
+                            "_id": "Celestial",
+                            "Color": null,
+                            "DisplayName": "Celestial",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 2,
+                        "Desc": "Temporarily increases:\n- Coins by 300%\n- Diamonds by 100%\n- Damage by 150%\n- Egg luck by 400%\n- Item drops by 150%\n- Walkspeed by 75%!",
+                        "Time": 1800,
+                        "Icon": "rbxassetid://88218761146440",
+                        "DisplayName": "The Cocktail II"
+                    }
+                ],
+                "PreventUpgrade": true,
+                "PrimaryColor": "#FFF6D3",
+                "MaxTier": 2,
+                "SecondaryColor": "#FDFFCE"
+            },
+            "dateModified": "2025-07-05T23:29:23.077Z",
+            "dateCreated": null,
+            "collection": "Potions",
+            "hashShort": "9024e6697fb6c4ef"
+        },
+        {
+            "configName": "Potion | Huge",
+            "category": "Potions",
+            "configData": {
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 8,
+                            "Lootbag": null,
+                            "_id": "Superior",
+                            "Color": null,
+                            "DisplayName": "Superior",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 1,
+                        "Desc": "Temporarily increases your active huge luck by 300%!",
+                        "Time": 3600,
+                        "Icon": "rbxassetid://16011869296",
+                        "DisplayName": "Huge Potion"
+                    }
+                ],
+                "PrimaryColor": "#942AFF",
+                "MaxTier": 1,
+                "SecondaryColor": "#BC21FF",
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:29:23.081Z",
+            "dateCreated": null,
+            "collection": "Potions",
+            "hashShort": "404e792924608b98"
+        }
+    ]
+}

@@ -1,0 +1,3103 @@
+{
+    "status": "ok",
+    "data": [
+        {
+            "configName": "Enchant | Strong Pets",
+            "category": "Enchants",
+            "configData": {
+                "BaseTier": 1,
+                "DiminishPowerThreshold": 336,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 1,
+                            "Lootbag": null,
+                            "_id": "Basic",
+                            "Color": null,
+                            "DisplayName": "Basic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 15,
+                        "Desc": "Increases the strength of your pets by 15%!",
+                        "Icon": "rbxassetid://15030239929",
+                        "DisplayName": "Strong Pets I"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 2,
+                            "Lootbag": null,
+                            "_id": "Rare",
+                            "Color": null,
+                            "DisplayName": "Rare",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 25,
+                        "Desc": "Increases the strength of your pets by 25%!",
+                        "Icon": "rbxassetid://15030239753",
+                        "DisplayName": "Strong Pets II"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 3,
+                            "Lootbag": null,
+                            "_id": "Epic",
+                            "Color": null,
+                            "DisplayName": "Epic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 40,
+                        "Desc": "Increases the strength of your pets by 40%!",
+                        "Icon": "rbxassetid://15030239649",
+                        "DisplayName": "Strong Pets III"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 4,
+                            "Lootbag": null,
+                            "_id": "Legendary",
+                            "Color": null,
+                            "DisplayName": "Legendary",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 60,
+                        "Desc": "Increases the strength of your pets by 60%!",
+                        "Icon": "rbxassetid://15030239477",
+                        "DisplayName": "Strong Pets IV"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 5,
+                            "Lootbag": null,
+                            "_id": "Mythical",
+                            "Color": null,
+                            "DisplayName": "Mythical",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 75,
+                        "Desc": "Increases the strength of your pets by 75%!",
+                        "Icon": "rbxassetid://15030239264",
+                        "DisplayName": "Strong Pets V"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 6,
+                            "Lootbag": null,
+                            "_id": "Exotic",
+                            "Color": null,
+                            "DisplayName": "Exotic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 90,
+                        "Desc": "Increases the strength of your pets by 90%!",
+                        "Icon": "rbxassetid://15696986509",
+                        "DisplayName": "Strong Pets VI"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 7,
+                            "Lootbag": null,
+                            "_id": "Divine",
+                            "Color": null,
+                            "DisplayName": "Divine",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 105,
+                        "Desc": "Increases the strength of your pets by 105%!",
+                        "Icon": "rbxassetid://15801600870",
+                        "DisplayName": "Strong Pets VII"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 8,
+                            "Lootbag": null,
+                            "_id": "Superior",
+                            "Color": null,
+                            "DisplayName": "Superior",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 120,
+                        "Desc": "Increases the strength of your pets by 120%!",
+                        "Icon": "rbxassetid://16318190917",
+                        "DisplayName": "Strong Pets VIII"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 9,
+                            "Lootbag": null,
+                            "_id": "Celestial",
+                            "Color": null,
+                            "DisplayName": "Celestial",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 135,
+                        "Desc": "Increases the strength of your pets by 135%!",
+                        "Icon": "rbxassetid://16888547248",
+                        "DisplayName": "Strong Pets IX"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 9,
+                            "Lootbag": null,
+                            "_id": "Celestial",
+                            "Color": null,
+                            "DisplayName": "Celestial",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 140,
+                        "Desc": "Increases the strength of your pets by 140%!",
+                        "Icon": "rbxassetid://93291705199169",
+                        "DisplayName": "Strong Pets X"
+                    }
+                ],
+                "EmpoweredBoost": 40,
+                "MaxTier": 10,
+                "PageIcon": "rbxassetid://13824100032"
+            },
+            "dateModified": "2025-07-05T23:28:49.137Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "d1ae0cab90f00de1"
+        },
+        {
+            "configName": "Enchant | Criticals",
+            "category": "Enchants",
+            "configData": {
+                "BaseTier": 1,
+                "DiminishPowerThreshold": 27.200000000000003,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 1,
+                            "Lootbag": null,
+                            "_id": "Basic",
+                            "Color": null,
+                            "DisplayName": "Basic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 2,
+                        "Desc": "2% chance your pet inflicts a critical hit (5x damage)!",
+                        "Icon": "rbxassetid://15030243121",
+                        "DisplayName": "Criticals I"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 2,
+                            "Lootbag": null,
+                            "_id": "Rare",
+                            "Color": null,
+                            "DisplayName": "Rare",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 4,
+                        "Desc": "4% chance your pet inflicts a critical hit (5x damage)!",
+                        "Icon": "rbxassetid://15030243011",
+                        "DisplayName": "Criticals II"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 3,
+                            "Lootbag": null,
+                            "_id": "Epic",
+                            "Color": null,
+                            "DisplayName": "Epic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 7,
+                        "Desc": "7% chance your pet inflicts a critical hit (5x damage)!",
+                        "Icon": "rbxassetid://15030242864",
+                        "DisplayName": "Criticals III"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 4,
+                            "Lootbag": null,
+                            "_id": "Legendary",
+                            "Color": null,
+                            "DisplayName": "Legendary",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 11,
+                        "Desc": "11% chance your pet inflicts a critical hit (5x damage)!",
+                        "Icon": "rbxassetid://15030242716",
+                        "DisplayName": "Criticals IV"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 5,
+                            "Lootbag": null,
+                            "_id": "Mythical",
+                            "Color": null,
+                            "DisplayName": "Mythical",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 14,
+                        "Desc": "14% chance your pet inflicts a critical hit (5x damage)!",
+                        "Icon": "rbxassetid://15030242482",
+                        "DisplayName": "Criticals V"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 6,
+                            "Lootbag": null,
+                            "_id": "Exotic",
+                            "Color": null,
+                            "DisplayName": "Exotic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 17,
+                        "Desc": "17% chance your pet inflicts a critical hit (5x damage)!",
+                        "Icon": "rbxassetid://15696962297",
+                        "DisplayName": "Criticals VI"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 7,
+                            "Lootbag": null,
+                            "_id": "Divine",
+                            "Color": null,
+                            "DisplayName": "Divine",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 20,
+                        "Desc": "20% chance your pet inflicts a critical hit (5x damage)!",
+                        "Icon": "rbxassetid://15801601919",
+                        "DisplayName": "Criticals VII"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 8,
+                            "Lootbag": null,
+                            "_id": "Superior",
+                            "Color": null,
+                            "DisplayName": "Superior",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 23,
+                        "Desc": "23% chance your pet inflicts a critical hit (5x damage)!",
+                        "Icon": "rbxassetid://16318191964",
+                        "DisplayName": "Criticals VIII"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 9,
+                            "Lootbag": null,
+                            "_id": "Celestial",
+                            "Color": null,
+                            "DisplayName": "Celestial",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 26,
+                        "Desc": "26% chance your pet inflicts a critical hit (5x damage)!",
+                        "Icon": "rbxassetid://16888547469",
+                        "DisplayName": "Criticals IX"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 9,
+                            "Lootbag": null,
+                            "_id": "Celestial",
+                            "Color": null,
+                            "DisplayName": "Celestial",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 29,
+                        "Desc": "29% chance your pet inflicts a critical hit (5x damage)!",
+                        "Icon": "rbxassetid://127022719765452",
+                        "DisplayName": "Criticals X"
+                    }
+                ],
+                "EmpoweredBoost": 25,
+                "MaxTier": 10,
+                "PageIcon": "rbxassetid://13824100032"
+            },
+            "dateModified": "2025-07-05T23:28:49.152Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "2a5d18872b5a9037"
+        },
+        {
+            "configName": "Enchant | Walkspeed",
+            "category": "Enchants",
+            "configData": {
+                "BaseTier": 1,
+                "DiminishPowerThreshold": 160,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 1,
+                            "Lootbag": null,
+                            "_id": "Basic",
+                            "Color": null,
+                            "DisplayName": "Basic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 25,
+                        "Desc": "Increases player and pet speed by 25%!",
+                        "Icon": "rbxassetid://15030237790",
+                        "DisplayName": "Speed I"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 2,
+                            "Lootbag": null,
+                            "_id": "Rare",
+                            "Color": null,
+                            "DisplayName": "Rare",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 40,
+                        "Desc": "Increases player and pet speed by 40%!",
+                        "Icon": "rbxassetid://15030237682",
+                        "DisplayName": "Speed II"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 3,
+                            "Lootbag": null,
+                            "_id": "Epic",
+                            "Color": null,
+                            "DisplayName": "Epic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 55,
+                        "Desc": "Increases player and pet speed by 55%!",
+                        "Icon": "rbxassetid://15030237571",
+                        "DisplayName": "Speed III"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 4,
+                            "Lootbag": null,
+                            "_id": "Legendary",
+                            "Color": null,
+                            "DisplayName": "Legendary",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 70,
+                        "Desc": "Increases player and pet speed by 70%!",
+                        "Icon": "rbxassetid://15030237474",
+                        "DisplayName": "Speed IV"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 5,
+                            "Lootbag": null,
+                            "_id": "Mythical",
+                            "Color": null,
+                            "DisplayName": "Mythical",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 100,
+                        "Desc": "Increases player and pet speed by 100%!",
+                        "Icon": "rbxassetid://15030237367",
+                        "DisplayName": "Speed V"
+                    }
+                ],
+                "EmpoweredBoost": 50,
+                "MaxTier": 5,
+                "PageIcon": "rbxassetid://13824100032"
+            },
+            "dateModified": "2025-07-05T23:28:49.151Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "d1ce8a39f5f8096e"
+        },
+        {
+            "configName": "Enchant | Tap Power",
+            "category": "Enchants",
+            "configData": {
+                "BaseTier": 1,
+                "DiminishPowerThreshold": 2160,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 1,
+                            "Lootbag": null,
+                            "_id": "Basic",
+                            "Color": null,
+                            "DisplayName": "Basic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 25,
+                        "Desc": "Increases your tap power by 25%!",
+                        "Icon": "rbxassetid://15030239092",
+                        "DisplayName": "Tap Power I"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 2,
+                            "Lootbag": null,
+                            "_id": "Rare",
+                            "Color": null,
+                            "DisplayName": "Rare",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 50,
+                        "Desc": "Increases your tap power by 50%!",
+                        "Icon": "rbxassetid://15030238976",
+                        "DisplayName": "Tap Power II"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 3,
+                            "Lootbag": null,
+                            "_id": "Epic",
+                            "Color": null,
+                            "DisplayName": "Epic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 100,
+                        "Desc": "Increases your tap power by 100%!",
+                        "Icon": "rbxassetid://15030238822",
+                        "DisplayName": "Tap Power III"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 4,
+                            "Lootbag": null,
+                            "_id": "Legendary",
+                            "Color": null,
+                            "DisplayName": "Legendary",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 200,
+                        "Desc": "Increases your tap power by 200%!",
+                        "Icon": "rbxassetid://15030238646",
+                        "DisplayName": "Tap Power IV"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 5,
+                            "Lootbag": null,
+                            "_id": "Mythical",
+                            "Color": null,
+                            "DisplayName": "Mythical",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 400,
+                        "Desc": "Increases your tap power by 400%!",
+                        "Icon": "rbxassetid://15030238497",
+                        "DisplayName": "Tap Power V"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 6,
+                            "Lootbag": null,
+                            "_id": "Exotic",
+                            "Color": null,
+                            "DisplayName": "Exotic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 500,
+                        "Desc": "Increases your tap power by 500%!",
+                        "Icon": "rbxassetid://15696961637",
+                        "DisplayName": "Tap Power VI"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 7,
+                            "Lootbag": null,
+                            "_id": "Divine",
+                            "Color": null,
+                            "DisplayName": "Divine",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 600,
+                        "Desc": "Increases your tap power by 600%!",
+                        "Icon": "rbxassetid://15801600712",
+                        "DisplayName": "Tap Power VII"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 8,
+                            "Lootbag": null,
+                            "_id": "Superior",
+                            "Color": null,
+                            "DisplayName": "Superior",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 700,
+                        "Desc": "Increases your tap power by 700%!",
+                        "Icon": "rbxassetid://16318190735",
+                        "DisplayName": "Tap Power VIII"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 9,
+                            "Lootbag": null,
+                            "_id": "Celestial",
+                            "Color": null,
+                            "DisplayName": "Celestial",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 800,
+                        "Desc": "Increases your tap power by 800%!",
+                        "Icon": "rbxassetid://16888547174",
+                        "DisplayName": "Tap Power IX"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 9,
+                            "Lootbag": null,
+                            "_id": "Celestial",
+                            "Color": null,
+                            "DisplayName": "Celestial",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 900,
+                        "Desc": "Increases your tap power by 900%!",
+                        "Icon": "rbxassetid://130430035493945",
+                        "DisplayName": "Tap Power X"
+                    }
+                ],
+                "EmpoweredBoost": 100,
+                "MaxTier": 10,
+                "PageIcon": "rbxassetid://13824100032"
+            },
+            "dateModified": "2025-07-05T23:28:49.156Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "2798037fb986afe3"
+        },
+        {
+            "configName": "Enchant | Diamonds",
+            "category": "Enchants",
+            "configData": {
+                "BaseTier": 1,
+                "DiminishPowerThreshold": 104,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 1,
+                            "Lootbag": null,
+                            "_id": "Basic",
+                            "Color": null,
+                            "DisplayName": "Basic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 10,
+                        "Desc": "Increases the number of Diamonds you earn from breakables by 10%!",
+                        "Icon": "rbxassetid://15030242315",
+                        "DisplayName": "Diamonds I"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 2,
+                            "Lootbag": null,
+                            "_id": "Rare",
+                            "Color": null,
+                            "DisplayName": "Rare",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 20,
+                        "Desc": "Increases the number of Diamonds you earn from breakables by 20%!",
+                        "Icon": "rbxassetid://15030242164",
+                        "DisplayName": "Diamonds II"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 3,
+                            "Lootbag": null,
+                            "_id": "Epic",
+                            "Color": null,
+                            "DisplayName": "Epic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 30,
+                        "Desc": "Increases the number of Diamonds you earn from breakables by 30%!",
+                        "Icon": "rbxassetid://15030242071",
+                        "DisplayName": "Diamonds III"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 4,
+                            "Lootbag": null,
+                            "_id": "Legendary",
+                            "Color": null,
+                            "DisplayName": "Legendary",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 35,
+                        "Desc": "Increases the number of Diamonds you earn from breakables by 35%!",
+                        "Icon": "rbxassetid://15030241880",
+                        "DisplayName": "Diamonds IV"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 5,
+                            "Lootbag": null,
+                            "_id": "Mythical",
+                            "Color": null,
+                            "DisplayName": "Mythical",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 40,
+                        "Desc": "Increases the number of Diamonds you earn from breakables by 40%!",
+                        "Icon": "rbxassetid://15030241672",
+                        "DisplayName": "Diamonds V"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 6,
+                            "Lootbag": null,
+                            "_id": "Exotic",
+                            "Color": null,
+                            "DisplayName": "Exotic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 45,
+                        "Desc": "Increases the number of Diamonds you earn from breakables by 45%!",
+                        "Icon": "rbxassetid://15696962163",
+                        "DisplayName": "Diamonds VI"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 7,
+                            "Lootbag": null,
+                            "_id": "Divine",
+                            "Color": null,
+                            "DisplayName": "Divine",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 50,
+                        "Desc": "Increases the number of Diamonds you earn from breakables by 50%!",
+                        "Icon": "rbxassetid://15801601732",
+                        "DisplayName": "Diamonds VII"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 8,
+                            "Lootbag": null,
+                            "_id": "Superior",
+                            "Color": null,
+                            "DisplayName": "Superior",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 55,
+                        "Desc": "Increases the number of Diamonds you earn from breakables by 55%!",
+                        "Icon": "rbxassetid://16318191770",
+                        "DisplayName": "Diamonds VIII"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 9,
+                            "Lootbag": null,
+                            "_id": "Celestial",
+                            "Color": null,
+                            "DisplayName": "Celestial",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 60,
+                        "Desc": "Increases the number of Diamonds you earn from breakables by 60%!",
+                        "Icon": "rbxassetid://16888547376",
+                        "DisplayName": "Diamonds IX"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 9,
+                            "Lootbag": null,
+                            "_id": "Celestial",
+                            "Color": null,
+                            "DisplayName": "Celestial",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 65,
+                        "Desc": "Increases the number of Diamonds you earn from breakables by 65%!",
+                        "Icon": "rbxassetid://98965567848472",
+                        "DisplayName": "Diamonds X"
+                    }
+                ],
+                "EmpoweredBoost": 25,
+                "MaxTier": 10,
+                "PageIcon": "rbxassetid://13824100032"
+            },
+            "dateModified": "2025-07-05T23:28:49.170Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "fa93f78a8c14b186"
+        },
+        {
+            "configName": "Enchant | Lucky Eggs",
+            "category": "Enchants",
+            "configData": {
+                "BaseTier": 1,
+                "DiminishPowerThreshold": 384,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 1,
+                            "Lootbag": null,
+                            "_id": "Basic",
+                            "Color": null,
+                            "DisplayName": "Basic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 15,
+                        "Desc": "Increases your egg luck by 15%!",
+                        "Icon": "rbxassetid://15030240936",
+                        "DisplayName": "Lucky Eggs I"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 2,
+                            "Lootbag": null,
+                            "_id": "Rare",
+                            "Color": null,
+                            "DisplayName": "Rare",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 30,
+                        "Desc": "Increases your egg luck by 30%!",
+                        "Icon": "rbxassetid://15030240839",
+                        "DisplayName": "Lucky Eggs II"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 3,
+                            "Lootbag": null,
+                            "_id": "Epic",
+                            "Color": null,
+                            "DisplayName": "Epic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 50,
+                        "Desc": "Increases your egg luck by 50%!",
+                        "Icon": "rbxassetid://15030240731",
+                        "DisplayName": "Lucky Eggs III"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 4,
+                            "Lootbag": null,
+                            "_id": "Legendary",
+                            "Color": null,
+                            "DisplayName": "Legendary",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 75,
+                        "Desc": "Increases your egg luck by 75%!",
+                        "Icon": "rbxassetid://15030240650",
+                        "DisplayName": "Lucky Eggs IV"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 5,
+                            "Lootbag": null,
+                            "_id": "Mythical",
+                            "Color": null,
+                            "DisplayName": "Mythical",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 95,
+                        "Desc": "Increases your egg luck by 95%!",
+                        "Icon": "rbxassetid://15030240562",
+                        "DisplayName": "Lucky Eggs V"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 6,
+                            "Lootbag": null,
+                            "_id": "Exotic",
+                            "Color": null,
+                            "DisplayName": "Exotic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 110,
+                        "Desc": "Increases your egg luck by 110%!",
+                        "Icon": "rbxassetid://15696961903",
+                        "DisplayName": "Lucky Eggs VI"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 7,
+                            "Lootbag": null,
+                            "_id": "Divine",
+                            "Color": null,
+                            "DisplayName": "Divine",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 125,
+                        "Desc": "Increases your egg luck by 125%!",
+                        "Icon": "rbxassetid://15801601280",
+                        "DisplayName": "Lucky Eggs VII"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 8,
+                            "Lootbag": null,
+                            "_id": "Superior",
+                            "Color": null,
+                            "DisplayName": "Superior",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 140,
+                        "Desc": "Increases your egg luck by 140%!",
+                        "Icon": "rbxassetid://16318191353",
+                        "DisplayName": "Lucky Eggs VIII"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 9,
+                            "Lootbag": null,
+                            "_id": "Celestial",
+                            "Color": null,
+                            "DisplayName": "Celestial",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 155,
+                        "Desc": "Increases your egg luck by 155%!",
+                        "Icon": "rbxassetid://16888547308",
+                        "DisplayName": "Lucky Eggs IX"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 9,
+                            "Lootbag": null,
+                            "_id": "Celestial",
+                            "Color": null,
+                            "DisplayName": "Celestial",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 160,
+                        "Desc": "Increases your egg luck by 160%!",
+                        "Icon": "rbxassetid://119384620589816",
+                        "DisplayName": "Lucky Eggs X"
+                    }
+                ],
+                "EmpoweredBoost": 25,
+                "MaxTier": 10,
+                "PageIcon": "rbxassetid://13824100032"
+            },
+            "dateModified": "2025-07-05T23:28:49.172Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "0ac846027ee2fa75"
+        },
+        {
+            "configName": "Enchant | Magnet",
+            "category": "Enchants",
+            "configData": {
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 1,
+                            "Lootbag": null,
+                            "_id": "Basic",
+                            "Color": null,
+                            "DisplayName": "Basic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 8,
+                        "Desc": "Increases your magnet distance by 8!",
+                        "Icon": "rbxassetid://15030240467",
+                        "DisplayName": "Magnet I"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 2,
+                            "Lootbag": null,
+                            "_id": "Rare",
+                            "Color": null,
+                            "DisplayName": "Rare",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 15,
+                        "Desc": "Increases your magnet distance by 15!",
+                        "Icon": "rbxassetid://15030240353",
+                        "DisplayName": "Magnet II"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 3,
+                            "Lootbag": null,
+                            "_id": "Epic",
+                            "Color": null,
+                            "DisplayName": "Epic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 25,
+                        "Desc": "Increases your magnet distance by 25!",
+                        "Icon": "rbxassetid://15030240240",
+                        "DisplayName": "Magnet III"
+                    }
+                ],
+                "EmpoweredBoost": 50,
+                "MaxTier": 3,
+                "BaseTier": 1,
+                "PageIcon": "rbxassetid://13824100032"
+            },
+            "dateModified": "2025-07-05T23:28:49.184Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "40c9d7cd1d458429"
+        },
+        {
+            "configName": "Enchant | Treasure Hunter",
+            "category": "Enchants",
+            "configData": {
+                "BaseTier": 1,
+                "DiminishPowerThreshold": 88,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 1,
+                            "Lootbag": null,
+                            "_id": "Basic",
+                            "Color": null,
+                            "DisplayName": "Basic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 10,
+                        "Desc": "Increases your chances of drops from breakables by 10%!",
+                        "Icon": "rbxassetid://15030238336",
+                        "DisplayName": "Treasure Hunter I"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 2,
+                            "Lootbag": null,
+                            "_id": "Rare",
+                            "Color": null,
+                            "DisplayName": "Rare",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 15,
+                        "Desc": "Increases your chances of drops from breakables by 15%!",
+                        "Icon": "rbxassetid://15030238207",
+                        "DisplayName": "Treasure Hunter II"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 3,
+                            "Lootbag": null,
+                            "_id": "Epic",
+                            "Color": null,
+                            "DisplayName": "Epic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 20,
+                        "Desc": "Increases your chances of drops from breakables by 20%!",
+                        "Icon": "rbxassetid://15030238126",
+                        "DisplayName": "Treasure Hunter III"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 4,
+                            "Lootbag": null,
+                            "_id": "Legendary",
+                            "Color": null,
+                            "DisplayName": "Legendary",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 25,
+                        "Desc": "Increases your chances of drops from breakables by 25%!",
+                        "Icon": "rbxassetid://15030238034",
+                        "DisplayName": "Treasure Hunter IV"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 5,
+                            "Lootbag": null,
+                            "_id": "Mythical",
+                            "Color": null,
+                            "DisplayName": "Mythical",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 30,
+                        "Desc": "Increases your chances of drops from breakables by 30%!",
+                        "Icon": "rbxassetid://15030237944",
+                        "DisplayName": "Treasure Hunter V"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 6,
+                            "Lootbag": null,
+                            "_id": "Exotic",
+                            "Color": null,
+                            "DisplayName": "Exotic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 35,
+                        "Desc": "Increases your chances of drops from breakables by 35%!",
+                        "Icon": "rbxassetid://15696961536",
+                        "DisplayName": "Treasure Hunter VI"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 7,
+                            "Lootbag": null,
+                            "_id": "Divine",
+                            "Color": null,
+                            "DisplayName": "Divine",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 40,
+                        "Desc": "Increases your chances of drops from breakables by 40%!",
+                        "Icon": "rbxassetid://15801600434",
+                        "DisplayName": "Treasure Hunter VII"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 8,
+                            "Lootbag": null,
+                            "_id": "Superior",
+                            "Color": null,
+                            "DisplayName": "Superior",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 45,
+                        "Desc": "Increases your chances of drops from breakables by 45%!",
+                        "Icon": "rbxassetid://16318190415",
+                        "DisplayName": "Treasure Hunter VIII"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 9,
+                            "Lootbag": null,
+                            "_id": "Celestial",
+                            "Color": null,
+                            "DisplayName": "Celestial",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 50,
+                        "Desc": "Increases your chances of drops from breakables by 50%!",
+                        "Icon": "rbxassetid://16888547124",
+                        "DisplayName": "Treasure Hunter IX"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 9,
+                            "Lootbag": null,
+                            "_id": "Celestial",
+                            "Color": null,
+                            "DisplayName": "Celestial",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 55,
+                        "Desc": "Increases your chances of drops from breakables by 55%!",
+                        "Icon": "rbxassetid://93835312698682",
+                        "DisplayName": "Treasure Hunter X"
+                    }
+                ],
+                "EmpoweredBoost": 40,
+                "MaxTier": 10,
+                "PageIcon": "rbxassetid://13824100032"
+            },
+            "dateModified": "2025-07-05T23:28:49.187Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "4ada612b226db2c9"
+        },
+        {
+            "configName": "Enchant | Coins",
+            "category": "Enchants",
+            "configData": {
+                "BaseTier": 1,
+                "DiminishPowerThreshold": 480,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 1,
+                            "Lootbag": null,
+                            "_id": "Basic",
+                            "Color": null,
+                            "DisplayName": "Basic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 20,
+                        "Desc": "Increases the number of Coins you earn from breakables by 20%!",
+                        "Icon": "rbxassetid://15030243757",
+                        "DisplayName": "Coins I"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 2,
+                            "Lootbag": null,
+                            "_id": "Rare",
+                            "Color": null,
+                            "DisplayName": "Rare",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 40,
+                        "Desc": "Increases the number of Coins you earn from breakables by 40%!",
+                        "Icon": "rbxassetid://15030243629",
+                        "DisplayName": "Coins II"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 3,
+                            "Lootbag": null,
+                            "_id": "Epic",
+                            "Color": null,
+                            "DisplayName": "Epic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 60,
+                        "Desc": "Increases the number of Coins you earn from breakables by 60%!",
+                        "Icon": "rbxassetid://15030243525",
+                        "DisplayName": "Coins III"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 4,
+                            "Lootbag": null,
+                            "_id": "Legendary",
+                            "Color": null,
+                            "DisplayName": "Legendary",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 80,
+                        "Desc": "Increases the number of Coins you earn from breakables by 80%!",
+                        "Icon": "rbxassetid://15030327119",
+                        "DisplayName": "Coins IV"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 5,
+                            "Lootbag": null,
+                            "_id": "Mythical",
+                            "Color": null,
+                            "DisplayName": "Mythical",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 100,
+                        "Desc": "Increases the number of Coins you earn from breakables by 100%!",
+                        "Icon": "rbxassetid://15030243249",
+                        "DisplayName": "Coins V"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 6,
+                            "Lootbag": null,
+                            "_id": "Exotic",
+                            "Color": null,
+                            "DisplayName": "Exotic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 120,
+                        "Desc": "Increases the number of Coins you earn from breakables by 120%!",
+                        "Icon": "rbxassetid://15696962457",
+                        "DisplayName": "Coins VI"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 7,
+                            "Lootbag": null,
+                            "_id": "Divine",
+                            "Color": null,
+                            "DisplayName": "Divine",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 140,
+                        "Desc": "Increases the number of Coins you earn from breakables by 140%!",
+                        "Icon": "rbxassetid://15801602105",
+                        "DisplayName": "Coins VII"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 8,
+                            "Lootbag": null,
+                            "_id": "Superior",
+                            "Color": null,
+                            "DisplayName": "Superior",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 160,
+                        "Desc": "Increases the number of Coins you earn from breakables by 160%!",
+                        "Icon": "rbxassetid://16318192171",
+                        "DisplayName": "Coins VIII"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 9,
+                            "Lootbag": null,
+                            "_id": "Celestial",
+                            "Color": null,
+                            "DisplayName": "Celestial",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 180,
+                        "Desc": "Increases the number of Coins you earn from breakables by 180%!",
+                        "Icon": "rbxassetid://16888547603",
+                        "DisplayName": "Coins IX"
+                    },
+                    {
+                        "Rarity": {
+                            "RarityNumber": 9,
+                            "Lootbag": null,
+                            "_id": "Celestial",
+                            "Color": null,
+                            "DisplayName": "Celestial",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 200,
+                        "Desc": "Increases the number of Coins you earn from breakables by 200%!",
+                        "Icon": "rbxassetid://117145802658778",
+                        "DisplayName": "Coins X"
+                    }
+                ],
+                "EmpoweredBoost": 50,
+                "MaxTier": 10,
+                "PageIcon": "rbxassetid://13824100032"
+            },
+            "dateModified": "2025-07-05T23:28:49.191Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "690afe771ae787f9"
+        },
+        {
+            "configName": "Enchant | Blast",
+            "category": "Special",
+            "configData": {
+                "DiminishPowerThreshold": 16,
+                "MaxTier": 1,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 4,
+                            "Lootbag": null,
+                            "_id": "Legendary",
+                            "Color": null,
+                            "DisplayName": "Legendary",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 10,
+                        "Desc": "Taps have a 10% chance to ignite an explosion, damaging nearby breakables!",
+                        "Icon": "rbxassetid://15012896094",
+                        "DisplayName": "Tap Blast"
+                    }
+                ],
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:28:49.946Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "4be0b8a11213d815"
+        },
+        {
+            "configName": "Enchant | Happy Pets",
+            "category": "Special",
+            "configData": {
+                "DiminishPowerThreshold": 2,
+                "MaxTier": 1,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 3,
+                            "Lootbag": null,
+                            "_id": "Epic",
+                            "Color": null,
+                            "DisplayName": "Epic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 2,
+                        "Desc": "Pets get random bursts of joy, moving 25% faster and attacking 40% quicker!",
+                        "Icon": "rbxassetid://15012895724",
+                        "DisplayName": "Happy Pets"
+                    }
+                ],
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:28:49.204Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "772df6e88f45a5be"
+        },
+        {
+            "configName": "Enchant | Large Taps",
+            "category": "Special",
+            "configData": {
+                "DiminishPowerThreshold": 10.5,
+                "MaxTier": 1,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 6,
+                            "Lootbag": null,
+                            "_id": "Exotic",
+                            "Color": null,
+                            "DisplayName": "Exotic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 10.5,
+                        "Desc": "Increases your tap radius!",
+                        "Icon": "rbxassetid://16022160439",
+                        "DisplayName": "Large Taps"
+                    }
+                ],
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:28:49.206Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "2e3babec35a3e473"
+        },
+        {
+            "configName": "Enchant | Midas Touch",
+            "category": "Special",
+            "configData": {
+                "DiminishPowerThreshold": 15,
+                "MaxTier": 1,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 6,
+                            "Lootbag": null,
+                            "_id": "Exotic",
+                            "Color": null,
+                            "DisplayName": "Exotic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 15,
+                        "Desc": "Breakables have a chance to turn gold, making them worth 5x!",
+                        "Icon": "rbxassetid://15012895285",
+                        "DisplayName": "Midas Touch"
+                    }
+                ],
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:28:49.216Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "461792b29a78d400"
+        },
+        {
+            "configName": "Enchant | Lightning",
+            "category": "Special",
+            "configData": {
+                "DiminishPowerThreshold": 6,
+                "MaxTier": 1,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 5,
+                            "Lootbag": null,
+                            "_id": "Mythical",
+                            "Color": null,
+                            "DisplayName": "Mythical",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 6,
+                        "Desc": "Tapping has a chance to send bolts of lightning to nearby breakables!",
+                        "Icon": "rbxassetid://15012895375",
+                        "DisplayName": "Lightning"
+                    }
+                ],
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:28:49.221Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "5b36d3d02e850146"
+        },
+        {
+            "configName": "Enchant | Exotic Pet",
+            "category": "Special",
+            "configData": {
+                "DiminishPowerThreshold": 150,
+                "MaxTier": 1,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 6,
+                            "Lootbag": null,
+                            "_id": "Exotic",
+                            "Color": null,
+                            "DisplayName": "Exotic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 150,
+                        "Desc": "Increases the strength of your BEST pet by 150%!",
+                        "Icon": "rbxassetid://15054823167",
+                        "DisplayName": "Exotic Pet"
+                    }
+                ],
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:28:49.227Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "bc556fd2bca7b2b9"
+        },
+        {
+            "configName": "Enchant | Tap Teamwork",
+            "category": "Special",
+            "configData": {
+                "DiminishPowerThreshold": 10,
+                "MaxTier": 1,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 3,
+                            "Lootbag": null,
+                            "_id": "Epic",
+                            "Color": null,
+                            "DisplayName": "Epic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 10,
+                        "Desc": "Tapping with your pets creates a Tap Teamwork buff, making your pets attack 10% faster! Stacks up to 6 times.",
+                        "Icon": "rbxassetid://15012894876",
+                        "DisplayName": "Tap Teamwork"
+                    }
+                ],
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:28:49.238Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "4d8dcbab3cb9ae74"
+        },
+        {
+            "configName": "Enchant | Super Lightning",
+            "category": "Special",
+            "configData": {
+                "DiminishPowerThreshold": 12,
+                "MaxTier": 1,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 8,
+                            "Lootbag": null,
+                            "_id": "Superior",
+                            "Color": null,
+                            "DisplayName": "Superior",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 12,
+                        "Desc": "Tapping has a chance to send bolts of super-charged lightning to nearby breakables!",
+                        "Icon": "rbxassetid://15012894984",
+                        "DisplayName": "Super Lightning"
+                    }
+                ],
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:28:49.240Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "ac8b2d434c9672af"
+        },
+        {
+            "configName": "Enchant | Starfall",
+            "category": "Special",
+            "configData": {
+                "DiminishPowerThreshold": 1,
+                "MaxTier": 1,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 6,
+                            "Lootbag": null,
+                            "_id": "Exotic",
+                            "Color": null,
+                            "DisplayName": "Exotic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 1,
+                        "Desc": "Chance for a Comet Shower to happen while equipped!",
+                        "Icon": "rbxassetid://15012895109",
+                        "DisplayName": "Starfall"
+                    }
+                ],
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:28:49.248Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "eb9d774929207875"
+        },
+        {
+            "configName": "Enchant | Shiny Hunter",
+            "category": "Special",
+            "configData": {
+                "DiminishPowerThreshold": 96,
+                "MaxTier": 1,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 6,
+                            "Lootbag": null,
+                            "_id": "Exotic",
+                            "Color": null,
+                            "DisplayName": "Exotic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 60,
+                        "Desc": "Increases the odds of hatching shiny pets by +60%!",
+                        "Icon": "rbxassetid://15012895193",
+                        "DisplayName": "Shiny Hunter"
+                    }
+                ],
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:28:49.256Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "326834e5da9236a1"
+        },
+        {
+            "configName": "Enchant | Huge Hunter",
+            "category": "Special",
+            "configData": {
+                "DiminishPowerThreshold": 80,
+                "MaxTier": 1,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 6,
+                            "Lootbag": null,
+                            "_id": "Exotic",
+                            "Color": null,
+                            "DisplayName": "Exotic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 25,
+                        "Desc": "Increases the odds of hatching Active Huge Pets by 25%!",
+                        "Icon": "rbxassetid://15012895531",
+                        "DisplayName": "Huge Hunter"
+                    }
+                ],
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:28:49.263Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "37556a0a97644965"
+        },
+        {
+            "configName": "Enchant | Chest Breaker",
+            "category": "Special",
+            "configData": {
+                "DiminishPowerThreshold": 200,
+                "MaxTier": 1,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 8,
+                            "Lootbag": null,
+                            "_id": "Superior",
+                            "Color": null,
+                            "DisplayName": "Superior",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 200,
+                        "Desc": "Increases the damage you deal to chests by 200%!",
+                        "Icon": "rbxassetid://15012896012",
+                        "DisplayName": "Chest Breaker"
+                    }
+                ],
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:28:49.944Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "952a0d8e9fa5e37c"
+        },
+        {
+            "configName": "Enchant | Fortune",
+            "category": "Special",
+            "configData": {
+                "DiminishPowerThreshold": 100,
+                "MaxTier": 1,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 6,
+                            "Lootbag": null,
+                            "_id": "Exotic",
+                            "Color": null,
+                            "DisplayName": "Exotic",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 100,
+                        "Desc": "Increases the Coins you earn from breakables by 100% and Diamonds by 40%!",
+                        "Icon": "rbxassetid://15012895819",
+                        "DisplayName": "Fortune"
+                    }
+                ],
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:28:49.275Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "f0e817484756d2b1"
+        },
+        {
+            "configName": "Enchant | Explosive",
+            "category": "Special",
+            "configData": {
+                "DiminishPowerThreshold": 10,
+                "MaxTier": 1,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 5,
+                            "Lootbag": null,
+                            "_id": "Mythical",
+                            "Color": null,
+                            "DisplayName": "Mythical",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": false,
+                            "_script": null
+                        },
+                        "Power": 10,
+                        "Desc": "Pets have a chance of igniting an explosive!",
+                        "Icon": "rbxassetid://16037377524",
+                        "DisplayName": "Explosive"
+                    }
+                ],
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:28:49.281Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "d818378bae6d6324"
+        },
+        {
+            "configName": "Enchant | Magic Orb",
+            "category": "Special",
+            "configData": {
+                "DiminishPowerThreshold": 100,
+                "MaxTier": 1,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 7,
+                            "Lootbag": null,
+                            "_id": "Divine",
+                            "Color": null,
+                            "DisplayName": "Divine",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 100,
+                        "Desc": "Spawns an orb companion that fires at nearby breakables!",
+                        "Icon": "rbxassetid://15938765507",
+                        "DisplayName": "Magic Orb"
+                    }
+                ],
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:28:49.942Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "7d7f6242a6e1f53c"
+        },
+        {
+            "configName": "Enchant | Fireworks",
+            "category": "Exclusive",
+            "configData": {
+                "DiminishPowerThreshold": 24,
+                "ProductId": 1674740229,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 999,
+                            "Lootbag": null,
+                            "_id": "Exclusive",
+                            "Color": null,
+                            "DisplayName": "Exclusive",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 10,
+                        "Desc": "Sporadically shoot fireworks to explode breakables you tap!",
+                        "Icon": "rbxassetid://15257719053",
+                        "DisplayName": "Fireworks"
+                    }
+                ],
+                "MaxTier": 1,
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:28:49.940Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "f4d65df436459cf9"
+        },
+        {
+            "configName": "Enchant | Party Time",
+            "category": "Exclusive",
+            "configData": {
+                "DiminishPowerThreshold": 8,
+                "ProductId": 1718430474,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 999,
+                            "Lootbag": null,
+                            "_id": "Exclusive",
+                            "Color": null,
+                            "DisplayName": "Exclusive",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 5,
+                        "Desc": "Time to party! Random Events happen more often for you!",
+                        "Icon": "rbxassetid://15799383770",
+                        "DisplayName": "Party Time"
+                    }
+                ],
+                "MaxTier": 1,
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:28:49.949Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "e27ba05a6aa648f8"
+        },
+        {
+            "configName": "Enchant | Lucky Block",
+            "category": "Exclusive",
+            "configData": {
+                "DiminishPowerThreshold": 0.8,
+                "ProductId": 1674740376,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 999,
+                            "Lootbag": null,
+                            "_id": "Exclusive",
+                            "Color": null,
+                            "DisplayName": "Exclusive",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 0.5,
+                        "Desc": "Lucky Blocks may randomly appear in your area!",
+                        "Icon": "rbxassetid://15257718885",
+                        "DisplayName": "Lucky Block"
+                    }
+                ],
+                "MaxTier": 1,
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:28:49.943Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "2c28c289a32d3a39"
+        },
+        {
+            "configName": "Enchant | Massive Comet",
+            "category": "Exclusive",
+            "configData": {
+                "DiminishPowerThreshold": 0.4,
+                "ProductId": 1718434271,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 999,
+                            "Lootbag": null,
+                            "_id": "Exclusive",
+                            "Color": null,
+                            "DisplayName": "Exclusive",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 0.25,
+                        "Desc": "Chance to spawn a Massive Comet! Drops items, diamonds and coins!",
+                        "Icon": "rbxassetid://15799384059",
+                        "DisplayName": "Massive Comet"
+                    }
+                ],
+                "MaxTier": 1,
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:28:50.130Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "99618c8b690dd791"
+        },
+        {
+            "configName": "Enchant | Chest Mimic",
+            "category": "Exclusive",
+            "configData": {
+                "DiminishPowerThreshold": 0.9600000000000002,
+                "ProductId": 1674746599,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 999,
+                            "Lootbag": null,
+                            "_id": "Exclusive",
+                            "Color": null,
+                            "DisplayName": "Exclusive",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 0.4,
+                        "Desc": "Destroying a breakable can reveal a Mini Chest!",
+                        "Icon": "rbxassetid://15257719276",
+                        "DisplayName": "Chest Mimic"
+                    }
+                ],
+                "MaxTier": 1,
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:28:49.977Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "957bf756594631d7"
+        },
+        {
+            "configName": "Enchant | Diamond Chest Mimic",
+            "category": "Exclusive",
+            "configData": {
+                "DiminishPowerThreshold": 0.26666666666666666,
+                "ProductId": 1718434784,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 999,
+                            "Lootbag": null,
+                            "_id": "Exclusive",
+                            "Color": null,
+                            "DisplayName": "Exclusive",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 0.16666666666666666,
+                        "Desc": "Destroying a breakable can reveal a Diamond Mini Chest!",
+                        "Icon": "rbxassetid://15801837068",
+                        "DisplayName": "Diamond Chest Mimic"
+                    }
+                ],
+                "MaxTier": 1,
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:28:49.980Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "610a9b2d83c0e558"
+        },
+        {
+            "configName": "Enchant | Super Shiny Hunter",
+            "category": "Exclusive",
+            "configData": {
+                "DiminishPowerThreshold": 240,
+                "ProductId": 1759520039,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 999,
+                            "Lootbag": null,
+                            "_id": "Exclusive",
+                            "Color": null,
+                            "DisplayName": "Exclusive",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 150,
+                        "Desc": "Increases the odds of hatching shiny pets by +150%!",
+                        "Icon": "rbxassetid://16457058699",
+                        "DisplayName": "Super Shiny Hunter"
+                    }
+                ],
+                "MaxTier": 1,
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:28:49.973Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "3aec46dbf46377b4"
+        },
+        {
+            "configName": "Enchant | Fruity",
+            "category": "Special",
+            "configData": {
+                "DiminishPowerThreshold": 0.25,
+                "MaxTier": 1,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 7,
+                            "Lootbag": null,
+                            "_id": "Divine",
+                            "Color": null,
+                            "DisplayName": "Divine",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 0.25,
+                        "Desc": "Increase the power of your fruits by 25%, but they expire twice as fast!",
+                        "Icon": "rbxassetid://16504664274",
+                        "DisplayName": "Fruity"
+                    }
+                ],
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:28:49.948Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "fddb80f6b73f89bc"
+        },
+        {
+            "configName": "Enchant | Boss Chest Mimic",
+            "category": "Exclusive",
+            "configData": {
+                "DiminishPowerThreshold": 0.24000000000000005,
+                "ProductId": 1759511562,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 999,
+                            "Lootbag": null,
+                            "_id": "Exclusive",
+                            "Color": null,
+                            "DisplayName": "Exclusive",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 0.1,
+                        "Desc": "Destroying a breakable can reveal a Boss Chest!",
+                        "Icon": "rbxassetid://16457058891",
+                        "DisplayName": "Boss Chest Mimic"
+                    }
+                ],
+                "MaxTier": 1,
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:28:50.011Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "c338422e31285482"
+        },
+        {
+            "configName": "Enchant | Super Magnet",
+            "category": "Exclusive",
+            "configData": {
+                "DiminishPowerThreshold": 1,
+                "ProductId": 1775110157,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 999,
+                            "Lootbag": null,
+                            "_id": "Exclusive",
+                            "Color": null,
+                            "DisplayName": "Exclusive",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 1,
+                        "Desc": "Collect coins, lootbags and dropped items from anywhere & everywhere!",
+                        "Icon": "rbxassetid://16736074645",
+                        "DisplayName": "Super Magnet"
+                    }
+                ],
+                "MaxTier": 1,
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:28:49.975Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "fb80315a6ee5df80"
+        },
+        {
+            "configName": "Enchant | Boss Lucky Block",
+            "category": "Exclusive",
+            "configData": {
+                "DiminishPowerThreshold": 0.2,
+                "ProductId": 1775110873,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 999,
+                            "Lootbag": null,
+                            "_id": "Exclusive",
+                            "Color": null,
+                            "DisplayName": "Exclusive",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 0.125,
+                        "Desc": "Boss Lucky Blocks may randomly appear in your area!",
+                        "Icon": "rbxassetid://16735810565",
+                        "DisplayName": "Boss Lucky Block"
+                    }
+                ],
+                "MaxTier": 1,
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:28:49.976Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "012bc832834df369"
+        },
+        {
+            "configName": "Enchant | Lightning Orb",
+            "category": "Exclusive",
+            "configData": {
+                "DiminishPowerThreshold": 100,
+                "ProductId": 1795853901,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 999,
+                            "Lootbag": null,
+                            "_id": "Exclusive",
+                            "Color": null,
+                            "DisplayName": "Exclusive",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 100,
+                        "Desc": "Spawns an orb companion that fires bolts of lightning to nearby breakables!",
+                        "Icon": "rbxassetid://18655090446",
+                        "DisplayName": "Lightning Orb"
+                    }
+                ],
+                "MaxTier": 1,
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:28:49.978Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "688c6933e574dafd"
+        },
+        {
+            "configName": "Enchant | Mini Chest Fortune",
+            "category": "Exclusive",
+            "configData": {
+                "DiminishPowerThreshold": 2,
+                "ProductId": 1816773521,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 999,
+                            "Lootbag": null,
+                            "_id": "Exclusive",
+                            "Color": null,
+                            "DisplayName": "Exclusive",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 2,
+                        "Desc": "Mini Chests drop 2x better items!",
+                        "Icon": "rbxassetid://17276030055",
+                        "DisplayName": "Mini Chest Fortune"
+                    }
+                ],
+                "MaxTier": 1,
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:28:49.971Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "2e66444decdd6d58"
+        },
+        {
+            "configName": "Enchant | Shiny Supercharge",
+            "category": "Exclusive",
+            "configData": {
+                "DiminishPowerThreshold": 100,
+                "ProductId": 1816774438,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 999,
+                            "Lootbag": null,
+                            "_id": "Exclusive",
+                            "Color": null,
+                            "DisplayName": "Exclusive",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 100,
+                        "Desc": "Increases the strength of your shiny pets by 100%!",
+                        "Icon": "rbxassetid://17276029951",
+                        "DisplayName": "Shiny Supercharge"
+                    }
+                ],
+                "MaxTier": 1,
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:28:49.977Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "ff7c91554b83a6df"
+        },
+        {
+            "configName": "Enchant | Corruption",
+            "category": "Special",
+            "configData": {
+                "DiminishPowerThreshold": 1,
+                "MaxTier": 1,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 999,
+                            "Lootbag": null,
+                            "_id": "Exclusive",
+                            "Color": null,
+                            "DisplayName": "Exclusive",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 1,
+                        "Desc": "Chance to apply corruption to breakables and increase the amount of damage you do!",
+                        "Icon": "rbxassetid://17375424643",
+                        "DisplayName": "Corruption"
+                    }
+                ],
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:28:49.945Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "5e44fbde84849e3c"
+        },
+        {
+            "configName": "Enchant | Nightmare Orb",
+            "category": "Special",
+            "configData": {
+                "DiminishPowerThreshold": 100,
+                "MaxTier": 1,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 999,
+                            "Lootbag": null,
+                            "_id": "Exclusive",
+                            "Color": null,
+                            "DisplayName": "Exclusive",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 100,
+                        "Desc": "Spawns an orb companion that fires balls of terror at nearby breakables!",
+                        "Icon": "rbxassetid://17375424435",
+                        "DisplayName": "Nightmare Orb"
+                    }
+                ],
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:28:49.939Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "b98802ba1e1769bb"
+        },
+        {
+            "configName": "Enchant | Superior Chest Mimic",
+            "category": "Exclusive",
+            "configData": {
+                "DiminishPowerThreshold": 0.24000000000000005,
+                "ProductId": 1829171313,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 999,
+                            "Lootbag": null,
+                            "_id": "Exclusive",
+                            "Color": null,
+                            "DisplayName": "Exclusive",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 0.1,
+                        "Desc": "Destroying a breakable can reveal a Superior Mini Chest!",
+                        "Icon": "rbxassetid://17502541549",
+                        "DisplayName": "Superior Chest Mimic"
+                    }
+                ],
+                "MaxTier": 1,
+                "BaseTier": 1
+            },
+            "dateModified": "2025-07-05T23:28:49.980Z",
+            "dateCreated": null,
+            "collection": "Enchants",
+            "hashShort": "84b0faa8ab311230"
+        },
+        {
+            "configName": "Enchant | Hacker Key Hunter",
+            "category": "Special",
+            "configData": {
+                "DiminishPowerThreshold": 1,
+                "MaxTier": 1,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 7,
+                            "Lootbag": null,
+                            "_id": "Divine",
+                            "Color": null,
+                            "DisplayName": "Divine",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 1,
+                        "Desc": "Each hacker key drop provides two or three keys!",
+                        "Icon": "rbxassetid://17760584353",
+                        "DisplayName": "Hacker Key Hunter"
+                    }
+                ],
+                "BaseTier": 1
+            },
+            "dateCreated": "2025-07-05T23:23:25.503Z",
+            "dateModified": "2025-07-05T23:23:25.503Z",
+            "collection": "Enchants",
+            "hashShort": "b3e9ba3bc829b20d"
+        },
+        {
+            "configName": "Enchant | Demonic",
+            "category": "Special",
+            "configData": {
+                "DiminishPowerThreshold": 1.04,
+                "MaxTier": 1,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 8,
+                            "Lootbag": null,
+                            "_id": "Superior",
+                            "Color": null,
+                            "DisplayName": "Superior",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 0.65,
+                        "Desc": "Chance to strike breakables with a demonic curse dealing more damage with every strike! Strikes up to 5 times!",
+                        "Icon": "rbxassetid://18255411160",
+                        "DisplayName": "Demonic"
+                    }
+                ],
+                "BaseTier": 1
+            },
+            "dateCreated": "2025-07-05T23:23:25.503Z",
+            "dateModified": "2025-07-05T23:23:25.503Z",
+            "collection": "Enchants",
+            "hashShort": "8680fe1814210faf"
+        },
+        {
+            "configName": "Enchant | Angelic",
+            "category": "Special",
+            "configData": {
+                "DiminishPowerThreshold": 1.04,
+                "MaxTier": 1,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 8,
+                            "Lootbag": null,
+                            "_id": "Superior",
+                            "Color": null,
+                            "DisplayName": "Superior",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 0.65,
+                        "Desc": "Chance to strike breakables with angelic justice dealing more damage with every strike! Strikes up to 5 times!",
+                        "Icon": "rbxassetid://18222206298",
+                        "DisplayName": "Angelic"
+                    }
+                ],
+                "BaseTier": 1
+            },
+            "dateCreated": "2025-07-05T23:23:25.503Z",
+            "dateModified": "2025-07-05T23:23:25.503Z",
+            "collection": "Enchants",
+            "hashShort": "16a280717aa26524"
+        },
+        {
+            "configName": "Enchant | Diamond Gift Hunter",
+            "category": "Exclusive",
+            "configData": {
+                "DiminishPowerThreshold": 0.5333333333333333,
+                "ProductId": 1861245836,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 999,
+                            "Lootbag": null,
+                            "_id": "Exclusive",
+                            "Color": null,
+                            "DisplayName": "Exclusive",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 0.3333333333333333,
+                        "Desc": "Destroying a breakable can drop a Diamond Gift Bag!",
+                        "Icon": "rbxassetid://18222206998",
+                        "DisplayName": "Diamond Gift Hunter"
+                    }
+                ],
+                "MaxTier": 1,
+                "BaseTier": 1
+            },
+            "dateCreated": "2025-07-05T23:23:25.503Z",
+            "dateModified": "2025-07-05T23:23:25.503Z",
+            "collection": "Enchants",
+            "hashShort": "f64b572df3622742"
+        },
+        {
+            "configName": "Enchant | Diamond Orb",
+            "category": "Exclusive",
+            "configData": {
+                "DiminishPowerThreshold": 100,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 999,
+                            "Lootbag": null,
+                            "_id": "Exclusive",
+                            "Color": null,
+                            "DisplayName": "Exclusive",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 100,
+                        "Desc": "Spawns an orb companion that has a chance to turn breakables into Diamond!",
+                        "Icon": "rbxassetid://18655090651",
+                        "DisplayName": "Diamond Orb"
+                    }
+                ],
+                "MaxTier": 1,
+                "Tradable": true,
+                "BaseTier": 1
+            },
+            "dateCreated": "2025-07-05T23:23:25.503Z",
+            "dateModified": "2025-07-05T23:23:25.503Z",
+            "collection": "Enchants",
+            "hashShort": "526722cfc2d782be"
+        },
+        {
+            "configName": "Enchant | Active Huge Overload",
+            "category": "Exclusive",
+            "configData": {
+                "DiminishPowerThreshold": 40,
+                "ProductId": 2313608101,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 999,
+                            "Lootbag": null,
+                            "_id": "Exclusive",
+                            "Color": null,
+                            "DisplayName": "Exclusive",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 40,
+                        "Desc": "Adds +1 RARE Active Huge to hatch!\n\nIncreases Active Huge hatch luck by 40%!",
+                        "Icon": "rbxassetid://90697119855056",
+                        "DisplayName": "Active Huge Overload"
+                    }
+                ],
+                "MaxTier": 1,
+                "BaseTier": 1
+            },
+            "dateCreated": "2025-07-05T23:23:25.503Z",
+            "dateModified": "2025-07-05T23:23:25.503Z",
+            "collection": "Enchants",
+            "hashShort": "8fd02b8b03353ec0"
+        },
+        {
+            "configName": "Enchant | Rainbow Eggs",
+            "category": "Exclusive",
+            "configData": {
+                "DiminishPowerThreshold": 12,
+                "ProductId": 2662224833,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 999,
+                            "Lootbag": null,
+                            "_id": "Exclusive",
+                            "Color": null,
+                            "DisplayName": "Exclusive",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 10,
+                        "Desc": "Boosts your ability to hatch Rainbow pets!",
+                        "Icon": "rbxassetid://82449205025738",
+                        "DisplayName": "Rainbow Egg"
+                    }
+                ],
+                "MaxTier": 1,
+                "BaseTier": 1
+            },
+            "dateCreated": "2025-07-05T23:23:25.503Z",
+            "dateModified": "2025-07-05T23:23:25.503Z",
+            "collection": "Enchants",
+            "hashShort": "60d2c9f6efc0720f"
+        },
+        {
+            "configName": "Enchant | Double Coins",
+            "category": "Exclusive",
+            "configData": {
+                "DiminishPowerThreshold": 1,
+                "ProductId": 2665766404,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 999,
+                            "Lootbag": null,
+                            "_id": "Exclusive",
+                            "Color": null,
+                            "DisplayName": "Exclusive",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 1,
+                        "Desc": "Gives DOUBLE the coins from destroying breakables!",
+                        "Icon": "rbxassetid://92136936171430",
+                        "DisplayName": "Double Coins"
+                    }
+                ],
+                "MaxTier": 1,
+                "BaseTier": 1
+            },
+            "dateCreated": "2025-07-05T23:23:25.503Z",
+            "dateModified": "2025-07-05T23:23:25.503Z",
+            "collection": "Enchants",
+            "hashShort": "37a92b06b76708b5"
+        },
+        {
+            "configName": "Enchant | Breakable Mayhem",
+            "category": "Exclusive",
+            "configData": {
+                "DiminishPowerThreshold": 1,
+                "ProductId": 2689880249,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 999,
+                            "Lootbag": null,
+                            "_id": "Exclusive",
+                            "Color": null,
+                            "DisplayName": "Exclusive",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 0.5,
+                        "Desc": "Random HUGE & TITANIC chance while destroying breakables!\n\nHuge & Titanic rotates DAILY!",
+                        "Icon": "rbxassetid://136082909959165",
+                        "DisplayName": "Breakable Mayhem"
+                    }
+                ],
+                "MaxTier": 1,
+                "BaseTier": 1
+            },
+            "dateCreated": "2025-07-05T23:23:25.503Z",
+            "dateModified": "2025-07-05T23:23:25.503Z",
+            "collection": "Enchants",
+            "hashShort": "b4ea2320e9db8c1d"
+        },
+        {
+            "configName": "Enchant | Mega Chest Breaker",
+            "category": "Special",
+            "configData": {
+                "DiminishPowerThreshold": 500,
+                "MaxTier": 1,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 999,
+                            "Lootbag": null,
+                            "_id": "Exclusive",
+                            "Color": null,
+                            "DisplayName": "Exclusive",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 500,
+                        "Desc": "Increases the damage you deal to chests by 500%!",
+                        "Icon": "rbxassetid://116837175751892",
+                        "DisplayName": "Mega Chest Breaker"
+                    }
+                ],
+                "BaseTier": 1
+            },
+            "dateCreated": "2025-07-05T23:23:25.503Z",
+            "dateModified": "2025-07-05T23:23:25.503Z",
+            "collection": "Enchants",
+            "hashShort": "f890e664894fd9b2"
+        },
+        {
+            "configName": "Enchant | Superior Wisdom",
+            "category": "Exclusive",
+            "configData": {
+                "DiminishPowerThreshold": 600,
+                "ProductId": 3296149716,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 999,
+                            "Lootbag": null,
+                            "_id": "Exclusive",
+                            "Color": null,
+                            "DisplayName": "Exclusive",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 300,
+                        "Desc": "Grants 3x Huge, Titanic, and Gargantuan XP!",
+                        "Icon": "rbxassetid://127001486940469",
+                        "DisplayName": "Superior Wisdom"
+                    }
+                ],
+                "MaxTier": 1,
+                "BaseTier": 1
+            },
+            "dateCreated": "2025-07-05T23:23:25.503Z",
+            "dateModified": "2025-07-05T23:23:25.503Z",
+            "collection": "Enchants",
+            "hashShort": "4576011c338c05bc"
+        },
+        {
+            "configName": "Enchant | Swift Taps",
+            "category": "Exclusive",
+            "configData": {
+                "DiminishPowerThreshold": 200,
+                "ProductId": 3609049371,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 999,
+                            "Lootbag": null,
+                            "_id": "Exclusive",
+                            "Color": null,
+                            "DisplayName": "Exclusive",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 100,
+                        "Desc": "Double your tapping power with 2x tap speed!",
+                        "Icon": "rbxassetid://135075197702264",
+                        "DisplayName": "Swift Taps"
+                    }
+                ],
+                "MaxTier": 1,
+                "BaseTier": 1
+            },
+            "dateCreated": "2026-07-11T18:32:21.458Z",
+            "dateModified": "2026-07-11T18:32:21.458Z",
+            "collection": "Enchants",
+            "hashShort": "c16162f993e0b7c8"
+        },
+        {
+            "configName": "Enchant | Pinata Basher",
+            "category": "Exclusive",
+            "configData": {
+                "DiminishPowerThreshold": 100,
+                "ProductId": 3648053290,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 999,
+                            "Lootbag": null,
+                            "_id": "Exclusive",
+                            "Color": null,
+                            "DisplayName": "Exclusive",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 100,
+                        "Desc": "Increases the damage you deal to piñatas by 100%!",
+                        "Icon": "rbxassetid://138644644170619",
+                        "DisplayName": "Piñata Basher"
+                    }
+                ],
+                "MaxTier": 1,
+                "BaseTier": 1
+            },
+            "dateCreated": "2026-08-08T15:59:31.764Z",
+            "dateModified": "2026-08-08T15:59:31.764Z",
+            "collection": "Enchants",
+            "hashShort": "87784a4deb823a27"
+        },
+        {
+            "configName": "Enchant | Lucky Block Breaker",
+            "category": "Exclusive",
+            "configData": {
+                "DiminishPowerThreshold": 100,
+                "ProductId": 3709318551,
+                "Tiers": [
+                    {
+                        "Rarity": {
+                            "RarityNumber": 999,
+                            "Lootbag": null,
+                            "_id": "Exclusive",
+                            "Color": null,
+                            "DisplayName": "Exclusive",
+                            "Message": null,
+                            "ItemSlot": null,
+                            "Gradient": null,
+                            "Announce": true,
+                            "_script": null
+                        },
+                        "Power": 100,
+                        "Desc": "Increases the damage you deal to Lucky Blocks by 100%!",
+                        "Icon": "rbxassetid://95898342975495",
+                        "DisplayName": "Lucky Block Breaker"
+                    }
+                ],
+                "MaxTier": 1,
+                "BaseTier": 1
+            },
+            "dateCreated": "2026-08-22T16:42:08.642Z",
+            "dateModified": "2026-08-22T16:42:08.642Z",
+            "collection": "Enchants",
+            "hashShort": "264924d65e9d478b"
+        }
+    ]
+}
