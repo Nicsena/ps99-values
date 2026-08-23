@@ -60,11 +60,7 @@ const dataDir = './data/game';
 const outDir = './data/test';
 mkdirSync(outDir, { recursive: true });
 
-const ENABLED_COLLECTIONS = [
-  'Pets', 'Boosts', 'Booths', 'Boxes', 'Charms', 'MiscItems', 'Potions',
-  'Seeds', 'Ultimates', 'XPPotions', 'Lootboxes', 'Hoverboards', 'Fruits',
-  'CardItems', 'Shovels', 'Sprinklers', 'ZoneFlags',
-];
+import ENABLED_COLLECTIONS from "./enabled_collections.js"
 
 const items: ItemDraft[] = [];
 const stats: Record<string, { total: number; fallbackToConfigName: number }> = {};

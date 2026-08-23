@@ -1,0 +1,19 @@
+export default [
+    "Pets",
+    "Boosts",
+    "Booths",
+    "Boxes",
+    "Charms",
+    "MiscItems",
+    "Potions",
+    "Seeds",
+    "Ultimates",
+    "XPPotions",
+    "Lootboxes",
+    "Hoverboards",
+    "Fruits",
+    "CardItems",
+    "Shovels",
+    "Sprinklers",
+    "ZoneFlags"
+]

@@ -47,17 +47,14 @@ const dataDir = './data/game';
 const outDir = './data/test';
 mkdirSync(outDir, { recursive: true });
 
-const ENABLED_COLLECTIONS = new Set([
-  'Pets', 'Boosts', 'Booths', 'Boxes', 'Charms', 'MiscItems', 'Potions',
-  'Seeds', 'Ultimates', 'XPPotions', 'Lootboxes', 'Hoverboards', 'Fruits',
-  'CardItems', 'Shovels', 'Sprinklers', 'ZoneFlags',
-]);
+import ENABLED_COLLECTIONS from "./enabled_collections.js"
+const enabledCollections = new Set(ENABLED_COLLECTIONS);
 
 const results: DetectionResult[] = [];
 
 for (const file of readdirSync(dataDir).filter((f) => f.startsWith('collection-'))) {
   const collection = file.replace('collection-', '').replace('.json', '');
-  if (!ENABLED_COLLECTIONS.has(collection)) continue;
+  if (!enabledCollections.has(collection)) continue;
   const entries: CollectionEntry[] = JSON.parse(readFileSync(join(dataDir, file), 'utf8')).data ?? [];
   const { chosenKey, coverage } = detectNameKey(entries);
   results.push({ collection, totalItems: entries.length, chosenKey, coverage });
