@@ -10,21 +10,25 @@ export const items = sqliteTable(
   'items',
   {
     id: text('id').primaryKey(),
-    collectionName: text('collection_name')
+    collectionName: text('collection')
       .notNull()
       .references(() => collections.name),
     name: text('name').notNull(),
+    displayName: text('displayName'),
     slug: text('slug'),
-    description: text('description'),
-    category: text('category'),
-    configData: text('config_data'),
-    dateSynced: integer('date_synced', { mode: 'timestamp' })
+    hidden: integer('hidden', { mode: 'boolean' }).notNull().default(false),
+    shiny: integer('shiny', { mode: 'boolean' }).notNull().default(false),
+    variant: integer('variant').notNull().default(0),
+    tier: integer('tier'),
+    huge: integer('huge', { mode: 'boolean' }).notNull().default(false),
+    titanic: integer('titanic', { mode: 'boolean' }).notNull().default(false),
+    gargantuan: integer('gargantuan', { mode: 'boolean' }).notNull().default(false),
+    createdAt: integer('createdAt', { mode: 'timestamp' })
       .notNull()
-      .$defaultFn(() => new Date())
-      .$onUpdateFn(() => new Date()),
+      .$defaultFn(() => new Date()),
   },
   (t) => [
-    uniqueIndex('items_collection_name_uq').on(t.collectionName, t.name),
+    uniqueIndex('items_variant_uq').on(t.collectionName, t.name, t.variant, t.shiny),
     index('items_slug_idx').on(t.slug),
   ],
 );

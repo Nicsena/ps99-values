@@ -5,6 +5,7 @@ import { ensureSchema } from './db/client.js';
 import { bootstrapIfNeeded } from './services/sync.js';
 import { pagesRouter } from './routes/pages.js';
 import { apiRouter } from './routes/api.js';
+import { buildDetailSlug } from './util/slug.js';
 
 const rootDir = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -13,6 +14,7 @@ export async function initApp(): Promise<express.Express> {
   await bootstrapIfNeeded();
 
   const app = express();
+  app.locals.detailPath = (name: string, pt = 0, shiny = false) => buildDetailSlug(name, pt, shiny);
 
   app.set('view engine', 'ejs');
   app.set('views', join(rootDir, 'views'));

@@ -1,25 +1,39 @@
 import { randomUUID } from 'node:crypto';
-import { eq, sql } from 'drizzle-orm';
+import { and, eq, sql } from 'drizzle-orm';
 import { db } from '../db/client.js';
 import { collections, items } from '../db/schema.js';
-import { slugify } from '../util/slug.js';
+import { buildDetailSlug, slugify } from '../util/slug.js';
 
 export interface ItemRow {
   id: string;
   collectionName: string;
   name: string;
-  slug: string | null;
+  displayName: string | null;
   description: string | null;
-  category: string | null;
-  configData: string | null;
+  slug: string | null;
+  hidden: boolean;
+  shiny: boolean;
+  variant: number;
+  huge: boolean;
+  titanic: boolean;
+  gargantuan: boolean;
 }
 
 export interface UpsertItemParams {
   collectionName: string;
   name: string;
-  description: string | null;
-  category: string | null;
-  configDataJson: string;
+  displayName?: string | null;
+  description?: string | null;
+  variant?: number;
+  shiny?: boolean;
+  hidden?: boolean;
+  huge?: boolean;
+  titanic?: boolean;
+  gargantuan?: boolean;
+}
+
+function slugFor(name: string, variant: number, shiny: boolean): string {
+  return variant || shiny ? buildDetailSlug(name, variant, shiny) : slugify(name);
 }
 
 export async function countItems(search?: string): Promise<number> {
@@ -43,83 +57,120 @@ export async function findItemByNameLower(name: string): Promise<ItemRow | undef
   return found[0];
 }
 
+export async function findItemVariant(
+  name: string,
+  variant: number,
+  shiny: boolean,
+): Promise<ItemRow | undefined> {
+  const found = await db
+    .select()
+    .from(items)
+    .where(
+      and(
+        sql`LOWER(${items.name}) = ${name.toLowerCase()}`,
+        eq(items.variant, variant),
+        eq(items.shiny, shiny),
+      ),
+    )
+    .limit(1);
+  return found[0];
+}
+
 export async function findItemBySlug(itemSlug: string): Promise<ItemRow | undefined> {
-  const normalized = slugify(itemSlug);
+  const normalized = slugify(itemSlug).toLowerCase();
   if (!normalized) return undefined;
 
-  const exact = await db.select().from(items).where(eq(items.slug, normalized)).limit(1);
+  const exact = await db
+    .select()
+    .from(items)
+    .where(sql`LOWER(${items.slug}) = ${normalized}`)
+    .limit(1);
   if (exact[0]) return exact[0];
 
   const prefix = normalized.slice(0, 4);
   const candidates = (await db.all<{
     id: string;
-    collection_name: string;
+    collection: string;
     name: string;
     slug: string | null;
-    description: string | null;
-    category: string | null;
-    config_data: string | null;
   }>(
-    sql`SELECT * FROM items WHERE slug LIKE ${`${prefix}%`} OR LOWER(name) LIKE ${`%${prefix.replace(/-/g, '%')}%`} LIMIT 50`,
-  )) as {
-    id: string;
-    collection_name: string;
-    name: string;
-    slug: string | null;
-    description: string | null;
-    category: string | null;
-    config_data: string | null;
-  }[];
+    sql`SELECT id, collection, name, slug FROM items WHERE slug LIKE ${`${prefix}%`} OR LOWER(name) LIKE ${`%${prefix.replace(/-/g, '%')}%`} LIMIT 50`,
+  )) as { id: string; collection: string; name: string; slug: string | null }[];
+
   for (const row of candidates) {
-    if (
-      slugify(row.slug ?? row.name) === normalized ||
-      slugify(row.name) === normalized
-    ) {
-      return {
-        id: row.id,
-        collectionName: row.collection_name,
-        name: row.name,
-        slug: row.slug,
-        description: row.description,
-        category: row.category,
-        configData: row.config_data,
-      };
+    const rowSlug = (row.slug ?? slugFor(row.name, 0, false)).toLowerCase();
+    if (rowSlug === normalized || slugify(row.name).toLowerCase() === normalized) {
+      const full = await db.select().from(items).where(eq(items.id, row.id)).limit(1);
+      return full[0];
     }
   }
   return undefined;
 }
 
-export async function upsertItem(params: UpsertItemParams): Promise<void> {
-  const itemSlug = slugify(params.name);
-  await db
+export async function upsertItem(params: UpsertItemParams): Promise<string> {
+  const variant = params.variant ?? 0;
+  const shiny = params.shiny ?? false;
+  const itemSlug = slugFor(params.name, variant, shiny);
+  const rows = await db
     .insert(items)
     .values({
       id: randomUUID(),
       collectionName: params.collectionName,
       name: params.name,
+      displayName: params.displayName ?? null,
+      description: params.description ?? null,
       slug: itemSlug,
-      description: params.description,
-      category: params.category,
-      configData: params.configDataJson,
+      hidden: params.hidden ?? false,
+      shiny,
+      variant,
+      huge: params.huge ?? false,
+      titanic: params.titanic ?? false,
+      gargantuan: params.gargantuan ?? false,
     })
     .onConflictDoUpdate({
-      target: [items.collectionName, items.name],
+      target: [items.collectionName, items.name, items.variant, items.shiny],
       set: {
+        displayName: params.displayName ?? null,
+        description: params.description ?? null,
         slug: itemSlug,
-        description: params.description,
-        category: params.category,
-        configData: params.configDataJson,
-        dateSynced: new Date(),
+        hidden: params.hidden ?? false,
+        huge: params.huge ?? false,
+        titanic: params.titanic ?? false,
+        gargantuan: params.gargantuan ?? false,
       },
-    });
+    })
+    .returning({ id: items.id });
+  return rows[0].id;
 }
 
-export async function getEnabledItemsWithCollection(): Promise<
-  { id: string; name: string }[]
+export async function getBaseItemsWithCollection(): Promise<
+  {
+    id: string;
+    collectionName: string;
+    name: string;
+    displayName: string | null;
+    description: string | null;
+    hidden: boolean;
+    huge: boolean;
+    titanic: boolean;
+    gargantuan: boolean;
+  }[]
 > {
   return db
-    .select({ id: items.id, name: items.name })
+    .select({
+      id: items.id,
+      collectionName: items.collectionName,
+      name: items.name,
+      displayName: items.displayName,
+      description: items.description,
+      hidden: items.hidden,
+      huge: items.huge,
+      titanic: items.titanic,
+      gargantuan: items.gargantuan,
+    })
     .from(items)
     .innerJoin(collections, eq(collections.name, items.collectionName))
-    .where(eq(collections.enabled, true));
+    .where(and(eq(collections.enabled, true), eq(items.variant, 0), eq(items.shiny, false)));
 }
+
+

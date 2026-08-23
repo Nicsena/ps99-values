@@ -40,7 +40,7 @@
       %>
         <tr>
           <td>
-            <a class="item-link" href="/pet/<%= encodeURIComponent(item.itemKey) %>"><%= item.name %></a>
+            <a class="item-link" href="/items/<%= detailPath(item.name, item.pt || 0, !!item.shiny) %>"><%= item.name %></a>
             <% if (item.shiny) { %><span class="badge shiny">Shiny</span><% } %>
           </td>
           <td><%= item.category %></td>

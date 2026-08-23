@@ -85,32 +85,15 @@
   }
 
   function cardHtml(item) {
-    const badges = [];
-    if (item.shiny) badges.push('<span class="badge shiny">Shiny</span>');
-    const variantKey = item.pt === 2 ? 'rainbow' : item.pt === 1 ? 'golden' : item.pt === 'golden' ? 'golden' : item.pt;
-    const variantName =
-      typeof item.pt === 'string'
-        ? VARIANT_NAMES[item.pt] || ''
-        : item.pt === 2 ? 'Rainbow' : item.pt === 1 ? 'Golden' : '';
-    if (variantName && variantName !== 'Regular') {
-      badges.push(
-        '<span class="badge ' + (item.pt === 2 ? 'rainbow' : 'golden') + '">' + variantName + '</span>',
-      );
-    }
-    if (item.category && item.category !== 'Uncategorized') {
-      badges.push('<span class="badge">' + escapeHtml(item.category) + '</span>');
-    }
-    void variantKey;
     const href = window.PS99 && PS99.itemPath
       ? PS99.itemPath(item.name, item.pt || 0, !!item.shiny)
-      : '/pet/' + encodeURIComponent(item.itemKey);
+      : '/items/' + (item.slug || PS99.slugify(item.name));
     return (
       '<a class="item-card-link" href="' + href + '">' +
       '<article class="item-card">' +
       '<img class="item-thumb" src="/img/placeholder.svg" loading="lazy" alt="">' +
       '<div class="item-info">' +
       '<h3 class="item-name">' + escapeHtml(item.name) + '</h3>' +
-      '<div class="badge-row">' + badges.join('') + '</div>' +
       '<div class="item-stats">' +
       '<span>RAP <b>' + fmt(item.rap) + '</b></span>' +
       '<span class="stat-sep">&middot;</span>' +

@@ -1,15 +1,9 @@
 import { Router, type Request, type Response, type NextFunction } from 'express';
-import { getItemDetail, parseItemKey } from '../services/rapService.js';
+import { getItemDetail } from '../services/rapService.js';
 import { buildRapItemKey } from '../services/itemKey.js';
 import { getEnabledCollections } from '../data/collectionsRepo.js';
-import { itemByName } from '../data/listings.js';
 import { findItemBySlug } from '../data/itemsRepo.js';
-import {
-  splitDetailSlug,
-  slugify,
-  variantToSlug,
-  type DetailSlugCandidate,
-} from '../util/slug.js';
+import { splitDetailSlug, type DetailSlugCandidate } from '../util/slug.js';
 
 export const pagesRouter = Router();
 
@@ -88,23 +82,3 @@ pagesRouter.get(
   },
 );
 
-pagesRouter.get('/pet/:itemKey', async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const raw = req.params.itemKey;
-    let itemKey: string = Array.isArray(raw) ? raw[0] : raw;
-    try {
-      itemKey = decodeURIComponent(itemKey);
-    } catch {
-      itemKey = Array.isArray(raw) ? raw[0] : raw;
-    }
-    const parsed = itemKey && itemKey.trim() ? parseItemKey(itemKey) : null;
-    if (!parsed) {
-      return void notFound(res, `Pet "${itemKey}" not found.`);
-    }
-    const item = await itemByName(parsed.name);
-    const slug = item?.slug ?? slugify(parsed.name);
-    res.redirect(301, `/items/${variantToSlug(parsed.pt, parsed.shiny)}-${slug}`);
-  } catch (err) {
-    next(err);
-  }
-});

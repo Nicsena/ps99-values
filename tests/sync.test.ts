@@ -2,7 +2,7 @@ import { rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
-import { eq } from 'drizzle-orm';
+import { and, eq } from 'drizzle-orm';
 import type * as Schema from '../src/db/schema.js';
 import type * as Biggames from '../src/services/biggames.js';
 
@@ -94,7 +94,12 @@ describe('syncAll', () => {
 
     const items = await client.db.select().from(schema.items).where(eq(schema.items.collectionName, 'Pets'));
     const itemNames = items.map((i) => i.name).sort();
-    expect(itemNames).toEqual(['Dragon', 'Unicorn']);
+    expect(itemNames).toEqual(['Dragon', 'Dragon', 'Unicorn']);
+    const dragons = items.filter((i) => i.name === 'Dragon').sort((a, b) => a.variant - b.variant);
+    expect(dragons[0].variant).toBe(0);
+    expect(dragons[0].shiny).toBe(false);
+    expect(dragons[1].variant).toBe(1);
+    expect(dragons[1].slug).toBe('Golden-Dragon');
 
     const snapshots = await client.db.select().from(schema.rapSnapshots);
     expect(snapshots).toHaveLength(2);
@@ -134,8 +139,11 @@ describe('syncAll', () => {
     expect(snapshots).toHaveLength(3);
     expect(unicornSnaps.map((s) => s.value).sort((a, b) => a - b)).toEqual([100, 150]);
 
-    const dragon = await client.db.select().from(schema.items).where(eq(schema.items.name, 'Dragon'));
-    const dragonSnaps = snapshots.filter((s) => s.itemId === dragon[0].id);
+    const dragonVariants = await client.db
+      .select()
+      .from(schema.items)
+      .where(and(eq(schema.items.name, 'Dragon'), eq(schema.items.variant, 1)));
+    const dragonSnaps = snapshots.filter((s) => s.itemId === dragonVariants[0].id);
     expect(dragonSnaps).toHaveLength(1);
     expect(dragonSnaps[0].value).toBe(200);
 

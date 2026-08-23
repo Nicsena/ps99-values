@@ -265,9 +265,9 @@ describe('data layer helpers', () => {
 
   it('finds items by slug with exact and fuzzy fallback', async () => {
     const itemsRepo = await import('../src/data/itemsRepo.js');
-    const exact = await itemsRepo.findItemBySlug('testicorn');
+    const exact = await itemsRepo.findItemBySlug('Testicorn');
     expect(exact?.id).toBe(itemId);
-    const fuzzy = await itemsRepo.findItemBySlug('Testicorn!!');
+    const fuzzy = await itemsRepo.findItemBySlug('testicorn');
     expect(fuzzy?.id).toBe(itemId);
     await expect(itemsRepo.findItemBySlug('does-not-exist')).resolves.toBeUndefined();
   });

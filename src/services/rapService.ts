@@ -4,7 +4,6 @@ import {
   countItemsFiltered,
   existsHistoryFor,
   historyFor,
-  itemByName,
   listRowsFiltered,
   listRowsRaw,
   similarItemsFor,
@@ -21,7 +20,8 @@ import {
   countRapSnapshots,
   type HistoryRawPoint,
 } from '../data/snapshotsRepo.js';
-import { countItems } from '../data/itemsRepo.js';
+import { countItems, findItemByNameLower, findItemVariant } from '../data/itemsRepo.js';
+import { deriveCategory } from '../data/listings.js';
 
 export interface ListItemRow {
   itemKey: string;
@@ -325,19 +325,26 @@ export async function getItemDetail(itemKey: string): Promise<ItemDetail | null>
   const cached = await cacheGet<ItemDetail>(detailCacheKey);
   if (cached) return cached;
 
-  const item = await itemByName(parsed.name);
+  const item =
+    (await findItemVariant(parsed.name, parsed.pt, parsed.shiny)) ??
+    (await findItemByNameLower(parsed.name));
   if (!item) return null;
 
   const shinyInt = parsed.shiny ? 1 : 0;
   const [variantRows, rapRows, existsRows, rapPoints, existsPoints, totalExists, similarRows] =
     await Promise.all([
-      variantsForItem(item.id),
+      variantsForItem(item.collectionName, item.name),
       historyFor(item.id, parsed.pt, shinyInt),
       existsHistoryFor(item.id, parsed.pt, shinyInt),
       countRapSnapshots(item.id, parsed.pt, shinyInt),
       countExistsSnapshots(item.id, parsed.pt, shinyInt),
       totalLatestExists(item.id),
-      similarItemsFor(item.id, item.category, item.collectionName, item.name),
+      similarItemsFor(
+        item.id,
+        deriveCategory(item.huge, item.titanic, item.gargantuan),
+        item.collectionName,
+        item.name,
+      ),
     ]);
 
   const variants: ItemVariant[] = variantRows.map((row) => ({
@@ -367,8 +374,8 @@ export async function getItemDetail(itemKey: string): Promise<ItemDetail | null>
       id: item.id,
       name: item.name,
       slug: item.slug ?? null,
-      description: item.description,
-      category: item.category,
+      description: item.description ?? null,
+      category: deriveCategory(item.huge, item.titanic, item.gargantuan),
       collectionName: item.collectionName,
     },
     currentRap,

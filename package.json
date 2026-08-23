@@ -1,6 +1,7 @@
 {
   "name": "ps99-values",
   "version": "0.1.0",
+  "author": "nicsena",
   "private": true,
   "type": "module",
   "scripts": {
@@ -22,6 +23,7 @@
     "express": "^5.2.1",
     "ioredis": "^5.8.2",
     "node-cron": "^4.2.1",
+    "slugify": "^1.6.9",
     "zod": "^4.1.13"
   },
   "devDependencies": {

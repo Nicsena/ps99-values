@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto';
-import { eq, isNull } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 import { db } from '../db/client.js';
 import { items } from '../db/schema.js';
 import {
@@ -10,6 +10,8 @@ import {
   type RapEntry,
 } from './biggames.js';
 import { buildRapItemKey, parseVariantFromRap } from './itemKey.js';
+import { resolveItemNaming } from './collectionSpecs.js';
+import { buildDetailSlug } from '../util/slug.js';
 import { getSetting, setSetting } from './settings.js';
 import {
   countCollections,
@@ -18,7 +20,7 @@ import {
   markSynced,
   upsertCollectionNames,
 } from '../data/collectionsRepo.js';
-import { getEnabledItemsWithCollection, upsertItem } from '../data/itemsRepo.js';
+import { getBaseItemsWithCollection, upsertItem } from '../data/itemsRepo.js';
 import { slugify } from '../util/slug.js';
 import {
   getLatestExistsValues,
@@ -59,12 +61,22 @@ export async function bootstrapIfNeeded(): Promise<void> {
 }
 
 async function backfillItemSlugs(): Promise<void> {
-  const missing = await db
-    .select({ id: items.id, name: items.name })
-    .from(items)
-    .where(isNull(items.slug));
-  for (const row of missing) {
-    await db.update(items).set({ slug: slugify(row.name) }).where(eq(items.id, row.id));
+  const rows = await db
+    .select({
+      id: items.id,
+      name: items.name,
+      slug: items.slug,
+      variant: items.variant,
+      shiny: items.shiny,
+    })
+    .from(items);
+  for (const row of rows) {
+    const expected = row.variant || row.shiny
+      ? buildDetailSlug(row.name, row.variant, row.shiny)
+      : slugify(row.name);
+    if (row.slug !== expected) {
+      await db.update(items).set({ slug: expected }).where(eq(items.id, row.id));
+    }
   }
 }
 
@@ -94,30 +106,69 @@ async function runSync(): Promise<SyncResult> {
       continue;
     }
     for (const entry of entries) {
-      const displayName =
-        typeof entry.configData.name === 'string' ? entry.configData.name : entry.configName;
+      const { name: displayName, description, usedFallback } = resolveItemNaming(
+        name,
+        entry.configName,
+        entry.configData,
+      );
       if (!displayName) continue;
-      const description =
-        typeof entry.configData.description === 'string' ? entry.configData.description : null;
+      if (usedFallback) {
+        console.warn(`[sync] ${name}: no name key matched for "${entry.configName}", used configName`);
+      }
+      const cd = entry.configData;
       await upsertItem({
         collectionName: name,
         name: displayName,
+        displayName,
         description,
-        category: entry.category ?? null,
-        configDataJson: JSON.stringify(entry.configData),
+        hidden: cd.hidden === true,
+        huge: cd.huge === true,
+        titanic: cd.titanic === true,
+        gargantuan: cd.gargantuan === true,
       });
       itemsUpserted += 1;
     }
     await markSynced(name);
   }
 
-  const enabledItems = await getEnabledItemsWithCollection();
+  const enabledItems = await getBaseItemsWithCollection();
 
-  const byName = new Map<string, { id: string; name: string }[]>();
+  const byName = new Map<string, typeof enabledItems>();
   for (const item of enabledItems) {
     const list = byName.get(item.name) ?? [];
     list.push(item);
     byName.set(item.name, list);
+  }
+
+  const variantItemIds = new Map<string, string>();
+  async function resolveItemId(
+    base: (typeof enabledItems)[number],
+    pt: number,
+    shiny: boolean,
+  ): Promise<string> {
+    if (!pt && !shiny) return base.id;
+    const key = `${base.collectionName}:${base.name}:${pt}:${shiny ? 1 : 0}`;
+    const existing = variantItemIds.get(key);
+    if (existing) return existing;
+    const variantLabel = [shiny ? 'Shiny' : '', pt === 1 ? 'Golden' : pt === 2 ? 'Rainbow' : '']
+      .filter(Boolean)
+      .join(' ');
+    const id = await upsertItem({
+      collectionName: base.collectionName,
+      name: base.name,
+      displayName: variantLabel
+        ? `${variantLabel} ${base.displayName ?? base.name}`
+        : (base.displayName ?? null),
+      description: base.description,
+      variant: pt,
+      shiny,
+      hidden: base.hidden,
+      huge: base.huge,
+      titanic: base.titanic,
+      gargantuan: base.gargantuan,
+    });
+    variantItemIds.set(key, id);
+    return id;
   }
 
   const latestValues = await getLatestRapValues();
@@ -146,18 +197,19 @@ async function runSync(): Promise<SyncResult> {
     if (!matches || matches.length === 0) continue;
     const variant = parseVariantFromRap(entry.configData);
     for (const item of matches) {
-      const previous = latestValues.get(`${item.id}:${variant.pt}:${variant.shiny ? 1 : 0}`);
+      const itemId = await resolveItemId(item, variant.pt, variant.shiny);
+      const previous = latestValues.get(`${itemId}:${variant.pt}:${variant.shiny ? 1 : 0}`);
       if (previous !== undefined && previous === entry.value) continue;
       pending.push({
         id: randomUUID(),
-        itemId: item.id,
+        itemId,
         itemKey: buildRapItemKey(item.name, variant.pt, variant.shiny),
         pt: variant.pt,
         shiny: variant.shiny,
         value: entry.value,
         capturedAt: now,
       });
-      latestValues.set(`${item.id}:${variant.pt}:${variant.shiny ? 1 : 0}`, entry.value);
+      latestValues.set(`${itemId}:${variant.pt}:${variant.shiny ? 1 : 0}`, entry.value);
     }
   }
 
@@ -180,12 +232,13 @@ async function runSync(): Promise<SyncResult> {
     if (!matches || matches.length === 0) continue;
     const variant = parseVariantFromRap(entry.configData);
     for (const item of matches) {
-      const key = `${item.id}:${variant.pt}:${variant.shiny ? 1 : 0}`;
+      const itemId = await resolveItemId(item, variant.pt, variant.shiny);
+      const key = `${itemId}:${variant.pt}:${variant.shiny ? 1 : 0}`;
       const previous = latestExistsValues.get(key);
       if (previous !== undefined && previous === entry.value) continue;
       pendingExists.push({
         id: randomUUID(),
-        itemId: item.id,
+        itemId,
         itemKey: buildRapItemKey(item.name, variant.pt, variant.shiny),
         pt: variant.pt,
         shiny: variant.shiny,

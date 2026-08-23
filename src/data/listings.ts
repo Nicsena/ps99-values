@@ -90,10 +90,12 @@ function buildFilteredWhere(params: FilteredListRowsParams): ReturnType<typeof s
     clauses.push(sql`COALESCE(l.pt, 0) = 2`);
   }
   if (params.category !== 'all') {
-    clauses.push(sql`LOWER(i.category) = LOWER(${params.category})`);
+    if (params.category === 'huge') clauses.push(sql`i.huge = 1`);
+    else if (params.category === 'titanic') clauses.push(sql`i.titanic = 1`);
+    else if (params.category === 'gargantuan') clauses.push(sql`i.gargantuan = 1`);
   }
   if (params.collection !== 'all') {
-    clauses.push(sql`i.collection_name = ${params.collection}`);
+    clauses.push(sql`i.collection = ${params.collection}`);
   }
 
   const rangeSql: Record<Exclude<ExistsRange, 'all'>, ReturnType<typeof sql>> = {
@@ -115,7 +117,7 @@ function buildFilteredWhere(params: FilteredListRowsParams): ReturnType<typeof s
     clauses.push(sql`(e.value IS NOT NULL AND e.value > 0)`);
   }
   if (params.hidePets) {
-    clauses.push(sql`i.collection_name != 'Pets'`);
+    clauses.push(sql`i.collection != 'Pets'`);
   }
 
   if (clauses.length === 0) return sql``;
@@ -137,10 +139,21 @@ function buildFilteredOrderBy(sort: SortKey): ReturnType<typeof sql> {
     case 'copies_asc':
       return sql` ORDER BY CASE WHEN e.value IS NULL THEN 1 ELSE 0 END, e.value ASC, LOWER(i.name) ASC`;
     case 'newest':
-      return sql` ORDER BY i.date_synced DESC`;
+      return sql` ORDER BY i."createdAt" DESC`;
     case 'oldest':
-      return sql` ORDER BY i.date_synced ASC`;
+      return sql` ORDER BY i."createdAt" ASC`;
   }
+}
+
+export function deriveCategory(
+  huge: number | boolean,
+  titanic: number | boolean,
+  gargantuan: number | boolean,
+): string | null {
+  if (Number(titanic)) return 'Titanic';
+  if (Number(gargantuan)) return 'Gargantuan';
+  if (Number(huge)) return 'Huge';
+  return null;
 }
 
 export async function listRowsFiltered(
@@ -150,8 +163,9 @@ export async function listRowsFiltered(
   const orderBy = buildFilteredOrderBy(params.sort);
   const offset = (params.page - 1) * params.pageSize;
 
-  return (await db.all<RawFilteredRow>(sql`${LATEST_CTE}${LATEST_EXISTS_CTE}
-    SELECT i.name, i.slug AS slug, i.category, i.collection_name AS collectionName,
+  const rows = (await db.all<Omit<RawFilteredRow, 'category'> & { huge: number; titanic: number; gargantuan: number }>(sql`${LATEST_CTE}${LATEST_EXISTS_CTE}
+    SELECT i.name, i.slug AS slug, i.huge, i.titanic, i.gargantuan,
+           i.collection AS collectionName,
            COALESCE(l.item_key, i.name) AS itemKey,
            l.value AS rap, COALESCE(l.pt, 0) AS pt, COALESCE(l.shiny, 0) AS shiny,
            e.value AS existsCount
@@ -159,7 +173,11 @@ export async function listRowsFiltered(
     LEFT JOIN latest l ON l.item_id = i.id
     LEFT JOIN latest_exists e ON e.item_id = i.id
       AND e.pt = COALESCE(l.pt, 0) AND e.shiny = COALESCE(l.shiny, 0)${where}${orderBy}
-    LIMIT ${params.pageSize} OFFSET ${offset}`)) as RawFilteredRow[];
+    LIMIT ${params.pageSize} OFFSET ${offset}`)) as unknown as RawFilteredRow[];
+  for (const row of rows as unknown as (RawFilteredRow & { huge: number; titanic: number; gargantuan: number })[]) {
+    row.category = deriveCategory(row.huge, row.titanic, row.gargantuan);
+  }
+  return rows;
 }
 
 export async function countItemsFiltered(params: FilteredListRowsParams): Promise<number> {
@@ -196,13 +214,17 @@ export async function listRowsRaw(params: ListRowsParams): Promise<RawListRow[]>
 
   const offset = (params.page - 1) * params.pageSize;
 
-  return (await db.all<RawListRow>(sql`${LATEST_CTE}
-    SELECT i.name, i.category, i.collection_name AS collectionName,
+  const rows = (await db.all<Omit<RawListRow, 'category'> & { huge: number; titanic: number; gargantuan: number }>(sql`${LATEST_CTE}
+    SELECT i.name, i.huge, i.titanic, i.gargantuan, i.collection AS collectionName,
            COALESCE(l.item_key, i.name) AS itemKey,
            l.value AS rap, COALESCE(l.pt, 0) AS pt, COALESCE(l.shiny, 0) AS shiny
     FROM items i
     LEFT JOIN latest l ON l.item_id = i.id${where}${orderBy}
-    LIMIT ${params.pageSize} OFFSET ${offset}`)) as RawListRow[];
+    LIMIT ${params.pageSize} OFFSET ${offset}`)) as unknown as RawListRow[];
+  for (const row of rows as unknown as (RawListRow & { huge: number; titanic: number; gargantuan: number })[]) {
+    row.category = deriveCategory(row.huge, row.titanic, row.gargantuan);
+  }
+  return rows;
 }
 
 export interface RawSimilarItemRow {
@@ -220,28 +242,38 @@ export async function similarItemsFor(
   excludeName: string,
 ): Promise<RawSimilarItemRow[]> {
   const match = category
-    ? sql`i.category IS NOT NULL AND LOWER(i.category) = LOWER(${category})`
-    : sql`i.collection_name = ${collectionName}`;
-  return (await db.all<RawSimilarItemRow>(sql`${LATEST_CTE}${LATEST_EXISTS_CTE}
-    SELECT i.name, i.slug AS slug, i.category,
+    ? sql`(CASE WHEN ${category} = 'Titanic' THEN i.titanic WHEN ${category} = 'Gargantuan' THEN i.gargantuan ELSE i.huge END) = 1`
+    : sql`i.collection = ${collectionName}`;
+  const rows = (await db.all<Omit<RawSimilarItemRow, 'category'> & { huge: number; titanic: number; gargantuan: number }>(sql`${LATEST_CTE}${LATEST_EXISTS_CTE}
+    SELECT i.name, i.slug AS slug, i.huge, i.titanic, i.gargantuan,
            l.value AS rap, e.value AS "exists"
     FROM items i
     LEFT JOIN latest l ON l.item_id = i.id AND l.pt = 0 AND l.shiny = 0
     LEFT JOIN latest_exists e ON e.item_id = i.id AND e.pt = 0 AND e.shiny = 0
     WHERE i.id != ${itemId} AND LOWER(i.name) != LOWER(${excludeName}) AND ${match}
     ORDER BY CASE WHEN l.value IS NULL THEN 1 ELSE 0 END, l.value DESC, LOWER(i.name) ASC
-    LIMIT 8`)) as RawSimilarItemRow[];
+    LIMIT 8`)) as unknown as RawSimilarItemRow[];
+  for (const row of rows as unknown as (RawSimilarItemRow & { huge: number; titanic: number; gargantuan: number })[]) {
+    row.category = deriveCategory(row.huge, row.titanic, row.gargantuan);
+  }
+  return rows;
 }
 
 export async function itemByName(name: string): Promise<ItemRow | undefined> {
   return findItemByNameLower(name);
 }
 
-export async function variantsForItem(itemId: string): Promise<RawVariantRow[]> {
+export async function variantsForItem(
+  collectionName: string,
+  name: string,
+): Promise<RawVariantRow[]> {
   return (await db.all<RawVariantRow>(sql`${LATEST_CTE}${LATEST_EXISTS_CTE}
-    SELECT l.pt, l.shiny, l.value AS rap, e.value AS "exists" FROM latest l
+    SELECT l.pt, l.shiny, l.value AS rap, e.value AS "exists"
+    FROM latest l
+    JOIN items s ON s.id = l.item_id
     LEFT JOIN latest_exists e ON e.item_id = l.item_id AND e.pt = l.pt AND e.shiny = l.shiny
-    WHERE l.item_id = ${itemId} ORDER BY l.pt ASC, l.shiny ASC`)) as RawVariantRow[];
+    WHERE LOWER(s.name) = LOWER(${name}) AND s.collection = ${collectionName}
+    ORDER BY l.pt ASC, l.shiny ASC`)) as RawVariantRow[];
 }
 
 export async function historyFor(

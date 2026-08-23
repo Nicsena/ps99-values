@@ -56,7 +56,7 @@
     if (window.PS99 && PS99.itemPath) {
       return PS99.itemPath(item.name, item.pt || 0, !!item.shiny);
     }
-    return '/pet/' + encodeURIComponent(item.itemKey || '');
+    return '/items/' + encodeURIComponent(item.slug || item.name || '');
   }
 
   function render(items, q) {
