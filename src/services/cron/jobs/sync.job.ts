@@ -4,7 +4,7 @@ import type { JobDefinition } from '../types.js';
 export const syncJob: JobDefinition = {
   name: 'sync',
   description: 'Fetch collections/items/RAP/exists from BigGames API',
-  defaultSchedule: '*/30 * * * *',
+  defaultSchedule: '0 */1 * * *',
   run: async () => {
     const result = await syncAll();
     console.log(

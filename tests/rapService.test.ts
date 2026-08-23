@@ -8,8 +8,8 @@ process.env.DB_PATH = join(tmpdir(), `ps99-rapservice-test-${Date.now()}-${proce
 type ClientModule = typeof import('../src/db/client.js');
 type SchemaModule = typeof import('../src/db/schema.js');
 type RapServiceModule = typeof import('../src/services/rapService.js');
-type ListingsModule = typeof import('../src/data/listings.js');
-type SnapshotsRepoModule = typeof import('../src/data/snapshotsRepo.js');
+type ListingsModule = typeof import('../src/db/queries/listings.js');
+type SnapshotsRepoModule = typeof import('../src/db/queries/snapshotsRepo.js');
 
 let client: ClientModule;
 let schema: SchemaModule;
@@ -27,8 +27,8 @@ beforeAll(async () => {
   client.ensureSchema();
   schema = await import('../src/db/schema.js');
   rapService = await import('../src/services/rapService.js');
-  listings = await import('../src/data/listings.js');
-  snapshotsRepo = await import('../src/data/snapshotsRepo.js');
+  listings = await import('../src/db/queries/listings.js');
+  snapshotsRepo = await import('../src/db/queries/snapshotsRepo.js');
 });
 
 afterAll(async () => {
@@ -264,7 +264,7 @@ describe('data layer helpers', () => {
   });
 
   it('finds items by slug with exact and fuzzy fallback', async () => {
-    const itemsRepo = await import('../src/data/itemsRepo.js');
+    const itemsRepo = await import('../src/db/queries/itemsRepo.js');
     const exact = await itemsRepo.findItemBySlug('Testicorn');
     expect(exact?.id).toBe(itemId);
     const fuzzy = await itemsRepo.findItemBySlug('testicorn');

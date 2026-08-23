@@ -1,5 +1,5 @@
 import { sql } from 'drizzle-orm';
-import { db } from '../db/client.js';
+import { db } from '../client.js';
 import { findItemByNameLower, type ItemRow } from './itemsRepo.js';
 import { loadExistsHistory, loadHistory } from './snapshotsRepo.js';
 

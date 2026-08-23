@@ -5,8 +5,8 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { getItemDetail } from '../services/rapService.js';
 import { buildRapItemKey } from '../services/itemKey.js';
-import { getEnabledCollections } from '../data/collectionsRepo.js';
-import { findImageIdByName, findItemBySlug } from '../data/itemsRepo.js';
+import { getEnabledCollections } from '../db/queries/collectionsRepo.js';
+import { findImageIdByName, findItemBySlug } from '../db/queries/itemsRepo.js';
 import { splitDetailSlug, type DetailSlugCandidate } from '../util/slug.js';
 
 export const pagesRouter = Router();

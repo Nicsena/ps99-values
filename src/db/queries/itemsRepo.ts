@@ -1,8 +1,8 @@
 import { randomUUID } from 'node:crypto';
 import { and, eq, sql } from 'drizzle-orm';
-import { db } from '../db/client.js';
-import { collections, items } from '../db/schema.js';
-import { buildDetailSlug, slugify } from '../util/slug.js';
+import { db } from '../client.js';
+import { collections, items } from '../schema.js';
+import { buildDetailSlug, slugify } from '../../util/slug.js';
 
 export interface ItemRow {
   id: string;

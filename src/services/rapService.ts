@@ -14,14 +14,14 @@ import {
   type RawListRow,
   type ShinyFilter,
   type SortKey,
-} from '../data/listings.js';
+} from '../db/queries/listings.js';
 import {
   countExistsSnapshots,
   countRapSnapshots,
   type HistoryRawPoint,
-} from '../data/snapshotsRepo.js';
-import { countItems, findItemByNameLower, findItemVariant } from '../data/itemsRepo.js';
-import { deriveCategory } from '../data/listings.js';
+} from '../db/queries/snapshotsRepo.js';
+import { countItems, findItemByNameLower, findItemVariant } from '../db/queries/itemsRepo.js';
+import { deriveCategory } from '../db/queries/listings.js';
 
 export interface ListItemRow {
   itemKey: string;

@@ -1,4 +1,4 @@
-import { deleteRow, getRow, upsertRow } from '../data/settingsRepo.js';
+import { deleteRow, getRow, upsertRow } from '../db/queries/settingsRepo.js';
 
 export type SettingType = 'string' | 'number' | 'boolean' | 'json';
 
@@ -8,7 +8,7 @@ export const DEFAULT_SETTINGS = {
   'snapshot.retentionDays': 90,
   'cron.enabled': true,
   'cron.jobs.sync.enabled': true,
-  'cron.jobs.sync.schedule': '*/30 * * * *',
+  'cron.jobs.sync.schedule': '0 */1 * * *',
   'cron.jobs.prune.enabled': true,
   'cron.jobs.prune.schedule': '30 3 * * *',
 } as const;

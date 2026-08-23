@@ -1,6 +1,6 @@
 import { eq } from 'drizzle-orm';
-import { db } from '../db/client.js';
-import { appSettings } from '../db/appSettingsSchema.js';
+import { db } from '../client.js';
+import { appSettings } from '../appSettingsSchema.js';
 
 export interface AppSettingRow {
   name: string;

@@ -19,8 +19,8 @@ import {
   getEnabledCollections,
   markSynced,
   upsertCollectionNames,
-} from '../data/collectionsRepo.js';
-import { getBaseItemsWithCollection, upsertItem } from '../data/itemsRepo.js';
+} from '../db/queries/collectionsRepo.js';
+import { getBaseItemsWithCollection, upsertItem } from '../db/queries/itemsRepo.js';
 import { slugify } from '../util/slug.js';
 import {
   getLatestExistsValues,
@@ -28,7 +28,7 @@ import {
   insertExistsSnapshots,
   insertRapSnapshots,
   pruneSnapshotsOlderThan,
-} from '../data/snapshotsRepo.js';
+} from '../db/queries/snapshotsRepo.js';
 
 export interface SyncResult {
   collections: number;

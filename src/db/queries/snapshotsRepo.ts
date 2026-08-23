@@ -1,6 +1,6 @@
 import { lt, sql } from 'drizzle-orm';
-import { db } from '../db/client.js';
-import { existsSnapshots, rapSnapshots } from '../db/schema.js';
+import { db } from '../client.js';
+import { existsSnapshots, rapSnapshots } from '../schema.js';
 
 export interface LatestRapValueRow {
   item_id: string;

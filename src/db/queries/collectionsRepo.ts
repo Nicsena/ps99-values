@@ -1,6 +1,6 @@
 import { eq } from 'drizzle-orm';
-import { db } from '../db/client.js';
-import { collections } from '../db/schema.js';
+import { db } from '../client.js';
+import { collections } from '../schema.js';
 
 export async function listAllCollections(): Promise<{ name: string }[]> {
   return db.select({ name: collections.name }).from(collections);
