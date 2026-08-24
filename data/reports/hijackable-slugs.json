@@ -1,0 +1,47 @@
+[
+    {
+        "shadowed_item": "Golden Cove Lockpick",
+        "collection": "MiscItems",
+        "slug": "Golden-Cove-Lockpick",
+        "prefix": "Golden",
+        "stem_item": "Cove Lockpick",
+        "stem_collection": "MiscItems",
+        "hijacking_url": "/items/golden-cove-lockpick"
+    },
+    {
+        "shadowed_item": "Golden Prison Key",
+        "collection": "MiscItems",
+        "slug": "Golden-Prison-Key",
+        "prefix": "Golden",
+        "stem_item": "Prison Key",
+        "stem_collection": "MiscItems",
+        "hijacking_url": "/items/golden-prison-key"
+    },
+    {
+        "shadowed_item": "Golden Watering Can",
+        "collection": "MiscItems",
+        "slug": "Golden-Watering-Can",
+        "prefix": "Golden",
+        "stem_item": "Watering Can",
+        "stem_collection": "MiscItems",
+        "hijacking_url": "/items/golden-watering-can"
+    },
+    {
+        "shadowed_item": "Rainbow Hoverboard",
+        "collection": "Hoverboards",
+        "slug": "Rainbow-Hoverboard",
+        "prefix": "Rainbow",
+        "stem_item": "Hoverboard",
+        "stem_collection": "Hoverboards",
+        "hijacking_url": "/items/rainbow-hoverboard"
+    },
+    {
+        "shadowed_item": "Rainbow Mini Chest",
+        "collection": "MiscItems",
+        "slug": "Rainbow-Mini-Chest",
+        "prefix": "Rainbow",
+        "stem_item": "Mini Chest",
+        "stem_collection": "MiscItems",
+        "hijacking_url": "/items/rainbow-mini-chest"
+    }
+]

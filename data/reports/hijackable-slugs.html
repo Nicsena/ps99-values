@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ps99-values — Hijackable Slugs Report</title>
+<style>
+:root{--bg:#0d0f14;--panel:#14171e;--panel2:#181c24;--line:#242938;--txt:#d7dae2;--mut:#8b93a7;--cyan:#22d3ee;--grn:#34d399;--red:#fb7185;--amb:#fbbf24;--mono:ui-monospace,Menlo,monospace}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.6 -apple-system,'Segoe UI',Roboto,sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:36px 24px 100px}
+h1{font-size:24px;margin:0 0 4px}h2{font-size:18px;color:var(--cyan);margin:40px 0 10px}
+.sub{color:var(--mut);margin-bottom:22px}
+.explain{background:var(--panel2);border:1px solid var(--line);border-radius:11px;padding:16px 20px;margin:16px 0}
+.explain h4{margin:0 0 8px;font-size:14px;color:var(--cyan)}.explain p{color:#b6bcc9;font-size:13.5px;margin:7px 0}
+.explain code{background:#1c2030;padding:1px 6px;border-radius:5px;font-size:12px;color:#93c5fd;font-family:var(--mono)}
+pre.code{background:#10131a;border:1px solid var(--line);border-radius:10px;padding:13px 15px;overflow-x:auto;font-family:var(--mono);font-size:12.2px;line-height:1.7;margin:10px 0}
+.ln{display:block;white-space:pre}.no{display:inline-block;width:28px;color:#3d4356;user-select:none;margin-right:12px;text-align:right}
+.hl{background:rgba(251,113,133,.14);display:inline-block;width:100%}
+table.grid{width:100%;border-collapse:collapse;margin:14px 0}
+table.grid th{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:var(--mut);text-align:left;padding:10px;border-bottom:1px solid var(--line)}
+table.grid td{padding:11px 10px;border-bottom:1px solid var(--line);vertical-align:top;font-size:13.5px}
+table.grid td.mono{font-family:var(--mono);font-size:12px}
+.bad2{color:var(--red);font-weight:700}.ok2{color:var(--grn);font-weight:700}.warn2{color:var(--amb);font-weight:700}
+.note{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:13px 17px;margin:13px 0;color:var(--mut);font-size:13.5px}
+.note b{color:var(--txt)}.note.goodx{border-left:3px solid var(--grn)}.note.badx{border-left:3px solid var(--red)}.note.warnx{border-left:3px solid var(--amb)}
+.statrow{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
+.stat{font-size:11px;font-weight:800;padding:5px 12px;border-radius:999px}.stat b{font-size:13px}
+.s1{background:#1a2030;color:#9db2d9}.s2{background:#331520;color:var(--red)}.s4{background:#0f2e22;color:var(--grn)}
+footer{margin-top:70px;color:var(--mut);font-size:12.5px;border-top:1px solid var(--line);padding-top:18px}
+</style></head><body><div class="wrap">
+
+<h1>Hijackable Slugs — Variant-Prefix Shadowing</h1>
+<p class="sub">From-scratch inconsistency audit · measured against <code>data/ps99.db</code> (16,314 items) · 2026-08-24 · companion: <code>inconsistency-audit/hijackable-slugs.md</code> · dataset: <code>data/reports/hijackable-slugs.json</code></p>
+
+<div class="statrow">
+<span class="stat s1" style="background:#1a2030;color:#9db2d9"><b>16,314</b> items scanned</span>
+<span class="stat s3" style="background:#2c2410;color:var(--amb)"><b>30</b> named Golden/Rainbow/Shiny …</span>
+<span class="stat s2" style="background:#331520;color:var(--red)"><b>5</b> actually shadowed</span>
+<span class="stat s4" style="background:#0f2e22;color:var(--grn)"><b>25</b> resolve correctly</span>
+</div>
+
+<div class="explain">
+<h4>The mechanism</h4>
+<p>Detail URLs are parsed by <code>splitDetailSlug()</code> (<code>src/util/slug.ts:45-68</code>), which generates resolution candidates <b>in this order</b>:</p>
+<pre class="code"><span class="ln"><span class="no">58</span>push(parts.slice(0, 2).join('-'), parts.slice(2).join('-'));  <span class="cm">← 2-token variant (shiny-golden-…)</span></span>
+<span class="ln"><span class="no">61</span>push(parts[0], parts.slice(1).join('-'));                     <span class="cm">← 1-token variant (golden-… / shiny-…)</span></span>
+<span class="ln hl"><span class="no">63</span>push('', parts.join('-'));                                    <span class="cm">← whole slug as literal item name — LAST</span></span></pre>
+<p>The route (<code>src/routes/pages.ts</code>) resolves candidates <b>in order</b> and serves the first whose remainder slug matches an existing item. Consequence: any item whose name literally begins with <b>"Golden ", "Rainbow ", or "Shiny "</b> is shadowed whenever the stem (name minus the prefix word) matches another item — the URL serves that other item's variant instead, and the literal item is unreachable at its natural address.</p>
+</div>
+
+<h2>Shadowed items — 5 confirmed</h2>
+<table class="grid">
+<tr><th>#</th><th>Shadowed item</th><th>Collection</th><th>Slug</th><th>URL</th><th>Shown item (stem_item)</th><th>Shown item Collection (stem_collection)</th><th>URL actually serves</th></tr>
+<tr><td>1</td><td class="mono">Golden Cove Lockpick</td><td>MiscItems</td>
+<td class="mono">Golden-Cove-Lockpick</td>
+<td class="mono">/items/golden-cove-lockpick</td>
+<td><b>Cove Lockpick</b></td><td>MiscItems</td>
+<td class="bad2">Regular version shown instead of the expected "Golden Cove Lockpick"</td></tr>
+<tr><td>2</td><td class="mono">Golden Prison Key</td><td>MiscItems</td>
+<td class="mono">Golden-Prison-Key</td>
+<td class="mono">/items/golden-prison-key</td>
+<td><b>Prison Key</b></td><td>MiscItems</td>
+<td class="bad2">Regular version shown instead of the expected "Golden Prison Key"</td></tr>
+<tr><td>3</td><td class="mono">Golden Watering Can</td><td>MiscItems</td>
+<td class="mono">Golden-Watering-Can</td>
+<td class="mono">/items/golden-watering-can</td>
+<td><b>Watering Can</b></td><td>MiscItems</td>
+<td class="bad2">Regular version shown instead of the expected "Golden Watering Can"</td></tr>
+<tr><td>4</td><td class="mono">Rainbow Hoverboard</td><td>Hoverboards</td>
+<td class="mono">Rainbow-Hoverboard</td>
+<td class="mono">/items/rainbow-hoverboard</td>
+<td><b>Hoverboard</b></td><td>Hoverboards</td>
+<td class="bad2">Regular version shown instead of the expected "Rainbow Hoverboard"</td></tr>
+<tr><td>5</td><td class="mono">Rainbow Mini Chest</td><td>MiscItems</td>
+<td class="mono">Rainbow-Mini-Chest</td>
+<td class="mono">/items/rainbow-mini-chest</td>
+<td><b>Mini Chest</b></td><td>MiscItems</td>
+<td class="bad2">Regular version shown instead of the expected "Rainbow Mini Chest"</td></tr></table>
+<div class="note badx"><b>Impact:</b> for each row, the item's own canonical URL is identical to the hijacking URL — the literal item is <b>unreachable</b> at its natural address (the route's candidate loop matches the stem item first and never falls through). Search and listings link to these URLs, so users clicking them land on the wrong item's page.</div>
+
+<details style="background:#181c24;border:1px solid #242938;border-radius:10px;padding:12px 16px;margin:14px 0">
+<summary style="cursor:pointer;font-weight:600;color:#93c5fd">Raw dataset — hijackable-slugs.json (5 records)</summary>
+<pre style="background:#10131a;border:1px solid #242938;border-radius:8px;padding:12px;overflow-x:auto;font-family:ui-monospace,Menlo,monospace;font-size:11.8px;line-height:1.6">[
+{
+    "shadowed_item": "Golden Cove Lockpick",
+    "collection": "MiscItems",
+    "slug": "Golden-Cove-Lockpick",
+    "prefix": "Golden",
+    "stem_item": "Cove Lockpick",
+    "stem_collection": "MiscItems",
+    "hijacking_url": "/items/golden-cove-lockpick"
+},
+{
+    "shadowed_item": "Golden Prison Key",
+    "collection": "MiscItems",
+    "slug": "Golden-Prison-Key",
+    "prefix": "Golden",
+    "stem_item": "Prison Key",
+    "stem_collection": "MiscItems",
+    "hijacking_url": "/items/golden-prison-key"
+},
+{
+    "shadowed_item": "Golden Watering Can",
+    "collection": "MiscItems",
+    "slug": "Golden-Watering-Can",
+    "prefix": "Golden",
+    "stem_item": "Watering Can",
+    "stem_collection": "MiscItems",
+    "hijacking_url": "/items/golden-watering-can"
+},
+{
+    "shadowed_item": "Rainbow Hoverboard",
+    "collection": "Hoverboards",
+    "slug": "Rainbow-Hoverboard",
+    "prefix": "Rainbow",
+    "stem_item": "Hoverboard",
+    "stem_collection": "Hoverboards",
+    "hijacking_url": "/items/rainbow-hoverboard"
+},
+{
+    "shadowed_item": "Rainbow Mini Chest",
+    "collection": "MiscItems",
+    "slug": "Rainbow-Mini-Chest",
+    "prefix": "Rainbow",
+    "stem_item": "Mini Chest",
+    "stem_collection": "MiscItems",
+    "hijacking_url": "/items/rainbow-mini-chest"
+}
+]</pre>
+<p style="margin:8px 0 0;color:#8b93a7;font-size:12.5px">Source file: <code>data/reports/hijackable-slugs.json</code> — same data the tables above render.</p>
+</details>
+
+<h2>Corrected count — why 30 was wrong</h2>
+<div class="note warnx"><b>Correction:</b> the earlier audit stated "30 live items named Golden/Rainbow/Shiny … are hijackable." Re-measured properly: <b>30 items</b> carry such names, but only <b>5 are actually shadowed</b> — for the other 25 (e.g. <code>Golden Fishing Rod</code>, <code>Shiny Hunter</code>, <code>Rainbow Eggs</code>, <code>Shiny Flag</code>), no stem item exists, so the whole-slug fallback resolves them correctly. The original number counted URLs <i>starting with</i> a variant token, not URLs that resolve to the wrong item.</div>
+
+<div class="explain">
+<h4>What the original "30" actually counted — and what the real number is</h4>
+<p>The original claim counted <b>every row</b> whose name starts with Golden/Rainbow/Shiny — including variant rows (Rainbow-Golden-Retriever etc.) that share a name with their base item. After filtering to base rows only (variant=0, shiny=0), there are <b>23 uniquely-named items</b>. Of those, <b>5 are shadowed</b> (their stem item exists, so the variant-prefix candidate wins and the literal item is unreachable) and <b>18 resolve correctly</b> via the whole-slug fallback. The table below lists all 23 with their resolution status.</p>
+</div>
+
+<h3 class="sub" style="margin:20px 0 10px;font-size:14px;color:#a78bfa">All 30 items — including variant rows</h3>
+<div style="display:flex;gap:14px;margin:0 0 12px;font-size:11px">
+<span style="display:inline-flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:50%;background:#34d399;display:inline-block"></span> RESOLVED — URL serves the correct item</span>
+<span style="display:inline-flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:50%;background:#fb7185;display:inline-block"></span> SHADOWED — URL serves a different item's variant</span>
+</div>
+<table class="grid">
+<tr><th>#</th><th>Item name (displayName)</th><th>Variant</th><th>Collection</th><th>Slug</th><th>URL</th><th>Status</th></tr>
+<tr><td>1</td><td>Golden Axe</td><td>Regular</td><td>MiscItems</td><td class="mono">Golden-Axe</td><td class="mono">/items/golden-axe</td><td><span style="padding:2px 9px;border-radius:999px;font-size:10px;font-weight:800;background:#34d399;color:#0d0f14">RESOLVED</span></td></tr>
+<tr><td>2</td><td>Golden Cove Lockpick</td><td>Regular</td><td>MiscItems</td><td class="mono">Golden-Cove-Lockpick</td><td class="mono">/items/golden-cove-lockpick</td><td><span style="padding:2px 9px;border-radius:999px;font-size:10px;font-weight:800;background:#fb7185;color:#0d0f14">SHADOWED</span></td></tr>
+<tr><td>3</td><td>Golden Fishing Rod</td><td>Regular</td><td>MiscItems</td><td class="mono">Golden-Fishing-Rod</td><td class="mono">/items/golden-fishing-rod</td><td><span style="padding:2px 9px;border-radius:999px;font-size:10px;font-weight:800;background:#34d399;color:#0d0f14">RESOLVED</span></td></tr>
+<tr><td>4</td><td>Golden Paw Ticket</td><td>Regular</td><td>MiscItems</td><td class="mono">Golden-Paw-Ticket</td><td class="mono">/items/golden-paw-ticket</td><td><span style="padding:2px 9px;border-radius:999px;font-size:10px;font-weight:800;background:#34d399;color:#0d0f14">RESOLVED</span></td></tr>
+<tr><td>5</td><td>Golden Pencil</td><td>Regular</td><td>MiscItems</td><td class="mono">Golden-Pencil</td><td class="mono">/items/golden-pencil</td><td><span style="padding:2px 9px;border-radius:999px;font-size:10px;font-weight:800;background:#34d399;color:#0d0f14">RESOLVED</span></td></tr>
+<tr><td>6</td><td>Golden Prison Key</td><td>Regular</td><td>MiscItems</td><td class="mono">Golden-Prison-Key</td><td class="mono">/items/golden-prison-key</td><td><span style="padding:2px 9px;border-radius:999px;font-size:10px;font-weight:800;background:#fb7185;color:#0d0f14">SHADOWED</span></td></tr>
+<tr><td>7</td><td>Golden Retriever</td><td>Regular</td><td>Pets</td><td class="mono">Golden-Retriever</td><td class="mono">/items/golden-retriever</td><td><span style="padding:2px 9px;border-radius:999px;font-size:10px;font-weight:800;background:#34d399;color:#0d0f14">RESOLVED</span></td></tr>
+<tr><td>8</td><td>Shiny Golden Retriever</td><td>Shiny</td><td>Pets</td><td class="mono">Shiny-Golden-Retriever</td><td class="mono">/items/shiny-golden-retriever</td><td><span style="padding:2px 9px;border-radius:999px;font-size:10px;font-weight:800;background:#34d399;color:#0d0f14">RESOLVED</span></td></tr>
+<tr><td>9</td><td>Golden Golden Retriever</td><td>Golden</td><td>Pets</td><td class="mono">Golden-Golden-Retriever</td><td class="mono">/items/golden-golden-retriever</td><td><span style="padding:2px 9px;border-radius:999px;font-size:10px;font-weight:800;background:#34d399;color:#0d0f14">RESOLVED</span></td></tr>
+<tr><td>10</td><td>Shiny Golden Golden Retriever</td><td>Shiny Golden</td><td>Pets</td><td class="mono">Shiny-Golden-Golden-Retriever</td><td class="mono">/items/shiny-golden-golden-retriever</td><td><span style="padding:2px 9px;border-radius:999px;font-size:10px;font-weight:800;background:#34d399;color:#0d0f14">RESOLVED</span></td></tr>
+<tr><td>11</td><td>Rainbow Golden Retriever</td><td>Rainbow</td><td>Pets</td><td class="mono">Rainbow-Golden-Retriever</td><td class="mono">/items/rainbow-golden-retriever</td><td><span style="padding:2px 9px;border-radius:999px;font-size:10px;font-weight:800;background:#34d399;color:#0d0f14">RESOLVED</span></td></tr>
+<tr><td>12</td><td>Shiny Rainbow Golden Retriever</td><td>Shiny Rainbow</td><td>Pets</td><td class="mono">Shiny-Rainbow-Golden-Retriever</td><td class="mono">/items/shiny-rainbow-golden-retriever</td><td><span style="padding:2px 9px;border-radius:999px;font-size:10px;font-weight:800;background:#34d399;color:#0d0f14">RESOLVED</span></td></tr>
+<tr><td>13</td><td>Golden Shovel</td><td>Regular</td><td>MiscItems</td><td class="mono">Golden-Shovel</td><td class="mono">/items/golden-shovel</td><td><span style="padding:2px 9px;border-radius:999px;font-size:10px;font-weight:800;background:#34d399;color:#0d0f14">RESOLVED</span></td></tr>
+<tr><td>14</td><td>Golden Watering Can</td><td>Regular</td><td>MiscItems</td><td class="mono">Golden-Watering-Can</td><td class="mono">/items/golden-watering-can</td><td><span style="padding:2px 9px;border-radius:999px;font-size:10px;font-weight:800;background:#fb7185;color:#0d0f14">SHADOWED</span></td></tr>
+<tr><td>15</td><td>Rainbow Booth</td><td>Regular</td><td>Booths</td><td class="mono">Rainbow-Booth</td><td class="mono">/items/rainbow-booth</td><td><span style="padding:2px 9px;border-radius:999px;font-size:10px;font-weight:800;background:#34d399;color:#0d0f14">RESOLVED</span></td></tr>
+<tr><td>16</td><td>Rainbow Eggs</td><td>Regular</td><td>Enchants</td><td class="mono">Rainbow-Eggs</td><td class="mono">/items/rainbow-eggs</td><td><span style="padding:2px 9px;border-radius:999px;font-size:10px;font-weight:800;background:#34d399;color:#0d0f14">RESOLVED</span></td></tr>
+<tr><td>17</td><td>Rainbow Flag</td><td>Regular</td><td>MiscItems</td><td class="mono">Rainbow-Flag</td><td class="mono">/items/rainbow-flag</td><td><span style="padding:2px 9px;border-radius:999px;font-size:10px;font-weight:800;background:#34d399;color:#0d0f14">RESOLVED</span></td></tr>
+<tr><td>18</td><td>Rainbow Fruit</td><td>Regular</td><td>Fruits</td><td class="mono">Rainbow-Fruit</td><td class="mono">/items/rainbow-fruit</td><td><span style="padding:2px 9px;border-radius:999px;font-size:10px;font-weight:800;background:#34d399;color:#0d0f14">RESOLVED</span></td></tr>
+<tr><td>19</td><td>Rainbow Gem</td><td>Regular</td><td>MiscItems</td><td class="mono">Rainbow-Gem</td><td class="mono">/items/rainbow-gem</td><td><span style="padding:2px 9px;border-radius:999px;font-size:10px;font-weight:800;background:#34d399;color:#0d0f14">RESOLVED</span></td></tr>
+<tr><td>20</td><td>Rainbow Hoverboard</td><td>Regular</td><td>Hoverboards</td><td class="mono">Rainbow-Hoverboard</td><td class="mono">/items/rainbow-hoverboard</td><td><span style="padding:2px 9px;border-radius:999px;font-size:10px;font-weight:800;background:#fb7185;color:#0d0f14">SHADOWED</span></td></tr>
+<tr><td>21</td><td>Rainbow Mini Chest</td><td>Regular</td><td>MiscItems</td><td class="mono">Rainbow-Mini-Chest</td><td class="mono">/items/rainbow-mini-chest</td><td><span style="padding:2px 9px;border-radius:999px;font-size:10px;font-weight:800;background:#fb7185;color:#0d0f14">SHADOWED</span></td></tr>
+<tr><td>22</td><td>Rainbow Pencil</td><td>Regular</td><td>MiscItems</td><td class="mono">Rainbow-Pencil</td><td class="mono">/items/rainbow-pencil</td><td><span style="padding:2px 9px;border-radius:999px;font-size:10px;font-weight:800;background:#34d399;color:#0d0f14">RESOLVED</span></td></tr>
+<tr><td>23</td><td>Rainbow Swirl</td><td>Regular</td><td>MiscItems</td><td class="mono">Rainbow-Swirl</td><td class="mono">/items/rainbow-swirl</td><td><span style="padding:2px 9px;border-radius:999px;font-size:10px;font-weight:800;background:#34d399;color:#0d0f14">RESOLVED</span></td></tr>
+<tr><td>24</td><td>Rainbow Swirl</td><td>Regular</td><td>Pets</td><td class="mono">Rainbow-Swirl</td><td class="mono">/items/rainbow-swirl</td><td><span style="padding:2px 9px;border-radius:999px;font-size:10px;font-weight:800;background:#34d399;color:#0d0f14">RESOLVED</span></td></tr>
+<tr><td>25</td><td>Rainbow Rainbow Swirl</td><td>Rainbow</td><td>MiscItems</td><td class="mono">Rainbow-Rainbow-Swirl</td><td class="mono">/items/rainbow-rainbow-swirl</td><td><span style="padding:2px 9px;border-radius:999px;font-size:10px;font-weight:800;background:#34d399;color:#0d0f14">RESOLVED</span></td></tr>
+<tr><td>26</td><td>Rainbow Rainbow Swirl</td><td>Rainbow</td><td>Pets</td><td class="mono">Rainbow-Rainbow-Swirl</td><td class="mono">/items/rainbow-rainbow-swirl</td><td><span style="padding:2px 9px;border-radius:999px;font-size:10px;font-weight:800;background:#34d399;color:#0d0f14">RESOLVED</span></td></tr>
+<tr><td>27</td><td>Rainbow Unicorn</td><td>Regular</td><td>Pets</td><td class="mono">Rainbow-Unicorn</td><td class="mono">/items/rainbow-unicorn</td><td><span style="padding:2px 9px;border-radius:999px;font-size:10px;font-weight:800;background:#34d399;color:#0d0f14">RESOLVED</span></td></tr>
+<tr><td>28</td><td>Shiny Flag</td><td>Regular</td><td>MiscItems</td><td class="mono">Shiny-Flag</td><td class="mono">/items/shiny-flag</td><td><span style="padding:2px 9px;border-radius:999px;font-size:10px;font-weight:800;background:#34d399;color:#0d0f14">RESOLVED</span></td></tr>
+<tr><td>29</td><td>Shiny Hunter</td><td>Regular</td><td>Enchants</td><td class="mono">Shiny-Hunter</td><td class="mono">/items/shiny-hunter</td><td><span style="padding:2px 9px;border-radius:999px;font-size:10px;font-weight:800;background:#34d399;color:#0d0f14">RESOLVED</span></td></tr>
+<tr><td>30</td><td>Shiny Supercharge</td><td>Regular</td><td>Enchants</td><td class="mono">Shiny-Supercharge</td><td class="mono">/items/shiny-supercharge</td><td><span style="padding:2px 9px;border-radius:999px;font-size:10px;font-weight:800;background:#34d399;color:#0d0f14">RESOLVED</span></td></tr>
+</table>
+<div class="note warnx"><b>Why "Golden Retriever" is safe but "Golden Cove Lockpick" is not:</b> the hijack fires only when the stem (name minus the variant word) matches another existing item. "Golden Retriever" → stem "Retriever" → no item named "Retriever" exists, so the whole-slug fallback resolves it. "Golden Cove Lockpick" → stem "Cove Lockpick" → that item exists, so the variant-prefix candidate wins first and the lockpick item is unreachable.</div>
+<h2>Resolution walk-through (example: Golden Cove Lockpick)</h2>
+<pre class="code"><span class="ln">URL:  /items/golden-cove-lockpick</span>
+<span class="ln">splitDetailSlug('golden-cove-lockpick')  →  candidates in order:</span>
+<span class="ln">  1. (variant=golden,  slug=cove-lockpick)          <span class="cm">← 1-token variant split</span></span>
+<span class="ln">  2. (variant='',      slug=golden-cove-lockpick)   <span class="cm">← whole-slug literal — tried LAST</span></span>
+<span class="ln">route loop:  findItemBySlug('cove-lockpick')  →  "Cove Lockpick" EXISTS</span>
+<span class="ln">           → serves Golden variant of Cove Lockpick. <span class="str">The literal item is never reached.</span></span></pre>
+
+
+<h2>Near-miss class — one upstream item away from breaking</h2>
+<div class="explain"><p>These variant-named items resolve correctly <b>today</b> only because their stem item doesn't exist. Any of these upstream additions instantly shadows them:</p>
+<ul style="color:#b6bcc9;font-size:13.5px">
+<li><code>Shiny Flag</code>, <code>Shiny Supercharge</code> (Enchants) — shadows if "Flag" / "Supercharge" items are added</li>
+<li><code>Rainbow Eggs</code> (Enchants) — shadows if an "Eggs" item is added</li>
+<li><code>Rainbow Fruit</code> (Fruits), <code>Rainbow Swirl</code>, <code>Golden Fishing Rod</code>, <code>Golden Shovel</code> (MiscItems) — same class</li>
+</ul></div>
+
+
+<h2>Database rows for the affected items</h2>
+<p class="sub">Live <code>items</code> rows (all 15 columns) for the 5 shadowed items (highlighted rows) and the 5 stem items that shadow them. Every row is a <b>base row</b> (<code>variant=0</code>, <code>shiny=0</code>) — literal distinct items, not variant rows; the collision lives purely in the slug namespace.</p>
+<table class="grid"><tr><th>id</th><th>collection</th><th>name</th><th>displayName</th><th>description</th><th>slug</th><th>hidden</th><th>shiny</th><th>variant</th><th>tier</th><th>imageId</th><th>huge</th><th>titanic</th><th>gargantuan</th><th>createdAt</th></tr><tr><td style="">abc3bec4</td><td style="">MiscItems</td><td style="">Cove Lockpick</td><td style="">Cove Lockpick</td><td style="">Save a pet from Grinch Cove! Chance for a HUGE!</td><td style="">Cove-Lockpick</td><td style="">0</td><td style="">0</td><td style="">0</td><td style="">NULL</td><td style="">120320082965427</td><td style="">0</td><td style="">0</td><td style="">0</td><td style="">2026-08-23 05:57:45</td></tr><tr style="background:rgba(251,113,133,.10)"><td style="">0b389492</td><td style="">MiscItems</td><td style="font-weight:700">Golden Cove Lockpick</td><td style="">Golden Cove Lockpick</td><td style="">Save a pet from Grinch Cove! Better lock-picking odds! Chance for a HUGE!</td><td style="">Golden-Cove-Lockpick</td><td style="">0</td><td style="">0</td><td style="">0</td><td style="">NULL</td><td style="">95200052788292</td><td style="">0</td><td style="">0</td><td style="">0</td><td style="">2026-08-23 05:57:45</td></tr><tr style="background:rgba(251,113,133,.10)"><td style="">dc0dbc06</td><td style="">MiscItems</td><td style="font-weight:700">Golden Prison Key</td><td style="">Golden Prison Key</td><td style="">Unlocks cells in Prison World for 10x HUGE pet chance! Drops randomly!</td><td style="">Golden-Prison-Key</td><td style="">0</td><td style="">0</td><td style="">0</td><td style="">NULL</td><td style="">17486584765</td><td style="">0</td><td style="">0</td><td style="">0</td><td style="">2026-08-23 05:57:45</td></tr><tr style="background:rgba(251,113,133,.10)"><td style="">57dcd6b8</td><td style="">MiscItems</td><td style="font-weight:700">Golden Watering Can</td><td style="">Golden Watering Can</td><td style="">Plants love gold water and grow faster! Lasts 1 hour!</td><td style="">Golden-Watering-Can</td><td style="">0</td><td style="">0</td><td style="">0</td><td style="">NULL</td><td style="">15555104643</td><td style="">0</td><td style="">0</td><td style="">0</td><td style="">2026-08-23 05:57:45</td></tr><tr><td style="">cf118b7f</td><td style="">Hoverboards</td><td style="">Hoverboard</td><td style="">Hoverboard</td><td style="">Your own personal hoverboard. Gotta go fast!</td><td style="">Hoverboard</td><td style="">0</td><td style="">0</td><td style="">0</td><td style="">NULL</td><td style="">14910756938</td><td style="">0</td><td style="">0</td><td style="">0</td><td style="">2026-08-23 05:57:45</td></tr><tr><td style="">d6492173</td><td style="">MiscItems</td><td style="">Mini Chest</td><td style="">Mini Chest</td><td style="">Open for THE MOST EPIC rewards!</td><td style="">Mini-Chest</td><td style="">0</td><td style="">0</td><td style="">0</td><td style="">NULL</td><td style="">15854077741</td><td style="">0</td><td style="">0</td><td style="">0</td><td style="">2026-08-23 05:57:45</td></tr><tr><td style="">3cd0366d</td><td style="">MiscItems</td><td style="">Prison Key</td><td style="">Prison Key</td><td style="">Unlocks cells in Prison World for a HUGE pet chance! Drops randomly!</td><td style="">Prison-Key</td><td style="">0</td><td style="">0</td><td style="">0</td><td style="">NULL</td><td style="">17486584661</td><td style="">0</td><td style="">0</td><td style="">0</td><td style="">2026-08-23 05:57:45</td></tr><tr style="background:rgba(251,113,133,.10)"><td style="">8310e997</td><td style="">Hoverboards</td><td style="font-weight:700">Rainbow Hoverboard</td><td style="">Rainbow Hoverboard</td><td style="">Double rainbow! (Redeem 5 merch codes)</td><td style="">Rainbow-Hoverboard</td><td style="">0</td><td style="">0</td><td style="">0</td><td style="">NULL</td><td style="">14910756731</td><td style="">0</td><td style="">0</td><td style="">0</td><td style="">2026-08-23 05:57:45</td></tr><tr style="background:rgba(251,113,133,.10)"><td style="">a7594417</td><td style="">MiscItems</td><td style="font-weight:700">Rainbow Mini Chest</td><td style="">Rainbow Mini Chest</td><td style="">Open for the best high tier loot!</td><td style="">Rainbow-Mini-Chest</td><td style="">0</td><td style="">0</td><td style="">0</td><td style="">NULL</td><td style="">17024878999</td><td style="">0</td><td style="">0</td><td style="">0</td><td style="">2026-08-23 05:57:45</td></tr><tr><td style="">6dab159c</td><td style="">MiscItems</td><td style="">Watering Can</td><td style="">Watering Can</td><td style="">Plants love water and grow faster! Lasts 20 minutes!</td><td style="">Watering-Can</td><td style="">0</td><td style="">0</td><td style="">0</td><td style="">NULL</td><td style="">15555104581</td><td style="">0</td><td style="">0</td><td style="">0</td><td style="">2026-08-23 05:57:45</td></tr></table>
+<div class="note infox"><b>Reading it:</b> <code>Rainbow Hoverboard</code> is a genuine base item in Hoverboards (variant=0) — yet its URL <code>/items/rainbow-hoverboard</code> is parsed as the rainbow variant of <code>Hoverboard</code>. Same for the three Golden MiscItems and <code>Rainbow Mini Chest</code>. The rows themselves are fine; only the URL parser misroutes them.</div>
+
+
+
+<h2>Fix</h2>
+<div class="note goodx"><b>One ordering change:</b> try the <b>whole-slug exact match first</b> in the route's candidate loop (or probe <code>findItemBySlug(wholeSlug)</code> before iterating <code>splitDetailSlug</code> candidates), falling back to variant-split candidates only when the whole slug matches no item. After the fix: all 5 shadowed items become reachable, and no existing variant URL changes (variant URLs whose stem item doesn't exist behave identically). Verify with the reproduction below.</div>
+
+<h2>Verification</h2>
+<div class="explain"><p>Reproduce any row after the fix:</p>
+<pre class="code"><span class="ln">curl -s "http://localhost:3000/items/golden-cove-lockpick" | grep -o "&lt;title&gt;[^&lt;]*"</span>
+<span class="ln"><span class="cm">→ should contain "Golden Cove Lockpick" (currently returns the Cove Lockpick page)</span></span></pre></div>
+
+<footer>ps99-values · hijackable slugs — variant-prefix shadowing · generated 2026-08-24 · measured against data/ps99.db (16,314 items) · companion: data/reports/inconsistency-audit/hijackable-slugs.md · parent finding: inconsistency-audit-full.html §01</footer>
+</div></body></html>

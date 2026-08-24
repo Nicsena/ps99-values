@@ -108,14 +108,8 @@ dist
 .DS_Store
 
 # Databases
-*.db
-*.db-shm
-*.db-wal
 *.db*
 
-data/*.db
-data/*.db-shm
-data/*.db-wal
 data/*.db*
 
 local/

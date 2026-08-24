@@ -5,6 +5,13 @@ let client: Redis | null = null;
 let unavailable = false;
 let warned = false;
 
+
+if(config.cacheDisabled === "false") {
+  console.log("REDIS CACHE IS ENABLED")
+} else {
+  console.log("REDIS CACHE IS DISABLED")
+}
+
 function warnOnce(): void {
   if (!warned) {
     warned = true;
@@ -16,6 +23,7 @@ function getClient(): Redis | null {
   if (unavailable) return null;
   if (client) return client;
   if (!config.redisUrl) return null;
+  if (config.cacheDisabled === "true") return null;
   try {
     const created = new Redis(config.redisUrl, {
       lazyConnect: false,
@@ -34,6 +42,8 @@ function getClient(): Redis | null {
     return null;
   }
 }
+
+await getClient();
 
 export async function cacheGet<T>(key: string): Promise<T | null> {
   try {

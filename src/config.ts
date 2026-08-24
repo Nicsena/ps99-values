@@ -6,6 +6,7 @@ export const configSchema = z.object({
   DB_PATH: z.string().min(1).default('./data/ps99.db'),
   REDIS_URL: z.string().min(1).optional(),
   SYNC_CRON: z.string().min(1).default('0 */1 * * *'),
+  CACHE_DISABLED: z.string().default("false"),
 });
 
 const parsed = configSchema.safeParse(process.env);
@@ -23,4 +24,5 @@ export const config = Object.freeze({
   dbPath: parsed.data.DB_PATH,
   redisUrl: parsed.data.REDIS_URL,
   syncCron: parsed.data.SYNC_CRON,
+  cacheDisabled: parsed.data.CACHE_DISABLED,
 });
