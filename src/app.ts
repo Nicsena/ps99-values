@@ -22,7 +22,7 @@ export async function initApp(): Promise<express.Express> {
 
   app.use('/', pagesRouter);
   app.use('/api', apiRouter);
-  app.use('/reports', express.static(join(rootDir, 'data', 'reports')));
+  app.use('/reports', express.static(join(rootDir, 'ai', 'reports')));
 
   app.use(
     (
