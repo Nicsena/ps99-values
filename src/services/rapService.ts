@@ -1,6 +1,10 @@
 import { cacheGet, cacheSet } from '../cache/index.js';
 import { buildRapItemKey } from './itemKey.js';
 import {
+  readColorVariants,
+  resolveChromaForColor,
+} from './collectionSpecs.js';
+import {
   countItemsFiltered,
   existsHistoryFor,
   historyFor,
@@ -16,11 +20,16 @@ import {
   type SortKey,
 } from '../db/queries/listings.js';
 import {
-  countExistsSnapshots,
-  countRapSnapshots,
+  countSnapshots,
   type HistoryRawPoint,
 } from '../db/queries/snapshotsRepo.js';
-import { countItems, findItemByNameLower, findItemVariant } from '../db/queries/itemsRepo.js';
+import {
+  countItems,
+  findItemByNameLower,
+  findItemBySlug,
+  findItemVariant,
+} from '../db/queries/itemsRepo.js';
+import type { ItemRow } from '../db/queries/itemsRepo.js';
 import { deriveCategory } from '../db/queries/listings.js';
 
 export interface ListItemRow {
@@ -39,8 +48,11 @@ export interface ListItemsResult {
 }
 
 export interface ItemVariant {
+  slug: string | null;
   pt: number;
   shiny: boolean;
+  chroma: number;
+  color: string | null;
   rap: number | null;
   exists: number | null;
   itemKey: string;
@@ -199,21 +211,26 @@ export async function listItems(params: {
   return result;
 }
 
+// Grammar: "Name[:golden|rainbow][:shiny][:color]". Exactly one additional
+// flag is accepted as a chroma color token (lowercased); further unknown flags
+// make the key invalid.
 export function parseItemKey(
   itemKey: string,
-): { name: string; pt: number; shiny: boolean } | null {
+): { name: string; pt: number; shiny: boolean; color?: string } | null {
   const parts = itemKey.split(':');
   const name = parts[0].trim();
   if (!name) return null;
   let pt = 0;
   let shiny = false;
+  let color: string | undefined;
   for (const flag of parts.slice(1)) {
     if (flag === 'golden' && pt === 0) pt = 1;
     else if (flag === 'rainbow' && pt === 0) pt = 2;
-    else if (flag === 'shiny') shiny = true;
+    else if (flag === 'shiny' && !shiny) shiny = true;
+    else if (color === undefined) color = flag.toLowerCase();
     else return null;
   }
-  return { name, pt, shiny };
+  return { name, pt, shiny, color };
 }
 
 export interface ComputeStatsOptions {
@@ -317,28 +334,18 @@ export function computeStats(
   };
 }
 
-export async function getItemDetail(itemKey: string): Promise<ItemDetail | null> {
-  const decoded = decodeURIComponent(itemKey);
-  const parsed = parseItemKey(decoded);
-  if (!parsed) return null;
+// Builds the detail payload for an already-resolved variant row. Every
+// addressable variant is its own items row, so `item` IS the requested variant.
+async function buildItemDetail(item: ItemRow): Promise<ItemDetail | null> {
+  const colorMap = readColorVariants(item.colorVariants);
 
-  const detailCacheKey = `v4:detail:${decoded}`;
-  const cached = await cacheGet<ItemDetail>(detailCacheKey);
-  if (cached) return cached;
-
-  const item =
-    (await findItemVariant(parsed.name, parsed.pt, parsed.shiny)) ??
-    (await findItemByNameLower(parsed.name));
-  if (!item) return null;
-
-  const shinyInt = parsed.shiny ? 1 : 0;
-  const [variantRows, rapRows, existsRows, rapPoints, existsPoints, totalExists, similarRows] =
+  const [variantRows, rapRows, existsRows, rapPoints, existsPoints, totalExistsVal, similarRows] =
     await Promise.all([
       variantsForItem(item.collectionName, item.name),
-      historyFor(item.id, parsed.pt, shinyInt),
-      existsHistoryFor(item.id, parsed.pt, shinyInt),
-      countRapSnapshots(item.id, parsed.pt, shinyInt),
-      countExistsSnapshots(item.id, parsed.pt, shinyInt),
+      historyFor(item.id),
+      existsHistoryFor(item.id),
+      countSnapshots(item.id, 'rap'),
+      countSnapshots(item.id, 'exists'),
       totalLatestExists(item.id),
       similarItemsFor(
         item.id,
@@ -348,18 +355,34 @@ export async function getItemDetail(itemKey: string): Promise<ItemDetail | null>
       ),
     ]);
 
-  const variants: ItemVariant[] = variantRows.map((row) => ({
-    pt: row.pt,
-    shiny: Number(row.shiny) !== 0,
-    rap: row.rap,
-    exists: row.exists === null || row.exists === undefined ? null : row.exists,
-    itemKey: buildRapItemKey(item.name, row.pt, Number(row.shiny) !== 0),
-  }));
+  const variants: ItemVariant[] = variantRows.map((row) => {
+    const rowChroma = row.chroma ?? 0;
+    const rowColor = rowChroma > 0 ? (colorMap.get(rowChroma)?.name ?? null) : null;
+    return {
+      slug: row.slug ?? null,
+      pt: Number(row.pt),
+      shiny: Number(row.shiny) !== 0,
+      chroma: rowChroma,
+      color: rowColor,
+      rap: row.rap,
+      exists: row.exists === null || row.exists === undefined ? null : row.exists,
+      itemKey:
+        rowColor !== null
+          ? buildRapItemKey(item.name, Number(row.pt), Number(row.shiny) !== 0, rowColor)
+          : buildRapItemKey(item.name, Number(row.pt), Number(row.shiny) !== 0),
+    };
+  });
 
-  const currentRap =
-    variants.find((v) => v.pt === parsed.pt && v.shiny === parsed.shiny)?.rap ?? null;
-  const exists =
-    variants.find((v) => v.pt === parsed.pt && v.shiny === parsed.shiny)?.exists ?? null;
+  // The requested variant's own latest values.
+  const self = variants.find(
+    (v) =>
+      v.pt === item.variant &&
+      v.shiny === item.shiny &&
+      v.chroma === item.chroma &&
+      item.tier === 0,
+  );
+  const currentRap = self?.rap ?? null;
+  const exists = self?.exists ?? null;
 
   const nowMs = Date.now();
   const stats = computeStats(rapRows, existsRows, nowMs, {
@@ -370,9 +393,10 @@ export async function getItemDetail(itemKey: string): Promise<ItemDetail | null>
   });
 
   const latestRapTs = rapRows[rapRows.length - 1]?.captured_at;
-  const detail: ItemDetail = {
+  return {
     item: {
-      id: item.id,
+      // Stringified at the boundary to keep the API shape stable.
+      id: String(item.id),
       name: item.name,
       displayName: item.displayName,
       slug: item.slug ?? null,
@@ -384,7 +408,7 @@ export async function getItemDetail(itemKey: string): Promise<ItemDetail | null>
     rapUpdatedAt:
       latestRapTs === undefined ? null : new Date(Number(latestRapTs) * 1000).toISOString(),
     exists,
-    totalExists,
+    totalExists: totalExistsVal,
     similarItems: similarRows.map((row) => ({
       name: row.name,
       slug: row.slug ?? null,
@@ -396,8 +420,51 @@ export async function getItemDetail(itemKey: string): Promise<ItemDetail | null>
     stats,
     history: buildMergedHistory(rapRows, existsRows),
   };
+}
 
-  await cacheSet(detailCacheKey, detail, 3600);
+// Detail pages: exact base-slug resolution only — one indexed lookup in one
+// table. The page itself lists every stored variant of the item.
+export async function getItemDetailBySlug(slug: string): Promise<ItemDetail | null> {
+  const normalized = decodeURIComponent(slug);
+  const cacheKey = `v6:detail-slug:${normalized}`;
+  const cached = await cacheGet<ItemDetail>(cacheKey);
+  if (cached) return cached;
+  const item = await findItemBySlug(normalized);
+  if (!item) return null;
+  const detail = await buildItemDetail(item);
+  if (detail) await cacheSet(cacheKey, detail, 3600);
+  return detail;
+}
+
+export async function getItemDetail(itemKey: string): Promise<ItemDetail | null> {
+  const decoded = decodeURIComponent(itemKey);
+  const parsed = parseItemKey(decoded);
+  if (!parsed) return null;
+
+  const detailCacheKey = `v4:detail:${decoded}`;
+  const cached = await cacheGet<ItemDetail>(detailCacheKey);
+  if (cached) return cached;
+
+  // Resolve chroma from the requested color token (strict; unknown → 404).
+  let chroma = 0;
+  if (parsed.color !== undefined) {
+    const anyRow = await findItemByNameLower(parsed.name);
+    if (!anyRow) return null;
+    const resolved = resolveChromaForColor(readColorVariants(anyRow.colorVariants), parsed.color);
+    if (resolved === undefined) return null;
+    chroma = resolved;
+  }
+
+  const item = await findItemVariant(parsed.name, {
+    variant: parsed.pt,
+    shiny: parsed.shiny,
+    chroma,
+    tier: 0,
+  });
+  if (!item) return null;
+
+  const detail = await buildItemDetail(item);
+  if (detail) await cacheSet(detailCacheKey, detail, 3600);
   return detail;
 }
 

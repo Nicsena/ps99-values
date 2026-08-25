@@ -1355,18 +1355,11 @@ a.badge-variant:hover {
   border: 1px solid var(--border);
   border-radius: 12px;
   color: var(--text);
-  cursor: pointer;
-  transition: border-color 0.15s ease, transform 0.15s ease;
+  text-decoration: none;
 }
 
-.variant-tile:hover {
-  transform: translateY(-2px);
+a.variant-tile:hover {
   border-color: var(--accent);
-}
-
-.variant-tile.active {
-  border-color: var(--accent-2);
-  box-shadow: 0 0 0 1px var(--accent-2);
 }
 
 .variant-tile img {

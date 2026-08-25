@@ -1,26 +1,38 @@
 import { sql } from 'drizzle-orm';
 import { db } from '../client.js';
 import { findItemByNameLower, type ItemRow } from './itemsRepo.js';
-import { loadExistsHistory, loadHistory } from './snapshotsRepo.js';
+import { loadHistory, type Metric } from './snapshotsRepo.js';
 
-export const LATEST_CTE = sql`WITH latest AS (
-  SELECT item_id, pt, shiny, item_key, value FROM rap_snapshots
-  GROUP BY item_id, pt, shiny HAVING captured_at = MAX(captured_at)
+// Latest snapshot per item row (i.e. per variant), deterministically via
+// ROW_NUMBER (no ties).
+const LATEST_CTE = sql`WITH latest AS (
+  SELECT item_id, value FROM (
+    SELECT item_id, value,
+      ROW_NUMBER() OVER (PARTITION BY item_id ORDER BY captured_at DESC) rn
+    FROM snapshots WHERE metric = 'rap'
+  ) WHERE rn = 1
 )`;
 
 const LATEST_EXISTS_CTE = sql`, latest_exists AS (
-  SELECT item_id, pt, shiny, item_key, value FROM exists_snapshots
-  GROUP BY item_id, pt, shiny HAVING captured_at = MAX(captured_at)
+  SELECT item_id, value FROM (
+    SELECT item_id, value,
+      ROW_NUMBER() OVER (PARTITION BY item_id ORDER BY captured_at DESC) rn
+    FROM snapshots WHERE metric = 'exists'
+  ) WHERE rn = 1
 )`;
 
 const HOUR_EXISTS_CTE = sql`, hour_exists AS (
-  SELECT item_id, pt, shiny, value, captured_at FROM (
-    SELECT item_id, pt, shiny, value, captured_at,
-      ROW_NUMBER() OVER (PARTITION BY item_id, pt, shiny ORDER BY captured_at DESC) rn
-    FROM exists_snapshots
-    WHERE captured_at <= unixepoch() - 3600
+  SELECT item_id, value, captured_at FROM (
+    SELECT item_id, value, captured_at,
+      ROW_NUMBER() OVER (PARTITION BY item_id ORDER BY captured_at DESC) rn
+    FROM snapshots
+    WHERE metric = 'exists' AND captured_at <= unixepoch() - 3600
   ) WHERE rn = 1
 )`;
+
+function itemKeyExpr(): ReturnType<typeof sql> {
+  return sql`i.name || CASE i.variant WHEN 1 THEN ':golden' WHEN 2 THEN ':rainbow' ELSE '' END || CASE WHEN i.shiny = 1 THEN ':shiny' ELSE '' END`;
+}
 
 export interface RawListRow {
   name: string;
@@ -34,8 +46,10 @@ export interface RawListRow {
 }
 
 export interface RawVariantRow {
+  slug: string | null;
   pt: number;
   shiny: number;
+  chroma: number;
   rap: number | null;
   exists: number | null;
 }
@@ -84,23 +98,27 @@ export interface RawFilteredRow {
   existsPerHour: number | null;
 }
 
+function escapeLike(value: string): string {
+  return value.replace(/[\\%_]/g, (c) => `\\${c}`);
+}
+
 function buildFilteredWhere(params: FilteredListRowsParams): ReturnType<typeof sql> {
   const clauses: ReturnType<typeof sql>[] = [];
 
   if (params.q.length > 0) {
-    clauses.push(sql`LOWER(i.name) LIKE ${`%${params.q.toLowerCase()}%`}`);
+    clauses.push(sql`LOWER(i.name) LIKE ${`%${escapeLike(params.q.toLowerCase())}%`}`);
   }
   if (params.shiny === 'no') {
-    clauses.push(sql`COALESCE(l.shiny, 0) = 0`);
+    clauses.push(sql`i.shiny = 0`);
   } else if (params.shiny === 'yes') {
-    clauses.push(sql`COALESCE(l.shiny, 0) = 1`);
+    clauses.push(sql`i.shiny = 1`);
   }
   if (params.pt === 'regular') {
-    clauses.push(sql`COALESCE(l.pt, 0) = 0`);
+    clauses.push(sql`i.variant = 0`);
   } else if (params.pt === 'golden') {
-    clauses.push(sql`COALESCE(l.pt, 0) = 1`);
+    clauses.push(sql`i.variant = 1`);
   } else if (params.pt === 'rainbow') {
-    clauses.push(sql`COALESCE(l.pt, 0) = 2`);
+    clauses.push(sql`i.variant = 2`);
   }
   if (params.category !== 'all') {
     if (params.category === 'huge') clauses.push(sql`i.huge = 1`);
@@ -187,16 +205,14 @@ export async function listRowsFiltered(
     SELECT i.name, i."displayName" AS displayName, i.slug AS slug, i.imageId AS imageId,
            i.huge, i.titanic, i.gargantuan,
            i.collection AS collectionName,
-           COALESCE(l.item_key, i.name) AS itemKey,
-           l.value AS rap, COALESCE(l.pt, 0) AS pt, COALESCE(l.shiny, 0) AS shiny,
+           ${itemKeyExpr()} AS itemKey,
+           l.value AS rap, i.variant AS pt, i.shiny AS shiny,
            e.value AS existsCount,
            h.value AS existsHourValue, h.captured_at AS existsHourAt
     FROM items i
     LEFT JOIN latest l ON l.item_id = i.id
     LEFT JOIN latest_exists e ON e.item_id = i.id
-      AND e.pt = COALESCE(l.pt, 0) AND e.shiny = COALESCE(l.shiny, 0)
-    LEFT JOIN hour_exists h ON h.item_id = i.id
-      AND h.pt = COALESCE(l.pt, 0) AND h.shiny = COALESCE(l.shiny, 0)${where}${orderBy}
+    LEFT JOIN hour_exists h ON h.item_id = i.id${where}${orderBy}
     LIMIT ${params.pageSize} OFFSET ${offset}`)) as unknown as (RawFilteredRow & {
     huge: number;
     titanic: number;
@@ -211,9 +227,9 @@ export async function listRowsFiltered(
       row.existsCount !== null &&
       row.existsHourValue !== null &&
       row.existsHourAt !== null &&
-      nowSec - row.existsHourAt >= 600
+      nowSec - Number(row.existsHourAt) >= 600
     ) {
-      const hours = (nowSec - row.existsHourAt) / 3600;
+      const hours = (nowSec - Number(row.existsHourAt)) / 3600;
       row.existsPerHour = Math.round((row.existsCount - row.existsHourValue) / hours);
     } else {
       row.existsPerHour = null;
@@ -228,8 +244,7 @@ export async function countItemsFiltered(params: FilteredListRowsParams): Promis
     SELECT COUNT(*) AS total
     FROM items i
     LEFT JOIN latest l ON l.item_id = i.id
-    LEFT JOIN latest_exists e ON e.item_id = i.id
-      AND e.pt = COALESCE(l.pt, 0) AND e.shiny = COALESCE(l.shiny, 0)${where}`)) as {
+    LEFT JOIN latest_exists e ON e.item_id = i.id${where}`)) as {
     total: number;
   }[];
   return rows[0]?.total ?? 0;
@@ -246,7 +261,7 @@ export interface ListRowsParams {
 export async function listRowsRaw(params: ListRowsParams): Promise<RawListRow[]> {
   const where =
     params.search.length > 0
-      ? sql` WHERE LOWER(i.name) LIKE ${`%${params.search}%`}`
+      ? sql` WHERE LOWER(i.name) LIKE ${`%${escapeLike(params.search)}%`}`
       : sql``;
 
   const orderBy =
@@ -258,8 +273,8 @@ export async function listRowsRaw(params: ListRowsParams): Promise<RawListRow[]>
 
   const rows = (await db.all<Omit<RawListRow, 'category'> & { huge: number; titanic: number; gargantuan: number }>(sql`${LATEST_CTE}
     SELECT i.name, i."displayName" AS displayName, i.huge, i.titanic, i.gargantuan, i.collection AS collectionName,
-           COALESCE(l.item_key, i.name) AS itemKey,
-           l.value AS rap, COALESCE(l.pt, 0) AS pt, COALESCE(l.shiny, 0) AS shiny
+           ${itemKeyExpr()} AS itemKey,
+           l.value AS rap, i.variant AS pt, i.shiny AS shiny
     FROM items i
     LEFT JOIN latest l ON l.item_id = i.id${where}${orderBy}
     LIMIT ${params.pageSize} OFFSET ${offset}`)) as unknown as RawListRow[];
@@ -278,7 +293,7 @@ export interface RawSimilarItemRow {
 }
 
 export async function similarItemsFor(
-  itemId: string,
+  itemId: number,
   category: string | null,
   collectionName: string,
   excludeName: string,
@@ -290,8 +305,8 @@ export async function similarItemsFor(
     SELECT i.name, i.slug AS slug, i.huge, i.titanic, i.gargantuan,
            l.value AS rap, e.value AS "exists"
     FROM items i
-    LEFT JOIN latest l ON l.item_id = i.id AND l.pt = 0 AND l.shiny = 0
-    LEFT JOIN latest_exists e ON e.item_id = i.id AND e.pt = 0 AND e.shiny = 0
+    LEFT JOIN latest l ON l.item_id = i.id
+    LEFT JOIN latest_exists e ON e.item_id = i.id
     WHERE i.id != ${itemId} AND LOWER(i.name) != LOWER(${excludeName}) AND ${match}
     ORDER BY CASE WHEN l.value IS NULL THEN 1 ELSE 0 END, l.value DESC, LOWER(i.name) ASC
     LIMIT 8`)) as unknown as RawSimilarItemRow[];
@@ -305,43 +320,54 @@ export async function itemByName(name: string): Promise<ItemRow | undefined> {
   return findItemByNameLower(name);
 }
 
+// All variant rows sharing the base (collection, name), each with its own
+// latest values. Chroma rows are included (colors resolved in rapService);
+// tiered rows are stored but not surfaced yet.
 export async function variantsForItem(
   collectionName: string,
   name: string,
 ): Promise<RawVariantRow[]> {
   return (await db.all<RawVariantRow>(sql`${LATEST_CTE}${LATEST_EXISTS_CTE}
-    SELECT l.pt, l.shiny, l.value AS rap, e.value AS "exists"
-    FROM latest l
-    JOIN items s ON s.id = l.item_id
-    LEFT JOIN latest_exists e ON e.item_id = l.item_id AND e.pt = l.pt AND e.shiny = l.shiny
-    WHERE LOWER(s.name) = LOWER(${name}) AND s.collection = ${collectionName}
-    ORDER BY l.pt ASC, l.shiny ASC`)) as RawVariantRow[];
+    SELECT s.slug AS slug, s.variant AS pt, s.shiny AS shiny, s.chroma AS chroma,
+           l.value AS rap, e.value AS "exists"
+    FROM items s
+    LEFT JOIN latest l ON l.item_id = s.id
+    LEFT JOIN latest_exists e ON e.item_id = s.id
+    WHERE s.collection = ${collectionName} AND LOWER(s.name) = LOWER(${name}) AND s.tier = 0
+    ORDER BY pt ASC, shiny ASC, chroma ASC`)) as RawVariantRow[];
 }
 
 export async function historyFor(
-  itemId: string,
-  pt: number,
-  shinyInt: number,
+  itemId: number,
+  metric: Metric = 'rap',
   limit = 200,
 ): Promise<{ captured_at: number; value: number }[]> {
-  return loadHistory(itemId, pt, shinyInt, limit);
+  return loadHistory(itemId, metric, limit);
 }
 
 export async function existsHistoryFor(
-  itemId: string,
-  pt: number,
-  shinyInt: number,
+  itemId: number,
   limit = 200,
 ): Promise<{ captured_at: number; value: number }[]> {
-  return loadExistsHistory(itemId, pt, shinyInt, limit);
+  return loadHistory(itemId, 'exists', limit);
 }
 
-export async function totalLatestExists(itemId: string): Promise<number | null> {
+// True cross-variant total: sums the latest exists value of every sibling row
+// sharing the base (collection, name).
+export async function totalLatestExists(itemId: number): Promise<number | null> {
   const rows = (await db.all<{ total: number | null }>(
     sql`SELECT SUM(value) AS total FROM (
-          SELECT value FROM exists_snapshots
-          WHERE item_id = ${itemId}
-          GROUP BY item_id, pt, shiny HAVING captured_at = MAX(captured_at)
+          SELECT value FROM (
+            SELECT item_id, value,
+              ROW_NUMBER() OVER (PARTITION BY item_id ORDER BY captured_at DESC) rn
+            FROM snapshots
+            WHERE metric = 'exists'
+              AND item_id IN (
+                SELECT id FROM items
+                WHERE collection = (SELECT collection FROM items WHERE id = ${itemId})
+                  AND name = (SELECT name FROM items WHERE id = ${itemId})
+              )
+          ) WHERE rn = 1
         )`,
   )) as { total: number | null }[];
   return rows[0]?.total ?? null;

@@ -13,7 +13,14 @@ export interface CollectionEntry {
 export interface RapEntry {
   category: string;
   value: number;
-  configData: { id: string; pt?: number; sh?: number | boolean };
+  configData: {
+    id: string;
+    pt?: number;
+    sh?: number | boolean;
+    cv?: number;
+    tn?: number;
+    vr?: unknown;
+  };
 }
 
 const collectionEntrySchema = z.object({
@@ -31,6 +38,9 @@ const rapEntrySchema = z.object({
       id: z.string(),
       pt: z.number().optional(),
       sh: z.union([z.number(), z.boolean()]).optional(),
+      cv: z.number().optional(),
+      tn: z.number().optional(),
+      vr: z.unknown().optional(),
     })
     .loose(),
 });

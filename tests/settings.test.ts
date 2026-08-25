@@ -7,7 +7,7 @@ const dbPath = join(tmpdir(), `ps99-settings-test-${Date.now()}-${process.pid}.d
 
 type ClientModule = typeof import('../src/db/client.js');
 type SettingsModule = typeof import('../src/services/settings.js');
-type SchemaModule = typeof import('../src/db/appSettingsSchema.js');
+type SchemaModule = typeof import('../src/db/schema.js');
 
 let client: ClientModule;
 let settings: SettingsModule;
@@ -17,7 +17,7 @@ beforeAll(async () => {
   process.env.DB_PATH = dbPath;
   client = await import('../src/db/client.js');
   client.ensureSchema();
-  const schema = await import('../src/db/appSettingsSchema.js');
+  const schema = await import('../src/db/schema.js');
   appSettings = schema.appSettings;
   settings = await import('../src/services/settings.js');
 });

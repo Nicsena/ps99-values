@@ -192,62 +192,93 @@ describe('computeStats', () => {
   });
 });
 
+describe('parseItemKey', () => {
+  it('parses variant flags', () => {
+    expect(rapService.parseItemKey('Dragon')).toEqual({ name: 'Dragon', pt: 0, shiny: false, color: undefined });
+    expect(rapService.parseItemKey('Dragon:golden:shiny')).toEqual({
+      name: 'Dragon',
+      pt: 1,
+      shiny: true,
+      color: undefined,
+    });
+  });
+
+  it('accepts a chroma color token and lowercases it', () => {
+    expect(rapService.parseItemKey('Huge Chroma Phoenix:shiny:blue')).toEqual({
+      name: 'Huge Chroma Phoenix',
+      pt: 0,
+      shiny: true,
+      color: 'blue',
+    });
+  });
+
+  it('rejects keys with multiple unknown tokens', () => {
+    expect(rapService.parseItemKey('X:mega:blue')).toBeNull();
+    expect(rapService.parseItemKey(':golden')).toBeNull();
+  });
+});
+
 describe('data layer helpers', () => {
-  let itemId: string;
+  let itemId: number;
+  let goldenVariantId: number;
 
   beforeAll(async () => {
     await client.db.insert(schema.collections).values({ name: 'Pets', enabled: true });
-    itemId = 'item-1111-2222';
-    await client.db.insert(schema.items).values({
-      id: itemId,
+    const itemsRepo = await import('../src/db/queries/itemsRepo.js');
+    // One row per variant: primary row + golden row, each with its own slug.
+    itemId = await itemsRepo.upsertItem({ collectionName: 'Pets', name: 'Testicorn' });
+    goldenVariantId = await itemsRepo.upsertItem({
       collectionName: 'Pets',
       name: 'Testicorn',
-      description: null,
-      category: null,
+      variant: 1,
     });
 
-    const rapSnap = (id: string, pt: number, shiny: boolean, value: number, at: number) =>
-      client.db.insert(schema.rapSnapshots).values({
-        id,
-        itemId,
-        itemKey: 'Testicorn',
-        pt,
-        shiny,
-        value,
-        capturedAt: new Date(at * 1000),
-      });
-    const existsSnap = (id: string, pt: number, shiny: boolean, value: number, at: number) =>
-      client.db.insert(schema.existsSnapshots).values({
-        id,
-        itemId,
-        itemKey: 'Testicorn',
-        pt,
-        shiny,
+    const snap = (itemIdArg: number, metric: 'rap' | 'exists', value: number, at: number) =>
+      client.db.insert(schema.snapshots).values({
+        itemId: itemIdArg,
+        metric,
         value,
         capturedAt: new Date(at * 1000),
       });
 
-    await rapSnap('r1', 0, false, 100, sec(NOW - 3000));
-    await rapSnap('r2', 0, false, 150, sec(NOW - 2000));
-    await rapSnap('r3', 0, false, 175, sec(NOW - 1000));
-    await rapSnap('r4', 0, false, 999, sec(NOW - 500));
-    await rapSnap('r5', 1, false, 500, sec(NOW - 100));
+    // Offsets chosen so each floored second is distinct (unique index).
+    await snap(itemId, 'rap', 100, sec(NOW - 5000));
+    await snap(itemId, 'rap', 150, sec(NOW - 4000));
+    await snap(itemId, 'rap', 175, sec(NOW - 3000));
+    await snap(itemId, 'rap', 999, sec(NOW - 2000));
+    await snap(goldenVariantId, 'rap', 500, sec(NOW - 1000));
 
-    await existsSnap('e1', 0, false, 5, sec(NOW - 3000));
-    await existsSnap('e2', 0, false, 8, sec(NOW - 2000));
-    await existsSnap('e3', 0, false, 12, sec(NOW - 1000));
-    await existsSnap('e4', 1, false, 20, sec(NOW - 100));  });
+    await snap(itemId, 'exists', 5, sec(NOW - 5000));
+    await snap(itemId, 'exists', 8, sec(NOW - 3000));
+    await snap(itemId, 'exists', 12, sec(NOW - 2000));
+    await snap(goldenVariantId, 'exists', 20, sec(NOW - 1000));
+
+    emptyItemId = await itemsRepo.upsertItem({ collectionName: 'Pets', name: 'Emptycorn' });
+  });
+
+  let emptyItemId: number;
+
+  it('assigns per-variant slugs at write time', async () => {
+    const rows = await client.db.select().from(schema.items);
+    const regular = rows.find((r) => r.id === itemId);
+    const golden = rows.find((r) => r.id === goldenVariantId);
+    expect(regular?.slug).toBe('testicorn');
+    expect(golden?.slug).toBe('golden-testicorn');
+    // Display-name prefixes ("Golden …") are applied by sync, not by upsertItem.
+    expect(golden?.variant).toBe(1);
+    void golden;
+  });
 
   it('loads exists history ascending for a variant', async () => {
-    const rows = await listings.existsHistoryFor(itemId, 0, 0);
+    const rows = await listings.existsHistoryFor(itemId);
     expect(rows.map((r) => r.value)).toEqual([5, 8, 12]);
   });
 
-  it('counts true totals per variant', async () => {
-    await expect(snapshotsRepo.countRapSnapshots(itemId, 0, 0)).resolves.toBe(4);
-    await expect(snapshotsRepo.countExistsSnapshots(itemId, 0, 0)).resolves.toBe(3);
-    await expect(snapshotsRepo.countRapSnapshots(itemId, 1, 0)).resolves.toBe(1);
-    await expect(snapshotsRepo.countExistsSnapshots(itemId, 0, 1)).resolves.toBe(0);
+  it('counts true totals per variant row', async () => {
+    await expect(snapshotsRepo.countSnapshots(itemId, 'rap')).resolves.toBe(4);
+    await expect(snapshotsRepo.countSnapshots(itemId, 'exists')).resolves.toBe(3);
+    await expect(snapshotsRepo.countSnapshots(goldenVariantId, 'rap')).resolves.toBe(1);
+    await expect(snapshotsRepo.countSnapshots(null, 'rap')).resolves.toBe(0);
   });
 
   it('sums latest exists across variants', async () => {
@@ -255,20 +286,125 @@ describe('data layer helpers', () => {
   });
 
   it('returns null total when item has no exists snapshots', async () => {
-    await client.db.insert(schema.items).values({
-      id: 'item-empty-3333',
-      collectionName: 'Pets',
-      name: 'Emptycorn',
-    });
-    await expect(listings.totalLatestExists('item-empty-3333')).resolves.toBeNull();
+    await expect(listings.totalLatestExists(emptyItemId)).resolves.toBeNull();
   });
 
-  it('finds items by slug with exact and fuzzy fallback', async () => {
+  it('finds items and variants by exact canonical slug match', async () => {
     const itemsRepo = await import('../src/db/queries/itemsRepo.js');
-    const exact = await itemsRepo.findItemBySlug('Testicorn');
+    const exact = await itemsRepo.findItemBySlug('testicorn');
     expect(exact?.id).toBe(itemId);
-    const fuzzy = await itemsRepo.findItemBySlug('testicorn');
-    expect(fuzzy?.id).toBe(itemId);
+    // Variant slugs are first-class addresses in the same table.
+    const golden = await itemsRepo.findItemBySlug('golden-testicorn');
+    expect(golden?.id).toBe(goldenVariantId);
+    expect(golden?.variant).toBe(1);
     await expect(itemsRepo.findItemBySlug('does-not-exist')).resolves.toBeUndefined();
+  });
+
+  it('keeps slugs unique across sibling variant rows', async () => {
+    const itemsRepo = await import('../src/db/queries/itemsRepo.js');
+    const rows = await client.db.select().from(schema.items);
+    const testicorns = rows.filter((r) => r.name === 'Testicorn').map((r) => r.slug);
+    expect(new Set(testicorns).size).toBe(testicorns.length);
+
+    // Re-upserting the same variant keeps its slug stable.
+    const again = await itemsRepo.upsertItem({
+      collectionName: 'Pets',
+      name: 'Testicorn',
+      variant: 1,
+    });
+    expect(again).toBe(goldenVariantId);
+    void itemsRepo;
+  });
+});
+
+describe('chroma detail resolution', () => {
+  beforeAll(async () => {
+    const itemsRepo = await import('../src/db/queries/itemsRepo.js');
+    await itemsRepo.upsertItem({
+      collectionName: 'Pets',
+      name: 'Chromaticorn',
+      // Non-standard ordering on purpose (mirrors Huge Chroma Lucki).
+      colorVariants: JSON.stringify([
+        { id: 1, name: 'Yellow', chance: 0.5 },
+        { id: 2, name: 'Pink', chance: 0.5 },
+      ]),
+    });
+    // Chroma variant as its own items row, addressed by its color name.
+    const yellow = await itemsRepo.upsertItem({
+      collectionName: 'Pets',
+      name: 'Chromaticorn',
+      chroma: 1,
+      colorVariants: JSON.stringify([
+        { id: 1, name: 'Yellow', chance: 0.5 },
+        { id: 2, name: 'Pink', chance: 0.5 },
+      ]),
+    });
+    await client.db.insert(schema.snapshots).values({
+      itemId: yellow,
+      metric: 'rap',
+      value: 777,
+      capturedAt: new Date(sec(NOW - 1000) * 1000),
+    });
+  });
+
+  it('resolves color itemKeys to the matching chroma variant', async () => {
+    const detail = await rapService.getItemDetail('Chromaticorn:yellow');
+    expect(detail?.currentRap).toBe(777);
+    expect(detail?.variants).toHaveLength(2); // primary + yellow
+    const yellowVariant = detail!.variants.find((v) => v.chroma === 1);
+    expect(yellowVariant?.color).toBe('Yellow');
+    expect(yellowVariant?.itemKey).toBe('Chromaticorn:yellow');
+    expect(yellowVariant?.slug).toBe('yellow-chromaticorn');
+    const primary = detail!.variants.find((v) => v.chroma === 0);
+    expect(primary?.color).toBeNull();
+    expect(primary?.slug).toBe('chromaticorn');
+  });
+
+  it('hard-fails unknown color tokens without fallback', async () => {
+    await expect(rapService.getItemDetail('Chromaticorn:blue')).resolves.toBeNull();
+    // The slug-based entry shows the base view regardless of itemKeys.
+    const base = await rapService.getItemDetailBySlug('chromaticorn');
+    expect(base).not.toBeNull();
+    // ':golden' parses as a pt flag, not a color; no golden row exists,
+    // so resolution strictly fails instead of falling back to the base.
+    await expect(rapService.getItemDetail('Chromaticorn:golden')).resolves.toBeNull();
+  });
+
+  it('lists all stored variants (including chroma) on the base detail', async () => {
+    const detail = await rapService.getItemDetailBySlug('chromaticorn');
+    expect(detail?.variants.map((v) => v.chroma).sort()).toEqual([0, 1]);
+    // Chroma slugs resolve as first-class addresses.
+    const viaSlug = await rapService.getItemDetailBySlug('yellow-chromaticorn');
+    expect(viaSlug?.currentRap).toBe(777);
+  });
+
+  it('backfills chroma slugs for legacy rows with NULL slugs', async () => {
+    const itemsRepo = await import('../src/db/queries/itemsRepo.js');
+    // Simulate a pre-backfill row: chroma variant without a slug.
+    await client.db.insert(schema.items).values({
+      collectionName: 'Pets',
+      name: 'Chromaticorn',
+      chroma: 2,
+      colorVariants: JSON.stringify([
+        { id: 1, name: 'Yellow', chance: 0.5 },
+        { id: 2, name: 'Pink', chance: 0.5 },
+      ]),
+      displayName: 'Pink Chromaticorn',
+    });
+    const assigned = await itemsRepo.repairVariantSlugs();
+    expect(assigned).toBeGreaterThanOrEqual(1);
+    const pink = await itemsRepo.findItemBySlug('pink-chromaticorn');
+    expect(pink?.chroma).toBe(2);
+
+    // Display names are repaired to "<label> <primary displayName>".
+    const renamed = await itemsRepo.repairVariantDisplayNames();
+    expect(renamed).toBeGreaterThanOrEqual(1);
+    const pinkAfter = await itemsRepo.findItemBySlug('pink-chromaticorn');
+    expect(pinkAfter?.displayName).toBe('Pink Chromaticorn');
+
+    // Idempotent: second run assigns nothing new.
+    const again = await itemsRepo.repairVariantSlugs();
+    expect(again).toBe(0);
+    expect(await itemsRepo.repairVariantDisplayNames()).toBe(0);
   });
 });

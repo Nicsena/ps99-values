@@ -87,8 +87,8 @@
   function cardHtml(item) {
     const displayName = item.displayName || item.name;
     const href = window.PS99 && PS99.itemPath
-      ? PS99.itemPath(item.name, item.pt || 0, !!item.shiny)
-      : '/items/' + (item.slug || PS99.slugify(item.name));
+      ? PS99.itemPath(item.slug || item.name)
+      : '/items/' + (item.slug || item.name);
     const perHour =
       typeof item.existsPerHour === 'number' && item.existsPerHour !== 0
         ? (item.existsPerHour > 0 ? '+' : '') + fmt(item.existsPerHour) + '/hr'
