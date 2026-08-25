@@ -54,7 +54,7 @@
 
   function itemHref(item) {
     if (window.PS99 && PS99.itemPath) {
-      return PS99.itemPath(item.name, item.pt || 0, !!item.shiny);
+      return PS99.itemPath(item.slug || item.name);
     }
     return '/items/' + encodeURIComponent(item.slug || item.name || '');
   }

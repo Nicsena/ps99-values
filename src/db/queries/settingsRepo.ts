@@ -1,6 +1,6 @@
 import { eq } from 'drizzle-orm';
 import { db } from '../client.js';
-import { appSettings } from '../appSettingsSchema.js';
+import { appSettings } from '../schema.js';
 
 export interface AppSettingRow {
   name: string;
@@ -22,6 +22,14 @@ export async function getRow(name: string): Promise<AppSettingRow | undefined> {
 }
 
 export async function upsertRow(params: UpsertSettingRowParams): Promise<void> {
+  // Only overwrite `protected` when explicitly provided; otherwise an
+  // unprotected write would silently clear the flag.
+  const set: Record<string, unknown> = {
+    value: params.value,
+    type: params.type,
+    updatedAt: new Date(),
+  };
+  if (params.protected !== undefined) set.protected = params.protected;
   await db
     .insert(appSettings)
     .values({
@@ -31,10 +39,7 @@ export async function upsertRow(params: UpsertSettingRowParams): Promise<void> {
       protected: params.protected ?? false,
       updatedAt: new Date(),
     })
-    .onConflictDoUpdate({
-      target: appSettings.name,
-      set: { value: params.value, type: params.type, updatedAt: new Date() },
-    });
+    .onConflictDoUpdate({ target: appSettings.name, set });
 }
 
 export async function deleteRow(name: string): Promise<void> {

@@ -344,16 +344,16 @@
            var npt = normPtEJS(v.pt);
            var names = ['Regular', 'Golden', 'Rainbow'];
            var label = names[npt] || 'Regular';
+           if (v.chroma) label += ' Chroma' + (v.color ? ' · ' + v.color : '');
            if (v.shiny) label += ' Shiny';
+           var tileTag = v.slug ? 'a' : 'div';
+           var href = v.slug ? ' href="/items/' + encodeURIComponent(v.slug) + '"' : '';
       %>
-        <button type="button" class="variant-tile"
-                data-name="<%= item.name %>"
-                data-pt="<%= typeof v.pt === 'string' ? v.pt.toLowerCase() : npt %>"
-                data-shiny="<%= v.shiny ? '1' : '0' %>">
+        <<%= tileTag %><%- href %> class="variant-tile">
           <img src="/img/placeholder.svg" alt="" width="64" height="64" loading="lazy">
           <span class="variant-tile-name"><%= label %></span>
           <span class="variant-tile-rap muted"><%= fmtCompactEJS(v.rap) %></span>
-        </button>
+        </<%= tileTag %>>
       <% }); %>
     </div>
   </section>
@@ -369,7 +369,7 @@
     </div>
     <div class="similar-grid">
       <% similarItems.forEach(function (si) { %>
-        <a class="similar-tile" href="#" data-sim-name="<%= si.name %>" data-pt="0" data-shiny="0">
+        <a class="similar-tile" href="/items/<%= encodeURIComponent(si.slug || si.name) %>" data-sim-name="<%= si.name %>">
           <img src="/img/placeholder.svg" alt="" width="64" height="64" loading="lazy">
           <span class="similar-info">
             <span class="similar-name"><%= si.name %></span>
@@ -406,51 +406,7 @@
       el.textContent = rel ? 'Updated ' + rel : '';
     });
 
-    /* ---------- variant chips from URL (linked via PS99.itemPath) ---------- */
-    (function () {
-      var m = location.pathname.match(/^\/items\/([a-z-]+)\//);
-      if (!m) return;
-      var vs = m[1];
-      var isShiny = vs.indexOf('shiny') !== -1;
-      var chips = [];
-      if (vs.indexOf('rainbow') !== -1) chips.push({ txt: 'RAINBOW', pt: 2 });
-      else if (vs.indexOf('golden') !== -1) chips.push({ txt: 'GOLDEN', pt: 1 });
-      if (isShiny) chips.push({ txt: 'SHINY', pt: 0 });
-      var box = document.getElementById('variant-chips');
-      if (!box || !FMT.itemPath) return;
-      chips.reverse().forEach(function (chip) {
-        var a = document.createElement('a');
-        a.className = 'badge badge-variant';
-        a.textContent = chip.txt;
-        a.href = FMT.itemPath(D.item.name, chip.pt, isShiny);
-        box.insertBefore(a, box.firstChild);
-      });
-    })();
-
-    /* ---------- variant tiles: active state + navigation ---------- */
-    (function () {
-      var m = location.pathname.match(/^\/items\/([a-z-]+)\//);
-      var cur = m ? m[1] : null;
-      document.querySelectorAll('.variant-tile').forEach(function (tile) {
-        if (FMT.variantSlug && FMT.variantSlug(tile.getAttribute('data-pt'), tile.getAttribute('data-shiny') === '1') === cur) {
-          tile.classList.add('active');
-        }
-        tile.addEventListener('click', function () {
-          if (!FMT.itemPath) return;
-          location.href = FMT.itemPath(
-            tile.getAttribute('data-name'),
-            tile.getAttribute('data-pt'),
-            tile.getAttribute('data-shiny') === '1'
-          );
-        });
-      });
-    })();
-
-    /* ---------- similar items links ---------- */
-    document.querySelectorAll('.similar-tile').forEach(function (a) {
-      if (!FMT.itemPath) return;
-      a.href = FMT.itemPath(a.getAttribute('data-sim-name'), a.getAttribute('data-pt'), a.getAttribute('data-shiny') === '1');
-    });
+    /* ---------- similar items are linked server-side (exact base slugs) ---------- */
 
     /* ---------- delta lines ---------- */
     function setDelta(id, chg, pct) {

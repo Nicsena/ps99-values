@@ -3,11 +3,9 @@ import { existsSync, mkdirSync } from 'node:fs';
 import { rename, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { getItemDetail } from '../services/rapService.js';
-import { buildRapItemKey } from '../services/itemKey.js';
+import { getItemDetailBySlug } from '../services/rapService.js';
 import { getEnabledCollections } from '../db/queries/collectionsRepo.js';
-import { findImageIdByName, findItemBySlug } from '../db/queries/itemsRepo.js';
-import { splitDetailSlug, type DetailSlugCandidate } from '../util/slug.js';
+import { findImageIdByName } from '../db/queries/itemsRepo.js';
 
 export const pagesRouter = Router();
 
@@ -76,34 +74,15 @@ pagesRouter.get(
 );
 
 pagesRouter.get(
-  '/items/:detailSlug',
+  '/items/:slug',
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const raw = Array.isArray(req.params.detailSlug)
-        ? req.params.detailSlug[0]
-        : req.params.detailSlug;
-      const candidates = splitDetailSlug(raw);
-      if (candidates.length === 0) {
-        return void notFound(res, 'Unknown item variant.');
-      }
-      let item = null;
-      let matched: DetailSlugCandidate | null = null;
-      for (const candidate of candidates) {
-        const found = await findItemBySlug(candidate.itemSlug);
-        if (found) {
-          item = found;
-          matched = candidate;
-          break;
-        }
-      }
-      if (!item || !matched) {
-        return void notFound(res, `Item "${raw}" not found.`);
-      }
-      const detail = await getItemDetail(
-        buildRapItemKey(item.name, matched.pt, matched.shiny),
-      );
+      const raw = Array.isArray(req.params.slug) ? req.params.slug[0] : req.params.slug;
+      // Exact base-slug match only; there are no variant URLs. The page
+      // itself lists every stored variant of the item.
+      const detail = await getItemDetailBySlug(raw);
       if (!detail) {
-        return void notFound(res, `Item "${matched.itemSlug}" not found.`);
+        return void notFound(res, `Item "${raw}" not found.`);
       }
       res.render('item', {
         item: detail.item,

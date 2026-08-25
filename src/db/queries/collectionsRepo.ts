@@ -24,6 +24,12 @@ export async function enableCollection(name: string): Promise<void> {
   await db.update(collections).set({ enabled: true }).where(eq(collections.name, name));
 }
 
+export async function enableCollections(names: readonly string[]): Promise<void> {
+  for (const name of names) {
+    await db.update(collections).set({ enabled: true }).where(eq(collections.name, name));
+  }
+}
+
 export async function markSynced(name: string): Promise<void> {
   await db.update(collections).set({ dateSynced: new Date() }).where(eq(collections.name, name));
 }
