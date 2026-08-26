@@ -1,24 +1,82 @@
 <%- include('partials/header', { title: 'PS99 Values' }) %>
 
-<section class="hero">
-  <h1 class="hero-title">PS99 Values</h1>
-  <p class="hero-sub">Track Pet Simulator 99 RAP and exists data</p>
-  <a href="/items" class="btn btn-accent btn-lg">Browse Items</a>
+<section class="home-hero">
+  <h1 class="home-title">PS99 Values</h1>
+  <p class="home-sub">Hourly RAP and exists tracking for Pet Simulator 99 — free, fast, and pulled straight from the BIG Games public API.</p>
+  <div class="home-actions">
+    <a href="/items" class="btn btn-accent">Browse Items</a>
+  </div>
+  <div class="home-hero-meta muted">
+    <span><b><%= itemCount.toLocaleString() %></b> items</span>
+    <span class="stat-sep">&middot;</span>
+    <span>hourly snapshots</span>
+    <span class="stat-sep">&middot;</span>
+    <span>synced <span id="home-sync" data-sync="<%= lastSyncAt %>" class="home-sync-inline">&mdash;</span></span>
+  </div>
 </section>
 
-<section class="features">
-  <div class="feature card">
-    <h2>RAP Tracking</h2>
-    <p class="muted">Live Recent Average Price data for every pet, variant, and shiny — pulled straight from the BIG Games public API and refreshed on demand.</p>
+<section class="home-features">
+  <div class="feature-row">
+    <i data-lucide="chart-line" class="feature-icon" aria-hidden="true"></i>
+    <div>
+      <b>RAP history charts</b>
+      <p class="muted">Every item charts its Recent Average Price over time — line, bar, or area, with ranges from 1 day to all-time.</p>
+    </div>
   </div>
-  <div class="feature card">
-    <h2>History Charts</h2>
-    <p class="muted">Every item page charts RAP over time so you can spot trends, crashes, and climbs at a glance.</p>
+  <div class="feature-row">
+    <i data-lucide="boxes" class="feature-icon" aria-hidden="true"></i>
+    <div>
+      <b>Supply tracking</b>
+      <p class="muted">Exists counts tracked for every variant, with supply filters to find the rarest items in the game.</p>
+    </div>
   </div>
-  <div class="feature card">
-    <h2>Exists Data</h2>
-    <p class="muted">Track how many copies of each pet exist, filter by supply, and find the rarest pets in the game.</p>
+  <div class="feature-row">
+    <i data-lucide="sparkles" class="feature-icon" aria-hidden="true"></i>
+    <div>
+      <b>Every variant, first-class</b>
+      <p class="muted">Golden, Rainbow, Shiny, and Chroma each get their own page, price, and history.</p>
+    </div>
+  </div>
+  <div class="feature-row">
+    <i data-lucide="search" class="feature-icon" aria-hidden="true"></i>
+    <div>
+      <b>Instant search</b>
+      <p class="muted">Press <kbd class="search-slash-hint">/</kbd> anywhere to search across all tracked items instantly.</p>
+    </div>
+  </div>
+  <div class="feature-row">
+    <i data-lucide="sliders-horizontal" class="feature-icon" aria-hidden="true"></i>
+    <div>
+      <b>Sort &amp; filter</b>
+      <p class="muted">Slice the market by RAP, exists, rarity, shiny, or collection on the items page.</p>
+    </div>
+  </div>
+  <div class="feature-row">
+    <i data-lucide="refresh-cw" class="feature-icon" aria-hidden="true"></i>
+    <div>
+      <b>Fresh hourly data</b>
+      <p class="muted">Snapshots sync every hour from the BIG Games public API - no login, no paywall.</p>
+    </div>
   </div>
 </section>
+
+<script>
+  (function () {
+    function hydrate() {
+      var el = document.getElementById('home-sync');
+      if (!el) return;
+      var iso = el.getAttribute('data-sync');
+      if (iso && window.PS99 && PS99.relTime) {
+        el.textContent = PS99.relTime(iso);
+        el.title = PS99.fmtDateTime ? PS99.fmtDateTime(iso) : iso;
+      }
+    }
+    if (window.PS99 && PS99.relTime) {
+      hydrate();
+    } else {
+      document.addEventListener('DOMContentLoaded', hydrate);
+    }
+  })();
+</script>
 
 <%- include('partials/footer') %>

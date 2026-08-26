@@ -3,9 +3,10 @@ import { existsSync, mkdirSync } from 'node:fs';
 import { rename, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { getItemDetailBySlug } from '../services/rapService.js';
+import { getItemDetailBySlug, listItemsFiltered } from '../services/rapService.js';
 import { getEnabledCollections } from '../db/queries/collectionsRepo.js';
 import { findImageIdByName } from '../db/queries/itemsRepo.js';
+import { getSetting } from '../services/settings.js';
 
 export const pagesRouter = Router();
 
@@ -60,52 +61,53 @@ function notFound(res: Response, message: string): void {
   });
 }
 
-pagesRouter.get('/', (_req: Request, res: Response, next: NextFunction) => {
+pagesRouter.get('/', async (_req: Request, res: Response, next: NextFunction) => {
   try {
-    res.render('home');
+    // Same source as the /items grid so the counts agree by construction.
+    const [items, lastSyncAt] = await Promise.all([
+      listItemsFiltered({}),
+      getSetting<string>('sync.lastSyncAt'),
+    ]);
+    res.render('home', {
+      itemCount: items.total,
+      lastSyncAt,
+    });
   } catch (err) {
     next(err);
   }
 });
 
-pagesRouter.get(
-  '/items',
-  async (_req: Request, res: Response, next: NextFunction) => {
-    try {
-      const rows = await getEnabledCollections();
-      const collections = rows.map((row) => row.name).sort((a, b) => a.localeCompare(b));
-      res.render('items', { collections });
-    } catch (err) {
-      next(err);
-    }
-  },
-);
+pagesRouter.get('/items', async (_req: Request, res: Response, next: NextFunction) => {
+  try {
+    const rows = await getEnabledCollections();
+    const collections = rows.map((row) => row.name).sort((a, b) => a.localeCompare(b));
+    res.render('items', { collections });
+  } catch (err) {
+    next(err);
+  }
+});
 
-pagesRouter.get(
-  '/items/:slug',
-  async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const raw = Array.isArray(req.params.slug) ? req.params.slug[0] : req.params.slug;
-      // Exact base-slug match only; there are no variant URLs. The page
-      // itself lists every stored variant of the item.
-      const detail = await getItemDetailBySlug(raw);
-      if (!detail) {
-        return void notFound(res, `Item "${raw}" not found.`);
-      }
-      res.render('item', {
-        item: detail.item,
-        currentRap: detail.currentRap,
-        rapUpdatedAt: detail.rapUpdatedAt,
-        exists: detail.exists,
-        totalExists: detail.totalExists,
-        variants: detail.variants,
-        stats: detail.stats,
-        history: detail.history,
-        similarItems: detail.similarItems,
-      });
-    } catch (err) {
-      next(err);
+pagesRouter.get('/items/:slug', async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const raw = Array.isArray(req.params.slug) ? req.params.slug[0] : req.params.slug;
+    // Exact base-slug match only; there are no variant URLs. The page
+    // itself lists every stored variant of the item.
+    const detail = await getItemDetailBySlug(raw);
+    if (!detail) {
+      return void notFound(res, `Item "${raw}" not found.`);
     }
-  },
-);
-
+    res.render('item', {
+      item: detail.item,
+      currentRap: detail.currentRap,
+      rapUpdatedAt: detail.rapUpdatedAt,
+      exists: detail.exists,
+      totalExists: detail.totalExists,
+      variants: detail.variants,
+      stats: detail.stats,
+      history: detail.history,
+      similarItems: detail.similarItems,
+    });
+  } catch (err) {
+    next(err);
+  }
+});

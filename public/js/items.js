@@ -25,8 +25,14 @@
     hide_pets: '0',
   };
   const VALID_SORTS = new Set([
-    'rap_desc', 'rap_asc', 'name_asc', 'name_desc',
-    'copies_desc', 'copies_asc', 'newest', 'oldest',
+    'rap_desc',
+    'rap_asc',
+    'name_asc',
+    'name_desc',
+    'copies_desc',
+    'copies_asc',
+    'newest',
+    'oldest',
   ]);
   const VARIANT_NAMES = { regular: 'Regular', golden: 'Golden', rainbow: 'Rainbow' };
 
@@ -37,13 +43,17 @@
   let observer = null;
 
   function escapeHtml(s) {
-    return String(s).replace(/[&<>"']/g, (c) => ({
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#39;',
-    }[c]));
+    return String(s).replace(
+      /[&<>"']/g,
+      (c) =>
+        ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#39;',
+        })[c],
+    );
   }
 
   function fmt(n) {
@@ -86,23 +96,36 @@
 
   function cardHtml(item) {
     const displayName = item.displayName || item.name;
-    const href = window.PS99 && PS99.itemPath
-      ? PS99.itemPath(item.slug || item.name)
-      : '/items/' + (item.slug || item.name);
+    const href =
+      window.PS99 && PS99.itemPath
+        ? PS99.itemPath(item.slug || item.name)
+        : '/items/' + (item.slug || item.name);
     const perHour =
       typeof item.existsPerHour === 'number' && item.existsPerHour !== 0
         ? (item.existsPerHour > 0 ? '+' : '') + fmt(item.existsPerHour) + '/hr'
         : '';
     return (
-      '<a class="item-card-link" href="' + href + '">' +
+      '<a class="item-card-link" href="' +
+      href +
+      '">' +
       '<article class="item-card">' +
-      '<img class="item-thumb" src="/thumbnails/' + (item.imageId ?? encodeURIComponent(displayName)) + '" loading="lazy" alt="">' +
+      '<img class="item-thumb" src="/thumbnails/' +
+      (item.imageId ?? encodeURIComponent(displayName)) +
+      '" loading="lazy" alt="">' +
       '<div class="item-info">' +
-      '<h3 class="item-name">' + escapeHtml(displayName) + '</h3>' +
+      '<h3 class="item-name">' +
+      escapeHtml(displayName) +
+      '</h3>' +
       '<div class="item-stats">' +
-      '<span>RAP <b>' + fmt(item.rap) + '</b></span>' +
+      '<span>RAP <b>' +
+      fmt(item.rap) +
+      '</b></span>' +
       '<span class="stat-sep">&middot;</span>' +
-      '<span>Exists <b>' + fmt(item.exists) + '</b>' + (perHour ? ' <small class="exists-rate">(' + perHour + ')</small>' : '') + '</span>' +
+      '<span>Exists <b>' +
+      fmt(item.exists) +
+      '</b>' +
+      (perHour ? ' <small class="exists-rate">(' + perHour + ')</small>' : '') +
+      '</span>' +
       '</div>' +
       '</div>' +
       '</article></a>'
@@ -138,7 +161,11 @@
       sentinel.innerHTML =
         '<button id="retry-btn" type="button" class="btn btn-ghost">Failed to load — Retry</button>';
       const retry = document.getElementById('retry-btn');
-      if (retry) retry.addEventListener('click', () => { done = false; loadPage(state, page, append); });
+      if (retry)
+        retry.addEventListener('click', () => {
+          done = false;
+          loadPage(state, page, append);
+        });
     } finally {
       setLoading(false);
     }
@@ -162,7 +189,10 @@
     if (filterPanel) {
       filterPanel.querySelectorAll('.pill[data-group]').forEach((pill) => {
         const group = pill.getAttribute('data-group');
-        pill.classList.toggle('active', (state[group] || 'all') === pill.getAttribute('data-value'));
+        pill.classList.toggle(
+          'active',
+          (state[group] || 'all') === pill.getAttribute('data-value'),
+        );
       });
     }
     if (sortSelect) sortSelect.value = state.sort;
@@ -186,41 +216,43 @@
 
   if (filterPanel) {
     filterPanel.addEventListener('click', (e) => {
-    const pill = e.target.closest('.pill[data-group]');
-    if (!pill) return;
-    const group = pill.getAttribute('data-group');
-    filterPanel
-      .querySelectorAll('.pill[data-group="' + group + '"]')
-      .forEach((p) => p.classList.remove('active'));
-    pill.classList.add('active');
-    const state = readState();
-    state[group] = pill.getAttribute('data-value');
-    writeState(state);
-    resetAndLoad();
-  });
+      const pill = e.target.closest('.pill[data-group]');
+      if (!pill) return;
+      const group = pill.getAttribute('data-group');
+      filterPanel
+        .querySelectorAll('.pill[data-group="' + group + '"]')
+        .forEach((p) => p.classList.remove('active'));
+      pill.classList.add('active');
+      const state = readState();
+      state[group] = pill.getAttribute('data-value');
+      writeState(state);
+      resetAndLoad();
+    });
   }
 
   if (sortSelect) {
-  sortSelect.addEventListener('change', () => {
-    const state = readState();
-    state.sort = sortSelect.value;
-    writeState(state);
-    resetAndLoad();
-  });
+    sortSelect.addEventListener('change', () => {
+      const state = readState();
+      state.sort = sortSelect.value;
+      writeState(state);
+      resetAndLoad();
+    });
   }
 
-  [['f-show-rap-zero', 'show_rap_zero'], ['f-show-exists-zero', 'show_exists_zero'], ['f-hide-pets', 'hide_pets']].forEach(
-    ([id, key]) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      el.addEventListener('change', () => {
-        const state = readState();
-        state[key] = el.checked ? '1' : '0';
-        writeState(state);
-        resetAndLoad();
-      });
-    },
-  );
+  [
+    ['f-show-rap-zero', 'show_rap_zero'],
+    ['f-show-exists-zero', 'show_exists_zero'],
+    ['f-hide-pets', 'hide_pets'],
+  ].forEach(([id, key]) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('change', () => {
+      const state = readState();
+      state[key] = el.checked ? '1' : '0';
+      writeState(state);
+      resetAndLoad();
+    });
+  });
 
   observer = new IntersectionObserver(
     (entries) => {

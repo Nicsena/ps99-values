@@ -5,32 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= title %></title>
   <link rel="stylesheet" href="/css/style.css">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('ps99-theme') || 'dark';
+        if (t === 'light' || (t === 'system' && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+          document.documentElement.dataset.theme = 'light';
+        }
+      } catch (e) { /* localStorage unavailable — default dark */ }
+    })();
+  </script>
   <script src="/js/slugs.js" defer></script>
   <script src="/js/format.js" defer></script>
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <script src="/js/search.js" defer></script>
 </head>
 <body>
-  <nav class="navbar">
-    <div class="navbar-inner container">
-      <div class="navbar-left">
-        <a href="/" class="site-name">PS99 Values</a>
-        <a href="/items" class="nav-link">Items</a>
-      </div>
-      <div class="navbar-center">
-        <div class="navbar-search">
-          <i data-lucide="search" class="search-icon" aria-hidden="true"></i>
-          <input id="navbar-search" type="search" placeholder="Search pets…  ( / )" autocomplete="off" spellcheck="false">
-          <div id="search-results" class="search-results" hidden></div>
-        </div>
-      </div>
-      <div class="navbar-right">
-        <button id="refreshBtn" class="btn btn-accent btn-icon" type="button">
-          <i data-lucide="rotate-cw" aria-hidden="true"></i><span>Refresh</span>
-        </button>
-      </div>
-    </div>
-  </nav>
+<%- include('navbar') %>
+
   <main class="container">
   <script>
     (function () {
@@ -74,22 +66,132 @@
 
       PS99.refreshIcons = function () { renderIcons(); };
 
+      var path = window.location.pathname;
+      document.querySelectorAll('.navbar-links a, .mobile-menu a').forEach(function (a) {
+        var href = a.getAttribute('href');
+        var active = href === '/' ? path === '/' : path === href || path.indexOf(href + '/') === 0;
+        if (active) a.classList.add('active');
+      });
+
+      var settingsBtn = document.getElementById('settingsBtn');
+      var settingsMenu = document.getElementById('settings-menu');
+      if (settingsBtn && settingsMenu) {
+        var closeSettings = function () {
+          settingsMenu.hidden = true;
+          settingsBtn.setAttribute('aria-expanded', 'false');
+        };
+        settingsBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var open = settingsMenu.hidden;
+          settingsMenu.hidden = !open;
+          settingsBtn.setAttribute('aria-expanded', String(open));
+        });
+        document.addEventListener('click', function (e) {
+          if (!settingsMenu.hidden && !settingsMenu.contains(e.target)) closeSettings();
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && !settingsMenu.hidden) {
+            closeSettings();
+            settingsBtn.focus();
+          }
+        });
+
+        var THEME_KEY = 'ps99-theme';
+        var systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+        var themeOptions = document.querySelectorAll('[data-theme-option]');
+        var themeTransitionTimer = null;
+
+        var applyTheme = function (choice, skipTransition) {
+          var root = document.documentElement;
+          if (!skipTransition) {
+            root.classList.add('theme-transition');
+            clearTimeout(themeTransitionTimer);
+            themeTransitionTimer = setTimeout(function () {
+              root.classList.remove('theme-transition');
+            }, 300);
+          }
+          if (choice === 'light' || (choice === 'system' && !systemDark.matches)) {
+            root.dataset.theme = 'light';
+          } else {
+            delete root.dataset.theme;
+          }
+          themeOptions.forEach(function (btn) {
+            btn.setAttribute('aria-checked', String(btn.dataset.themeOption === choice));
+          });
+        };
+
+        var stored = 'dark';
+        try { stored = localStorage.getItem(THEME_KEY) || 'dark'; } catch (e) { /* default */ }
+        applyTheme(stored, true);
+
+        themeOptions.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var choice = btn.dataset.themeOption;
+            try { localStorage.setItem(THEME_KEY, choice); } catch (e) { /* non-persistent */ }
+            applyTheme(choice);
+            closeSettings();
+          });
+        });
+
+        systemDark.addEventListener('change', function () {
+          var current = 'dark';
+          try { current = localStorage.getItem(THEME_KEY) || 'dark'; } catch (e) { /* default */ }
+          if (current === 'system') applyTheme('system');
+        });
+      }
+
+      var hamburgerBtn = document.getElementById('hamburgerBtn');
+      var mobileMenu = document.getElementById('mobile-menu');
+      var mobileSettingsBtn = document.getElementById('mobileSettingsBtn');
+      var mobileSettings = document.getElementById('mobile-settings');
+      var collapseMobileSettings = function () {
+        if (mobileSettings && mobileSettingsBtn) {
+          mobileSettings.hidden = true;
+          mobileSettingsBtn.setAttribute('aria-expanded', 'false');
+        }
+      };
+      if (hamburgerBtn && mobileMenu) {
+        var closeMobileMenu = function () {
+          mobileMenu.classList.remove('open');
+          hamburgerBtn.setAttribute('aria-expanded', 'false');
+          collapseMobileSettings();
+        };
+        hamburgerBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          if (mobileMenu.classList.contains('open')) {
+            closeMobileMenu();
+            return;
+          }
+          mobileMenu.classList.add('open');
+          hamburgerBtn.setAttribute('aria-expanded', 'true');
+        });
+        document.addEventListener('click', function (e) {
+          if (mobileMenu.classList.contains('open') && !mobileMenu.contains(e.target)) {
+            closeMobileMenu();
+          }
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+            closeMobileMenu();
+            hamburgerBtn.focus();
+          }
+        });
+        mobileMenu.addEventListener('click', function (e) {
+          if (e.target.closest('a')) closeMobileMenu();
+        });
+      }
+      if (mobileSettingsBtn && mobileSettings) {
+        mobileSettingsBtn.addEventListener('click', function () {
+          var open = mobileSettings.hidden;
+          mobileSettings.hidden = !open;
+          mobileSettingsBtn.setAttribute('aria-expanded', String(open));
+        });
+      }
+
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', renderIcons);
       } else {
         renderIcons();
       }
     })();
-  </script>
-  <script>
-    document.getElementById('refreshBtn').addEventListener('click', async function () {
-      this.disabled = true;
-      var label = this.querySelector('span');
-      if (label) label.textContent = 'Refreshing...'; else this.textContent = 'Refreshing...';
-      try {
-        await fetch('/api/refresh', { method: 'POST' });
-      } finally {
-        window.location.reload();
-      }
-    });
   </script>

@@ -304,7 +304,7 @@
       </div>
       <div class="variant-donut">
         <svg viewBox="0 0 100 100" width="160" height="160" role="img" aria-label="Exists share by variant">
-          <circle cx="50" cy="50" r="<%= donutR %>" fill="none" stroke="#1c2030" stroke-width="14"></circle>
+          <circle cx="50" cy="50" r="<%= donutR %>" fill="none" stroke="var(--color-surface-sunken)" stroke-width="14"></circle>
           <% variantRows.forEach(function (row) {
                var frac = totalExists > 0 ? row.exists / totalExists : 0;
                var len = frac * donutC;

@@ -11,6 +11,20 @@
 </div>
 
 <div id="filter-panel" hidden>
+  <div class="sort-row">
+    <label for="sort-select">Sort</label>
+    <select id="sort-select">
+      <option value="rap_desc">Highest RAP</option>
+      <option value="rap_asc">Lowest RAP</option>
+      <option value="name_asc">A-Z</option>
+      <option value="name_desc">Z-A</option>
+      <option value="copies_desc">Highest Copies</option>
+      <option value="copies_asc">Lowest Copies</option>
+      <option value="newest">Newest</option>
+      <option value="oldest">Oldest</option>
+    </select>
+  </div>
+
   <div class="filter-group" data-label="Shiny">
     <button type="button" class="pill active" data-group="shiny" data-value="all">All</button>
     <button type="button" class="pill" data-group="shiny" data-value="no">Not Shiny</button>
@@ -53,20 +67,6 @@
     <label><input id="f-show-rap-zero" type="checkbox" data-param="show_rap_zero" checked> Show RAP 0</label>
     <label><input id="f-show-exists-zero" type="checkbox" data-param="show_exists_zero" checked> Show Exists 0</label>
     <label><input id="f-hide-pets" type="checkbox" data-param="hide_pets"> Hide Pets</label>
-  </div>
-
-  <div class="sort-row">
-    <label for="sort-select">Sort</label>
-    <select id="sort-select">
-      <option value="rap_desc">Highest RAP</option>
-      <option value="rap_asc">Lowest RAP</option>
-      <option value="name_asc">A-Z</option>
-      <option value="name_desc">Z-A</option>
-      <option value="copies_desc">Highest Copies</option>
-      <option value="copies_asc">Lowest Copies</option>
-      <option value="newest">Newest</option>
-      <option value="oldest">Oldest</option>
-    </select>
   </div>
 </div>
 
