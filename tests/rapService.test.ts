@@ -194,7 +194,12 @@ describe('computeStats', () => {
 
 describe('parseItemKey', () => {
   it('parses variant flags', () => {
-    expect(rapService.parseItemKey('Dragon')).toEqual({ name: 'Dragon', pt: 0, shiny: false, color: undefined });
+    expect(rapService.parseItemKey('Dragon')).toEqual({
+      name: 'Dragon',
+      pt: 0,
+      shiny: false,
+      color: undefined,
+    });
     expect(rapService.parseItemKey('Dragon:golden:shiny')).toEqual({
       name: 'Dragon',
       pt: 1,
@@ -378,33 +383,23 @@ describe('chroma detail resolution', () => {
     expect(viaSlug?.currentRap).toBe(777);
   });
 
-  it('backfills chroma slugs for legacy rows with NULL slugs', async () => {
+  it('writes chroma slugs at upsert time', async () => {
     const itemsRepo = await import('../src/db/queries/itemsRepo.js');
-    // Simulate a pre-backfill row: chroma variant without a slug.
-    await client.db.insert(schema.items).values({
+    // A chroma variant written through the normal upsert path gets its
+    // grammar slug immediately (labels are supplied by the caller); no
+    // separate repair pass exists anymore.
+    await itemsRepo.upsertItem({
       collectionName: 'Pets',
       name: 'Chromaticorn',
       chroma: 2,
+      displayName: 'Pink Chromaticorn',
       colorVariants: JSON.stringify([
         { id: 1, name: 'Yellow', chance: 0.5 },
         { id: 2, name: 'Pink', chance: 0.5 },
       ]),
-      displayName: 'Pink Chromaticorn',
     });
-    const assigned = await itemsRepo.repairVariantSlugs();
-    expect(assigned).toBeGreaterThanOrEqual(1);
     const pink = await itemsRepo.findItemBySlug('pink-chromaticorn');
     expect(pink?.chroma).toBe(2);
-
-    // Display names are repaired to "<label> <primary displayName>".
-    const renamed = await itemsRepo.repairVariantDisplayNames();
-    expect(renamed).toBeGreaterThanOrEqual(1);
-    const pinkAfter = await itemsRepo.findItemBySlug('pink-chromaticorn');
-    expect(pinkAfter?.displayName).toBe('Pink Chromaticorn');
-
-    // Idempotent: second run assigns nothing new.
-    const again = await itemsRepo.repairVariantSlugs();
-    expect(again).toBe(0);
-    expect(await itemsRepo.repairVariantDisplayNames()).toBe(0);
+    expect(pink?.displayName).toBe('Pink Chromaticorn');
   });
 });

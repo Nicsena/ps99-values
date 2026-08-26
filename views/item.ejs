@@ -98,7 +98,7 @@
 </nav>
 
 <div class="item-header">
-  <img class="item-header-thumb" src="/thumbnails/<%= encodeURIComponent(item.displayName || item.name) %>" alt="<%= item.displayName || item.name %>">
+  <img class="item-header-thumb" src="/thumbnails/<%= item.imageId ?? encodeURIComponent(item.displayName || item.name) %>" alt="<%= item.displayName || item.name %>">
   <div class="item-header-info">
     <h1 class="item-title"><%= item.displayName || item.name %></h1>
     <div class="badge-row" id="variant-chips">

@@ -21,7 +21,15 @@ pagesRouter.get('/thumbnails/:name', async (req: Request, res: Response, next: N
     } catch {
       /* keep raw */
     }
-    const imageId = name.trim() ? await findImageIdByName(name) : null;
+    // Numeric names address an asset id directly — unambiguous even when
+    // multiple collections contain items with the same name.
+    const asId = Number(name);
+    const imageId =
+      Number.isInteger(asId) && asId > 0
+        ? asId
+        : name.trim()
+          ? await findImageIdByName(name)
+          : null;
     if (!imageId) return void res.redirect(302, '/img/placeholder.svg');
 
     const fileName = `${imageId}.png`;

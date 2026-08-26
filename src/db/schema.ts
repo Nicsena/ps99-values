@@ -2,8 +2,22 @@ import { sqliteTable, text, integer, uniqueIndex } from 'drizzle-orm/sqlite-core
 
 export const collections = sqliteTable('collections', {
   name: text('name').primaryKey(),
+  /** Singular human-readable form ("Pets" → "Pet", "MiscItems" → "Misc"). */
+  displayName: text('displayName'),
   enabled: integer('enabled', { mode: 'boolean' }).notNull().default(false),
+  /** Reserved for curation: hidden collections stay synced but could be
+   * excluded from listings. Currently unused — no collection is flagged. */
+  hidden: integer('hidden', { mode: 'boolean' }).notNull().default(false),
   dateSynced: integer('date_synced', { mode: 'timestamp' }),
+});
+
+// Upstream item categories (one row per singular collection category).
+export const category = sqliteTable('category', {
+  name: text('name').primaryKey(),
+  hidden: integer('hidden', { mode: 'boolean' }).notNull().default(false),
+  createdAt: integer('createdAt', { mode: 'timestamp' })
+    .notNull()
+    .$defaultFn(() => new Date()),
 });
 
 // One row per variant of an upstream item. Variant dimensions live directly on
@@ -25,6 +39,11 @@ export const items = sqliteTable(
     // JSON array [{id, name, chance}] from upstream animations.colorVariants;
     // maps chroma levels (cv) to color names. NULL for non-chroma items.
     colorVariants: text('colorVariants'),
+    // Raw upstream configData JSON, captured at catalog sync time.
+    configData: text('configData'),
+    // Upstream internal category string (e.g. "Exclusive Eggs", "Update 5");
+    // joins loosely to category.name where hidden flags drive visibility.
+    categoryName: text('categoryName'),
     hidden: integer('hidden', { mode: 'boolean' }).notNull().default(false),
     imageId: integer('imageId'),
     huge: integer('huge', { mode: 'boolean' }).notNull().default(false),
@@ -86,6 +105,8 @@ export const appSettings = sqliteTable('app_settings', {
 
 export type Collection = typeof collections.$inferSelect;
 export type NewCollection = typeof collections.$inferInsert;
+export type Category = typeof category.$inferSelect;
+export type NewCategory = typeof category.$inferInsert;
 export type Item = typeof items.$inferSelect;
 export type NewItem = typeof items.$inferInsert;
 export type Snapshot = typeof snapshots.$inferSelect;

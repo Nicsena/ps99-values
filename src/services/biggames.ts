@@ -45,6 +45,13 @@ const rapEntrySchema = z.object({
     .loose(),
 });
 
+export interface FeedResult<T> {
+  /** Entries that passed validation; malformed entries are skipped and counted. */
+  data: T[];
+  /** Number of entries dropped because they failed validation. */
+  invalid: number;
+}
+
 async function request<T>(path: string, parse: (body: unknown) => T): Promise<T> {
   const res = await fetch(`${BASE_URL}${path}`, { signal: AbortSignal.timeout(TIMEOUT_MS) });
   if (!res.ok) {
@@ -63,33 +70,48 @@ async function request<T>(path: string, parse: (body: unknown) => T): Promise<T>
   return parse(body);
 }
 
-function extractData<T>(schema: z.ZodType<T>, body: unknown): T[] {
-  const parsed = z.object({ data: z.array(schema) }).loose().safeParse(body);
+// Per-entry tolerant: one malformed entry is skipped and counted instead of
+// discarding the whole feed.
+function extractData<T>(schema: z.ZodType<T>, body: unknown): FeedResult<T> {
+  const parsed = z
+    .object({ data: z.array(z.unknown()) })
+    .loose()
+    .safeParse(body);
   if (!parsed.success) {
     throw new Error(`Upstream response failed validation: ${parsed.error.message}`);
   }
-  return parsed.data.data;
+  const data: T[] = [];
+  let invalid = 0;
+  for (const entry of parsed.data.data) {
+    const result = schema.safeParse(entry);
+    if (result.success) data.push(result.data);
+    else invalid += 1;
+  }
+  return { data, invalid };
 }
 
 export async function fetchCollections(): Promise<string[]> {
   const body = await request('/api/collections', (b) => b);
-  const parsed = z.object({ data: z.array(z.string()) }).loose().safeParse(body);
+  const parsed = z
+    .object({ data: z.array(z.string()) })
+    .loose()
+    .safeParse(body);
   if (!parsed.success) {
     throw new Error(`Collections response failed validation: ${parsed.error.message}`);
   }
   return parsed.data.data;
 }
 
-export async function fetchCollection(name: string): Promise<CollectionEntry[]> {
+export async function fetchCollection(name: string): Promise<FeedResult<CollectionEntry>> {
   return request(`/api/collection/${encodeURIComponent(name)}`, (b) =>
     extractData(collectionEntrySchema, b),
   );
 }
 
-export async function fetchRap(): Promise<RapEntry[]> {
+export async function fetchRap(): Promise<FeedResult<RapEntry>> {
   return request('/api/rap', (b) => extractData(rapEntrySchema, b));
 }
 
-export async function fetchExists(): Promise<RapEntry[]> {
+export async function fetchExists(): Promise<FeedResult<RapEntry>> {
   return request('/api/exists', (b) => extractData(rapEntrySchema, b));
 }

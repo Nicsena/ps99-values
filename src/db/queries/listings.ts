@@ -50,6 +50,7 @@ export interface RawVariantRow {
   pt: number;
   shiny: number;
   chroma: number;
+  tier: number;
   rap: number | null;
   exists: number | null;
 }
@@ -88,6 +89,7 @@ export interface RawFilteredRow {
   displayName: string | null ;
   slug: string | null;
   category: string | null;
+  categoryName: string | null;
   collectionName: string;
   itemKey: string;
   imageId: number | null;
@@ -151,7 +153,19 @@ function buildFilteredWhere(params: FilteredListRowsParams): ReturnType<typeof s
     clauses.push(sql`i.collection != 'Pets'`);
   }
 
-  if (clauses.length === 0) return sql``;
+  // Items in hidden categories (non-exclusive eggs, event categories) are
+  // excluded from listings — UNLESS they carry market data: several event
+  // items have rap/exists and those stay visible (owner rule). Individually
+  // hidden items (i.hidden) are always excluded.
+  clauses.push(sql`NOT (
+    EXISTS (
+      SELECT 1 FROM category cg WHERE cg.name = i."categoryName" AND cg.hidden = 1
+    )
+    AND NOT EXISTS (
+      SELECT 1 FROM snapshots s WHERE s.item_id = i.id
+    )
+  )`);
+  clauses.push(sql`i.hidden = 0`);
   return sql` WHERE ${sql.join(clauses, sql` AND `)}`;
 }
 
@@ -204,7 +218,7 @@ export async function listRowsFiltered(
   }>(sql`${LATEST_CTE}${LATEST_EXISTS_CTE}${HOUR_EXISTS_CTE}
     SELECT i.name, i."displayName" AS displayName, i.slug AS slug, i.imageId AS imageId,
            i.huge, i.titanic, i.gargantuan,
-           i.collection AS collectionName,
+           i.collection AS collectionName, i."categoryName" AS categoryName,
            ${itemKeyExpr()} AS itemKey,
            l.value AS rap, i.variant AS pt, i.shiny AS shiny,
            e.value AS existsCount,
@@ -320,21 +334,22 @@ export async function itemByName(name: string): Promise<ItemRow | undefined> {
   return findItemByNameLower(name);
 }
 
-// All variant rows sharing the base (collection, name), each with its own
-// latest values. Chroma rows are included (colors resolved in rapService);
-// tiered rows are stored but not surfaced yet.
+// All rows sharing the base (collection, name), each with its own latest
+// values. Includes tiered rows (tier surfaced so callers can separate the
+// ladder from regular variants); chroma rows are included (colors resolved in
+// rapService).
 export async function variantsForItem(
   collectionName: string,
   name: string,
 ): Promise<RawVariantRow[]> {
   return (await db.all<RawVariantRow>(sql`${LATEST_CTE}${LATEST_EXISTS_CTE}
     SELECT s.slug AS slug, s.variant AS pt, s.shiny AS shiny, s.chroma AS chroma,
-           l.value AS rap, e.value AS "exists"
+           s.tier AS tier, l.value AS rap, e.value AS "exists"
     FROM items s
     LEFT JOIN latest l ON l.item_id = s.id
     LEFT JOIN latest_exists e ON e.item_id = s.id
-    WHERE s.collection = ${collectionName} AND LOWER(s.name) = LOWER(${name}) AND s.tier = 0
-    ORDER BY pt ASC, shiny ASC, chroma ASC`)) as RawVariantRow[];
+    WHERE s.collection = ${collectionName} AND LOWER(s.name) = LOWER(${name})
+    ORDER BY s.tier ASC, pt ASC, shiny ASC, chroma ASC`)) as RawVariantRow[];
 }
 
 export async function historyFor(

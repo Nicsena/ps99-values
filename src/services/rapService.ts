@@ -52,6 +52,7 @@ export interface ItemVariant {
   pt: number;
   shiny: boolean;
   chroma: number;
+  tier: number;
   color: string | null;
   rap: number | null;
   exists: number | null;
@@ -95,6 +96,7 @@ export interface ItemDetail {
     description: string | null;
     category: string | null;
     collectionName: string;
+    imageId: number | null;
   };
   currentRap: number | null;
   rapUpdatedAt: string | null;
@@ -355,7 +357,12 @@ async function buildItemDetail(item: ItemRow): Promise<ItemDetail | null> {
       ),
     ]);
 
-  const variants: ItemVariant[] = variantRows.map((row) => {
+  // Tier rows are only surfaced on tiered items' own pages; regular items
+  // list their pt/shiny/chroma variants without the tier ladder.
+  const visibleRows =
+    item.tier > 0 ? variantRows : variantRows.filter((row) => (row.tier ?? 0) === 0);
+
+  const variants: ItemVariant[] = visibleRows.map((row) => {
     const rowChroma = row.chroma ?? 0;
     const rowColor = rowChroma > 0 ? (colorMap.get(rowChroma)?.name ?? null) : null;
     return {
@@ -363,6 +370,7 @@ async function buildItemDetail(item: ItemRow): Promise<ItemDetail | null> {
       pt: Number(row.pt),
       shiny: Number(row.shiny) !== 0,
       chroma: rowChroma,
+      tier: row.tier ?? 0,
       color: rowColor,
       rap: row.rap,
       exists: row.exists === null || row.exists === undefined ? null : row.exists,
@@ -379,7 +387,7 @@ async function buildItemDetail(item: ItemRow): Promise<ItemDetail | null> {
       v.pt === item.variant &&
       v.shiny === item.shiny &&
       v.chroma === item.chroma &&
-      item.tier === 0,
+      v.tier === item.tier,
   );
   const currentRap = self?.rap ?? null;
   const exists = self?.exists ?? null;
@@ -403,6 +411,7 @@ async function buildItemDetail(item: ItemRow): Promise<ItemDetail | null> {
       description: item.description ?? null,
       category: deriveCategory(item.huge, item.titanic, item.gargantuan),
       collectionName: item.collectionName,
+      imageId: item.imageId ?? null,
     },
     currentRap,
     rapUpdatedAt:
@@ -475,6 +484,8 @@ export interface FilteredItem {
   slug: string | null;
   imageId: number | null;
   category: string | null;
+  /** Upstream internal category ("Exclusive Eggs", "Update 5", …). */
+  internalCategory: string | null;
   collectionName: string;
   rap: number | null;
   exists: number | null;
@@ -615,6 +626,7 @@ export async function listItemsFiltered(
       slug: row.slug ?? null,
       imageId: row.imageId ?? null,
       category: row.category,
+      internalCategory: row.categoryName ?? null,
       collectionName: row.collectionName,
       rap: row.rap,
       exists: row.existsCount,

@@ -94,3 +94,16 @@ export async function cacheDelPrefix(prefix: string): Promise<void> {
     warnOnce();
   }
 }
+
+// Full flush. The cache is purely derived data, so a completed sync may wipe
+// it wholesale — this also evicts any stale entries written while the
+// database was still empty (e.g. requests during first-run bootstrap).
+export async function cacheFlush(): Promise<void> {
+  try {
+    const redis = getClient();
+    if (!redis) return;
+    await redis.flushdb();
+  } catch {
+    warnOnce();
+  }
+}

@@ -1,4 +1,4 @@
-import { pruneSnapshots } from '../../sync.js';
+import { pruneSnapshots } from '../../sync/index.js';
 import type { JobDefinition } from '../types.js';
 
 export const pruneJob: JobDefinition = {

@@ -35,29 +35,30 @@ export async function getLatestValues(metric: Metric): Promise<LatestValues> {
   return new Map(rows.map((r) => [r.item_id, r.value]));
 }
 
-// Batch insert; each chunk is a single multi-row INSERT.
+// Batch insert; all chunks commit in a single transaction so a crash cannot
+// leave a partial hour behind.
 // Timestamps are stored at second precision, so two syncs within the same
 // second target the same point; those conflicts take the newer value rather
 // than dropping it. Returns the number of rows written.
-// Note: better-sqlite3 rejects promise-returning transaction callbacks, so
-// chunks are not wrapped in one cross-chunk transaction.
-export async function insertSnapshots(
-  metric: Metric,
-  rows: SnapshotInsert[],
-): Promise<number> {
+export async function insertSnapshots(metric: Metric, rows: SnapshotInsert[]): Promise<number> {
   if (rows.length === 0) return 0;
   let written = 0;
-  for (const batch of chunk(rows, 250)) {
-    const result = await db
-      .insert(snapshots)
-      .values(batch.map((row) => ({ ...row, metric })))
-      .onConflictDoUpdate({
-        target: [snapshots.itemId, snapshots.metric, snapshots.capturedAt],
-        set: { value: sql`excluded.value` },
-      })
-      .returning({ id: snapshots.id });
-    written += result.length;
-  }
+  // better-sqlite3 transactions are synchronous; the drizzle sync builder is
+  // used so every chunk shares one commit.
+  db.transaction((tx) => {
+    for (const batch of chunk(rows, 250)) {
+      const result = tx
+        .insert(snapshots)
+        .values(batch.map((row) => ({ ...row, metric })))
+        .onConflictDoUpdate({
+          target: [snapshots.itemId, snapshots.metric, snapshots.capturedAt],
+          set: { value: sql`excluded.value` },
+        })
+        .returning({ id: snapshots.id })
+        .all();
+      written += result.length;
+    }
+  });
   return written;
 }
 

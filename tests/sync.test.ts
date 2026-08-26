@@ -8,9 +8,10 @@ import type * as Biggames from '../src/services/biggames.js';
 
 const mocks = vi.hoisted(() => ({
   fetchCollections: vi.fn<() => Promise<string[]>>(),
-  fetchCollection: vi.fn<(name: string) => Promise<Biggames.CollectionEntry[]>>(),
-  fetchRap: vi.fn<() => Promise<Biggames.RapEntry[]>>(),
-  fetchExists: vi.fn<() => Promise<Biggames.RapEntry[]>>(),
+  fetchCollection:
+    vi.fn<(name: string) => Promise<Biggames.FeedResult<Biggames.CollectionEntry>>>(),
+  fetchRap: vi.fn<() => Promise<Biggames.FeedResult<Biggames.RapEntry>>>(),
+  fetchExists: vi.fn<() => Promise<Biggames.FeedResult<Biggames.RapEntry>>>(),
 }));
 
 vi.mock('../src/services/biggames.js', () => ({
@@ -20,10 +21,12 @@ vi.mock('../src/services/biggames.js', () => ({
   fetchExists: mocks.fetchExists,
 }));
 
+const feed = <T>(data: T[], invalid = 0): Biggames.FeedResult<T> => ({ data, invalid });
+
 const dbPath = join(tmpdir(), `ps99-sync-test-${Date.now()}-${process.pid}.db`);
 
 type ClientModule = typeof import('../src/db/client.js');
-type SyncModule = typeof import('../src/services/sync.js');
+type SyncModule = typeof import('../src/services/sync/index.js');
 type SettingsModule = typeof import('../src/services/settings.js');
 
 let client: ClientModule;
@@ -63,11 +66,11 @@ beforeAll(async () => {
   client = await import('../src/db/client.js');
   client.ensureSchema();
   schema = await import('../src/db/schema.js');
-  sync = await import('../src/services/sync.js');
+  sync = await import('../src/services/sync/index.js');
   settings = await import('../src/services/settings.js');
   mocks.fetchCollections.mockResolvedValue(['Pets', 'Eggs', 'Decor']);
   mocks.fetchCollection.mockImplementation(async (name) =>
-    name === 'Pets' ? petEntries : eggEntries,
+    name === 'Pets' ? feed(petEntries) : feed(eggEntries),
   );
 });
 
@@ -91,26 +94,28 @@ async function ageSnapshots(seconds: number): Promise<void> {
 }
 
 // One row per variant; find a specific variant row of an item by dims.
-async function itemRow(name: string, dims?: Partial<{ variant: number; shiny: boolean }>): Promise<
-  Schema.Item | undefined
-> {
+async function itemRow(
+  name: string,
+  dims?: Partial<{ variant: number; shiny: boolean }>,
+): Promise<Schema.Item | undefined> {
   const rows = await client.db.select().from(schema.items).where(eq(schema.items.name, name));
-  return rows.find(
-    (r) =>
-      r.variant === (dims?.variant ?? 0) && r.shiny === (dims?.shiny ?? false),
-  );
+  return rows.find((r) => r.variant === (dims?.variant ?? 0) && r.shiny === (dims?.shiny ?? false));
 }
 
 describe('syncAll', () => {
   it('seeds collections with only Pets enabled and inserts initial snapshots', async () => {
-    mocks.fetchRap.mockResolvedValue([
-      { category: 'Pet', value: 100, configData: { id: 'Unicorn' } },
-      { category: 'Pet', value: 200, configData: { id: 'Dragon', pt: 1 } },
-    ]);
-    mocks.fetchExists.mockResolvedValue([
-      { category: 'Pet', value: 5, configData: { id: 'Unicorn' } },
-      { category: 'Pet', value: 3, configData: { id: 'Dragon', pt: 1 } },
-    ]);
+    mocks.fetchRap.mockResolvedValue(
+      feed([
+        { category: 'Pet', value: 100, configData: { id: 'Unicorn' } },
+        { category: 'Pet', value: 200, configData: { id: 'Dragon', pt: 1 } },
+      ]),
+    );
+    mocks.fetchExists.mockResolvedValue(
+      feed([
+        { category: 'Pet', value: 5, configData: { id: 'Unicorn' } },
+        { category: 'Pet', value: 3, configData: { id: 'Dragon', pt: 1 } },
+      ]),
+    );
 
     const result = await sync.syncAll();
 
@@ -119,11 +124,17 @@ describe('syncAll', () => {
     expect(result.snapshotsInserted).toBe(2);
     expect(result.existsInserted).toBe(2);
     expect(result.errors).toEqual([]);
+    expect(result.warnings.rap).toEqual({
+      unmatchedEntries: 0,
+      ambiguousNames: 0,
+      malformedEntries: 0,
+    });
 
     const cols = await client.db.select().from(schema.collections);
     const byName = new Map(cols.map((c) => [c.name, c]));
     expect(byName.get('Pets')?.enabled).toBe(true);
-    expect(byName.get('Eggs')?.enabled).toBe(false);
+    // Eggs is part of the default enabled set.
+    expect(byName.get('Eggs')?.enabled).toBe(true);
     expect(byName.get('Decor')?.enabled).toBe(false);
 
     // One row per variant: Unicorn primary + Dragon regular/golden.
@@ -161,14 +172,18 @@ describe('syncAll', () => {
 
   it('inserts a snapshot only for changed values on re-sync', async () => {
     await ageSnapshots(10);
-    mocks.fetchRap.mockResolvedValue([
-      { category: 'Pet', value: 150, configData: { id: 'Unicorn' } },
-      { category: 'Pet', value: 200, configData: { id: 'Dragon', pt: 1 } },
-    ]);
-    mocks.fetchExists.mockResolvedValue([
-      { category: 'Pet', value: 5, configData: { id: 'Unicorn' } },
-      { category: 'Pet', value: 3, configData: { id: 'Dragon', pt: 1 } },
-    ]);
+    mocks.fetchRap.mockResolvedValue(
+      feed([
+        { category: 'Pet', value: 150, configData: { id: 'Unicorn' } },
+        { category: 'Pet', value: 200, configData: { id: 'Dragon', pt: 1 } },
+      ]),
+    );
+    mocks.fetchExists.mockResolvedValue(
+      feed([
+        { category: 'Pet', value: 5, configData: { id: 'Unicorn' } },
+        { category: 'Pet', value: 3, configData: { id: 'Dragon', pt: 1 } },
+      ]),
+    );
 
     const result = await sync.syncAll();
 
@@ -180,8 +195,12 @@ describe('syncAll', () => {
     expect(rapSnaps).toHaveLength(3);
 
     const unicorn = await itemRow('Unicorn');
-    expect(rapSnaps.filter((s) => s.itemId === unicorn!.id).map((s) => s.value).sort((a, b) => a - b))
-      .toEqual([100, 150]);
+    expect(
+      rapSnaps
+        .filter((s) => s.itemId === unicorn!.id)
+        .map((s) => s.value)
+        .sort((a, b) => a - b),
+    ).toEqual([100, 150]);
 
     const existsSnaps = snaps.filter((s) => s.metric === 'exists');
     expect(existsSnaps).toHaveLength(2);
@@ -189,12 +208,12 @@ describe('syncAll', () => {
 
   it('inserts exists snapshots when values change between runs', async () => {
     await ageSnapshots(10);
-    mocks.fetchRap.mockResolvedValue([
-      { category: 'Pet', value: 150, configData: { id: 'Unicorn' } },
-    ]);
-    mocks.fetchExists.mockResolvedValue([
-      { category: 'Pet', value: 7, configData: { id: 'Unicorn' } },
-    ]);
+    mocks.fetchRap.mockResolvedValue(
+      feed([{ category: 'Pet', value: 150, configData: { id: 'Unicorn' } }]),
+    );
+    mocks.fetchExists.mockResolvedValue(
+      feed([{ category: 'Pet', value: 7, configData: { id: 'Unicorn' } }]),
+    );
 
     const result = await sync.syncAll();
 
@@ -202,20 +221,20 @@ describe('syncAll', () => {
 
     const snaps = await client.db.select().from(schema.snapshots);
     const unicorn = await itemRow('Unicorn');
-    const unicornExists = snaps.filter(
-      (s) => s.metric === 'exists' && s.itemId === unicorn!.id,
-    );
+    const unicornExists = snaps.filter((s) => s.metric === 'exists' && s.itemId === unicorn!.id);
     expect(unicornExists.map((s) => s.value).sort((a, b) => a - b)).toEqual([5, 7]);
   });
 
   it('stores chroma and tier variants as their own rows instead of collapsing them', async () => {
     await ageSnapshots(10);
-    mocks.fetchRap.mockResolvedValue([
-      { category: 'Pet', value: 300, configData: { id: 'Dragon', cv: 1 } },
-      { category: 'Pet', value: 400, configData: { id: 'Dragon', cv: 2 } },
-      { category: 'Pet', value: 500, configData: { id: 'Dragon', tn: 3 } },
-    ]);
-    mocks.fetchExists.mockResolvedValue([]);
+    mocks.fetchRap.mockResolvedValue(
+      feed([
+        { category: 'Pet', value: 300, configData: { id: 'Dragon', cv: 1 } },
+        { category: 'Pet', value: 400, configData: { id: 'Dragon', cv: 2 } },
+        { category: 'Pet', value: 500, configData: { id: 'Dragon', tn: 3 } },
+      ]),
+    );
+    mocks.fetchExists.mockResolvedValue(feed([]));
 
     await sync.syncAll();
 
@@ -243,9 +262,9 @@ describe('syncAll', () => {
     const before = await settings.getSetting<string>('sync.lastSyncAt');
 
     mocks.fetchRap.mockRejectedValue(new Error('boom'));
-    mocks.fetchExists.mockResolvedValue([
-      { category: 'Pet', value: 9, configData: { id: 'Unicorn' } },
-    ]);
+    mocks.fetchExists.mockResolvedValue(
+      feed([{ category: 'Pet', value: 9, configData: { id: 'Unicorn' } }]),
+    );
 
     const result = await sync.syncAll();
 
@@ -255,16 +274,66 @@ describe('syncAll', () => {
   });
 
   it('advances lastSyncAt on healthy runs', async () => {
-    mocks.fetchRap.mockResolvedValue([
-      { category: 'Pet', value: 150, configData: { id: 'Unicorn' } },
-    ]);
-    mocks.fetchExists.mockResolvedValue([
-      { category: 'Pet', value: 9, configData: { id: 'Unicorn' } },
-    ]);
+    mocks.fetchRap.mockResolvedValue(
+      feed([{ category: 'Pet', value: 150, configData: { id: 'Unicorn' } }]),
+    );
+    mocks.fetchExists.mockResolvedValue(
+      feed([{ category: 'Pet', value: 9, configData: { id: 'Unicorn' } }]),
+    );
 
     const result = await sync.syncAll();
     expect(result.errors).toEqual([]);
     expect(await settings.getSetting<string>('sync.lastSyncAt')).not.toBeNull();
+  });
+
+  it('skips malformed feed entries and counts them instead of discarding the feed', async () => {
+    await ageSnapshots(10);
+    mocks.fetchRap.mockResolvedValue(
+      feed([{ category: 'Pet', value: 160, configData: { id: 'Unicorn' } }], 2),
+    );
+    mocks.fetchExists.mockResolvedValue(
+      feed([{ category: 'Pet', value: 9, configData: { id: 'Unicorn' } }]),
+    );
+
+    const result = await sync.syncAll();
+
+    expect(result.errors).toEqual([]);
+    expect(result.snapshotsInserted).toBe(1);
+    expect(result.warnings.rap.malformedEntries).toBe(2);
+  });
+
+  it('reports unmatched entries in warnings', async () => {
+    await ageSnapshots(10);
+    mocks.fetchRap.mockResolvedValue(
+      feed([
+        { category: 'Pet', value: 165, configData: { id: 'Unicorn' } },
+        { category: 'Pet', value: 999, configData: { id: 'MysteryItem' } },
+      ]),
+    );
+    mocks.fetchExists.mockResolvedValue(
+      feed([{ category: 'Pet', value: 9, configData: { id: 'Unicorn' } }]),
+    );
+
+    const result = await sync.syncAll();
+
+    expect(result.warnings.rap.unmatchedEntries).toBe(1);
+    expect(result.snapshotsInserted).toBe(1);
+  });
+
+  it('recovers from a transient feed failure via retry', async () => {
+    await ageSnapshots(10);
+    mocks.fetchRap.mockRejectedValueOnce(new Error('flaky'));
+    mocks.fetchRap.mockResolvedValue(
+      feed([{ category: 'Pet', value: 170, configData: { id: 'Unicorn' } }]),
+    );
+    mocks.fetchExists.mockResolvedValue(
+      feed([{ category: 'Pet', value: 9, configData: { id: 'Unicorn' } }]),
+    );
+
+    const result = await sync.syncAll();
+
+    expect(result.errors).toEqual([]);
+    expect(result.snapshotsInserted).toBe(1);
   });
 
   it('prunes snapshots older than the retention window', async () => {

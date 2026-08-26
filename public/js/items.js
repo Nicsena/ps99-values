@@ -96,7 +96,7 @@
     return (
       '<a class="item-card-link" href="' + href + '">' +
       '<article class="item-card">' +
-      '<img class="item-thumb" src="/thumbnails/' + encodeURIComponent(displayName) + '" loading="lazy" alt="">' +
+      '<img class="item-thumb" src="/thumbnails/' + (item.imageId ?? encodeURIComponent(displayName)) + '" loading="lazy" alt="">' +
       '<div class="item-info">' +
       '<h3 class="item-name">' + escapeHtml(displayName) + '</h3>' +
       '<div class="item-stats">' +

@@ -1,8 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import {
+  NAMESPACE_RULES,
+  namespaceNaming,
+  namespaceTierNaming,
   parseColorVariants,
   readColorVariants,
   resolveChromaForColor,
+  toRoman,
 } from '../src/services/collectionSpecs.js';
 
 describe('parseColorVariants', () => {
@@ -55,5 +59,41 @@ describe('readColorVariants / resolveChromaForColor', () => {
     expect(resolveChromaForColor(map, 'yellow')).toBe(1);
     expect(resolveChromaForColor(map, 'ORANGE')).toBe(4);
     expect(resolveChromaForColor(map, 'blue')).toBeUndefined();
+  });
+});
+
+describe('namespace grammar', () => {
+  it('converts numbers to uppercase Roman numerals', () => {
+    expect(toRoman(1)).toBe('I');
+    expect(toRoman(3)).toBe('III');
+    expect(toRoman(4)).toBe('IV');
+    expect(toRoman(9)).toBe('IX');
+    expect(toRoman(10)).toBe('X');
+    expect(toRoman(14)).toBe('XIV');
+    expect(toRoman(40)).toBe('XL');
+    expect(toRoman(1990)).toBe('MCMXC');
+    expect(toRoman(0)).toBeNull();
+    expect(toRoman(-1)).toBeNull();
+    expect(toRoman(4000)).toBeNull();
+  });
+
+  it('builds primary naming from the collection token', () => {
+    expect(namespaceNaming('Coins', NAMESPACE_RULES.Charms)).toEqual({
+      displayName: 'Coins Charm',
+      slugStem: 'coins-charm',
+    });
+    expect(namespaceNaming('Rainbow Swirl', NAMESPACE_RULES.MiscItems)).toEqual({
+      displayName: 'Rainbow Swirl Item',
+      slugStem: 'rainbow-swirl-item',
+    });
+    expect(namespaceNaming('Banana', NAMESPACE_RULES.Fruits).slugStem).toBe('banana-fruit');
+  });
+
+  it('builds tier naming with Roman numerals and no "tier" word', () => {
+    expect(namespaceTierNaming('Coins', NAMESPACE_RULES.Enchants, 3)).toEqual({
+      displayName: 'Coins III Enchant',
+      slugStem: 'coins-iii-enchant',
+    });
+    expect(namespaceTierNaming('TNT', NAMESPACE_RULES.Charms, 1).slugStem).toBe('tnt-i-charm');
   });
 });

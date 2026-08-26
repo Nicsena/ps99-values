@@ -1,4 +1,4 @@
-import { syncAll } from '../../sync.js';
+import { syncAll } from '../../sync/index.js';
 import type { JobDefinition } from '../types.js';
 
 export const syncJob: JobDefinition = {

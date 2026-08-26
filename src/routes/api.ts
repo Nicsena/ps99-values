@@ -1,6 +1,11 @@
 import { Router, type Request, type Response, type NextFunction } from 'express';
-import { listItems, listItemsFiltered, getItemDetail, searchItems } from '../services/rapService.js';
-import { syncAll } from '../services/sync.js';
+import {
+  listItems,
+  listItemsFiltered,
+  getItemDetail,
+  searchItems,
+} from '../services/rapService.js';
+import { syncAll } from '../services/sync/index.js';
 
 export const apiRouter = Router();
 
@@ -80,6 +85,8 @@ apiRouter.post('/refresh', async (_req: Request, res: Response) => {
     const result = await syncAll();
     res.json({ status: 'ok', ...result });
   } catch (err) {
-    res.status(500).json({ status: 'error', error: err instanceof Error ? err.message : String(err) });
+    res
+      .status(500)
+      .json({ status: 'error', error: err instanceof Error ? err.message : String(err) });
   }
 });
