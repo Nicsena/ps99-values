@@ -1,0 +1,35 @@
+<%- include('../partials/header', { title: title }) %>
+
+<section class="error-page">
+  <div class="error-card">
+    <div class="error-illustration" aria-hidden="true">
+      <i data-lucide="search-x" class="error-icon"></i>
+    </div>
+    <div class="error-status">404</div>
+
+    <% if (typeof itemSlug !== 'undefined' && itemSlug) { %>
+    <h1 class="error-title">Item Not Found</h1>
+    <p class="error-description">
+        <code class="error-slug"><%= itemSlug %></code> couldn't be found. It may have been renamed, removed, or never existed.
+    </p>
+    <% } else { %>
+    <h1 class="error-title">Page Not Found</h1>
+    <p class="error-description"> The page you're looking for doesn't exist or may have been moved. </p>
+    <% } %>
+
+    <div class="error-divider"></div>
+
+    <div class="error-actions">
+      <a class="btn btn-accent" href="/">
+        <i data-lucide="home" aria-hidden="true"></i>
+        <span>Back to home</span>
+      </a>
+      <a class="btn btn-ghost" href="/items">
+        <i data-lucide="search" aria-hidden="true"></i>
+        <span>Browse all items</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

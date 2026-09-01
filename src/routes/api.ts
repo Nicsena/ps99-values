@@ -90,3 +90,19 @@ apiRouter.post('/refresh', async (_req: Request, res: Response) => {
       .json({ status: 'error', error: err instanceof Error ? err.message : String(err) });
   }
 });
+
+apiRouter.use((req: Request, res: Response) => {
+  return res.status(404).json({ error: { "status": 404, "message": "Not Found" }})
+});
+
+apiRouter.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
+
+  if (res.headersSent) {
+    next(err);
+    return;
+  }
+
+  const message = err instanceof Error ? err.message : 'Internal Server Error';
+  console.error('[app] unhandled error:', err);
+  return res.status(500).json({ error: { "status": 500, "message": message }})
+});

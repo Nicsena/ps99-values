@@ -1,0 +1,28 @@
+<%- include('../partials/header', { title: title }) %>
+
+<section class="error-page">
+  <div class="error-card">
+    <div class="error-illustration" aria-hidden="true">
+      <i data-lucide="lock" class="error-icon"></i>
+    </div>
+    <div class="error-status">401</div>
+
+    <h1 class="error-title">Authentication Required</h1>
+    <p class="error-description"> You need to be signed in to access this page. </p>
+
+    <div class="error-divider"></div>
+
+    <div class="error-actions">
+      <a class="btn btn-accent" href="/login">
+        <i data-lucide="log-in" aria-hidden="true"></i>
+        <span>Sign in</span>
+      </a>
+      <a class="btn btn-ghost" href="/">
+        <i data-lucide="home" aria-hidden="true"></i>
+        <span>Back to home</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

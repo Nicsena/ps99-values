@@ -1,0 +1,34 @@
+<%- include('../partials/header', { title: title }) %>
+
+<section class="error-page">
+  <div class="error-card">
+    <div class="error-illustration" aria-hidden="true">
+      <i data-lucide="server-crash" class="error-icon"></i>
+    </div>
+    <div class="error-status">500</div>
+
+    <h1 class="error-title">Internal Server Error</h1>
+    <p class="error-description">Something went wrong on our end. Please try again later.</p>
+
+    <%#] if (isDev) { %>
+    <div class="error-divider"></div>
+
+    <div class="error-details">
+      <p class="error-title">Error Information</p>
+      <pre class="error-message"><%= message %></pre>
+    </div>
+
+    <%# } %>
+
+    <div class="error-divider"></div>
+
+    <div class="error-actions">
+      <a class="btn btn-accent" href="/">
+        <i data-lucide="home" aria-hidden="true"></i>
+        <span>Back to home</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

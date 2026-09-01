@@ -1,0 +1,22 @@
+<%- include('../partials/header', { title: title }) %>
+
+<section class="error-page">
+  <div class="error-card">
+    <div class="error-illustration" aria-hidden="true">
+      <i data-lucide="gauge" class="error-icon"></i>
+    </div>
+    <div class="error-status">429</div>
+
+    <h1 class="error-title">Too Many Requests</h1>
+    <p class="error-description">
+      Too many requests have been made in a short period of time. Please try again later.
+    </p>
+
+    <!-- <div class="error-divider"></div>
+    <div class="error-actions">
+    </div> -->
+
+  </div>
+</section>
+
+<%- include('../partials/footer') %>
