@@ -195,7 +195,7 @@ export async function listItems(params: {
   const pageRaw = Number(params.page ?? 1);
   const page = Number.isFinite(pageRaw) && pageRaw >= 1 ? Math.floor(pageRaw) : 1;
 
-  const cacheKey = `rap:list:${search}:${sort}:${order}:${page}:${pageSize}`;
+  const cacheKey = `list:${search}:${sort}:${order}:${page}:${pageSize}`;
   const cached = await cacheGet<ListItemsResult>(cacheKey);
   if (cached) return cached;
 
@@ -435,7 +435,7 @@ async function buildItemDetail(item: ItemRow): Promise<ItemDetail | null> {
 // table. The page itself lists every stored variant of the item.
 export async function getItemDetailBySlug(slug: string): Promise<ItemDetail | null> {
   const normalized = decodeURIComponent(slug);
-  const cacheKey = `v6:detail-slug:${normalized}`;
+  const cacheKey = `item:${normalized}`;
   const cached = await cacheGet<ItemDetail>(cacheKey);
   if (cached) return cached;
   const item = await findItemBySlug(normalized);
@@ -450,7 +450,7 @@ export async function getItemDetail(itemKey: string): Promise<ItemDetail | null>
   const parsed = parseItemKey(decoded);
   if (!parsed) return null;
 
-  const detailCacheKey = `v4:detail:${decoded}`;
+  const detailCacheKey = `item:${decoded}`;
   const cached = await cacheGet<ItemDetail>(detailCacheKey);
   if (cached) return cached;
 
@@ -609,7 +609,7 @@ export async function listItemsFiltered(
 ): Promise<FilteredItemsResult> {
   const normalized = normalizeFilteredParams(rawParams);
 
-  const cacheKey = `v3:items:${JSON.stringify(normalized)}`;
+  const cacheKey = `items:${JSON.stringify(normalized)}`;
   const cached = await cacheGet<FilteredItemsResult>(cacheKey);
   if (cached) return cached;
 
@@ -660,7 +660,7 @@ export async function searchItems(
 }> {
   const trimmed = q.trim();
   const boundedLimit = Math.min(Math.max(1, limit), 10);
-  const cacheKey = `v3:search:${trimmed}:${boundedLimit}`;
+  const cacheKey = `search:${trimmed}:${boundedLimit}`;
   const cached = await cacheGet<{ items: { itemKey: string; name: string; displayName: string | null; slug: string | null; pt: number; shiny: boolean; category: string | null; rap: number | null }[] }>(cacheKey);
   if (cached) return cached;
 
