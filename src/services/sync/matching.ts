@@ -21,9 +21,25 @@ export interface MatchableItem {
   gargantuan: boolean;
 }
 
+export type UnmatchedReason = 'no-candidate' | 'category-mismatch';
+
+export interface UnmatchedDetail {
+  reason: UnmatchedReason;
+  /** Collections the matcher considered before giving up. Empty for `no-candidate`. */
+  ambiguousCandidates: string[];
+  /** Whether the matcher attempted a `<id> <collectionToken>` suffixed lookup. */
+  triedSuffixLookup: boolean;
+}
+
 export interface MatchWarnings {
   unmatchedEntries: number;
   ambiguousNames: number;
+  /**
+   * Diagnostic for the most recent unmatched drop. Cleared on the next
+   * successful match. Informational; not part of the warning counter
+   * contract and not relied on by the public matcher API.
+   */
+  lastUnmatched?: UnmatchedDetail;
 }
 
 export interface EntryMatcher {
@@ -123,6 +139,7 @@ export function buildEntryMatcher(
 
   let unmatchedEntries = 0;
   let ambiguousNames = 0;
+  let lastUnmatched: UnmatchedDetail | undefined;
 
   function attribute(upstreamId: string, candidates: MatchableItem[]): MatchableItem | null {
     const first = candidates[0];
@@ -173,8 +190,16 @@ export function buildEntryMatcher(
       const candidates = candidatesFor(upstreamId);
       if (candidates.length === 0) {
         const suffixed = category !== undefined ? suffixedLookup(upstreamId, category) : null;
-        if (suffixed) return suffixed;
+        if (suffixed) {
+          lastUnmatched = undefined;
+          return suffixed;
+        }
         unmatchedEntries += 1;
+        lastUnmatched = {
+          reason: 'no-candidate',
+          ambiguousCandidates: [],
+          triedSuffixLookup: category !== undefined,
+        };
         return null;
       }
       if (candidates.length === 1) {
@@ -187,8 +212,12 @@ export function buildEntryMatcher(
           !collectionObservedCovers(candidate, category)
         ) {
           const suffixed = suffixedLookup(upstreamId, category);
-          if (suffixed) return suffixed;
+          if (suffixed) {
+            lastUnmatched = undefined;
+            return suffixed;
+          }
         }
+        lastUnmatched = undefined;
         return candidate;
       }
 
@@ -198,18 +227,30 @@ export function buildEntryMatcher(
         const resolved = candidates.filter((candidate) =>
           collectionObservedCovers(candidate, category),
         );
-        if (resolved.length >= 1) return attribute(upstreamId, resolved);
+        if (resolved.length >= 1) {
+          lastUnmatched = undefined;
+          return attribute(upstreamId, resolved);
+        }
 
         const suffixed = suffixedLookup(upstreamId, category);
-        if (suffixed) return suffixed;
+        if (suffixed) {
+          lastUnmatched = undefined;
+          return suffixed;
+        }
 
         // The category belongs to a domain none of the candidates cover:
         // honest unmatched instead of fabricated attribution.
         unmatchedEntries += 1;
+        lastUnmatched = {
+          reason: 'category-mismatch',
+          ambiguousCandidates: candidates.map((c) => c.collectionName),
+          triedSuffixLookup: true,
+        };
         return null;
       }
+      lastUnmatched = undefined;
       return attribute(upstreamId, candidates);
     },
-    warnings: () => ({ unmatchedEntries, ambiguousNames }),
+    warnings: () => ({ unmatchedEntries, ambiguousNames, lastUnmatched }),
   };
 }

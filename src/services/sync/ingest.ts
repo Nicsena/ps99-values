@@ -148,7 +148,26 @@ export async function runFeed(options: {
   const matched: DesiredValue[] = [];
   for (const entry of feed.data) {
     const base = matcher.match(entry.configData.id, entry.category);
-    if (!base) continue;
+    if (!base) {
+      const detail = matcher.warnings().lastUnmatched;
+      log.debug(
+        metric,
+        'unmatched',
+        'id=', entry.configData.id,
+        'category=', entry.category ?? '(none)',
+        'value=', entry.value,
+        'dims=', JSON.stringify({
+          pt: entry.configData.pt,
+          sh: entry.configData.sh,
+          cv: entry.configData.cv,
+          tn: entry.configData.tn,
+        }),
+        'reason=', detail?.reason ?? 'unknown',
+        'candidates=[', detail?.ambiguousCandidates?.join('/') ?? '', ']',
+        detail?.triedSuffixLookup ? 'suffixed=missed' : 'suffixed=skipped',
+      );
+      continue;
+    }
     const dims = parseVariantFromRap(entry.configData);
     matched.push({ base, dims, value: entry.value });
   }
