@@ -1,6 +1,9 @@
 import { lt, sql } from 'drizzle-orm';
 import { db } from '../client.js';
 import { snapshots } from '../schema.js';
+import { createLogger } from '../../logger.js';
+
+const log = createLogger({ namespace: 'db.snapshots' });
 
 export type Metric = 'rap' | 'exists';
 
@@ -25,14 +28,16 @@ function chunk<T>(arr: T[], size: number): T[][] {
 
 // Deterministic latest-per-item via ROW_NUMBER; no bare-column MAX() ties.
 export async function getLatestValues(metric: Metric): Promise<LatestValues> {
-  const rows = (await db.all<{ item_id: number; value: number }>(
-    sql`SELECT item_id, value FROM (
-          SELECT item_id, value,
-            ROW_NUMBER() OVER (PARTITION BY item_id ORDER BY captured_at DESC) AS rn
-          FROM snapshots WHERE metric = ${metric}
-        ) WHERE rn = 1`,
-  )) as { item_id: number; value: number }[];
-  return new Map(rows.map((r) => [r.item_id, r.value]));
+  return log.timerFn(`get latest values ${metric}`, async () => {
+    const rows = (await db.all<{ item_id: number; value: number }>(
+      sql`SELECT item_id, value FROM (
+            SELECT item_id, value,
+              ROW_NUMBER() OVER (PARTITION BY item_id ORDER BY captured_at DESC) AS rn
+            FROM snapshots WHERE metric = ${metric}
+          ) WHERE rn = 1`,
+    )) as { item_id: number; value: number }[];
+    return new Map(rows.map((r) => [r.item_id, r.value]));
+  }, 'debug');
 }
 
 // Batch insert; all chunks commit in a single transaction so a crash cannot
@@ -41,25 +46,27 @@ export async function getLatestValues(metric: Metric): Promise<LatestValues> {
 // second target the same point; those conflicts take the newer value rather
 // than dropping it. Returns the number of rows written.
 export async function insertSnapshots(metric: Metric, rows: SnapshotInsert[]): Promise<number> {
-  if (rows.length === 0) return 0;
-  let written = 0;
-  // better-sqlite3 transactions are synchronous; the drizzle sync builder is
-  // used so every chunk shares one commit.
-  db.transaction((tx) => {
-    for (const batch of chunk(rows, 250)) {
-      const result = tx
-        .insert(snapshots)
-        .values(batch.map((row) => ({ ...row, metric })))
-        .onConflictDoUpdate({
-          target: [snapshots.itemId, snapshots.metric, snapshots.capturedAt],
-          set: { value: sql`excluded.value` },
-        })
-        .returning({ id: snapshots.id })
-        .all();
-      written += result.length;
-    }
-  });
-  return written;
+  return log.timerFn(`insert snapshots ${metric} (${rows.length})`, async () => {
+    if (rows.length === 0) return 0;
+    let written = 0;
+    // better-sqlite3 transactions are synchronous; the drizzle sync builder is
+    // used so every chunk shares one commit.
+    db.transaction((tx) => {
+      for (const batch of chunk(rows, 250)) {
+        const result = tx
+          .insert(snapshots)
+          .values(batch.map((row) => ({ ...row, metric })))
+          .onConflictDoUpdate({
+            target: [snapshots.itemId, snapshots.metric, snapshots.capturedAt],
+            set: { value: sql`excluded.value` },
+          })
+          .returning({ id: snapshots.id })
+          .all();
+        written += result.length;
+      }
+    });
+    return written;
+  }, 'debug');
 }
 
 export async function loadHistory(
@@ -67,29 +74,35 @@ export async function loadHistory(
   metric: Metric,
   limit = 200,
 ): Promise<HistoryRawPoint[]> {
-  if (!itemId) return [];
-  return (await db.all<HistoryRawPoint>(
-    sql`SELECT captured_at, value FROM (
-          SELECT captured_at, value FROM snapshots
-          WHERE item_id = ${itemId} AND metric = ${metric}
-          ORDER BY captured_at DESC LIMIT ${limit}
-        ) ORDER BY captured_at ASC`,
-  )) as HistoryRawPoint[];
+  return log.timerFn(`load history ${itemId ?? 'null'} ${metric}`, async () => {
+    if (!itemId) return [];
+    return (await db.all<HistoryRawPoint>(
+      sql`SELECT captured_at, value FROM (
+            SELECT captured_at, value FROM snapshots
+            WHERE item_id = ${itemId} AND metric = ${metric}
+            ORDER BY captured_at DESC LIMIT ${limit}
+          ) ORDER BY captured_at ASC`,
+    )) as HistoryRawPoint[];
+  }, 'debug');
 }
 
 export async function countSnapshots(
   itemId: number | null | undefined,
   metric: Metric,
 ): Promise<number> {
-  if (!itemId) return 0;
-  const rows = (await db.all<{ total: number }>(
-    sql`SELECT COUNT(*) AS total FROM snapshots
-        WHERE item_id = ${itemId} AND metric = ${metric}`,
-  )) as { total: number }[];
-  return rows[0]?.total ?? 0;
+  return log.timerFn(`count snapshots ${itemId ?? 'null'} ${metric}`, async () => {
+    if (!itemId) return 0;
+    const rows = (await db.all<{ total: number }>(
+      sql`SELECT COUNT(*) AS total FROM snapshots
+          WHERE item_id = ${itemId} AND metric = ${metric}`,
+    )) as { total: number }[];
+    return rows[0]?.total ?? 0;
+  }, 'debug');
 }
 
 export async function pruneSnapshotsOlderThan(cutoffDate: Date): Promise<number> {
-  const result = await db.delete(snapshots).where(lt(snapshots.capturedAt, cutoffDate));
-  return result.changes;
+  return log.timerFn(`prune snapshots older than ${cutoffDate.toISOString()}`, async () => {
+    const result = await db.delete(snapshots).where(lt(snapshots.capturedAt, cutoffDate));
+    return result.changes;
+  }, 'debug');
 }

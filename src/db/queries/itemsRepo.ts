@@ -3,6 +3,9 @@ import { db } from '../client.js';
 import { collections, items } from '../schema.js';
 import { readColorVariants } from '../../services/collectionSpecs.js';
 import { slugify } from '../../util/slug.js';
+import { createLogger } from '../../logger.js';
+
+const log = createLogger({ namespace: 'db.items' });
 
 export interface ItemRow {
   id: number;
@@ -163,13 +166,15 @@ function escapeLike(value: string): string {
 }
 
 export async function countItems(search?: string): Promise<number> {
-  const normalized = (search ?? '').trim().toLowerCase();
-  const where =
-    normalized.length > 0 ? sql` WHERE LOWER(i.name) LIKE ${`%${escapeLike(normalized)}%`}` : sql``;
-  const countRows = (await db.all<{ total: number }>(
-    sql`SELECT COUNT(*) AS total FROM items i${where}`,
-  )) as { total: number }[];
-  return countRows[0]?.total ?? 0;
+  return log.timerFn('count items', async () => {
+    const normalized = (search ?? '').trim().toLowerCase();
+    const where =
+      normalized.length > 0 ? sql` WHERE LOWER(i.name) LIKE ${`%${escapeLike(normalized)}%`}` : sql``;
+    const countRows = (await db.all<{ total: number }>(
+      sql`SELECT COUNT(*) AS total FROM items i${where}`,
+    )) as { total: number }[];
+    return countRows[0]?.total ?? 0;
+  }, 'debug');
 }
 
 function itemRowSelect() {
@@ -197,49 +202,57 @@ function itemRowSelect() {
 
 // Exact indexed match only; slugs are stored canonical/lowercase at write time.
 export async function findItemBySlug(itemSlug: string): Promise<ItemRow | undefined> {
-  const normalized = slugify(itemSlug).toLowerCase();
-  if (!normalized) return undefined;
-  const rows = await itemRowSelect().where(eq(items.slug, normalized)).limit(1);
-  return rows[0];
+  return log.timerFn(`find item by slug ${itemSlug}`, async () => {
+    const normalized = slugify(itemSlug).toLowerCase();
+    if (!normalized) return undefined;
+    const rows = await itemRowSelect().where(eq(items.slug, normalized)).limit(1);
+    return rows[0];
+  }, 'debug');
 }
 
 export async function findItemByNameLower(name: string): Promise<ItemRow | undefined> {
-  const rows = await itemRowSelect()
-    .where(sql`LOWER(${items.name}) = ${name.toLowerCase()}`)
-    .limit(1);
-  // Prefer the primary row when several variants share a name.
-  if (rows.length === 0) return undefined;
-  const primary = rows.find((r) => r.variant === 0 && !r.shiny && r.chroma === 0 && r.tier === 0);
-  return primary ?? rows[0];
+  return log.timerFn(`find item by name lower ${name}`, async () => {
+    const rows = await itemRowSelect()
+      .where(sql`LOWER(${items.name}) = ${name.toLowerCase()}`)
+      .limit(1);
+    // Prefer the primary row when several variants share a name.
+    if (rows.length === 0) return undefined;
+    const primary = rows.find((r) => r.variant === 0 && !r.shiny && r.chroma === 0 && r.tier === 0);
+    return primary ?? rows[0];
+  }, 'debug');
 }
 
 export async function findItemVariant(
   name: string,
   dims: VariantDims,
 ): Promise<ItemRow | undefined> {
-  const rows = await itemRowSelect()
-    .where(
-      and(
-        sql`LOWER(${items.name}) = ${name.toLowerCase()}`,
-        eq(items.variant, dims.variant),
-        eq(items.shiny, dims.shiny),
-        eq(items.chroma, dims.chroma),
-        eq(items.tier, dims.tier),
-      ),
-    )
-    .limit(1);
-  return rows[0];
+  return log.timerFn(`find item variant ${name}`, async () => {
+    const rows = await itemRowSelect()
+      .where(
+        and(
+          sql`LOWER(${items.name}) = ${name.toLowerCase()}`,
+          eq(items.variant, dims.variant),
+          eq(items.shiny, dims.shiny),
+          eq(items.chroma, dims.chroma),
+          eq(items.tier, dims.tier),
+        ),
+      )
+      .limit(1);
+    return rows[0];
+  }, 'debug');
 }
 
 export async function findImageIdByName(name: string): Promise<number | null> {
-  const found = await db
-    .select({ imageId: items.imageId })
-    .from(items)
-    .where(
-      sql`(LOWER(${items.displayName}) = ${name.toLowerCase()} OR LOWER(${items.name}) = ${name.toLowerCase()}) AND ${items.imageId} IS NOT NULL`,
-    )
-    .limit(1);
-  return found[0]?.imageId ?? null;
+  return log.timerFn(`find image id by name ${name}`, async () => {
+    const found = await db
+      .select({ imageId: items.imageId })
+      .from(items)
+      .where(
+        sql`(LOWER(${items.displayName}) = ${name.toLowerCase()} OR LOWER(${items.name}) = ${name.toLowerCase()}) AND ${items.imageId} IS NOT NULL`,
+      )
+      .limit(1);
+    return found[0]?.imageId ?? null;
+  }, 'debug');
 }
 
 interface NormalizedUpsert {
@@ -292,172 +305,178 @@ export interface VariantRef {
 // Resolves ids for existing item rows matching full identities; missing keys
 // are absent from the returned map.
 export async function findVariantIds(refs: VariantRef[]): Promise<Map<string, number>> {
-  if (refs.length === 0) return new Map();
-  const collections = [...new Set(refs.map((r) => r.collectionName))];
-  const rows = await db
-    .select({
-      id: items.id,
-      collectionName: items.collectionName,
-      name: items.name,
-      variant: items.variant,
-      shiny: items.shiny,
-      chroma: items.chroma,
-      tier: items.tier,
-    })
-    .from(items)
-    .where(inArray(items.collectionName, collections));
-  const byIdentity = new Map(
-    rows.map((r) => [
-      itemIdentityKey(r.collectionName, r.name, {
-        variant: r.variant,
-        shiny: r.shiny,
-        chroma: r.chroma,
-        tier: r.tier,
-      }),
-      r.id,
-    ]),
-  );
-  const out = new Map<string, number>();
-  for (const ref of refs) {
-    const key = itemIdentityKey(ref.collectionName, ref.name, ref.dims);
-    const id = byIdentity.get(key);
-    if (id !== undefined) out.set(key, id);
-  }
-  return out;
+  return log.timerFn(`find variant ids (${refs.length})`, async () => {
+    if (refs.length === 0) return new Map();
+    const collections = [...new Set(refs.map((r) => r.collectionName))];
+    const rows = await db
+      .select({
+        id: items.id,
+        collectionName: items.collectionName,
+        name: items.name,
+        variant: items.variant,
+        shiny: items.shiny,
+        chroma: items.chroma,
+        tier: items.tier,
+      })
+      .from(items)
+      .where(inArray(items.collectionName, collections));
+    const byIdentity = new Map(
+      rows.map((r) => [
+        itemIdentityKey(r.collectionName, r.name, {
+          variant: r.variant,
+          shiny: r.shiny,
+          chroma: r.chroma,
+          tier: r.tier,
+        }),
+        r.id,
+      ]),
+    );
+    const out = new Map<string, number>();
+    for (const ref of refs) {
+      const key = itemIdentityKey(ref.collectionName, ref.name, ref.dims);
+      const id = byIdentity.get(key);
+      if (id !== undefined) out.set(key, id);
+    }
+    return out;
+  }, 'debug');
 }
 
 // Single-row convenience wrapper around upsertItems; returns the row's id.
 export async function upsertItem(params: UpsertItemParams): Promise<number> {
-  await upsertItems([params]);
-  const dims: VariantDims = {
-    variant: params.variant ?? 0,
-    shiny: params.shiny ?? false,
-    chroma: params.chroma ?? 0,
-    tier: params.tier ?? 0,
-  };
-  const ids = await findVariantIds([
-    { collectionName: params.collectionName, name: params.name, dims },
-  ]);
-  const id = ids.get(itemIdentityKey(params.collectionName, params.name, dims));
-  if (id === undefined) {
-    throw new Error(
-      `upsertItem: row not found after upsert (${params.collectionName}/${params.name})`,
-    );
-  }
-  return id;
+  return log.timerFn(`upsert item ${params.collectionName}/${params.name}`, async () => {
+    await upsertItems([params]);
+    const dims: VariantDims = {
+      variant: params.variant ?? 0,
+      shiny: params.shiny ?? false,
+      chroma: params.chroma ?? 0,
+      tier: params.tier ?? 0,
+    };
+    const ids = await findVariantIds([
+      { collectionName: params.collectionName, name: params.name, dims },
+    ]);
+    const id = ids.get(itemIdentityKey(params.collectionName, params.name, dims));
+    if (id === undefined) {
+      throw new Error(
+        `upsertItem: row not found after upsert (${params.collectionName}/${params.name})`,
+      );
+    }
+    return id;
+  }, 'debug');
 }
 
 // Batched upsert of item rows (one multi-row INSERT ... ON CONFLICT per chunk).
 // Slugs are assigned first-come in list order with a single preloaded uniqueness
 // check; existing rows are updated in place (ids preserved).
 export async function upsertItems(paramsList: UpsertItemParams[]): Promise<number> {
-  if (paramsList.length === 0) return 0;
+  return log.timerFn(`upsert items (${paramsList.length})`, async () => {
+    if (paramsList.length === 0) return 0;
 
-  const normalized = paramsList.map(normalizeUpsert);
+    const normalized = paramsList.map(normalizeUpsert);
 
-  // Load existing rows for the involved collections to learn current ids/slugs.
-  const collections = [...new Set(normalized.map((n) => n.params.collectionName))];
-  const existingRows = await db
-    .select({
-      id: items.id,
-      collectionName: items.collectionName,
-      name: items.name,
-      slug: items.slug,
-      variant: items.variant,
-      shiny: items.shiny,
-      chroma: items.chroma,
-      tier: items.tier,
-    })
-    .from(items)
-    .where(inArray(items.collectionName, collections));
-  const existingByIdentity = new Map(
-    existingRows.map((r) => [
-      itemIdentityKey(r.collectionName, r.name, {
-        variant: r.variant,
-        shiny: r.shiny,
-        chroma: r.chroma,
-        tier: r.tier,
-      }),
-      { id: r.id, slug: r.slug },
-    ]),
-  );
-
-  // Slug pass: preload all first-choice candidates in one bulk query, then
-  // assign sequentially so earlier rows win collisions deterministically. A row
-  // whose stored slug already equals its candidate keeps it.
-  const assigner = new SlugAssigner();
-  const candidates = [
-    ...new Set(normalized.map((n) => n.candidate).filter((c): c is string => c !== null)),
-  ];
-  const selfOwned = new Map<string, number>();
-  for (const n of normalized) {
-    if (n.candidate === null) continue;
-    const existing = existingByIdentity.get(
-      itemIdentityKey(n.params.collectionName, n.params.name, n.dims),
+    // Load existing rows for the involved collections to learn current ids/slugs.
+    const collections = [...new Set(normalized.map((n) => n.params.collectionName))];
+    const existingRows = await db
+      .select({
+        id: items.id,
+        collectionName: items.collectionName,
+        name: items.name,
+        slug: items.slug,
+        variant: items.variant,
+        shiny: items.shiny,
+        chroma: items.chroma,
+        tier: items.tier,
+      })
+      .from(items)
+      .where(inArray(items.collectionName, collections));
+    const existingByIdentity = new Map(
+      existingRows.map((r) => [
+        itemIdentityKey(r.collectionName, r.name, {
+          variant: r.variant,
+          shiny: r.shiny,
+          chroma: r.chroma,
+          tier: r.tier,
+        }),
+        { id: r.id, slug: r.slug },
+      ]),
     );
-    if (existing && existing.slug === n.candidate) selfOwned.set(n.candidate, existing.id);
-  }
-  await assigner.preload(candidates, selfOwned);
 
-  for (const n of normalized) {
-    if (n.candidate === null) {
-      n.finalSlug = null;
-      continue;
+    // Slug pass: preload all first-choice candidates in one bulk query, then
+    // assign sequentially so earlier rows win collisions deterministically. A row
+    // whose stored slug already equals its candidate keeps it.
+    const assigner = new SlugAssigner();
+    const candidates = [
+      ...new Set(normalized.map((n) => n.candidate).filter((c): c is string => c !== null)),
+    ];
+    const selfOwned = new Map<string, number>();
+    for (const n of normalized) {
+      if (n.candidate === null) continue;
+      const existing = existingByIdentity.get(
+        itemIdentityKey(n.params.collectionName, n.params.name, n.dims),
+      );
+      if (existing && existing.slug === n.candidate) selfOwned.set(n.candidate, existing.id);
     }
-    const existing = existingByIdentity.get(
-      itemIdentityKey(n.params.collectionName, n.params.name, n.dims),
-    );
-    n.finalSlug = await assigner.assign(n.candidate, n.params.collectionName, existing?.id);
-  }
+    await assigner.preload(candidates, selfOwned);
 
-  // Write pass: chunked multi-row upserts against the full identity index.
-  // createdAt is intentionally untouched on conflict.
-  for (const batch of chunkOf(normalized, 100)) {
-    await db
-      .insert(items)
-      .values(
-        batch.map(({ params, dims, finalSlug }) => ({
-          collectionName: params.collectionName,
-          name: params.name,
-          displayName: params.displayName ?? null,
-          description: params.description ?? null,
-          slug: finalSlug ?? null,
-          hidden: params.hidden ?? false,
-          imageId: params.imageId ?? null,
-          huge: params.huge ?? false,
-          titanic: params.titanic ?? false,
-          gargantuan: params.gargantuan ?? false,
-          colorVariants: params.colorVariants ?? null,
-          configData: params.configData ?? null,
-          categoryName: params.categoryName ?? null,
-          ...dims,
-        })),
-      )
-      .onConflictDoUpdate({
-        target: [
-          items.collectionName,
-          items.name,
-          items.variant,
-          items.shiny,
-          items.chroma,
-          items.tier,
-        ],
-        set: {
-          displayName: sql`excluded."displayName"`,
-          description: sql`excluded."description"`,
-          slug: sql`excluded."slug"`,
-          hidden: sql`excluded."hidden"`,
-          imageId: sql`excluded."imageId"`,
-          huge: sql`excluded."huge"`,
-          titanic: sql`excluded."titanic"`,
-          gargantuan: sql`excluded."gargantuan"`,
-          colorVariants: sql`excluded."colorVariants"`,
-          configData: sql`excluded."configData"`,
-          categoryName: sql`excluded."categoryName"`,
-        },
-      });
-  }
-  return paramsList.length;
+    for (const n of normalized) {
+      if (n.candidate === null) {
+        n.finalSlug = null;
+        continue;
+      }
+      const existing = existingByIdentity.get(
+        itemIdentityKey(n.params.collectionName, n.params.name, n.dims),
+      );
+      n.finalSlug = await assigner.assign(n.candidate, n.params.collectionName, existing?.id);
+    }
+
+    // Write pass: chunked multi-row upserts against the full identity index.
+    // createdAt is intentionally untouched on conflict.
+    for (const batch of chunkOf(normalized, 100)) {
+      await db
+        .insert(items)
+        .values(
+          batch.map(({ params, dims, finalSlug }) => ({
+            collectionName: params.collectionName,
+            name: params.name,
+            displayName: params.displayName ?? null,
+            description: params.description ?? null,
+            slug: finalSlug ?? null,
+            hidden: params.hidden ?? false,
+            imageId: params.imageId ?? null,
+            huge: params.huge ?? false,
+            titanic: params.titanic ?? false,
+            gargantuan: params.gargantuan ?? false,
+            colorVariants: params.colorVariants ?? null,
+            configData: params.configData ?? null,
+            categoryName: params.categoryName ?? null,
+            ...dims,
+          })),
+        )
+        .onConflictDoUpdate({
+          target: [
+            items.collectionName,
+            items.name,
+            items.variant,
+            items.shiny,
+            items.chroma,
+            items.tier,
+          ],
+          set: {
+            displayName: sql`excluded."displayName"`,
+            description: sql`excluded."description"`,
+            slug: sql`excluded."slug"`,
+            hidden: sql`excluded."hidden"`,
+            imageId: sql`excluded."imageId"`,
+            huge: sql`excluded."huge"`,
+            titanic: sql`excluded."titanic"`,
+            gargantuan: sql`excluded."gargantuan"`,
+            colorVariants: sql`excluded."colorVariants"`,
+            configData: sql`excluded."configData"`,
+            categoryName: sql`excluded."categoryName"`,
+          },
+        });
+    }
+    return paramsList.length;
+  }, 'debug');
 }
 
 export async function getBaseItemsWithCollection(): Promise<
@@ -477,31 +496,33 @@ export async function getBaseItemsWithCollection(): Promise<
     categoryName: string | null;
   }[]
 > {
-  return db
-    .select({
-      id: items.id,
-      collectionName: items.collectionName,
-      name: items.name,
-      displayName: items.displayName,
-      description: items.description,
-      colorVariants: items.colorVariants,
-      configData: items.configData,
-      imageId: items.imageId,
-      hidden: items.hidden,
-      huge: items.huge,
-      titanic: items.titanic,
-      gargantuan: items.gargantuan,
-      categoryName: items.categoryName,
-    })
-    .from(items)
-    .innerJoin(collections, eq(collections.name, items.collectionName))
-    .where(
-      and(
-        eq(collections.enabled, true),
-        eq(items.variant, 0),
-        eq(items.shiny, false),
-        eq(items.chroma, 0),
-        eq(items.tier, 0),
-      ),
-    );
+  return log.timerFn('get base items with collection', async () => {
+    return db
+      .select({
+        id: items.id,
+        collectionName: items.collectionName,
+        name: items.name,
+        displayName: items.displayName,
+        description: items.description,
+        colorVariants: items.colorVariants,
+        configData: items.configData,
+        imageId: items.imageId,
+        hidden: items.hidden,
+        huge: items.huge,
+        titanic: items.titanic,
+        gargantuan: items.gargantuan,
+        categoryName: items.categoryName,
+      })
+      .from(items)
+      .innerJoin(collections, eq(collections.name, items.collectionName))
+      .where(
+        and(
+          eq(collections.enabled, true),
+          eq(items.variant, 0),
+          eq(items.shiny, false),
+          eq(items.chroma, 0),
+          eq(items.tier, 0),
+        ),
+      );
+  }, 'debug');
 }
