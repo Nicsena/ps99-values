@@ -39,6 +39,9 @@ function parseLevel(raw: string | undefined, fallback: LogLevel): LogLevel {
   if (raw === undefined) return fallback;
   const lower = raw.toLowerCase();
   if (lower in LEVEL_WEIGHTS) return lower as LogLevel;
+  // Bootstrap: the logger isn't constructed yet, so this falls through to a
+  // direct console.* call. Mirrors the same pattern used in src/config.ts for
+  // invalid-environment reporting.
   console.warn(`[logger] unknown LOG_LEVEL "${raw}", falling back to "${fallback}"`);
   return fallback;
 }
@@ -47,6 +50,7 @@ function parseFormat(raw: string | undefined, fallback: LogFormat): LogFormat {
   if (raw === undefined) return fallback;
   const lower = raw.toLowerCase();
   if (lower === 'text' || lower === 'json' || lower === 'pretty') return lower;
+  // Bootstrap: see parseLevel above.
   console.warn(`[logger] unknown LOG_FORMAT "${raw}", falling back to "${fallback}"`);
   return fallback;
 }
@@ -74,6 +78,7 @@ function resolveTimezone(): string | null {
   const raw = process.env.TZ;
   if (!raw) return null;
   if (!isValidTimezone(raw)) {
+    // Bootstrap: see parseLevel above.
     console.warn(`[logger] unknown TZ "${raw}", falling back to UTC`);
     return null;
   }

@@ -1,3 +1,7 @@
+import { createLogger } from '../../logger.js';
+
+const log = createLogger({ namespace: 'sync' }).child('retry');
+
 export interface RetryOptions {
   /** Total attempts including the first; must be >= 1. */
   attempts?: number;
@@ -17,7 +21,7 @@ export async function withRetry<T>(fn: () => Promise<T>, opts: RetryOptions = {}
     } catch (err) {
       lastError = err;
       if (attempt < attempts) {
-        console.warn(`[sync] attempt ${attempt}/${attempts} failed, retrying:`, err);
+        log.warn(`attempt ${attempt} / ${attempts} failed, retrying: ${err}`);
         await new Promise((resolve) => setTimeout(resolve, delayMs * attempt));
       }
     }

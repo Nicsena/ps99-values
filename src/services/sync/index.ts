@@ -1,10 +1,13 @@
 import { countCollections } from '../../db/queries/collectionsRepo.js';
 import { pruneSnapshotsOlderThan } from '../../db/queries/snapshotsRepo.js';
 import { getSetting } from '../settings.js';
+import { createLogger } from '../../logger.js';
 import { seedCollections } from './catalog.js';
 import { runSync, type SyncResult } from './runner.js';
 
 export type { SyncResult };
+
+const log = createLogger({ namespace: 'sync' });
 
 let syncing: Promise<SyncResult> | null = null;
 
@@ -27,7 +30,7 @@ export async function bootstrapIfNeeded(): Promise<void> {
       await seedCollections();
     }
   } catch (err) {
-    console.error('[sync] bootstrap failed:', err);
+    log.error(`${err} bootstrap failed`);
   }
 }
 
@@ -38,7 +41,7 @@ export async function pruneSnapshots(): Promise<number> {
     const cutoff = new Date(Date.now() - days * 24 * 60 * 60 * 1000);
     return await pruneSnapshotsOlderThan(cutoff);
   } catch (err) {
-    console.error('[sync] snapshot pruning failed:', err);
+    log.error(`${err} snapshot pruning failed`);
     return 0;
   }
 }

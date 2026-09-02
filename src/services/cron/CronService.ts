@@ -1,6 +1,9 @@
 import { createTask, validate } from 'node-cron';
 import { getSetting } from '../settings.js';
+import { createLogger } from '../../logger.js';
 import type { JobDefinition, JobStatus } from './types.js';
+
+const log = createLogger({ namespace: 'cron' });
 
 interface TaskHandle {
   stop(): void;
@@ -69,18 +72,18 @@ export class CronService {
     const expression = scheduleSetting ?? def.defaultSchedule;
 
     if (!validate(expression)) {
-      console.error(`[cron] invalid schedule "${expression}" for job ${name}, not starting`);
+      log.error(`invalid schedule ${expression} for job ${name} not starting`);
       return false;
     }
 
     const handle = this.scheduler(expression, () => {
       def
         .run()
-        .then(() => console.log(`[cron] ${name} completed`))
-        .catch((err: unknown) => console.error(`[cron] job ${name} failed:`, err));
+        .then(() => log.info(`${name} completed`))
+        .catch((err: unknown) => log.error(`${err} job ${name} failed`));
     });
     this.handles.set(name, handle);
-    console.log(`[cron] started ${name} (${expression})`);
+    log.info(`started ${name} (${expression})`);
     return true;
   }
 
@@ -89,7 +92,7 @@ export class CronService {
     if (!handle) return false;
     handle.stop();
     this.handles.delete(name);
-    console.log(`[cron] stopped ${name}`);
+    log.info(`stopped ${name}`);
     return true;
   }
 

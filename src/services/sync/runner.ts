@@ -1,10 +1,13 @@
 import { getEnabledCollections } from '../../db/queries/collectionsRepo.js';
 import { getBaseItemsWithCollection } from '../../db/queries/itemsRepo.js';
 import { cacheFlush } from '../../cache/index.js';
+import { createLogger } from '../../logger.js';
 import { fetchExists, fetchRap } from '../biggames.js';
 import { setSetting, getSetting } from '../settings.js';
 import { syncCatalog, seedCollections } from './catalog.js';
 import { runFeed, type IngestWarnings } from './ingest.js';
+
+const log = createLogger({ namespace: 'sync' });
 
 export interface SyncResult {
   collections: number;
@@ -33,7 +36,7 @@ export async function runSync(): Promise<SyncResult> {
   try {
     collectionsSeeded = await seedCollections();
   } catch (err) {
-    console.error('[sync] collection seeding failed:', err);
+    log.error(`${err} collection seeding failed`);
     errors.push(`collection seeding failed: ${String(err)}`);
   }
 

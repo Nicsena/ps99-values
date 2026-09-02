@@ -6,6 +6,9 @@ import { bootstrapIfNeeded } from './services/sync/index.js';
 import { pagesRouter } from './routes/pages.js';
 import { itemsRouter } from './routes/items.js';
 import { apiRouter } from './routes/api.js';
+import { createLogger } from './logger.js';
+
+const log = createLogger({ namespace: 'app' });
 
 const rootDir = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -38,7 +41,7 @@ export async function initApp(): Promise<express.Express> {
       }
 
       const message = err instanceof Error ? err.message : 'Internal Server Error';
-      console.error('[app] unhandled error:', err);
+      log.error(err, 'unhandled error');
       return res.status(500).render("errors/500", { title: "PS99 Values", message });
     },
   );

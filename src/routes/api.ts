@@ -6,6 +6,9 @@ import {
   searchItems,
 } from '../services/rapService.js';
 import { syncAll } from '../services/sync/index.js';
+import { createLogger } from '../logger.js';
+
+const log = createLogger({ namespace: 'routes.api' });
 
 export const apiRouter = Router();
 
@@ -103,6 +106,6 @@ apiRouter.use((err: unknown, req: Request, res: Response, next: NextFunction) =>
   }
 
   const message = err instanceof Error ? err.message : 'Internal Server Error';
-  console.error('[app] unhandled error:', err);
+  log.error(err, 'unhandled error');
   return res.status(500).json({ error: { "status": 500, "message": message }})
 });

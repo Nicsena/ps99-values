@@ -1,5 +1,8 @@
 import { pruneSnapshots } from '../../sync/index.js';
+import { createLogger } from '../../../logger.js';
 import type { JobDefinition } from '../types.js';
+
+const log = createLogger({ namespace: 'cron' }).child('jobs').child('prune');
 
 export const pruneJob: JobDefinition = {
   name: 'prune',
@@ -7,7 +10,7 @@ export const pruneJob: JobDefinition = {
   defaultSchedule: '30 3 * * *',
   run: async () => {
     const pruned = await pruneSnapshots();
-    console.log(`[cron] pruned ${pruned} snapshots`);
+    log.info(`pruned ${pruned} snapshots`);
     return pruned;
   },
 };

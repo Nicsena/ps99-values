@@ -1,6 +1,10 @@
 // Pure feed-entry → base-item attribution. No I/O so matching rules are
 // unit-testable in isolation from the database and upstream client.
 
+import { createLogger } from '../../logger.js';
+
+const log = createLogger({ namespace: 'sync' }).child('matching');
+
 export interface MatchableItem {
   id: number;
   collectionName: string;
@@ -124,9 +128,7 @@ export function buildEntryMatcher(
     const first = candidates[0];
     if (candidates.length > 1) {
       ambiguousNames += 1;
-      console.warn(
-        `[sync] name "${upstreamId}" matches ${candidates.map((c) => c.collectionName).join('/')}; attributing to "${first.collectionName}"`,
-      );
+      log.warn(`name ${upstreamId} matches ${candidates.map((c) => c.collectionName).join('/')} attributing to ${first.collectionName}`)
     }
     return first;
   }
@@ -147,9 +149,7 @@ export function buildEntryMatcher(
       if (!coversCategory) continue;
       const hit = byName.get(`${upstreamId} ${collectionToken(collection)}`);
       if (hit && hit.length > 0) {
-        console.warn(
-          `[sync] "${upstreamId}" [${category}] resolved via suffixed name "${hit[0].name}" (${collection})`,
-        );
+        log.warn(`${upstreamId} [${category}] resolved via suffixed name ${hit[0].name} (${collection})`)
         return hit[0];
       }
     }

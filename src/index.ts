@@ -1,19 +1,22 @@
 import { config } from './config.js';
 import { initApp } from './app.js';
 import { cronService, registerDefaultJobs } from './services/cron/index.js';
+import { createLogger } from './logger.js';
+
+const log = createLogger({ namespace: 'app' });
 
 async function main(): Promise<void> {
   const app = await initApp();
 
   const server = app.listen(config.port, () => {
-    console.log(`ps99-values listening on http://localhost:${config.port}`);
+    log.info(`ps99-values listening on http://localhost:${config.port}`);
   });
 
   registerDefaultJobs();
   await cronService.startAll();
 
   function shutdown(signal: string): void {
-    console.log(`Received ${signal}, shutting down...`);
+    log.info(`Received ${signal}, shutting down...`);
     server.close(() => process.exit(0));
     setTimeout(() => process.exit(1), 5000).unref();
   }
@@ -23,6 +26,6 @@ async function main(): Promise<void> {
 }
 
 main().catch((err) => {
-  console.error('Fatal startup error:', err);
+  log.exception(err, 'Fatal startup error');
   process.exit(1);
 });

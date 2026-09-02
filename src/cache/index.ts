@@ -1,5 +1,8 @@
 import { Redis } from 'ioredis';
 import { config } from '../config.js';
+import { createLogger } from '../logger.js';
+
+const log = createLogger({ namespace: 'cache' });
 
 let client: Redis | null = null;
 let unavailable = false;
@@ -7,15 +10,15 @@ let warned = false;
 
 
 if(config.cacheDisabled === "false") {
-  console.log("REDIS CACHE IS ENABLED")
+  log.info("Redis cache is enabled")
 } else {
-  console.log("REDIS CACHE IS DISABLED")
+  log.info("Redis cache is disabled")
 }
 
 function warnOnce(): void {
   if (!warned) {
     warned = true;
-    console.warn('[cache] Redis unavailable, serving from DB');
+    log.warn('Redis unavailable, serving from DB');
   }
 }
 

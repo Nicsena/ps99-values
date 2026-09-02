@@ -26,7 +26,10 @@ import {
   upsertCollectionNames,
 } from '../../db/queries/collectionsRepo.js';
 import { upsertItems, type UpsertItemParams } from '../../db/queries/itemsRepo.js';
+import { createLogger } from '../../logger.js';
 import { withRetry } from './retry.js';
+
+const log = createLogger({ namespace: 'sync' }).child('catalog');
 
 export const DEFAULT_ENABLED_COLLECTIONS = [
   'Pets',
@@ -144,10 +147,10 @@ export async function syncCatalog(
       entries = feed.data;
       if (feed.invalid > 0) {
         invalidEntries += feed.invalid;
-        console.warn(`[sync] ${name}: skipped ${feed.invalid} malformed catalog entries`);
+        log.warn(`${name} skipped ${feed.invalid} malformed catalog entries`);
       }
     } catch (err) {
-      console.error(`[sync] failed to fetch collection ${name}:`, err);
+      log.error(`${err} failed to fetch collection ${name}`);
       errors.push(`collection ${name} failed: ${String(err)}`);
       continue;
     }
@@ -195,7 +198,7 @@ export async function syncCatalog(
       }
       if (usedFallback && !imageWarnings.has(itemName)) {
         imageWarnings.add(itemName);
-        console.warn(`[sync] ${name}: no name key matched for "${entry.configName}", used configName`);
+        log.warn(`${name} no name key matched for ${entry.configName} used configName`);
       }
       const cd = entry.configData;
       const alias = stripNamePrefix(entry.configName);
@@ -359,7 +362,7 @@ export async function syncCatalog(
     try {
       itemsUpserted += await upsertItems(rows);
     } catch (err) {
-      console.error(`[sync] failed to upsert catalog for ${catalog.collection}:`, err);
+      log.error(`${err} failed to upsert catalog for ${catalog.collection}`);
       errors.push(`catalog upsert for ${catalog.collection} failed: ${String(err)}`);
       continue;
     }

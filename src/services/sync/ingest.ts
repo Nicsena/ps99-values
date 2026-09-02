@@ -25,7 +25,10 @@ import {
   type EntryMatcher,
   type MatchableItem,
 } from './matching.js';
+import { createLogger } from '../../logger.js';
 import { withRetry } from './retry.js';
+
+const log = createLogger({ namespace: 'sync' }).child('ingest');
 
 export interface IngestWarnings {
   unmatchedEntries: number;
@@ -120,7 +123,7 @@ export async function runFeed(options: {
   try {
     feed = await withRetry(fetch);
   } catch (err) {
-    console.error(`[sync] failed to fetch ${metric} data:`, err);
+    log.error(`${err} failed to fetch ${metric} data`);
     return {
       ok: false,
       inserted: 0,
@@ -130,7 +133,7 @@ export async function runFeed(options: {
   }
 
   if (feed.invalid > 0) {
-    console.warn(`[sync] ${metric}: skipped ${feed.invalid} malformed feed entries`);
+    log.warn(`${metric} skipped ${feed.invalid} malformed feed entries`);
   }
 
   const latest = await getLatestValues(metric);
@@ -245,14 +248,11 @@ export async function runFeed(options: {
     pending.push({ itemId, value: d.value, capturedAt: runTime });
   }
   if (matcher.warnings().unmatchedEntries > 0) {
-    console.warn(
-      `[sync] ${metric}: ${matcher.warnings().unmatchedEntries} feed entries matched no known item and were skipped`,
-    );
+    log.warn(`${metric} ${matcher.warnings().unmatchedEntries} feed entries matched no known item and were skipped`)
   }
   if (matcher.warnings().ambiguousNames > 0) {
-    console.warn(
-      `[sync] ${metric}: ${matcher.warnings().ambiguousNames} feed entries had cross-collection name collisions`,
-    );
+    log.warn(`${metric} ${matcher.warnings().ambiguousNames} feed entries had cross-collection name collisions`);
+
   }
 
   const inserted = await insertSnapshots(metric, pending);
