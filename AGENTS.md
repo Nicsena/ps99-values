@@ -30,6 +30,10 @@ A deep, from-scratch audit of the codebase was performed against commit `66f3c57
 
 - Current vars: `PORT`, `DB_PATH`, `REDIS_URL`, `SYNC_CRON`, `CACHE_DISABLED`.
 
+## Logging
+
+The application provides a leveled, namespaced logger at `src/logger.ts`. The default log level is `info`, controlled by the `LOG_LEVEL` env var (`silent | debug | info | warn | error | exception`). The `DEBUG=sync,cron` env var gates `debug` output to listed namespaces (only active when `LOG_LEVEL` is unset or `debug`). The `LOG_FORMAT` env var selects output style: `text` (default, `[time] [ns] msg`), `json` (one JSON object per line with `ts`/`level`/`ns`/`msg` and an `err` field for `Error` instances), or `pretty` (chalk-colored `[time] [level] [ns] msg`, opt-in colors). Timestamps are ISO-8601 by default and honor the `TZ` env var; when `TZ` is unset, UTC `Z` is used. The timestamp can also be customized programmatically via `createLogger({ formatTimestamp })`; a small `formats` helper ships common formatters (`iso`, `isoUtc`, `epoch`, `none`, `local`). When `formatTimestamp` is set, it takes over and `TZ` is ignored for that logger. The level can be changed at runtime via `log.setLevel(level)` and queried via `log.isLevelEnabled(level)`; both throw on unknown level names. Children created before a parent's `setLevel` call are not affected; children created after see the new level. Two timing helpers are available: `log.timer(label, level?)` returns a `done()` closure that logs `"<label> finished in <N>ms"`, and `log.timerFn(label, fn, level?)` wraps an async or sync function, logs the success duration, and on error logs `"<label> failed after <N>ms"` and rethrows. Existing `console.*` call sites are intentionally not migrated to the logger in this change; a follow-up PR will replace them.
+
 ## Project Structure
 
 Note: The current structure may be different later in development or during refactors/redesigns and may not always reflect the newest changes.
