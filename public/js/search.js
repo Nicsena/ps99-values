@@ -22,6 +22,8 @@
       resultsBox.innerHTML = '';
       activeIndex = -1;
       resultsBox.classList.remove('loading');
+      input.setAttribute('aria-expanded', 'false');
+      input.removeAttribute('aria-activedescendant');
     }
 
     function escapeHtml(s) {
@@ -55,26 +57,26 @@
     }
 
     function itemHref(item) {
-      if (window.PS99 && PS99.itemPath) {
-        return PS99.itemPath(item.slug || item.name);
-      }
-      return '/items/' + encodeURIComponent(item.slug || item.name || '');
+      if (item.slug) return '/items/' + item.slug;
+      return '/items/' + encodeURIComponent(item.name || '');
     }
 
     function render(items, q) {
       if (items.length === 0) {
         resultsBox.innerHTML = '<div class="search-empty">No matches</div>';
+        input.setAttribute('aria-expanded', 'true');
         return;
       }
       const html = items
-        .map((item) => {
+        .map((item, i) => {
+          const optId = resultsBox.id + '-opt-' + i;
           const meta = [escapeHtml(item.category || ''), formatNum(item.rap)]
             .filter(Boolean)
             .join(' · ');
           return (
-            '<a class="search-result" href="' +
+            '<a class="search-result" id="' + optId + '" role="option" href="' +
             itemHref(item) +
-            '"><img class="search-thumb" src="/img/placeholder.svg" loading="lazy" alt="">' +
+            '"><img class="search-thumb" src="/thumbnails/' + encodeURIComponent(item.displayName || item.name || '') + '" loading="lazy" alt="">' +
             '<span class="search-result-body"><span class="search-result-name">' +
             highlight(item.name, q) +
             '</span><span class="search-result-meta">' +
@@ -84,6 +86,7 @@
         })
         .join('');
       resultsBox.innerHTML = html;
+      input.setAttribute('aria-expanded', 'true');
     }
 
     async function runSearch(q) {
@@ -99,7 +102,7 @@
         render(Array.isArray(data.items) ? data.items : [], q);
       } catch (err) {
         if (err && err.name === 'AbortError') return;
-        resultsBox.innerHTML = '<div class="search-empty">No matches</div>';
+        resultsBox.innerHTML = '<div class="search-empty search-error">Search failed — try again</div>';
       } finally {
         resultsBox.classList.remove('loading');
       }
@@ -118,7 +121,11 @@
         const delta = e.key === 'ArrowDown' ? 1 : -1;
         activeIndex = (activeIndex + delta + links.length) % links.length;
         links.forEach((l, i) => l.classList.toggle('active', i === activeIndex));
-        links[activeIndex].scrollIntoView({ block: 'nearest' });
+        const active = links[activeIndex];
+        if (active) {
+          input.setAttribute('aria-activedescendant', active.id);
+          active.scrollIntoView({ block: 'nearest' });
+        }
       }
       if (e.key === 'Enter' && activeIndex >= 0 && links[activeIndex]) {
         e.preventDefault();
@@ -135,6 +142,7 @@
       }
       debounceTimer = setTimeout(() => {
         resultsBox.hidden = false;
+        input.setAttribute('aria-expanded', 'true');
         runSearch(q);
       }, DEBOUNCE_MS);
     });

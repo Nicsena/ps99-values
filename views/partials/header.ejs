@@ -15,9 +15,8 @@
       } catch (e) { /* localStorage unavailable — default dark */ }
     })();
   </script>
-  <script src="/js/slugs.js" defer></script>
   <script src="/js/format.js" defer></script>
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="https://unpkg.com/lucide@1.41.0/dist/umd/lucide.min.js" integrity="sha256-/D7Cdm/d++JpBay9Okbiuteo+Kx+9fMONwe1q7dQz5o=" crossorigin="anonymous"></script>
   <script src="/js/search.js" defer></script>
 </head>
 <body>
@@ -27,7 +26,6 @@
   <script>
     (function () {
       'use strict';
-      window.PS99 = window.PS99 || {};
 
       function hasIcon(name) {
         try {
@@ -36,8 +34,6 @@
           ]);
         } catch (e) { return false; }
       }
-
-      PS99.resolveIcon = function (name) { return bestName(name); };
 
       var FALLBACKS = {
         'line-chart': ['line-chart', 'chart-line', 'trending-up'],
@@ -63,8 +59,6 @@
         });
         lucide.createIcons();
       }
-
-      PS99.refreshIcons = function () { renderIcons(); };
 
       var path = window.location.pathname;
       document.querySelectorAll('.navbar-links a, .mobile-menu a').forEach(function (a) {

@@ -49,6 +49,8 @@ export interface RawListRow {
 }
 
 export interface RawVariantRow {
+  name: string;
+  displayName: string | null;
   slug: string | null;
   pt: number;
   shiny: number;
@@ -369,8 +371,9 @@ export async function variantsForItem(
 ): Promise<RawVariantRow[]> {
   return log.timerFn(`variants for ${collectionName}/${name}`, async () => {
     return (await db.all<RawVariantRow>(sql`${LATEST_CTE}${LATEST_EXISTS_CTE}
-      SELECT s.slug AS slug, s.variant AS pt, s.shiny AS shiny, s.chroma AS chroma,
-             s.tier AS tier, l.value AS rap, e.value AS "exists"
+      SELECT s.name AS name, s."displayName" AS displayName, s.slug AS slug,
+             s.variant AS pt, s.shiny AS shiny, s.chroma AS chroma, s.tier AS tier,
+             l.value AS rap, e.value AS "exists"
       FROM items s
       LEFT JOIN latest l ON l.item_id = s.id
       LEFT JOIN latest_exists e ON e.item_id = s.id

@@ -2,7 +2,7 @@
 
 Status: **Completed**
 Created: 2026-09-04
-Shipped: 2026-09-04 (uncommitted)
+Shipped: 2026-09-04, commit `6494784` ("Move scripts (AI/Manual)"), on branch `main`
 
 ## Goal
 
@@ -104,10 +104,9 @@ After the move:
 
 ## Out of scope (intentional)
 
-- No content edits to any of the 11 files.
-- No new scripts.
-- No commit / no push.
-- No CI / pipeline changes.
+- No content edits to any of the 9 historical/dormant scripts. The move is purely a directory relocation; `git mv` preserves history.
+- No new scripts in `scripts/old/`. (The two new files are modern one-offs, not investigation scripts.)
+- No CI / pipeline changes beyond the `tsconfig.json` exclude drop and the `eslint.config.js` ignore addition.
 - No rename of `scripts/old/` to a stronger "do not edit" name. The convention is documented in AGENTS.md; enforcement is by convention.
 - No `.gitkeep` for `src/test/`. The empty directory is removed.
 - No `package.json` entries for the scripts. They are run with `npx tsx scripts/<name>.ts`.
@@ -146,7 +145,7 @@ Plan is final once those are answered. Ready to apply when you exit plan mode.
 
 Implemented and verified. The 11 one-off scripts that lived under `src/test/` (a directory whose name was misleading — it has never been part of the Vitest suite) have been moved to a top-level `scripts/` directory at the repo root. The `src/test/` directory is gone.
 
-### Files modified (14 total)
+### Files modified (16 total, all in commit `6494784`)
 
 - **9 `git mv` renames** (history preserved, no content change):
   - `src/test/00-fetch-collections.ts` → `scripts/old/00-fetch-collections.ts`
@@ -159,23 +158,25 @@ Implemented and verified. The 11 one-off scripts that lived under `src/test/` (a
   - `src/test/05-spec-driven-items-rap-exists.ts` → `scripts/old/05-spec-driven-items-rap-exists.ts`
   - `src/test/enabled_collections.ts` → `scripts/old/enabled_collections.ts`
 - **2 new files** (untracked at the time, so no rename was possible):
-  - `scripts/reseed.ts`
-  - `scripts/sri.ts`
+  - `scripts/reseed.ts` — wipe the local DB, re-apply migrations, run a full sync.
+  - `scripts/sri.ts` — download (or read) a file, print its SRI hashes, and (by default) save the downloaded copy to `./scripts/downloads/`. See "Behavior" below.
 - **`src/test/`** — removed (empty after the moves).
 - **`tsconfig.json:15`** — `exclude` no longer contains `"src/test/**"`. New: `["node_modules", "dist"]`.
 - **`AGENTS.md`** — three updates:
   - Project Structure block (line 63): the `src/test/` line is replaced with a `scripts/` block listing `scripts/`, `scripts/old/`, `reseed.ts`, `sri.ts`.
   - Testing section (lines 117–121): rewritten to describe the new convention (modern helpers in `scripts/`, dormant scripts in `scripts/old/`, run with `npx tsx scripts/<name>.ts`).
   - Accepted Quirks (line 141): the "`src/test/` exclusions" line is removed — the quirk no longer applies.
-- **`scripts/sri.ts`** — in-place edit. The help text and the top-of-file comment referenced the old path `src/test/sri.ts`; updated to `scripts/sri.ts`. 5 occurrences total.
+- **`scripts/sri.ts`** — substantive in-place edit alongside the file move. The help text and the top-of-file comment referenced the old path `src/test/sri.ts`; updated to `scripts/sri.ts` (5 occurrences). The download-then-discard behavior was replaced with a download-then-save-to-disk behavior; details below.
+- **`eslint.config.js`** — added `scripts/downloads/**` to the `ignores` list. Without this, ESLint tried to parse the downloaded `lucide.min.js` (a minified bundle) and hit a "Maximum call stack size exceeded" parser error. The `.gitignore` already excludes the directory at line 122; the eslint-config exclude is the matching build-tool exclude.
 - **`ai/plans/scripts-relocation.md`** — this plan file.
 
 ### Behavior
 
 - **Production build is unaffected.** None of the moved files were ever in the TypeScript program; `npm run typecheck`, `npm run lint`, and `npm test` all stay green.
-- **Scripts are still runnable from their new paths.** `npx tsx scripts/sri.ts --help` works; `npx tsx scripts/reseed.ts` works; `npx tsx scripts/old/00-fetch-collections.ts` still works (the dormant scripts remain runnable; the directory name does not disable them).
+- **Scripts are still runnable from their new paths.** `npx tsx scripts/sri.ts --help` works; `npx tsx scripts/reseed.ts` works; `npx tsx scripts/old/00-fetch-collections.ts` still works (the dormant scripts remain runnable; the directory name doesn't disable them).
 - **Empty `src/test/` is removed.** No `.gitkeep`; if a future contributor needs a `src/test/` directory, they can create it.
 - **AGENTS.md now accurately documents the layout.** A new contributor reading AGENTS.md will know that `scripts/` is the home for one-off manual scripts and that `scripts/old/` is the home for dormant ones.
+- **`scripts/sri.ts` — defaults to saving the download.** By default, every downloaded file is written to `./scripts/downloads/` (gitignored), and a `# saved: <path>` line is added to the output block. Filenames are derived from the URL via `deriveFilename(url)`: the `https://`/`http://` prefix is dropped, `/` becomes `-`, `@` becomes `@@`, so the result is portable across Windows / macOS / Linux. Two downloads of the same URL overwrite the same file. Use `--no-save` to discard the buffer after hashing, or `--save-dir <path>` to override the location. Local file inputs are not affected — the input is already a file path; nothing to "save" or "discard."
 
 ### Verification (green)
 
@@ -183,51 +184,22 @@ Implemented and verified. The 11 one-off scripts that lived under `src/test/` (a
 - `npm run lint` — clean.
 - `npm test` — 12 files, 179 tests pass.
 - `npx tsx scripts/sri.ts --help` — prints the corrected help text (referencing `scripts/sri.ts`, not the old path).
-- `git status --porcelain` after the move shows 9 `R` renames, 2 `A` new-files, 4 `M` modifications (AGENTS.md, tsconfig.json, scripts/sri.ts, plus pre-existing in-flight edits from prior work), and 1 untracked file (this plan).
-- Pre-flight `Get-ChildItem -LiteralPath src\test -Force` showed exactly 11 files, no hidden state.
-
-### Out of scope (unchanged from the original "Out of scope" list)
-
-- No commit / no push. Per AGENTS.md and your workflow.
-- No CI / pipeline changes.
-- No new `package.json` entries.
-- No rename of `scripts/old/` to a stronger "do not edit" name. The convention is documented in AGENTS.md; enforcement is by convention.
-- The two new files (`reseed.ts`, `sri.ts`) are the only new content in `scripts/`. The 9 historical files and the data file are the only new content in `scripts/old/`. Nothing else was created.
-
-## Follow-up: `sri.ts` --save-dir default and --no-save flag
-
-After the relocation, `scripts/sri.ts` was enhanced to support keeping the downloaded file at a known location. Originally the download buffer was discarded after hashing; the new default saves it under `./scripts/downloads/` (gitignored), and `--no-save` opts out.
-
-### Files modified (this follow-up)
-
-- `scripts/sri.ts`:
-  - New `--save-dir <path>` flag overrides the default save location.
-  - New `--no-save` flag discards the buffer after hashing (matches the pre-follow-up behavior).
-  - Default `saveDir` is now `resolve('./scripts/downloads')`. The directory is created with `mkdirSync({ recursive: true })` on first use.
-  - `printBlock` accepts an optional `savedTo` argument; when present, a `# saved: <path>` line is added to the block (between `# bytes:` and the SRI hashes).
-  - Filenames are derived from the URL via `deriveFilename(url)`: the `https://`/`http://` prefix is dropped, `/` becomes `-`, `@` becomes `@@`, so the result is portable across Windows / macOS / Linux. Examples:
-    - `https://unpkg.com/lucide@1.41.0/dist/umd/lucide.min.js` → `unpkg.com-lucide@@1.41.0-dist-umd-lucide.min.js`
-    - `https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.js` → `cdn.jsdelivr.net-npm-chart.js@@4.5.1-dist-chart.umd.js`
-  - Local file inputs are not affected by either flag — the input is already a file path; nothing to "save" or "discard."
-  - Help text and the top-of-file comment were updated to describe the new default and flags.
-
-- `eslint.config.js`:
-  - Added `scripts/downloads/**` to the `ignores` list. Without this, ESLint tried to parse the downloaded `lucide.min.js` (a minified bundle) and hit a "Maximum call stack size exceeded" parser error. The `.gitignore` already excludes the directory; the eslint-config exclude is the matching build-tool exclude.
-
-### Behavior
-
-- **Default**: `npx tsx scripts/sri.ts <url>` downloads, hashes, writes the file to `./scripts/downloads/<derived-filename>`, and emits the SRI block with a `# saved:` line. The directory is created on first use.
-- **`--no-save`**: `npx tsx scripts/sri.ts --no-save <url>` matches the pre-follow-up behavior. The buffer is dropped after hashing; no file is written; no `# saved:` line.
-- **`--save-dir <path>`**: `npx tsx scripts/sri.ts --save-dir <path> <url>` writes to the given directory instead of the default.
-- **Local file inputs**: `npx tsx scripts/sri.ts ./some/file.js` reads the file, hashes, and prints the SRI block. No file is written regardless of `--save-dir` or `--no-save`. The default `saveDir` value is harmless because the URL branch is the only one that uses it.
-
-### Verification (green)
-
-- `npm run typecheck` — clean.
-- `npm run lint` — clean.
-- `npm test` — 12 files, 179 tests pass.
 - `npx tsx scripts/sri.ts https://unpkg.com/lucide@1.41.0/dist/umd/lucide.min.js` (no flags) — wrote the file to `./scripts/downloads/unpkg.com-lucide@@1.41.0-dist-umd-lucide.min.js` (429,464 bytes). The SHA-256 of the saved file, computed independently with `Get-FileHash`, decodes to base64 as `/D7Cdm/d++JpBay9Okbiuteo+Kx+9fMONwe1q7dQz5o=` — the same value the script printed. End-to-end correctness verified.
 - `npx tsx scripts/sri.ts --no-save <url>` — output has no `# saved:` line; `./scripts/downloads` is not created.
 - `npx tsx scripts/sri.ts ./local/file.js` — local input; no `# saved:` line; `./scripts/downloads` is not created.
-- `git status --porcelain` does not list `scripts/downloads/...` (the directory is gitignored; the new exclude in `eslint.config.js` matches the .gitignore entry at line 122).
+- `git status --porcelain` (pre-commit) showed 9 `R` renames, 2 `A` new-files, 4 `M` modifications (AGENTS.md, tsconfig.json, scripts/sri.ts, eslint.config.js), and 1 untracked file (this plan).
 - `git check-ignore -v .\scripts\downloads\unpkg.com-…` confirms the rule: `scripts/downloads/` at `.gitignore:122`.
+
+### Committed
+
+- Commit `6494784` ("Move scripts (AI/Manual)", 2026-09-04) on branch `main`. The commit message describes the wholesale move; the `--save-dir`/`--no-save` enhancement to `scripts/sri.ts` and the matching `eslint.config.js` ignore are part of the same commit.
+
+## Other uncommitted work (not in this plan)
+
+`git status --porcelain` after commit `6494784` shows 8 files still in the working tree. These are from a separate frontend batch (Tier A + Tier B) done earlier in the same session:
+
+- `public/js/format.js`, `public/js/items.js`, `public/js/search.js`
+- `src/db/queries/listings.ts`, `src/routes/items.ts`, `src/services/rapService.ts`
+- `views/item.ejs`, `views/partials/header.ejs`
+
+That batch is a different scope of work (frontend image fixes, search dropdown fixes, items.js robustness, exists-caption timestamp, SRI pinning) and should be tracked by a separate plan when you decide to commit it. It is intentionally out of scope for the `scripts/` relocation.

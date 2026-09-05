@@ -10,10 +10,10 @@
     <div class="navbar-search-wrap" data-search-scope>
       <label class="navbar-search" for="navbar-search">
         <i data-lucide="search" aria-hidden="true"></i>
-        <input id="navbar-search" data-search-input="search-results" type="text" placeholder="Search items..." autocomplete="off" spellcheck="false">
+        <input id="navbar-search" data-search-input="search-results" type="text" placeholder="Search items..." autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-results">
         <kbd class="search-slash-hint" aria-hidden="true">/</kbd>
       </label>
-      <div id="search-results" class="search-results" hidden></div>
+      <div id="search-results" class="search-results" role="listbox" hidden></div>
     </div>
     <div class="navbar-right">
       <div class="navbar-menu-wrap">

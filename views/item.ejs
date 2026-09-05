@@ -51,15 +51,15 @@
   var marketCells = [
     { label: '24h Rap Change', tip: 'Change in RAP over the last 24 hours.', value: fmtSignedCompactEJS(st.rapChange24h), cls: chgClass(st.rapChange24h) },
     { label: '24h Exists Change', tip: 'Change in number of copies over the last 24 hours.', value: fmtSignedCompactEJS(st.existsChange24h), cls: chgClass(st.existsChange24h) },
-    { label: '24h High', value: fmtCompactEJS(st.high24h), delta: true },
-    { label: '24h Low', value: fmtCompactEJS(st.low24h), delta: true },
-    { label: '1M High', value: fmtCompactEJS(st.high1m), delta: true },
-    { label: '1M Low', value: fmtCompactEJS(st.low1m), delta: true },
+    { label: '24h High', value: fmtCompactEJS(st.high24h) },
+    { label: '24h Low', value: fmtCompactEJS(st.low24h) },
+    { label: '1M High', value: fmtCompactEJS(st.high1m) },
+    { label: '1M Low', value: fmtCompactEJS(st.low1m) },
     { label: 'Market Cap', tip: 'RAP multiplied by total copies in existence.', value: fmtCompactEJS(st.marketCap) },
     { label: 'Rap / Copy', tip: 'Average RAP per existing copy.', value: fmtCompactEJS(st.rapPerCopy), info: true },
     { label: 'Tracked', tip: 'Number of related items tracked together.', value: (st.tracked === null || st.tracked === undefined) ? '0' : String(st.tracked), info: true },
-    { label: 'All-Time High', value: fmtCompactEJS(st.ath), delta: true },
-    { label: 'All-Time Low', value: fmtCompactEJS(st.atl), delta: true },
+    { label: 'All-Time High', value: fmtCompactEJS(st.ath) },
+    { label: 'All-Time Low', value: fmtCompactEJS(st.atl) },
     { label: '30D Rap Volatility', tip: 'Measure of how much the RAP has fluctuated in 30 days.', value: (st.volatility30d === null || st.volatility30d === undefined) ? 'N/A' : fmtCompactEJS(st.volatility30d), info: true },
     { label: '24h Rap Updates', tip: 'Number of RAP updates captured in the last 24 hours.', value: (st.updates24h === null || st.updates24h === undefined) ? '\u2014' : fmtCompactEJS(st.updates24h), info: true },
     { label: 'Rap Data Points', tip: 'Total historical RAP data points stored.', value: (st.rapPoints === null || st.rapPoints === undefined) ? '\u2014' : fmtCompactEJS(st.rapPoints) },
@@ -114,12 +114,12 @@
       <div class="header-stat">
         <span class="stat-label">RAP</span>
         <span class="stat-value big-num"><%= fmtCompactEJS(currentRap) %></span>
-        <span class="stat-caption muted" data-rel="<%= rapUpdatedAt %>"></span>
+        <span class="stat-caption muted"<% if (rapUpdatedAt) { %> data-rel="<%= rapUpdatedAt %>"<% } %>></span>
       </div>
       <div class="header-stat">
         <span class="stat-label">Exists</span>
         <span class="stat-value big-num"><%= fmtCompactEJS(exists) %></span>
-        <span class="stat-caption muted" data-rel="<%= rapUpdatedAt %>"></span>
+        <span class="stat-caption muted"<% if (existsUpdatedAt) { %> data-rel="<%= existsUpdatedAt %>"<% } %>></span>
       </div>
       <div class="header-stat">
         <span class="stat-label">Total Exists</span>
@@ -136,7 +136,7 @@
       <h2 class="section-label">RAP History</h2>
     </div>
     <div class="card-toolbar">
-      <button type="button" class="pill-toggle" data-toggle="normalize" title="Scale both series to 0\u2013100%">
+      <button type="button" class="pill-toggle" data-toggle="normalize" title="Scale both series to 0—100%">
         <i data-lucide="equal"></i><span>Normalize</span>
       </button>
       <button type="button" class="pill-toggle" data-toggle="zero" title="Start y axis at zero">
@@ -163,6 +163,7 @@
     <button type="button" class="pill-toggle range-btn" data-range="30D">30D</button>
     <button type="button" class="pill-toggle range-btn" data-range="90D">90D</button>
     <button type="button" class="pill-toggle range-btn" data-range="ALL">ALL</button>
+    <span class="muted range-hint" id="rap-range-hint" hidden></span>
   </div>
   <div class="chart-body">
     <div class="chart-canvas-wrap" style="height:300px;"><canvas id="rapChart"></canvas></div>
@@ -180,7 +181,7 @@
       <button type="button" class="pill-toggle" data-toggle="hide-live" title="Drop the most recent point">
         <i data-lucide="eye-off"></i><span>Hide Live Point</span>
       </button>
-      <button type="button" class="pill-toggle" data-toggle="normalize" title="Scale series to 0\u2013100%">
+      <button type="button" class="pill-toggle" data-toggle="normalize" title="Scale series to 0—100%">
         <i data-lucide="equal"></i><span>Normalize</span>
       </button>
       <button type="button" class="pill-toggle" data-toggle="zero" title="Start y axis at zero">
@@ -203,6 +204,7 @@
     <button type="button" class="pill-toggle range-btn" data-range="30D">30D</button>
     <button type="button" class="pill-toggle range-btn" data-range="90D">90D</button>
     <button type="button" class="pill-toggle range-btn" data-range="ALL">ALL</button>
+    <span class="muted range-hint" id="exists-range-hint" hidden></span>
   </div>
   <div class="chart-body">
     <div class="chart-canvas-wrap" style="height:300px;"><canvas id="existsChart"></canvas></div>
@@ -222,7 +224,7 @@
     <% marketCells.forEach(function (cell) { %>
       <div class="market-cell">
         <div class="market-label muted"><%= cell.label %>
-          <% if (cell.info) { %><i data-lucide="info" class="info-ico" title="<%= cell.tip %>"></i><% } %>
+          <% if (cell.info) { %><span title="<%= cell.tip %>"><i data-lucide="info" class="info-ico"></i></span><% } %>
         </div>
         <div class="market-value">
           <span class="<%= cell.cls || '' %>"><%= cell.value %></span>
@@ -237,7 +239,7 @@
   <div class="card-head">
     <div class="card-head-left">
         <i data-lucide="table-2" class="section-icon"></i>
-        <h2 class="section-label">Price History <span class="muted history-count">(<%= (st.rapPoints === null || st.rapPoints === undefined) ? (history ? history.length : 0) : st.rapPoints %>)</span></h2>
+        <h2 class="section-label">Recent history</h2>
     </div>
   </div>
   <% if (!history || history.length === 0) { %>
@@ -350,7 +352,7 @@
            var href = v.slug ? ' href="/items/' + encodeURIComponent(v.slug) + '"' : '';
       %>
         <<%= tileTag %><%- href %> class="variant-tile">
-          <img src="/img/placeholder.svg" alt="" width="64" height="64" loading="lazy">
+          <img src="/thumbnails/<%= encodeURIComponent(v.displayName ?? v.name) %>" alt="" width="64" height="64" loading="lazy">
           <span class="variant-tile-name"><%= label %></span>
           <span class="variant-tile-rap muted"><%= fmtCompactEJS(v.rap) %></span>
         </<%= tileTag %>>
@@ -370,7 +372,7 @@
     <div class="similar-grid">
       <% similarItems.forEach(function (si) { %>
         <a class="similar-tile" href="/items/<%= encodeURIComponent(si.slug || si.name) %>" data-sim-name="<%= si.name %>">
-          <img src="/img/placeholder.svg" alt="" width="64" height="64" loading="lazy">
+          <img src="/thumbnails/<%= encodeURIComponent(si.name) %>" alt="" width="64" height="64" loading="lazy">
           <span class="similar-info">
             <span class="similar-name"><%= si.name %></span>
             <% if (si.category) { %><span class="similar-cat muted"><%= si.category %></span><% } %>
@@ -381,7 +383,7 @@
   </section>
 <% } %>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.js" integrity="sha384-hfkuqrKeWFmnTMWN31VWyoe8xgdTADD11kgxmdpx2uyE6j5Az5uZq6u6AKYYmAOw" crossorigin="anonymous"></script>
 <script>
   window.PAGE_DATA = {
     item: <%- JSON.stringify({ name: item.name, slug: item.slug }) %>,
@@ -393,16 +395,72 @@
   };
 </script>
 <script>
+  // Inlined formatters (see /public/js/format.js for the canonical
+  // implementation). Duplication is intentional: this script is a
+  // self-contained page initialization and doesn't depend on a global.
+  // The /js/format.js script also defines these; whichever loads first
+  // wins, but since the names are identical the inlined copies are
+  // never reached for the formatters (only the chart helpers below use
+  // the inlined compact() helper). This avoids the double-declaration
+  // error that would otherwise occur when format.js loads first.
+
+  var MONTHS2 = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  function fmtCompact2(n) {
+    if (n === null || n === undefined || isNaN(Number(n))) return '\u2014';
+    var v = Number(n), abs = Math.abs(v), s = v < 0 ? '-' : '';
+    function t2(x) { return x.replace(/\.0+$/, '').replace(/(\.\d*[1-9])0+$/, '$1'); }
+    if (abs >= 1e12) return s + t2((abs / 1e12).toFixed(2)) + 'T';
+    if (abs >= 1e9) return s + t2((abs / 1e9).toFixed(2)) + 'B';
+    if (abs >= 1e6) return s + t2((abs / 1e6).toFixed(2)) + 'M';
+    if (abs >= 1e3) return s + t2((abs / 1e3).toFixed(2)) + 'K';
+    return v.toLocaleString();
+  }
+
+  function fmtSignedCompact2(n) {
+    if (n === null || n === undefined || isNaN(Number(n))) return 'N/A';
+    var v = Number(n);
+    if (v === 0) return '+0';
+    return (v > 0 ? '+' : '-') + fmtCompact2(Math.abs(v));
+  }
+
+  function fmtPct2(n) {
+    if (n === null || n === undefined || isNaN(Number(n))) return 'N/A';
+    var v = Number(n);
+    if (v === 0) return '+0%';
+    return (v > 0 ? '+' : '') + (Math.round(Math.abs(v) * 10) / 10) + '%';
+  }
+
+  function fmtDateTime2(iso) {
+    if (!iso) return '\u2014';
+    var d = new Date(iso);
+    if (isNaN(d.getTime())) return '\u2014';
+    var h = d.getHours(), ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12 || 12;
+    return MONTHS2[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear() + ', ' + h + ':' + String(d.getMinutes()).padStart(2, '0') + ' ' + ampm;
+  }
+
+  function relTime2(iso) {
+    if (!iso) return null;
+    var d = new Date(iso);
+    if (isNaN(d.getTime())) return null;
+    var secs = Math.max(0, Math.floor((Date.now() - d.getTime()) / 1000));
+    if (secs < 60) return 'just now';
+    if (secs < 3600) return Math.floor(secs / 60) + 'm ago';
+    var hours = Math.floor(secs / 3600);
+    if (hours < 24) return hours + 'h ago';
+    return Math.floor(hours / 24) + 'd ago';
+  }
+
   function initItemPage() {
     'use strict';
     var D = window.PAGE_DATA;
-    var FMT = window.PS99 || {};
 
     /* ---------- relative captions ---------- */
     document.querySelectorAll('.stat-caption[data-rel]').forEach(function (el) {
       var iso = el.getAttribute('data-rel');
       if (!iso) { el.textContent = ''; return; }
-      var rel = FMT.relTime ? FMT.relTime(iso) : null;
+      var rel = relTime2(iso);
       el.textContent = rel ? 'Updated ' + rel : '';
     });
 
@@ -419,8 +477,8 @@
       }
       el.classList.remove('hidden');
       var arrow = chg > 0 ? '\u25B2 ' : chg < 0 ? '\u25BC ' : '';
-      var chgTxt = FMT.fmtSignedCompact ? FMT.fmtSignedCompact(chg) : String(chg);
-      var pctTxt = FMT.fmtPct ? FMT.fmtPct(pct) : String(pct);
+      var chgTxt = fmtSignedCompact2(chg);
+      var pctTxt = fmtPct2(pct);
       el.textContent = arrow + chgTxt + ' (' + pctTxt + ')';
     }
     setDelta('rap-delta', D.stats.rapChange24h, D.stats.rapChangePct24h);
@@ -428,14 +486,35 @@
 
     var rapDateEl = document.getElementById('rap-date');
     if (rapDateEl) {
-      rapDateEl.textContent = D.rapUpdatedAt && FMT.fmtDateTime ? FMT.fmtDateTime(D.rapUpdatedAt) : '';
+      rapDateEl.textContent = D.rapUpdatedAt ? fmtDateTime2(D.rapUpdatedAt) : '';
     }
 
     /* ---------- charts ---------- */
-    if (typeof Chart === 'undefined' || !D.history.length) return;
+    if (!D.history.length) return;
+    if (typeof Chart === 'undefined') {
+      document.querySelectorAll('.chart-card .card-toolbar').forEach(function (el) {
+        el.querySelectorAll('button').forEach(function (b) { b.disabled = true; });
+      });
+      document.querySelectorAll('.chart-card .chart-canvas-wrap').forEach(function (el) {
+        el.innerHTML = '<p class="muted chart-error">Chart failed to load.</p>';
+      });
+      return;
+    }
 
-    Chart.defaults.font.family = getComputedStyle(document.body).fontFamily;
-    Chart.defaults.color = '#8b93a7';
+    try {
+      Chart.defaults.font.family = getComputedStyle(document.body).fontFamily;
+      Chart.defaults.color = '#8b93a7';
+    } catch (e) {
+      // Same recovery path as a missing Chart global: leave the page
+      // readable with a message rather than a blank canvas.
+      document.querySelectorAll('.chart-card .card-toolbar').forEach(function (el) {
+        el.querySelectorAll('button').forEach(function (b) { b.disabled = true; });
+      });
+      document.querySelectorAll('.chart-card .chart-canvas-wrap').forEach(function (el) {
+        el.innerHTML = '<p class="muted chart-error">Chart failed to load.</p>';
+      });
+      return;
+    }
 
     var chrono = D.history.slice().reverse();
     var SPANS = { '1D': 864e5, '7D': 6048e5, '30D': 2592e6, '90D': 7776e6 };
@@ -447,7 +526,7 @@
     }
 
     function compact(v) {
-      return FMT.fmtCompact ? FMT.fmtCompact(v) : (v === null ? '\u2014' : String(v));
+      return fmtCompact2(v);
     }
 
     function tickLabel(t) {
@@ -508,6 +587,7 @@
       var strip = cardEl.querySelector('.mini-strip');
       var wrap = cardEl.querySelector('.chart-canvas-wrap');
       var noData = cardEl.querySelector('.no-data-msg');
+      var hintEl = cardEl.querySelector('.range-hint');
       var state = { range: '7D', ctype: 'line', normalize: false, zero: false, extra: false };
       var chart = null;
 
@@ -535,12 +615,32 @@
           wrap.hidden = true;
           noData.hidden = false;
           if (strip) strip.style.display = 'none';
+          if (hintEl) hintEl.hidden = true;
           if (chart) { chart.destroy(); chart = null; }
           return;
         }
         wrap.hidden = false;
         noData.hidden = true;
         if (strip) strip.style.display = '';
+
+        // Range buttons promise 1D/7D/30D/90D/ALL of hourly data, but the
+        // history endpoint caps rows at 200. When the user's chosen range
+        // exceeds the data we actually have, surface that so the silent
+        // clip is visible.
+        if (hintEl) {
+          if (state.range === 'ALL') {
+            hintEl.hidden = true;
+          } else {
+            var expectedHours = (SPANS[state.range] || 0) / 3.6e6;
+            var availableHours = (chrono.length) ? (chrono[chrono.length - 1].t - chrono[0].t) / 3.6e6 : 0;
+            if (availableHours + 0.5 < expectedHours) {
+              hintEl.textContent = 'Limited data — ' + Math.max(1, Math.round(availableHours)) + 'h of ' + Math.round(expectedHours) + 'h available';
+              hintEl.hidden = false;
+            } else {
+              hintEl.hidden = true;
+            }
+          }
+        }
 
         var labels = pts.map(function (p) { return p.t; });
         var datasets;

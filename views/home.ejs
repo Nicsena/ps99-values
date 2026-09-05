@@ -61,20 +61,52 @@
 </section>
 
 <script>
+  // Inlined copies of the formatters from /public/js/format.js so this
+  // template doesn't need to read from a global. The /js/format.js script
+  // also defines these; the duplication is intentional — this template is
+  // self-contained.
+
+  var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  function relTime(iso) {
+    if (!iso) return null;
+    var d = new Date(iso);
+    if (isNaN(d.getTime())) return null;
+    var secs = Math.max(0, Math.floor((Date.now() - d.getTime()) / 1000));
+    if (secs < 60) return 'just now';
+    if (secs < 3600) return Math.floor(secs / 60) + 'm ago';
+    var hours = Math.floor(secs / 3600);
+    if (hours < 24) return hours + 'h ago';
+    return Math.floor(hours / 24) + 'd ago';
+  }
+
+  function fmtDateTime(iso) {
+    if (!iso) return '\u2014';
+    var d = new Date(iso);
+    if (isNaN(d.getTime())) return '\u2014';
+    var h = d.getHours();
+    var ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12 || 12;
+    return (
+      MONTHS[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear() +
+      ', ' + h + ':' + String(d.getMinutes()).padStart(2, '0') + ' ' + ampm
+    );
+  }
+
   (function () {
     function hydrate() {
       var el = document.getElementById('home-sync');
       if (!el) return;
       var iso = el.getAttribute('data-sync');
-      if (iso && window.PS99 && PS99.relTime) {
-        el.textContent = PS99.relTime(iso);
-        el.title = PS99.fmtDateTime ? PS99.fmtDateTime(iso) : iso;
+      if (iso) {
+        el.textContent = relTime(iso);
+        el.title = fmtDateTime(iso);
       }
     }
-    if (window.PS99 && PS99.relTime) {
-      hydrate();
-    } else {
+    if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', hydrate);
+    } else {
+      hydrate();
     }
   })();
 </script>

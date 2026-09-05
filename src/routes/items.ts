@@ -31,6 +31,7 @@ itemsRouter.get('/:slug', async (req: Request, res: Response, next: NextFunction
             item: detail.item,
             currentRap: detail.currentRap,
             rapUpdatedAt: detail.rapUpdatedAt,
+            existsUpdatedAt: detail.existsUpdatedAt,
             exists: detail.exists,
             totalExists: detail.totalExists,
             variants: detail.variants,

@@ -48,6 +48,8 @@ export interface ListItemsResult {
 }
 
 export interface ItemVariant {
+  name: string;
+  displayName: string | null;
   slug: string | null;
   pt: number;
   shiny: boolean;
@@ -100,6 +102,7 @@ export interface ItemDetail {
   };
   currentRap: number | null;
   rapUpdatedAt: string | null;
+  existsUpdatedAt: string | null;
   exists: number | null;
   totalExists: number | null;
   similarItems: SimilarItem[];
@@ -366,6 +369,8 @@ async function buildItemDetail(item: ItemRow): Promise<ItemDetail | null> {
     const rowChroma = row.chroma ?? 0;
     const rowColor = rowChroma > 0 ? (colorMap.get(rowChroma)?.name ?? null) : null;
     return {
+      name: row.name,
+      displayName: row.displayName ?? null,
       slug: row.slug ?? null,
       pt: Number(row.pt),
       shiny: Number(row.shiny) !== 0,
@@ -401,6 +406,7 @@ async function buildItemDetail(item: ItemRow): Promise<ItemDetail | null> {
   });
 
   const latestRapTs = rapRows[rapRows.length - 1]?.captured_at;
+  const latestExistsTs = existsRows[existsRows.length - 1]?.captured_at;
   return {
     item: {
       // Stringified at the boundary to keep the API shape stable.
@@ -416,6 +422,8 @@ async function buildItemDetail(item: ItemRow): Promise<ItemDetail | null> {
     currentRap,
     rapUpdatedAt:
       latestRapTs === undefined ? null : new Date(Number(latestRapTs) * 1000).toISOString(),
+    existsUpdatedAt:
+      latestExistsTs === undefined ? null : new Date(Number(latestExistsTs) * 1000).toISOString(),
     exists,
     totalExists: totalExistsVal,
     similarItems: similarRows.map((row) => ({

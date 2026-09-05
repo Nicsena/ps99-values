@@ -13,6 +13,29 @@ const rootDir = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const thumbnailsDir = join(rootDir, 'public', 'thumbnails');
 mkdirSync(thumbnailsDir, { recursive: true });
 
+// In-flight promise map keyed on imageId. Two simultaneous requests for the
+// same uncached thumbnail share one upstream fetch.
+const inflight = new Map<number, Promise<{ ok: boolean }>>();
+
+async function fetchAndStore(imageId: number, filePath: string): Promise<{ ok: boolean }> {
+  try {
+    const upstream = await fetch(`https://ps99.biggamesapi.io/image/${imageId}`, {
+      signal: AbortSignal.timeout(15000),
+    });
+    if (!upstream.ok) return { ok: false };
+    const buffer = Buffer.from(await upstream.arrayBuffer());
+    const tmpPath = `${filePath}.tmp`;
+    await writeFile(tmpPath, buffer);
+    await rename(tmpPath, filePath).catch(async () => {
+      // Windows: rename can fail if the target was created concurrently
+      if (!existsSync(filePath)) throw new Error('thumbnail rename failed');
+    });
+    return { ok: true };
+  } catch {
+    return { ok: false };
+  }
+}
+
 pagesRouter.get('/thumbnails/:name', async (req: Request, res: Response, next: NextFunction) => {
   try {
     let name: string = Array.isArray(req.params.name) ? req.params.name[0] : req.params.name;
@@ -30,23 +53,32 @@ pagesRouter.get('/thumbnails/:name', async (req: Request, res: Response, next: N
         : name.trim()
           ? await findImageIdByName(name)
           : null;
-    if (!imageId) return void res.redirect(302, '/img/placeholder.svg');
+    if (!imageId) {
+      res.set('Cache-Control', 'public, max-age=86400, immutable');
+      return void res.redirect(302, '/img/placeholder.svg');
+    }
 
     const fileName = `${imageId}.png`;
     const filePath = join(thumbnailsDir, fileName);
     if (!existsSync(filePath)) {
-      const upstream = await fetch(`https://ps99.biggamesapi.io/image/${imageId}`, {
-        signal: AbortSignal.timeout(15000),
-      });
-      if (!upstream.ok) return void res.redirect(302, '/img/placeholder.svg');
-      const buffer = Buffer.from(await upstream.arrayBuffer());
-      const tmpPath = `${filePath}.tmp`;
-      await writeFile(tmpPath, buffer);
-      await rename(tmpPath, filePath).catch(async () => {
-        // Windows: rename can fail if the target was created concurrently
-        if (!existsSync(filePath)) throw new Error('thumbnail rename failed');
-      });
+      let pending = inflight.get(imageId);
+      if (!pending) {
+        pending = fetchAndStore(imageId, filePath);
+        inflight.set(imageId, pending);
+        try {
+          await pending;
+        } finally {
+          inflight.delete(imageId);
+        }
+      } else {
+        await pending;
+      }
+      if (!existsSync(filePath)) {
+        res.set('Cache-Control', 'public, max-age=86400, immutable');
+        return void res.redirect(302, '/img/placeholder.svg');
+      }
     }
+    res.set('Cache-Control', 'public, max-age=86400, immutable');
     res.redirect(302, `/thumbnails/${fileName}`);
   } catch (err) {
     next(err);

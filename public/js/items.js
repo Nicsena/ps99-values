@@ -13,7 +13,6 @@
   const PAGE_SIZE = 24;
   const PILL_GROUPS = ['shiny', 'pt', 'category', 'collection', 'exists'];
   const DEFAULTS = {
-    q: '',
     sort: 'rap_desc',
     shiny: 'all',
     pt: 'all',
@@ -41,6 +40,7 @@
   let loading = false;
   let done = false;
   let observer = null;
+  let loadAbort = null;
 
   function escapeHtml(s) {
     return String(s).replace(
@@ -78,7 +78,7 @@
       if (state[key] !== DEFAULTS[key]) params.set(key, state[key]);
     });
     const qs = params.toString();
-    history.replaceState(null, '', location.pathname + (qs ? '?' + qs : ''));
+    history.pushState(null, '', location.pathname + (qs ? '?' + qs : ''));
   }
 
   function buildQuery(state, pageNum) {
@@ -86,7 +86,6 @@
     params.set('page', String(pageNum));
     params.set('pageSize', String(PAGE_SIZE));
     params.set('sort', state.sort);
-    params.set('q', state.q);
     ['shiny', 'pt', 'category', 'collection', 'exists'].forEach((k) => params.set(k, state[k]));
     params.set('show_rap_zero', state.show_rap_zero);
     params.set('show_exists_zero', state.show_exists_zero);
@@ -96,10 +95,7 @@
 
   function cardHtml(item) {
     const displayName = item.displayName || item.name;
-    const href =
-      window.PS99 && PS99.itemPath
-        ? PS99.itemPath(item.slug || item.name)
-        : '/items/' + (item.slug || item.name);
+    const href = '/items/' + (item.slug || item.name);
     const perHour =
       typeof item.existsPerHour === 'number' && item.existsPerHour !== 0
         ? (item.existsPerHour > 0 ? '+' : '') + fmt(item.existsPerHour) + '/hr'
@@ -139,32 +135,40 @@
 
   async function loadPage(state, pageNum, append) {
     if (loading) return;
+    if (loadAbort) loadAbort.abort();
+    loadAbort = new AbortController();
+    const signal = loadAbort.signal;
     setLoading(true);
     sentinel.innerHTML = '';
     try {
-      const res = await fetch('/api/items?' + buildQuery(state, pageNum));
+      const res = await fetch('/api/items?' + buildQuery(state, pageNum), { signal });
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const data = await res.json();
       total = data.total || 0;
       page = data.page || pageNum;
+      const pageSize = data.pageSize || PAGE_SIZE;
       const items = Array.isArray(data.items) ? data.items : [];
       if (!append) grid.innerHTML = '';
       grid.insertAdjacentHTML('beforeend', items.map(cardHtml).join(''));
-      if (window.PS99 && typeof PS99.refreshIcons === 'function') PS99.refreshIcons();
       if (resultCount) resultCount.textContent = total.toLocaleString() + ' results';
-      done = page * PAGE_SIZE >= total || items.length === 0;
+      // End of list: server returned fewer than a full page.
+      done = items.length < pageSize;
       if (done && grid.children.length === 0) {
         grid.innerHTML = '<div class="empty-grid muted">No items match the current filters</div>';
       }
     } catch (err) {
+      if (err && err.name === 'AbortError') return;
       done = true;
+      if (observer) observer.disconnect();
       sentinel.innerHTML =
         '<button id="retry-btn" type="button" class="btn btn-ghost">Failed to load — Retry</button>';
       const retry = document.getElementById('retry-btn');
       if (retry)
         retry.addEventListener('click', () => {
           done = false;
-          loadPage(state, page, append);
+          loadPage(state, page, append).then(() => {
+            if (!done && observer) observer.observe(sentinel);
+          });
         });
     } finally {
       setLoading(false);
@@ -269,4 +273,10 @@
   const initial = readState();
   hydrateControls(initial);
   resetAndLoad();
+
+  window.addEventListener('popstate', () => {
+    const s = readState();
+    hydrateControls(s);
+    resetAndLoad();
+  });
 })();
