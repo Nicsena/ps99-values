@@ -1,7 +1,8 @@
 # Per-entry debug logging for unmatched feed entries
 
-Status: **Planning** — awaiting approval, not yet implemented
+Status: **Completed**
 Created: 2026-09-01
+Shipped: commit `495abc2` ("Sync Service - Per-Entity Logging (Debug) (AI)")
 Scope: add a per-feed-entry `debug` log line in the `rap` / `exists` ingest path so an operator running with `LOG_LEVEL=debug` can see which upstream ids were dropped and why. The existing aggregated `warn` summary and the `unmatchedEntries` counter are preserved unchanged.
 
 ## Background
@@ -156,3 +157,65 @@ One watch-out: `tests/matching.test.ts:178` uses `expect(matcher.warnings()).toE
 - **Why not also include `vr` (raw variant blob).** The `vr` field on `configData` is `unknown` and untyped in `biggames.ts:22`. Including it in the debug line would surface untyped upstream noise. Skipping it keeps the line predictable; if a future investigation needs it, add it as a separate `vr=` field at that point.
 - **No value formatting (thousands separators).** The aggregated `warn` summary doesn't use them, so the per-entry line matches house style. *Decision: no separators.*
 - **Single `lastUnmatched` vs. an array.** Storing only the most recent drop is sufficient because `ingest.ts` reads and consumes it immediately. An array would need explicit clearing on every successful match and is harder to reason about. *Decision: single-value, cleared on success.*
+
+## Summary
+
+Implemented as planned. Per-entry `log.debug(...)` is emitted from the
+`runFeed` ingest loop (`src/services/sync/ingest.ts:153-168`) whenever
+`matcher.match()` returns null. The diagnostic context comes from a new
+`lastUnmatched?: UnmatchedDetail` field on `MatchWarnings`
+(`src/services/sync/matching.ts:24-43`), populated at the no-candidate
+and category-mismatch drop sites and cleared on every successful match.
+
+### Files modified (2)
+
+- `src/services/sync/matching.ts` — added `UnmatchedReason` /
+  `UnmatchedDetail`; extended `MatchWarnings` with `lastUnmatched`;
+  populate at the two drop sites; clear on every successful match.
+- `src/services/sync/ingest.ts` — emit one `log.debug(...)` per
+  unmatched feed entry carrying metric, id, category, value, dims
+  (JSON-stringified pt/sh/cv/tn), reason, candidate collections,
+  and suffixed-lookup outcome.
+
+### Behavior
+
+- `LOG_LEVEL=info` (default): no change. `emit()` short-circuits in
+  `logger.ts:178-190, 257`; the only added cost per dropped entry is
+  one small `JSON.stringify` over four variant fields.
+- `LOG_LEVEL=debug` (or `DEBUG=sync.ingest`): one
+  `… unmatched id=… category=… value=… dims={"pt":…,…} reason=… candidates=[…] suffixed=…`
+  line per dropped entry, alongside the existing aggregated
+  `[sync.ingest] rap N feed entries matched no known item and were skipped`
+  summary.
+- Matcher public contract unchanged: `match()` signature and return
+  type identical; `lastUnmatched` is informational and never part of
+  the warning-counter contract.
+
+### Tests
+
+- No new tests added (per the original plan's deliberate decision).
+- `tests/matching.test.ts:178, 203` —
+  `toEqual({ unmatchedEntries: 0, ambiguousNames: 0 })` continues to
+  pass; Vitest ignores `undefined` properties on objects.
+- `tests/sync.test.ts:305-321` — "reports unmatched entries in warnings"
+  still passes; the new debug line is `console.log` and not asserted on.
+
+### Verification (green)
+
+- `npm run typecheck`
+- `npm run lint`
+- `npm test` — full suite green.
+- Optional manual smoke: `LOG_LEVEL=debug DEBUG=sync.ingest npm run dev`,
+  watch the cron-driven sync output, confirm per-entry `unmatched …`
+  lines appear alongside the aggregated summary.
+
+### Out of scope (unchanged)
+
+- `vr` (raw variant blob) — `unknown` in `biggames.ts:22`, kept out of
+  the debug line to keep the shape predictable.
+- Thousands separators in the `value=` field — matches the existing
+  aggregated summary's house style.
+- Single-value `lastUnmatched` over an array — sufficient because
+  `ingest.ts` consumes it immediately after each `match()` call.
+- New env vars, config schema, `.env.example`, `AGENTS.md`,
+  `package.json`, Drizzle schema — all untouched.

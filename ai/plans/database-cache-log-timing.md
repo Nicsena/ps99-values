@@ -1,5 +1,9 @@
 # Database / Cache Log Timing
 
+Status: **Completed**
+Created: 2026-09-01
+Shipped: commit `e1d4ed5` ("Database/Cache - Add timing (AI)")
+
 ## Goal
 Instrument every exported function in `src/cache/index.ts` and
 `src/db/queries/*.ts` with the logger's `log.timerFn` helper so that each call
@@ -129,3 +133,88 @@ After implementation, run from the repo root:
   `src/logger.ts:351-367` where the catch branch logs and then `throw err`.
 - If any test monkey-patches the query functions directly, the new wrappers
   will be observed; no current test does this against the repo layer.
+
+## Summary
+
+Implemented as planned. Every exported function in `src/cache/index.ts`
+and `src/db/queries/{collections,items,listings,settings,snapshots}Repo.ts`
+is wrapped with `log.timerFn(label, fn, 'debug')`. Function signatures,
+return types, and behavior are unchanged; the wrappers are pure
+additions.
+
+### Files modified (6)
+
+- `src/cache/index.ts` — wrapped `cacheGet`, `cacheSet`, `cacheDel`,
+  `cacheDelPrefix`, `cacheFlush`. `getClient` and `warnOnce` left
+  untimed as planned.
+- `src/db/queries/collectionsRepo.ts` — wrapped every exported
+  function (`list all collections`, `count collections`,
+  `upsert collection names (n)`, `enable collection …`,
+  `enable collections (n)`, `mark synced …`,
+  `set collection display names (n)`, `seed categories (n)`,
+  `set category hidden (n)`, `get enabled collections`).
+- `src/db/queries/itemsRepo.ts` — wrapped every exported function
+  (`count items`, `find item by slug …`, `find item by name lower …`,
+  `find item variant …`, `find image id by name …`,
+  `find variant ids (n)`, `upsert item …`, `upsert items (n)`,
+  `get base items with collection`).
+- `src/db/queries/listings.ts` — wrapped every exported function
+  (`list rows raw …`, `list rows filtered …`, `count items filtered …`,
+  `similar items for … (category)`, `item by name …`,
+  `variants for collection/name`, `history for id metric`,
+  `exists history for id`, `total latest exists id`).
+- `src/db/queries/settingsRepo.ts` — wrapped every exported function
+  (`get setting …`, `set setting …`, `delete setting …`).
+- `src/db/queries/snapshotsRepo.ts` — wrapped every exported function
+  (`get latest values …`, `insert snapshots … (n)`,
+  `load history id metric`, `count snapshots id metric`,
+  `prune snapshots older than <iso>`).
+
+### Behavior
+
+- `LOG_LEVEL=info` (default): no visible change. `emit()` short-circuits
+  in `logger.ts:178-190, 257`; the wrapper pays one extra level check
+  per call.
+- `LOG_LEVEL=debug` (or `DEBUG=cache,db.items,db.snapshots,db.collections,db.listings,db.settings`):
+  every wrapped call emits
+  `[time] [ns] <label> finished in <N>ms` on success and
+  `[time] [ns] <label> failed after <N>ms` on error (with the `Error`
+  attached). `timerFn` rethrows the original error after logging, so
+  all existing catch blocks keep working — nothing is swallowed.
+- `src/db/client.ts` (`ensureSchema`, `migrate`), `src/db/schema.ts`,
+  `src/db/appSettingsSchema.ts`, and `src/services/*` were intentionally
+  left untouched, per the plan's scope.
+
+### Tests
+
+- No new tests added (per the original plan's deliberate decision);
+  wrappers are pure additions and existing tests stay green.
+- Existing tests in `tests/{rapService,settings,cron,sync,slug,itemKey,config}`
+  continue to pass — no test monkey-patches the query or cache layer.
+
+### Verification (green)
+
+- `npm run typecheck`
+- `npm run lint`
+- `npm test` — full suite green (12 files, 179 tests at time of ship).
+- `npm run build`.
+- Optional manual smoke:
+  `LOG_LEVEL=debug DEBUG=cache,db.items,db.snapshots npm run dev`,
+  then hit `GET /api/pets` and `GET /api/items?q=dragon`. Expect debug
+  lines like `[time] [cache] cache get list:::1:25 finished in 1ms`,
+  `[time] [db.items] count items finished in 0ms`,
+  `[time] [db.snapshots] count snapshots 42 rap finished in 1ms`.
+
+### Out of scope (unchanged)
+
+- `src/db/client.ts` — startup-only DDL/PRAGMA dance, not in a per-
+  request hot path.
+- `src/services/*` — consumers, not part of this scope.
+- `src/test/**` — excluded from build/typecheck per AGENTS.md.
+- `src/routes/*` — request handlers, not part of this scope.
+- New log destinations — the existing logger still writes to
+  `console.log/warn/error` only.
+- PII / log-aggregator posture — labels include cache keys, ids, and
+  metric names; the existing logger already redacts only `Error`
+  stacks, so this is no change in posture. Worth noting for any
+  future log-shipping work.

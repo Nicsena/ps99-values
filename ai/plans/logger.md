@@ -1,7 +1,8 @@
 # Logger Module Plan
 
-Status: **Approved (planning)** — not yet implemented
+Status: **Completed**
 Created: 2026-09-01
+Shipped: commit `cc40afa` ("Logger (AI)") plus follow-ups in `2967428` ("Migrate files to use the new logger (AI)")
 Scope: introduce a leveled, namespaced logger module at `src/logger.ts`. No migrations of existing `console.*` call sites in this change.
 
 ## Goal
@@ -337,3 +338,69 @@ The following were considered for iteration 2 but pulled out as too much for the
 - `LOG_FORMAT=json` writes via `console.log`/`console.error`, not `stdout.write` directly. Line-buffering and async-write performance are not on par with pino's SonicBoom; not relevant at this project's log volume.
 - `Intl.DateTimeFormat` with `longOffset` produces `GMT-07:00` / `GMT` for UTC. The plan normalizes `GMT` → `Z` and `GMT-07:00` → `-07:00`. Behavior is consistent across Node 16+ but ICU data on the host affects the result for non-trivial zones; the test for `TZ=Not/A_Zone` is the safety net.
 - `formats.local()` returns process-local time, which is host-dependent. Documented behavior; not a bug. If a future use case needs `TZ`-aware local-style output, that's a separate helper.
+
+## Summary
+
+Implemented as planned and as the "Iteration 2" and "Iteration 3" sections
+in this document already acknowledge. The current `src/logger.ts` ships
+the full surface called out in "Public surface" plus the iteration-2
+runtime level controls and iteration-3 timing helpers.
+
+### Files modified (3)
+
+- `src/logger.ts` (new) — leveled/namespaced logger with `debug`/`info`/
+  `warn`/`error`/`exception`, `child(suffix)`, `setLevel`/`isLevelEnabled`,
+  `timer`/`timerFn`, three formats (`text`/`json`/`pretty`), the
+  `formats` helper (`iso`/`isoUtc`/`epoch`/`none`/`local`), and
+  `formatTimestamp` programmatic override.
+- `tests/logger.test.ts` (new) — covers level/DEBUG gating, json vs text
+  output, `Error` serialization, timestamps under `TZ`, and the
+  `formats` helper.
+- `AGENTS.md` — `## Logging` section documents the module, env vars,
+  and namespace layout.
+
+### Behavior
+
+- `LOG_LEVEL` (default `info`): `silent` silences everything including
+  `exception`; `exception` always writes to `console.error` otherwise.
+- `DEBUG=ns1,ns2`: gates `debug` output to listed namespaces; only
+  active when `LOG_LEVEL` is unset or `debug`.
+- `LOG_FORMAT`:
+  - `text` — `[time] [ns] msg` per line.
+  - `json` — one parseable JSON object per line with `ts`/`level`/`ns`/
+    `msg`, plus a structured `err` field when an `Error` is logged.
+  - `pretty` — chalk-colored `[time] [level] [ns] msg` regardless of
+    TTY (`chalk.level = 1` is forced in `resolveConfig`).
+- `TZ` — drives the default `formats.iso()` offset; invalid zones
+  fall back to UTC with a one-shot bootstrap `console.warn`.
+- `formatTimestamp` — programmatic override; wins over `TZ` for the
+  logger that sets it; `formats.none()` returns `''` and the emit
+  path drops the time field/prefix.
+
+### Tests
+
+- `tests/logger.test.ts` — 33 cases covering level/DEBUG (7), json/text
+  output and `Error` rendering (10), `TZ` and `formatTimestamp` (10),
+  and the `formats` helper (6). All green.
+- `tests/log-namespace.test.ts` — added in the migration follow-up to
+  verify per-module namespace routing end-to-end (9 cases).
+
+### Verification (green)
+
+- `npm run typecheck`
+- `npm run lint`
+- `npm test` — full suite green.
+- `npm run build`.
+
+### Out of scope (unchanged)
+
+- Migrating `console.*` call sites — done as a separate follow-up plan
+  (`ai/plans/logger-migration.md`, status: Completed; commit `2967428`).
+- Log destinations other than `console.log/warn/error` — no sinks added.
+- `pino`-style `fatal` flush-on-exit — `exception` is the deliberate
+  rename and does not flush.
+- Full `format` chain (winston parity) — `formatTimestamp` is the
+  focused subset; the full chain can come later if operators ask.
+- Splat / printf-style interpolation — deferred from iteration 2.
+- Redaction (`pino`-style `redact: ['*.password']`) — deferred from
+  iteration 2; useful defense-in-depth when logging upstream errors.
