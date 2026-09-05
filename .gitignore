@@ -118,3 +118,5 @@ local/
 
 # Images
 public/thumbnails*
+
+scripts/downloads/

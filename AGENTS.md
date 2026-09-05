@@ -60,13 +60,15 @@ Note: The current structure may be different later in development or during refa
 │   │   ├── appSettingsSchema.ts
 │   │   └── queries/      # itemsRepo, collectionsRepo, snapshotsRepo, settingsRepo, listings
 │   ├── cache/index.ts    # optional Redis cache (fail-open)
-│   └── test/             # one-off scripts — NOT tests; excluded from build/typecheck
+│   └── test/             # (deprecated) one-off scripts; see scripts/ at repo root
 ├── views/                # EJS templates
 ├── public/               # static assets: css/, img/, js/ (plain browser JS)
 ├── data/                  # SQLite database and application data
 ├── ai/
 │   ├── reports/           # generated audits, investigations, and development reports
 │   └── plans/             # development and refactoring plans
+├── scripts/              # one-off manual scripts (run with `npx tsx scripts/<name>.ts`)
+│   └── old/              # dormant scripts, may be consulted for reference
 └── tests/                 # Vitest automated tests
 ```
 
@@ -118,7 +120,11 @@ Run the relevant typecheck, lint, and tests after making changes. Before conside
 
 The project uses Vitest for automated testing. Automated tests are located under `tests/` and use the `*.test.ts` naming convention. Existing tests cover areas including `itemKey`, `cron`, `sync`, `slug`, `settings`, `config`, and `rapService`.
 
-`src/test/**` contains one-off manual scripts and is not part of the automated test suite. These files are excluded from the TypeScript configuration/build and are not picked up by Vitest.
+One-off manual scripts live at the repo root under `scripts/`:
+- `scripts/` (top level) — modern one-off helpers. Currently: `reseed.ts` (wipe and rebuild the local database) and `sri.ts` (compute SRI hashes for CDN URLs).
+- `scripts/old/` — dormant scripts that are not currently in use but may be consulted for reference.
+
+All scripts in `scripts/` are run with `npx tsx scripts/<name>.ts` (or `npx tsx scripts/old/<name>.ts`). They are not part of the TypeScript program, the build, the lint, or the Vitest suite.
 
 ## Frontend
 
@@ -138,7 +144,6 @@ The following are known and currently accepted behaviors. Do not change them sil
 
 - `/reports` route
 - Hourly synchronization cadence
-- `src/test/` exclusions
 - Unauthenticated sync trigger
 
 ## Development Guidelines
